@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+
+# System / OS
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# Temporary files
+*.tmp
+*.log
