@@ -1238,6 +1238,19 @@ button, input, select {
     border-color: rgba(16, 185, 129, 0.4);
 }
 
+/* Mobile-specific elements (Hidden on Desktop by default) */
+.mobile-header-bar {
+    display: none;
+}
+
+.sidebar-close-btn {
+    display: none;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
 /* ==========================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================== */
@@ -1255,44 +1268,241 @@ button, input, select {
 @media (max-width: 768px) {
     .app-container {
         flex-direction: column;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
     }
     
+    /* 1. Backdrop Overlay for Drawer */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 998;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .sidebar-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    /* 2. Off-Canvas Slide-out Drawer Sidebar */
     .sidebar {
-        width: 100%;
-        height: auto;
-        border-right: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 310px;
+        max-width: 86vw;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 999;
+        background: var(--bg-card);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-right: 1px solid var(--border-hover);
+        border-bottom: none;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+        transform: translateX(-105%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
         border-bottom: 1px solid var(--border-color);
     }
     
+    .sidebar-close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--bg-input);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.2s ease;
+    }
+    
+    .sidebar-close-btn:hover {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+        border-color: rgba(239, 68, 68, 0.4);
+    }
+    
     .sidebar-content {
-        max-height: 250px;
+        max-height: none;
+        overflow-y: auto;
+        flex-grow: 1;
+        padding: 16px 20px;
+        -webkit-overflow-scrolling: touch;
     }
     
+    /* 3. Main Content Full Screen on Mobile */
     .main-content {
-        padding: 16px;
-        min-height: calc(100vh - 250px);
+        padding: 12px 14px;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow-x: hidden;
     }
     
+    /* 4. Topbar & Mobile Header Row */
     .topbar {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
     }
     
-    .topbar-actions {
+    .mobile-header-bar {
+        display: flex;
+        align-items: center;
         justify-content: space-between;
+        gap: 10px;
         width: 100%;
     }
     
-    .progress-stats {
-        width: calc(100% - 60px);
+    .mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 10px;
+        background: var(--bg-btn-active);
+        border: 1px solid var(--primary-glow);
+        color: var(--text-primary);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
     }
     
+    .mobile-menu-btn:hover, .mobile-menu-btn:active {
+        background: var(--primary);
+        color: #ffffff;
+    }
+    
+    .mobile-switch-links {
+        display: flex;
+        background: var(--bg-input);
+        border-radius: 8px;
+        padding: 3px;
+        border: 1px solid var(--border-color);
+        flex-grow: 1;
+        max-width: 200px;
+    }
+    
+    .mobile-switch-links a {
+        flex: 1;
+        text-align: center;
+        padding: 6px 8px;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 6px;
+        text-decoration: none;
+        color: var(--text-muted);
+        transition: all 0.2s ease;
+    }
+    
+    .mobile-switch-links a.active {
+        background: var(--primary);
+        color: #ffffff;
+    }
+    
+    .desktop-only {
+        display: none !important;
+    }
+    
+    /* Tabs grid on mobile */
+    .tab-selectors {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+        width: 100%;
+        gap: 4px;
+    }
+    
+    .tab-btn {
+        padding: 8px 4px;
+        font-size: 11px;
+        gap: 4px;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        border-radius: 8px;
+    }
+    
+    .tab-btn i {
+        font-size: 14px;
+    }
+    
+    /* Progress bar row */
+    .topbar-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 12px;
+    }
+    
+    .progress-stats {
+        width: 100%;
+    }
+    
+    /* Flashcard mobile sizing */
     .flip-card-container {
-        height: 380px;
+        height: 400px;
+        width: 100%;
     }
     
     .kanji-display {
-        font-size: 90px;
+        font-size: 82px;
+    }
+    
+    .card-navigator {
+        margin-bottom: 12px;
+    }
+    
+    .quick-status-actions {
+        gap: 8px;
+        margin-top: 14px;
+    }
+    
+    .status-btn {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+    
+    /* Canvas writing */
+    .canvas-wrapper {
+        width: 100%;
+        max-width: 320px;
+        height: 320px;
+    }
+    
+    #writing-canvas {
+        width: 100% !important;
+        height: 100% !important;
     }
 }
 
@@ -1301,13 +1511,19 @@ button, input, select {
         grid-template-columns: 1fr;
     }
     
-    .tab-btn {
-        padding: 8px 12px;
-        font-size: 12px;
-        gap: 4px;
+    .logo {
+        font-size: 18px;
     }
     
-    .logo {
+    .flip-card-container {
+        height: 420px;
+    }
+    
+    .back-header h2 {
+        font-size: 22px;
+    }
+    
+    .pinyin-display {
         font-size: 18px;
     }
 }

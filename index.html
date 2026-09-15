@@ -25,7 +25,10 @@
                     <i class="fa-solid fa-graduation-cap"></i>
                     <span>Hán Tự 700</span>
                 </div>
-                        </div>
+                <button class="sidebar-close-btn" id="sidebar-close-btn" title="Đóng menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
             <div style="display: flex; margin: 15px 20px; background: var(--bg-card); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color);">
                 <a href="index.html" style="flex: 1; text-align: center; padding: 10px; color: #fff; background: var(--primary); text-decoration: none; font-weight: 600; border-right: 1px solid var(--border-color); transition: all 0.3s;">Hán Tự</a>
                 <a href="vocab.html" style="flex: 1; text-align: center; padding: 10px; color: var(--text-muted); text-decoration: none; font-weight: 500; transition: all 0.3s;">Từ Vựng</a>
@@ -79,10 +82,28 @@
             </div>
         </aside>
         
+        <!-- Backdrop Overlay for Mobile Drawer -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        
         <!-- Main Content Area -->
         <main class="main-content">
             <!-- Header/Top Bar -->
             <header class="topbar">
+                <!-- Mobile Navigation Bar (Hiển thị trên điện thoại) -->
+                <div class="mobile-header-bar">
+                    <button class="mobile-menu-btn" id="mobile-menu-toggle" title="Mở bộ lọc & tìm kiếm">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Bộ lọc</span>
+                    </button>
+                    <div class="mobile-switch-links">
+                        <a href="index.html" class="active">Hán Tự</a>
+                        <a href="vocab.html">Từ Vựng</a>
+                    </div>
+                    <button class="theme-toggle" id="mobile-theme-toggle-btn" title="Chuyển đổi giao diện">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+                
                 <div class="tab-selectors">
                     <button class="tab-btn active" data-tab="flashcards">
                         <i class="fa-solid fa-clone"></i> Thẻ Học
@@ -109,7 +130,7 @@
                         </div>
                     </div>
                     
-                    <button class="theme-toggle" id="theme-toggle-btn" title="Chuyển đổi giao diện">
+                    <button class="theme-toggle desktop-only" id="theme-toggle-btn" title="Chuyển đổi giao diện">
                         <i class="fa-solid fa-moon"></i>
                     </button>
                 </div>

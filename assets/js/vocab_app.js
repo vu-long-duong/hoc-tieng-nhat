@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     loadProgress();
     setupEventListeners();
+    setupMobileSidebar();
     updateSidebarCounts();
     applyFilters();
-    
 });
 
 // Theme Initialization
@@ -42,12 +42,10 @@ function initTheme() {
 }
 
 function updateThemeIcon() {
-    const themeBtn = document.getElementById('theme-toggle-btn');
-    if (currentTheme === 'light') {
-        themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    } else {
-        themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-    }
+    const themeBtns = document.querySelectorAll('.theme-toggle');
+    themeBtns.forEach(btn => {
+        btn.innerHTML = currentTheme === 'light' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    });
 }
 
 // Progress Tracking (localStorage)
@@ -157,12 +155,14 @@ function setupEventListeners() {
         }
     });
     
-    // Theme Toggle
-    document.getElementById('theme-toggle-btn').addEventListener('click', () => {
-        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        localStorage.setItem('vocab_theme', currentTheme);
-        updateThemeIcon();
+    // Theme Toggle (supports both desktop & mobile buttons)
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('vocab_theme', currentTheme);
+            updateThemeIcon();
+        });
     });
     
     // --- Flashcard Controls ---
@@ -636,3 +636,47 @@ if (translateBtnSetup) {
         }
     });
 }
+
+// ==========================================
+// MOBILE DRAWER SIDEBAR LOGIC
+// ==========================================
+function setupMobileSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const menuBtn = document.getElementById('mobile-menu-toggle');
+    const closeBtn = document.getElementById('sidebar-close-btn');
+
+    function openSidebar() {
+        if (sidebar) sidebar.classList.add('open');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+        if (sidebar) sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    if (menuBtn) menuBtn.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+
+    // Auto close drawer when a filter/sort button is chosen on mobile
+    const filterBtns = document.querySelectorAll('.filter-btn, .sort-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+            closeSidebar();
+        }
+    });
+}
+
