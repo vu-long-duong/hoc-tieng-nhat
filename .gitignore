@@ -13,3 +13,8 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.log
+
+# Large local study materials (PDFs, MP3s, PNG scans, Anki decks) — keep out of GitHub Pages
+tài liệu/
+anki/
+

@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Đề JLPT N3 - 240 Câu Kanji & Kho Phục Thù Chống Học Vẹt</title>
+
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* ==========================================
+           THEME-AWARE HIGH-CONTRAST VARIABLES
+           ========================================== */
+        :root {
+            --hub-surface: #181432;
+            --hub-surface-2: #231d47;
+            --hub-text: #f8fafc;
+            --hub-text-body: #cbd5e1;
+            --hub-text-sub: #94a3b8;
+            --hub-border: rgba(255, 255, 255, 0.12);
+            --hub-border-strong: rgba(255, 255, 255, 0.22);
+            --hub-banner-bg: linear-gradient(135deg, rgba(139, 92, 246, 0.24) 0%, rgba(236, 72, 153, 0.14) 100%);
+
+            --hub-danger-bg: rgba(239, 68, 68, 0.14);
+            --hub-danger-border: rgba(239, 68, 68, 0.38);
+            --hub-danger-text: #f87171;
+
+            --hub-warn-bg: rgba(245, 158, 11, 0.14);
+            --hub-warn-border: rgba(245, 158, 11, 0.38);
+            --hub-warn-text: #fbbf24;
+
+            --hub-ok-bg: rgba(16, 185, 129, 0.14);
+            --hub-ok-border: rgba(16, 185, 129, 0.38);
+            --hub-ok-text: #34d399;
+        }
+
+        [data-theme="light"] {
+            --hub-surface: #ffffff;
+            --hub-surface-2: #f1f5f9;
+            --hub-text: #0f172a;
+            --hub-text-body: #334155;
+            --hub-text-sub: #64748b;
+            --hub-border: #e2e8f0;
+            --hub-border-strong: #cbd5e1;
+            --hub-banner-bg: linear-gradient(135deg, rgba(79, 70, 229, 0.09) 0%, rgba(236, 72, 153, 0.06) 100%);
+
+            --hub-danger-bg: #fef2f2;
+            --hub-danger-border: #fecaca;
+            --hub-danger-text: #dc2626;
+
+            --hub-warn-bg: #fffbeb;
+            --hub-warn-border: #fde68a;
+            --hub-warn-text: #d97706;
+
+            --hub-ok-bg: #ecfdf5;
+            --hub-ok-border: #a7f3d0;
+            --hub-ok-text: #059669;
+        }
+
+        /* 4-Way Global Navigation in Sidebar */
+        .nav-switcher-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin: 14px 16px;
+        }
+        .nav-switcher-4 a {
+            text-align: center;
+            padding: 9px 6px;
+            font-size: 12.5px;
+            color: var(--hub-text-body);
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border);
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .nav-switcher-4 a.active {
+            color: #ffffff;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        .nav-switcher-4 a:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--hub-text);
+        }
+
+        /* Buttons */
+        .btn-pill {
+            padding: 9px 15px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            color: var(--hub-text);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+        }
+        .btn-pill:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+        .btn-pill.primary {
+            background: var(--primary);
+            color: #ffffff !important;
+            border-color: var(--primary);
+        }
+        .btn-pill.primary:hover {
+            opacity: 0.92;
+        }
+        .btn-pill.danger {
+            background: var(--hub-danger-bg);
+            color: var(--hub-danger-text) !important;
+            border-color: var(--hub-danger-border);
+        }
+        .btn-pill.danger:hover {
+            background: var(--hub-danger-text);
+            color: #ffffff !important;
+        }
+        .btn-pill.warn {
+            background: var(--hub-warn-bg);
+            color: var(--hub-warn-text) !important;
+            border-color: var(--hub-warn-border);
+        }
+        .btn-pill.ok {
+            background: var(--hub-ok-bg);
+            color: var(--hub-ok-text) !important;
+            border-color: var(--hub-ok-border);
+        }
+
+        /* Panels & Layout */
+        .panel-card {
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            border-radius: 16px;
+            padding: 20px 22px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 18px;
+        }
+        .panel-card h3 {
+            font-size: 17px;
+            color: var(--hub-text);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Exam Bank Selector Strip */
+        .bank-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .bank-chip {
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .bank-chip.active {
+            border-color: var(--primary);
+            background: var(--hub-banner-bg);
+            box-shadow: var(--shadow-glow);
+        }
+        .bank-chip.locked {
+            opacity: 0.62;
+            cursor: default;
+        }
+        .bank-chip-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--hub-text);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .bank-chip-sub {
+            font-size: 12px;
+            color: var(--hub-text-sub);
+        }
+
+        /* KPI Row */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .kpi-card {
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            border-radius: 14px;
+            padding: 15px 18px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+        .kpi-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .kpi-val {
+            font-family: var(--font-heading);
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--hub-text);
+            line-height: 1.1;
+        }
+        .kpi-lbl {
+            font-size: 12px;
+            color: var(--hub-text-sub);
+            margin-top: 3px;
+        }
+
+        /* 4-Shift Sprint Cards */
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 820px) {
+            .sessions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .session-card {
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: border-color 0.2s;
+        }
+        .session-card:hover {
+            border-color: var(--primary);
+        }
+        .session-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .shift-badge {
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 99px;
+            background: var(--bg-btn-active);
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .score-badge {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            color: var(--hub-text-body);
+        }
+        .score-badge.passed {
+            background: var(--hub-ok-bg);
+            border-color: var(--hub-ok-border);
+            color: var(--hub-ok-text);
+        }
+
+        /* Anti-Rote Controls Box */
+        .antirote-box {
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+        }
+        .toggle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .toggle-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 13px;
+            border-radius: 10px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--hub-text);
+            user-select: none;
+            transition: all 0.2s;
+        }
+        .toggle-chip:hover {
+            border-color: var(--primary);
+        }
+        .toggle-chip input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .toggle-chip .toggle-sub {
+            display: block;
+            font-size: 11.5px;
+            font-weight: 400;
+            color: var(--hub-text-sub);
+        }
+
+        /* Custom Drill Controls */
+        .custom-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        .hub-select {
+            padding: 9px 13px;
+            border-radius: 10px;
+            background: var(--hub-surface);
+            color: var(--hub-text);
+            border: 1px solid var(--hub-border-strong);
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Active Exam Workspace */
+        .exam-workspace {
+            display: grid;
+            grid-template-columns: 1fr 270px;
+            gap: 20px;
+            align-items: start;
+        }
+        @media (max-width: 960px) {
+            .exam-workspace {
+                grid-template-columns: 1fr;
+            }
+            .exam-nav-panel {
+                display: none;
+            }
+            .exam-nav-panel.mobile-open {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                max-height: 70vh;
+                overflow-y: auto;
+                z-index: 999;
+                border-radius: 20px 20px 0 0;
+                box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.5);
+            }
+        }
+        .exam-topbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            border-radius: 14px;
+            margin-bottom: 16px;
+        }
+        .timer-pill {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 10px;
+            background: var(--hub-warn-bg);
+            color: var(--hub-warn-text);
+            border: 1px solid var(--hub-warn-border);
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .timer-pill.urgent {
+            background: var(--hub-danger-bg);
+            color: var(--hub-danger-text);
+            border-color: var(--hub-danger-border);
+        }
+
+        /* Question Card */
+        .question-stage {
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            border-radius: 18px;
+            padding: 26px 24px;
+            box-shadow: var(--shadow-soft);
+        }
+        .q-meta-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .q-tag {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 11px;
+            border-radius: 8px;
+            background: var(--bg-btn-active);
+            color: var(--primary);
+        }
+        .q-instruction {
+            font-size: 13.5px;
+            color: var(--hub-text-sub);
+            margin-bottom: 14px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: var(--hub-surface-2);
+            border-left: 3px solid var(--primary);
+        }
+        .q-sentence {
+            font-size: 25px;
+            font-weight: 700;
+            line-height: 1.75;
+            color: var(--hub-text);
+            margin: 18px 0 22px 0;
+            text-align: center;
+            padding: 20px 14px;
+            border-radius: 14px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border);
+        }
+        .q-sentence.only-word {
+            font-size: 40px;
+            padding: 28px 14px;
+            letter-spacing: 2px;
+        }
+        .q-target {
+            text-decoration: none;
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            padding: 0 4px 2px 4px;
+            border-radius: 4px;
+            background: var(--bg-btn-active);
+        }
+        [data-theme="dark"] .q-target {
+            color: #c4b5fd;
+            border-bottom-color: #a78bfa;
+        }
+
+        /* 4 Big Answer Options */
+        .exam-options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        @media (max-width: 600px) {
+            .exam-options-grid {
+                grid-template-columns: 1fr;
+            }
+            .q-sentence {
+                font-size: 21px;
+            }
+        }
+        .exam-opt-btn {
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: var(--hub-surface-2);
+            border: 2px solid var(--hub-border-strong);
+            color: var(--hub-text);
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.16s;
+            text-align: left;
+            min-height: 62px;
+        }
+        .exam-opt-btn:hover:not(.locked-opt) {
+            border-color: var(--primary);
+            background: var(--bg-btn-active);
+            transform: translateY(-2px);
+        }
+        .exam-opt-btn .opt-key {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border-strong);
+            color: var(--hub-text-sub);
+            font-size: 14px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .exam-opt-btn.selected {
+            border-color: var(--primary);
+            background: var(--bg-btn-active);
+        }
+        .exam-opt-btn.selected .opt-key {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+        .exam-opt-btn.correct {
+            background: var(--hub-ok-bg) !important;
+            border-color: var(--hub-ok-text) !important;
+            color: var(--hub-ok-text) !important;
+        }
+        .exam-opt-btn.correct .opt-key {
+            background: var(--hub-ok-text);
+            color: #fff;
+            border-color: var(--hub-ok-text);
+        }
+        .exam-opt-btn.wrong {
+            background: var(--hub-danger-bg) !important;
+            border-color: var(--hub-danger-text) !important;
+            color: var(--hub-danger-text) !important;
+        }
+        .exam-opt-btn.wrong .opt-key {
+            background: var(--hub-danger-text);
+            color: #fff;
+            border-color: var(--hub-danger-text);
+        }
+
+        /* Rich Explanation Card */
+        .exp-box {
+            margin-top: 16px;
+            padding: 18px;
+            border-radius: 14px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            border-left: 4px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .exp-box.is-correct { border-left-color: var(--hub-ok-text); }
+        .exp-box.is-wrong { border-left-color: var(--hub-danger-text); }
+        .exp-word-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+        }
+        .hanviet-pill {
+            font-size: 12.5px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: var(--hub-warn-bg);
+            color: var(--hub-warn-text);
+            border: 1px solid var(--hub-warn-border);
+        }
+        .trap-pill {
+            font-size: 13.5px;
+            color: var(--hub-text-body);
+            line-height: 1.55;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+        }
+
+        /* Navigator Grid (1-60) */
+        .q-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .q-nav-cell {
+            height: 36px;
+            border-radius: 8px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border);
+            color: var(--hub-text-body);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.15s;
+        }
+        .q-nav-cell.current {
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-glow);
+            color: var(--hub-text);
+        }
+        .q-nav-cell.answered {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+        .q-nav-cell.rev-ok {
+            background: var(--hub-ok-bg);
+            color: var(--hub-ok-text);
+            border-color: var(--hub-ok-border);
+        }
+        .q-nav-cell.rev-bad {
+            background: var(--hub-danger-bg);
+            color: var(--hub-danger-text);
+            border-color: var(--hub-danger-border);
+        }
+        .q-nav-cell.flagged::after {
+            content: "🚩";
+            position: absolute;
+            top: -5px;
+            right: -4px;
+            font-size: 10px;
+        }
+
+        /* Review Cards in Result View */
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 16px;
+        }
+        .review-card {
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            border-left: 4px solid var(--hub-border-strong);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+        .review-card.bad { border-left-color: var(--hub-danger-text); }
+        .review-card.ok { border-left-color: var(--hub-ok-text); }
+        .review-card.flag { border-left-color: var(--hub-warn-text); }
+
+        /* Mistake Bank Table */
+        .mistake-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 16px;
+            border-radius: 12px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border);
+            border-left: 4px solid var(--hub-danger-text);
+            flex-wrap: wrap;
+        }
+        .streak-pill {
+            font-size: 11.5px;
+            font-weight: 800;
+            padding: 3px 9px;
+            border-radius: 99px;
+            background: var(--hub-warn-bg);
+            color: var(--hub-warn-text);
+            border: 1px solid var(--hub-warn-border);
+        }
+        .kbd-hint {
+            font-size: 11.5px;
+            color: var(--hub-text-sub);
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .kbd-hint kbd {
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            border-radius: 5px;
+            padding: 1px 6px;
+            font-family: monospace;
+            font-weight: 700;
+            color: var(--hub-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-file-pen"></i>
+                    <span>Luyện Đề N3</span>
+                </div>
+                <button class="sidebar-close-btn" id="sidebar-close-btn" title="Đóng menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- 4-Way Global Navigation -->
+            <div class="nav-switcher-4">
+                <a href="n3_hub.html"><i class="fa-solid fa-bullseye"></i> Chiến Dịch</a>
+                <a href="luyen_de.html" class="active"><i class="fa-solid fa-file-pen"></i> Luyện Đề</a>
+                <a href="index.html"><i class="fa-solid fa-language"></i> Hán Tự</a>
+                <a href="vocab.html"><i class="fa-solid fa-book"></i> Từ Vựng</a>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="filter-section">
+                    <h3>Lịch Cày Siêu Tốc 240 Kanji</h3>
+                    <div id="sidebar-sprint-checklist" style="font-size: 12.5px; color: var(--hub-text-body); display: flex; flex-direction: column; gap: 8px; line-height: 1.45;">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Kho Phục Thù [2/2]</h3>
+                    <div style="padding: 12px; border-radius: 10px; background: var(--hub-surface-2); border: 1px solid var(--hub-border); font-size: 12.5px; color: var(--hub-text-body); line-height: 1.5;">
+                        Câu làm sai hoặc gắn cờ <strong>🚩</strong> sẽ tự động xáo vị trí đáp án ở lượt sau. Trả lời đúng <strong>2 lượt khác nhau [2/2]</strong> mới xóa khỏi kho lỗ hổng!
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <button class="action-btn" id="copy-kanji-report-btn" style="background: var(--primary); color: #fff; margin-bottom: 8px;">
+                        <i class="fa-solid fa-copy"></i> Copy Báo Cáo Lỗ Hổng
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="mobile-header-bar">
+                    <button class="mobile-menu-btn" id="mobile-menu-toggle" title="Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="mobile-switch-links" style="font-size: 12px;">
+                        <a href="n3_hub.html">Chiến Dịch</a>
+                        <a href="luyen_de.html" class="active">Luyện Đề</a>
+                        <a href="index.html">Hán Tự</a>
+                        <a href="vocab.html">Từ Vựng</a>
+                    </div>
+                    <button class="theme-toggle" id="mobile-theme-toggle-btn" title="Chuyển Sáng/Tối">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+
+                <div class="tab-selectors">
+                    <button class="tab-btn active" id="nav-view-lobby-btn" onclick="showMainView('lobby')">
+                        <i class="fa-solid fa-layer-group"></i> Sảnh Bộ Đề (4 Ca)
+                    </button>
+                    <button class="tab-btn" id="nav-view-mistakes-btn" onclick="showMainView('mistakes')">
+                        <i class="fa-solid fa-fire" style="color: var(--hub-danger-text);"></i> Kho Phục Thù (<span id="top-mistake-count">0</span>)
+                    </button>
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="theme-toggle desktop-only" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng/Tối">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-container">
+                <!-- ==========================================
+                     VIEW 1: SẢNH KHO BỘ ĐỀ (LOBBY)
+                     ========================================== -->
+                <div id="view-lobby">
+                    <!-- Extensible Exam Library Selector -->
+                    <div class="bank-strip">
+                        <div class="bank-chip active">
+                            <div class="bank-chip-title">
+                                <span>🈴 240 Câu Kanji N3</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                            </div>
+                            <span class="bank-chip-sub">4 Buổi × 60 câu (Mondai 1 & 2)</span>
+                        </div>
+                        <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 2 sau khi xong 240 Kanji">
+                            <div class="bank-chip-title">
+                                <span>🔁 80 Cặp Đồng Nghĩa</span>
+                                <span style="font-size: 11px; color: var(--hub-text-sub);">GĐ 2</span>
+                            </div>
+                            <span class="bank-chip-sub">Từ đồng nghĩa chuẩn JLPT N3</span>
+                        </div>
+                        <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 3">
+                            <div class="bank-chip-title">
+                                <span>🔤 Katakana & 330 Kanji</span>
+                                <span style="font-size: 11px; color: var(--hub-text-sub);">GĐ 3</span>
+                            </div>
+                            <span class="bank-chip-sub">Từ mượn & Kanji tổng hợp N3</span>
+                        </div>
+                        <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 4">
+                            <div class="bank-chip-title">
+                                <span>📜 Đề Thi N3 (2010–2023)</span>
+                                <span style="font-size: 11px; color: var(--hub-text-sub);">GĐ 4</span>
+                            </div>
+                            <span class="bank-chip-sub">Đề full các năm + Nghe MP3</span>
+                        </div>
+                    </div>
+
+                    <!-- KPI Analytics -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon" style="background: var(--bg-btn-active); color: var(--primary);">
+                                <i class="fa-solid fa-check-double"></i>
+                            </div>
+                            <div>
+                                <div class="kpi-val" id="kpi-touched">0 / 240</div>
+                                <div class="kpi-lbl">Tiến độ đã quét</div>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon" style="background: var(--hub-ok-bg); color: var(--hub-ok-text);">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <div>
+                                <div class="kpi-val" id="kpi-m1-acc">--%</div>
+                                <div class="kpi-lbl">Mondai 1 (Đọc Kanji)</div>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon" style="background: rgba(59, 130, 246, 0.14); color: #3b82f6;">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <div>
+                                <div class="kpi-val" id="kpi-m2-acc">--%</div>
+                                <div class="kpi-lbl">Mondai 2 (Chọn Kanji)</div>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="cursor: pointer;" onclick="showMainView('mistakes')">
+                            <div class="kpi-icon" style="background: var(--hub-danger-bg); color: var(--hub-danger-text);">
+                                <i class="fa-solid fa-fire"></i>
+                            </div>
+                            <div>
+                                <div class="kpi-val" id="kpi-mistakes">0 câu</div>
+                                <div class="kpi-lbl">Đang chờ Phục Thù [2/2]</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Anti-Rote Configuration Panel -->
+                    <div class="antirote-box">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                            <strong style="font-size: 15px; color: var(--hub-text);">
+                                <i class="fa-solid fa-shield-halved" style="color: var(--primary);"></i> Hệ Thống Chống Học Vẹt (Tự Động Áp Dụng Khi Bắt Đầu)
+                            </strong>
+                            <span style="font-size: 12px; color: var(--hub-text-sub);">Chống nhớ máy móc vị trí 1–4 & ngữ cảnh</span>
+                        </div>
+                        <div class="toggle-grid">
+                            <label class="toggle-chip">
+                                <input type="checkbox" id="opt-shuffle-questions" checked>
+                                <div>
+                                    🔀 Xáo thứ tự câu hỏi
+                                    <span class="toggle-sub">Tắt nếu muốn đúng số 1–60 theo PDF</span>
+                                </div>
+                            </label>
+                            <label class="toggle-chip">
+                                <input type="checkbox" id="opt-shuffle-answers" checked>
+                                <div>
+                                    🎲 Xáo vị trí đáp án 1–4
+                                    <span class="toggle-sub">Đổi vị trí A/B/C/D ở mọi lượt ôn</span>
+                                </div>
+                            </label>
+                            <label class="toggle-chip">
+                                <input type="checkbox" id="opt-hide-context">
+                                <div>
+                                    🙈 Ẩn câu ngữ cảnh
+                                    <span class="toggle-sub">Chỉ hiện từ gạch chân, ép nhớ mặt chữ</span>
+                                </div>
+                            </label>
+                            <label class="toggle-chip">
+                                <input type="checkbox" id="opt-reverse-mode">
+                                <div>
+                                    🔄 Đảo chiều (M1 ↔ M2)
+                                    <span class="toggle-sub">Kanji↔Hiragana với 3 nhiễu tự sinh</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 4-Shift Sprint Sessions -->
+                    <div class="panel-card">
+                        <h3>
+                            <span><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3</span>
+                            <button class="btn-pill danger" id="quick-revenge-btn">
+                                <i class="fa-solid fa-fire"></i> Phục Thù Toàn Bộ Câu Sai (<span id="btn-revenge-cnt">0</span>)
+                            </button>
+                        </h3>
+                        <div class="sessions-grid" id="sessions-cards-container">
+                            <!-- 4 Session cards injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Custom Mix / Short Burst Launcher -->
+                    <div class="panel-card">
+                        <h3>
+                            <span><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 240 Câu</span>
+                        </h3>
+                        <div class="custom-row">
+                            <select id="custom-session-select" class="hub-select">
+                                <option value="all">Trộn tổng cả 240 câu (4 Buổi)</option>
+                                <option value="1">Chỉ Buổi 1 (60 câu)</option>
+                                <option value="2">Chỉ Buổi 2 (60 câu)</option>
+                                <option value="3">Chỉ Buổi 3 (60 câu)</option>
+                                <option value="4">Chỉ Buổi 4 (60 câu)</option>
+                            </select>
+                            <select id="custom-mondai-select" class="hub-select">
+                                <option value="all">Cả Mondai 1 & Mondai 2</option>
+                                <option value="1">Chỉ Mondai 1 (Đọc Kanji)</option>
+                                <option value="2">Chỉ Mondai 2 (Chọn chữ Kanji)</option>
+                            </select>
+                            <select id="custom-count-select" class="hub-select">
+                                <option value="15">15 câu (Lượt nhanh 4 phút)</option>
+                                <option value="30" selected>30 câu (Nửa buổi 8 phút)</option>
+                                <option value="60">60 câu (Trọn 1 buổi 15 phút)</option>
+                                <option value="240">Tất cả câu lọc được</option>
+                            </select>
+                            <button class="btn-pill primary" id="start-custom-drill-btn">
+                                <i class="fa-solid fa-play"></i> Luyện Nhanh Chữa Ngay
+                            </button>
+                            <button class="btn-pill warn" id="start-custom-exam-btn">
+                                <i class="fa-solid fa-stopwatch"></i> Thi Thử Bấm Giờ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     VIEW 2: PHÒNG LÀM BÀI (ACTIVE EXAM / DRILL)
+                     ========================================== -->
+                <div id="view-exam" style="display: none;">
+                    <div class="exam-topbar">
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn-pill" id="exit-exam-btn"><i class="fa-solid fa-arrow-left"></i> Sảnh</button>
+                            <strong id="exam-title-lbl" style="font-size: 16px; color: var(--hub-text);">Buổi 1</strong>
+                            <span class="q-tag" id="exam-mode-badge">Thi Thử</span>
+                            <span id="active-antirote-badges" style="display: flex; gap: 6px; flex-wrap: wrap;"></span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="timer-pill" id="exam-timer-box" style="display: none;">
+                                <i class="fa-solid fa-clock"></i> <span id="exam-timer-text">15:00</span>
+                            </div>
+                            <div class="score-badge" id="drill-live-score" style="display: none;">
+                                Đúng: <strong id="drill-live-correct" style="color: var(--hub-ok-text);">0</strong> / <span id="drill-live-answered">0</span>
+                            </div>
+                            <button class="btn-pill" id="toggle-mobile-nav-btn" title="Bảng số câu">
+                                <i class="fa-solid fa-table-cells"></i> <span id="exam-progress-txt">1/60</span>
+                            </button>
+                            <button class="btn-pill primary" id="submit-exam-btn">
+                                <i class="fa-solid fa-flag-checkered"></i> Nộp bài
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="exam-workspace">
+                        <!-- Left: Question Stage -->
+                        <div class="question-stage">
+                            <div class="q-meta-bar">
+                                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                    <span class="q-tag" id="q-num-badge">Câu 1 / 60</span>
+                                    <span class="q-tag" id="q-mondai-badge" style="background: var(--hub-surface-2); color: var(--hub-text-body);">Mondai 1</span>
+                                    <span class="streak-pill" id="q-revenge-badge" style="display: none;">🔥 Phục thù [0/2]</span>
+                                </div>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="btn-pill" id="q-flag-btn" title="Gắn cờ câu đoán bừa / phân vân (Phím F)">
+                                        <i class="fa-regular fa-flag"></i> Cờ 🚩
+                                    </button>
+                                    <button class="btn-pill" id="q-reveal-ctx-btn" style="display: none;" title="Tạm mở xem câu ngữ cảnh">
+                                        <i class="fa-solid fa-eye"></i> Xem câu
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="q-instruction" id="q-instruction-text">
+                                問題1：Chọn cách đọc Hiragana đúng nhất cho phần gạch chân.
+                            </div>
+
+                            <div class="q-sentence" id="q-sentence-display">
+                                <!-- Sentence injected here -->
+                            </div>
+                            <div id="q-hint-display" style="display: none; text-align: center; font-size: 13px; color: var(--hub-warn-text); margin: -12px 0 16px 0; font-weight: 600;"></div>
+
+                            <div class="exam-options-grid" id="exam-options-container">
+                                <!-- 4 Options injected here -->
+                            </div>
+
+                            <!-- Instant Explanation (Drill Mode) -->
+                            <div id="instant-exp-container" style="display: none;"></div>
+
+                            <!-- Bottom Navigation -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 10px;">
+                                <button class="btn-pill" id="q-prev-btn">
+                                    <i class="fa-solid fa-chevron-left"></i> Câu trước
+                                </button>
+                                <button class="btn-pill primary" id="q-next-btn">
+                                    Câu tiếp theo <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="kbd-hint">
+                                <span><kbd>1</kbd>–<kbd>4</kbd> Chọn đáp án</span>
+                                <span><kbd>←</kbd> <kbd>→</kbd> Chuyển câu</span>
+                                <span><kbd>F</kbd> Gắn cờ 🚩</span>
+                                <span><kbd>Space</kbd> Nghe (khi đã chữa)</span>
+                                <span><kbd>Enter</kbd> Câu tiếp</span>
+                            </div>
+                        </div>
+
+                        <!-- Right: Question Navigator (1-60) -->
+                        <div class="panel-card exam-nav-panel" id="exam-nav-panel">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <strong style="font-size: 14.5px; color: var(--hub-text);">Bảng Điều Hướng</strong>
+                                <span style="font-size: 12px; color: var(--hub-text-sub);" id="nav-answered-lbl">0/60 đã chọn</span>
+                            </div>
+                            <div class="q-nav-grid" id="q-nav-grid">
+                                <!-- 1..N cells -->
+                            </div>
+                            <div style="margin-top: 14px; font-size: 11.5px; color: var(--hub-text-sub); display: flex; flex-wrap: wrap; gap: 10px;">
+                                <span>🟣 Đã chọn</span>
+                                <span>🚩 Cờ đoán bừa</span>
+                                <span>⬜ Chưa làm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     VIEW 3: KẾT QUẢ & CHỮA BÀI CHI TIẾT
+                     ========================================== -->
+                <div id="view-result" style="display: none;">
+                    <div class="panel-card" style="background: var(--hub-banner-bg); border-color: var(--primary);">
+                        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px;">
+                            <div>
+                                <span class="shift-badge" id="res-mode-lbl">Kết quả Thi Thử</span>
+                                <h2 id="res-headline" style="font-size: 26px; color: var(--hub-text); margin: 6px 0;">Hoàn thành Buổi 1!</h2>
+                                <p id="res-subtext" style="font-size: 14px; color: var(--hub-text-body);"></p>
+                            </div>
+                            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                                <div class="kpi-card" style="padding: 12px 18px;">
+                                    <div>
+                                        <div class="kpi-val" id="res-score-big" style="font-size: 28px; color: var(--primary);">0 / 60</div>
+                                        <div class="kpi-lbl" id="res-pct-lbl">0% chính xác</div>
+                                    </div>
+                                </div>
+                                <div class="kpi-card" style="padding: 12px 16px;">
+                                    <div>
+                                        <div class="kpi-val" id="res-m1-m2" style="font-size: 16px;">M1: 0/0 • M2: 0/0</div>
+                                        <div class="kpi-lbl" id="res-time-lbl">Thời gian: 00:00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn-pill danger" id="res-revenge-now-btn">
+                                <i class="fa-solid fa-fire"></i> Phục Thù Ngay Các Câu Sai & Gắn Cờ (Xáo Mới)
+                            </button>
+                            <button class="btn-pill primary" id="res-retry-shuffled-btn">
+                                <i class="fa-solid fa-shuffle"></i> Làm Lại Bộ Này (Xáo Mới 100%)
+                            </button>
+                            <button class="btn-pill" onclick="showMainView('lobby')">
+                                <i class="fa-solid fa-house"></i> Về Sảnh 4 Ca
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="panel-card">
+                        <h3>
+                            <span><i class="fa-solid fa-microscope" style="color: var(--primary);"></i> Chữa Bài Chi Tiết (Hán Việt • Dịch Câu • Bẫy Nhiễu)</span>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn-pill primary" id="filter-rev-wrong-btn">Chỉ câu Sai & Cờ 🚩</button>
+                                <button class="btn-pill" id="filter-rev-all-btn">Xem tất cả</button>
+                            </div>
+                        </h3>
+                        <div class="review-list" id="result-review-list">
+                            <!-- Detailed review cards -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     VIEW 4: KHO PHỤC THÙ CÂU SAI & CỜ 🚩
+                     ========================================== -->
+                <div id="view-mistakes" style="display: none;">
+                    <div class="panel-card">
+                        <h3>
+                            <span><i class="fa-solid fa-fire" style="color: var(--hub-danger-text);"></i> Kho Phục Thù Câu Sai & Gắn Cờ 🚩 (Cơ chế [2/2])</span>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn-pill danger" id="start-revenge-drill-btn">
+                                    <i class="fa-solid fa-bolt"></i> Phục Thù Chữa Ngay (Xáo Đáp Án)
+                                </button>
+                                <button class="btn-pill warn" id="start-revenge-hard-btn">
+                                    <i class="fa-solid fa-mask"></i> Phục Thù Gắt (Ẩn Ngữ Cảnh + Đảo Chiều)
+                                </button>
+                            </div>
+                        </h3>
+                        <p style="font-size: 13.5px; color: var(--hub-text-sub); margin-bottom: 16px;">
+                            Mỗi câu sai/gắn cờ cần vượt qua <strong>2 lượt trả lời đúng ở 2 lần xáo trộn khác nhau</strong> (<code>[0/2] → [1/2] → [2/2 Đã lấp]</code>) mới tự động xóa sổ. Đồng thời đã đồng bộ sang Sổ tay Lỗ hổng của trang <strong>Chiến Dịch N3</strong>!
+                        </p>
+                        <div id="mistakes-bank-list" style="display: flex; flex-direction: column; gap: 10px;">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load 240 Kanji Database + Logic -->
+    <script src="data/kanji_240_data.js"></script>
+    <script src="assets/js/luyen_de_app.js"></script>
+</body>
+</html>
