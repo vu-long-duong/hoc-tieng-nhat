@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Theme Initialization
 function initTheme() {
-    const savedTheme = localStorage.getItem('kanji_theme');
-    if (savedTheme) {
-        currentTheme = savedTheme;
-    } else {
-        // Detect system preference
-        currentTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    if (!localStorage.getItem('n3_theme_bright_v1')) {
+        localStorage.setItem('kanji_theme', 'light');
+        localStorage.setItem('vocab_theme', 'light');
+        localStorage.setItem('n3_theme_bright_v1', '1');
     }
+    const savedTheme = localStorage.getItem('kanji_theme');
+    currentTheme = savedTheme || 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
     updateThemeIcon();
 }

@@ -64,7 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // 1. THEME & STATE PERSISTENCE
 // ==========================================
 function initHubTheme() {
-    let savedTheme = localStorage.getItem('kanji_theme') || localStorage.getItem('vocab_theme') || 'dark';
+    if (!localStorage.getItem('n3_theme_bright_v1')) {
+        localStorage.setItem('kanji_theme', 'light');
+        localStorage.setItem('vocab_theme', 'light');
+        localStorage.setItem('n3_theme_bright_v1', '1');
+    }
+    let savedTheme = localStorage.getItem('kanji_theme') || localStorage.getItem('vocab_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeButtons(savedTheme);
 
