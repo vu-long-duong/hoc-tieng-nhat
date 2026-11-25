@@ -1,31 +1,60 @@
 // ==========================================
-// LUYỆN ĐỀ N3 — 240 KANJI & ANTI-ROTE ENGINE
+// LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE
+// Supports: [kanji240] 240 Câu Kanji N3 | [syn80] 80 Cặp Đồng Nghĩa N3
 // ==========================================
 
-const LS_MISTAKES_KEY = 'n3_kanji240_mistakes';
-const LS_HISTORY_KEY = 'n3_kanji240_history';
-const LS_TOUCHED_KEY = 'n3_kanji240_touched';
-const LS_INPROGRESS_KEY = 'n3_kanji240_inprogress';
 const LS_HUB_SRS_KEY = 'n3_srs_mistakes';
 const LS_HUB_STATS_KEY = 'n3_campaign_stats';
+const LS_ACTIVE_BANK_KEY = 'n3_luyende_active_bank';
+
+const BANK_CONFIGS = {
+    kanji240: {
+        id: 'kanji240',
+        name: '240 Câu Kanji N3',
+        keys: {
+            mistakes: 'n3_kanji240_mistakes',
+            history: 'n3_kanji240_history',
+            touched: 'n3_kanji240_touched',
+            inprogress: 'n3_kanji240_inprogress'
+        },
+        secPerQuestion: 15,
+        shifts: [
+            { session: 1, shift: 'Ca 1 • Sáng', icon: 'fa-sun', title: 'Buổi 1 — 60 Câu Kanji N3', desc: 'Câu 1–60 (30 đọc Kanji + 30 chọn Kanji)', count: 60, timeLbl: '15p' },
+            { session: 2, shift: 'Ca 2 • Trưa', icon: 'fa-cloud-sun', title: 'Buổi 2 — 60 Câu Kanji N3', desc: 'Câu 61–120 (31 đọc Kanji + 29 chọn Kanji)', count: 60, timeLbl: '15p' },
+            { session: 3, shift: 'Ca 3 • Chiều', icon: 'fa-mountain-sun', title: 'Buổi 3 — 60 Câu Kanji N3', desc: 'Câu 121–180 (30 đọc Kanji + 30 chọn Kanji)', count: 60, timeLbl: '15p' },
+            { session: 4, shift: 'Ca 4 • Tối', icon: 'fa-moon', title: 'Buổi 4 — 60 Câu Kanji N3', desc: 'Câu 181–240 (30 đọc Kanji + 30 chọn Kanji)', count: 60, timeLbl: '15p' }
+        ]
+    },
+    syn80: {
+        id: 'syn80',
+        name: '80 Cặp Từ Đồng Nghĩa N3',
+        keys: {
+            mistakes: 'n3_syn80_mistakes',
+            history: 'n3_syn80_history',
+            touched: 'n3_syn80_touched',
+            inprogress: 'n3_syn80_inprogress'
+        },
+        secPerQuestion: 15,
+        shifts: [
+            { session: 1, shift: 'Ca 1 • Đề Gốc', icon: 'fa-sun', title: 'Bài 1 — 40 Câu Đồng Nghĩa', desc: 'Mondai 4 chuẩn đề gốc (40 câu đầu)', count: 40, timeLbl: '10p' },
+            { session: 2, shift: 'Ca 2 • Đề Gốc', icon: 'fa-cloud-sun', title: 'Bài 2 — 40 Câu Đồng Nghĩa', desc: 'Mondai 4 chuẩn đề gốc (40 câu sau)', count: 40, timeLbl: '10p' },
+            { session: 3, shift: 'Ca 3 • Phủ Kín', icon: 'fa-sparkles', title: 'Bài 3 Bổ Sung — 15 Câu Phủ Kín Bảng 80', desc: '15 cặp bảng 80 chưa hỏi ở Bài 1 & 2 (延期, 輝く, がっかり...)', count: 15, timeLbl: '4p' }
+        ]
+    }
+};
 
 const ALL_BACKUP_KEYS = [
-    LS_MISTAKES_KEY, LS_HISTORY_KEY, LS_TOUCHED_KEY, LS_INPROGRESS_KEY,
+    'n3_kanji240_mistakes', 'n3_kanji240_history', 'n3_kanji240_touched', 'n3_kanji240_inprogress',
+    'n3_syn80_mistakes', 'n3_syn80_history', 'n3_syn80_touched', 'n3_syn80_inprogress',
     LS_HUB_SRS_KEY, LS_HUB_STATS_KEY,
     'n3_grammar_progress', 'kanji_progress', 'vocab_progress'
 ];
 
-const SHIFT_META = [
-    { session: 1, shift: 'Ca 1 • Sáng', icon: 'fa-sun', desc: 'Câu 1–60 (30 đọc Kanji + 30 chọn Kanji)' },
-    { session: 2, shift: 'Ca 2 • Trưa', icon: 'fa-cloud-sun', desc: 'Câu 61–120 (31 đọc Kanji + 29 chọn Kanji)' },
-    { session: 3, shift: 'Ca 3 • Chiều', icon: 'fa-mountain-sun', desc: 'Câu 121–180 (30 đọc Kanji + 30 chọn Kanji)' },
-    { session: 4, shift: 'Ca 4 • Tối', icon: 'fa-moon', desc: 'Câu 181–240 (30 đọc Kanji + 30 chọn Kanji)' }
-];
-
-// Persistent State
-let mistakesMap = {}; // { qid: { streak: 0|1, wrongCount: n, flagged: bool, lastAt: str } }
+// Active Bank State
+let activeBank = 'kanji240'; // 'kanji240' | 'syn80'
+let mistakesMap = {};
 let historyData = {
-    sessions: { 1: null, 2: null, 3: null, 4: null },
+    sessions: {},
     m1Correct: 0, m1Total: 0,
     m2Correct: 0, m2Total: 0,
     attemptsLog: []
@@ -34,39 +63,130 @@ let touchedSet = new Set();
 
 // Active Exam Session State
 let activeSession = null;
-/*
-activeSession = {
-    title: string,
-    sourceConfig: { ... },
-    mode: 'exam' | 'drill',
-    isRevenge: boolean,
-    antiRote: { shuffleQ, shuffleOpt, hideCtx, reverseMode },
-    items: [ { orig, effectiveMondai, displayHtml, displayOnlyWord, options: [str], correctIdx: int } ],
-    answers: [ null | 0..3 ],
-    flags: [ bool ],
-    revealedCtx: [ bool ],
-    currentIndex: 0,
-    startedAt: number,
-    timerSecondsLeft: number,
-    timerInterval: number | null,
-    finished: boolean
-}
-*/
-let lastResultFilter = 'wrong'; // 'wrong' | 'all'
+let lastResultFilter = 'wrong';
+
+// 80 Synonym Pairs Quick-Study Table State
+let pairsMaskMode = 'none'; // 'none' | 'right' | 'left'
+let currentPairsOrder = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
-    loadState();
+    activeBank = localStorage.getItem(LS_ACTIVE_BANK_KEY) || 'kanji240';
+    if (!BANK_CONFIGS[activeBank]) activeBank = 'kanji240';
+    if (typeof SYNONYM_80_PAIRS !== 'undefined') currentPairsOrder = [...SYNONYM_80_PAIRS];
+
+    loadBankState();
     setupMobileMenu();
     setupLobbyEvents();
     setupExamEvents();
+    setupPairsEvents();
     setupKeyboardShortcuts();
+    applyBankUI();
     renderLobby();
 });
 
 // ==========================================
-// 1. THEME & PERSISTENCE
+// 1. BANK ACCESSORS & PERSISTENCE
 // ==========================================
+function getBankCfg(bankId = activeBank) {
+    return BANK_CONFIGS[bankId];
+}
+
+function getBankDataset(bankId = activeBank) {
+    return bankId === 'syn80' ? SYNONYM_N3_DATA : KANJI_240_DATA;
+}
+
+function getItemSessionNum(qObj, bankId = activeBank) {
+    return bankId === 'syn80' ? qObj.part : qObj.session;
+}
+
+function switchBank(newBankId) {
+    if (!BANK_CONFIGS[newBankId] || newBankId === activeBank) return;
+    if (activeSession && !activeSession.finished && document.getElementById('view-exam').style.display === 'block') {
+        if (!confirm('Chuyển bộ đề sẽ quay về Sảnh (bài đang làm đã tự lưu)?')) return;
+    }
+    activeBank = newBankId;
+    localStorage.setItem(LS_ACTIVE_BANK_KEY, activeBank);
+    loadBankState();
+    applyBankUI();
+    showMainView('lobby');
+}
+
+function applyBankUI() {
+    const isSyn = activeBank === 'syn80';
+    document.getElementById('bank-chip-kanji240').classList.toggle('active', !isSyn);
+    document.getElementById('bank-chip-syn80').classList.toggle('active', isSyn);
+
+    document.getElementById('nav-view-pairs-btn').style.display = isSyn ? 'inline-flex' : 'none';
+    document.getElementById('open-pairs-quick-btn').style.display = isSyn ? 'inline-flex' : 'none';
+    document.getElementById('nav-lobby-lbl').textContent = isSyn ? 'Sảnh Đồng Nghĩa' : 'Sảnh Bộ Đề (4 Ca)';
+    document.getElementById('sidebar-sprint-heading').textContent = isSyn ? 'Lịch Cày 80 Cặp Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 240 Kanji';
+
+    // Update KPI labels
+    document.getElementById('kpi-m1-lbl').textContent = isSyn ? 'Đồng nghĩa Xuôi (A → B)' : 'Mondai 1 (Đọc Kanji)';
+    document.getElementById('kpi-m2-lbl').textContent = isSyn ? 'Đảo chiều Chống Vẹt (B → A)' : 'Mondai 2 (Chọn Kanji)';
+
+    // Update Anti-Rote toggle labels
+    document.getElementById('toggle-hide-sub').textContent = isSyn
+        ? 'Chỉ hiện từ A (hoặc B), ép nhớ nghĩa gốc'
+        : 'Chỉ hiện từ gạch chân, ép nhớ mặt chữ';
+    document.getElementById('toggle-rev-title').textContent = isSyn
+        ? '🔄 Đảo chiều (B → A)'
+        : '🔄 Đảo chiều (M1 ↔ M2)';
+    document.getElementById('toggle-rev-sub').textContent = isSyn
+        ? 'Cho nghĩa B trong câu, chọn ngược từ N3 A'
+        : 'Kanji↔Hiragana với 3 nhiễu tự sinh';
+
+    document.getElementById('sessions-panel-title').innerHTML = isSyn
+        ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 80 Cặp Đồng Nghĩa (95 Câu)'
+        : '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3';
+
+    document.getElementById('custom-panel-title').innerHTML = isSyn
+        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 95 Câu Đồng Nghĩa'
+        : '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 240 Câu';
+
+    // Populate custom selects per bank
+    const sessSel = document.getElementById('custom-session-select');
+    const monSel = document.getElementById('custom-mondai-select');
+    const cntSel = document.getElementById('custom-count-select');
+
+    if (isSyn) {
+        sessSel.innerHTML = `
+            <option value="all">Trộn tổng cả 95 câu (Bài 1 + 2 + 3)</option>
+            <option value="1">Chỉ Bài 1 Gốc (40 câu)</option>
+            <option value="2">Chỉ Bài 2 Gốc (40 câu)</option>
+            <option value="3">Chỉ Bài 3 Bổ Sung (15 câu phủ kín)</option>
+        `;
+        monSel.style.display = 'none';
+        cntSel.innerHTML = `
+            <option value="15">15 câu (Lượt nhanh 4 phút)</option>
+            <option value="30" selected>30 câu (8 phút)</option>
+            <option value="40">40 câu (Trọn 1 bài 10 phút)</option>
+            <option value="95">Tất cả 95 câu</option>
+        `;
+    } else {
+        sessSel.innerHTML = `
+            <option value="all">Trộn tổng cả 240 câu (4 Buổi)</option>
+            <option value="1">Chỉ Buổi 1 (60 câu)</option>
+            <option value="2">Chỉ Buổi 2 (60 câu)</option>
+            <option value="3">Chỉ Buổi 3 (60 câu)</option>
+            <option value="4">Chỉ Buổi 4 (60 câu)</option>
+        `;
+        monSel.style.display = 'inline-block';
+        monSel.innerHTML = `
+            <option value="all">Cả Mondai 1 & Mondai 2</option>
+            <option value="1">Chỉ Mondai 1 (Đọc Kanji)</option>
+            <option value="2">Chỉ Mondai 2 (Chọn chữ Kanji)</option>
+        `;
+        cntSel.innerHTML = `
+            <option value="15">15 câu (Lượt nhanh 4 phút)</option>
+            <option value="30" selected>30 câu (Nửa buổi 8 phút)</option>
+            <option value="60">60 câu (Trọn 1 buổi 15 phút)</option>
+            <option value="240">Tất cả câu lọc được</option>
+        `;
+    }
+}
+
 function initTheme() {
     if (!localStorage.getItem('n3_theme_bright_v1')) {
         localStorage.setItem('kanji_theme', 'light');
@@ -94,22 +214,35 @@ function updateThemeIcons(theme) {
     });
 }
 
-function loadState() {
-    try { mistakesMap = JSON.parse(localStorage.getItem(LS_MISTAKES_KEY)) || {}; } catch (e) { mistakesMap = {}; }
+function loadBankState() {
+    const keys = getBankCfg().keys;
+    try { mistakesMap = JSON.parse(localStorage.getItem(keys.mistakes)) || {}; } catch (e) { mistakesMap = {}; }
+
+    historyData = { sessions: {}, m1Correct: 0, m1Total: 0, m2Correct: 0, m2Total: 0, attemptsLog: [] };
     try {
-        const h = JSON.parse(localStorage.getItem(LS_HISTORY_KEY));
-        if (h) historyData = { ...historyData, ...h, sessions: { 1: null, 2: null, 3: null, 4: null, ...(h.sessions || {}) }, attemptsLog: Array.isArray(h.attemptsLog) ? h.attemptsLog : [] };
+        const h = JSON.parse(localStorage.getItem(keys.history));
+        if (h) {
+            historyData = {
+                ...historyData,
+                ...h,
+                sessions: { ...(h.sessions || {}) },
+                attemptsLog: Array.isArray(h.attemptsLog) ? h.attemptsLog : []
+            };
+        }
     } catch (e) {}
+
+    touchedSet = new Set();
     try {
-        const t = JSON.parse(localStorage.getItem(LS_TOUCHED_KEY));
+        const t = JSON.parse(localStorage.getItem(keys.touched));
         if (Array.isArray(t)) touchedSet = new Set(t);
     } catch (e) {}
 }
 
-function saveState() {
-    localStorage.setItem(LS_MISTAKES_KEY, JSON.stringify(mistakesMap));
-    localStorage.setItem(LS_HISTORY_KEY, JSON.stringify(historyData));
-    localStorage.setItem(LS_TOUCHED_KEY, JSON.stringify(Array.from(touchedSet)));
+function saveBankState() {
+    const keys = getBankCfg().keys;
+    localStorage.setItem(keys.mistakes, JSON.stringify(mistakesMap));
+    localStorage.setItem(keys.history, JSON.stringify(historyData));
+    localStorage.setItem(keys.touched, JSON.stringify(Array.from(touchedSet)));
 }
 
 function getTodayStr() {
@@ -117,8 +250,7 @@ function getTodayStr() {
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-// Sync mistakes directly with n3_hub.html's SRS Mistake Bank
-function syncMistakeToHubSrs(qObj, remove = false) {
+function syncMistakeToHubSrs(qObj, bankId = activeBank, remove = false) {
     let hubSrs = [];
     try { hubSrs = JSON.parse(localStorage.getItem(LS_HUB_SRS_KEY)) || []; } catch (e) { hubSrs = []; }
 
@@ -126,15 +258,25 @@ function syncMistakeToHubSrs(qObj, remove = false) {
     if (remove) {
         if (idx !== -1) hubSrs.splice(idx, 1);
     } else {
-        const entry = {
-            id: qObj.id,
-            type: `240 Kanji (B${qObj.session})`,
-            title: `${qObj.kanji_form}（${qObj.reading}）• ${qObj.han_viet} — ${qObj.meaning_vi}`,
-            detail: `${qObj.sentence_vi} | ${qObj.trap_note}`,
-            level: 0,
-            nextReview: getTodayStr(),
-            addedAt: new Date().toLocaleDateString('vi-VN')
-        };
+        const entry = bankId === 'syn80'
+            ? {
+                id: qObj.id,
+                type: `Đồng Nghĩa (B${qObj.part})`,
+                title: `${qObj.target_word} ＝ ${qObj.synonym_word} — ${qObj.meaning_vi}`,
+                detail: `${qObj.sentence_vi} | ${qObj.nuance_note}`,
+                level: 0,
+                nextReview: getTodayStr(),
+                addedAt: new Date().toLocaleDateString('vi-VN')
+            }
+            : {
+                id: qObj.id,
+                type: `240 Kanji (B${qObj.session})`,
+                title: `${qObj.kanji_form}（${qObj.reading}）• ${qObj.han_viet} — ${qObj.meaning_vi}`,
+                detail: `${qObj.sentence_vi} | ${qObj.trap_note}`,
+                level: 0,
+                nextReview: getTodayStr(),
+                addedAt: new Date().toLocaleDateString('vi-VN')
+            };
         if (idx !== -1) hubSrs[idx] = { ...hubSrs[idx], ...entry };
         else hubSrs.unshift(entry);
     }
@@ -149,41 +291,41 @@ function addHubXP(xp) {
     } catch (e) {}
 }
 
-function recordMistakeOrFlag(qObj, isFlagOnly = false) {
+function recordMistakeOrFlag(qObj, isFlagOnly = false, bankId = activeBank) {
     const cur = mistakesMap[qObj.id];
     mistakesMap[qObj.id] = {
-        streak: 0, // Reset mastery gate [0/2] whenever wrong or newly flagged
+        streak: 0,
         wrongCount: (cur ? cur.wrongCount : 0) + (isFlagOnly ? 0 : 1),
         flagged: isFlagOnly ? true : (cur ? cur.flagged : false),
         lastAt: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
     };
-    syncMistakeToHubSrs(qObj, false);
-    saveState();
+    syncMistakeToHubSrs(qObj, bankId, false);
+    saveBankState();
 }
 
-function recordRevengeSuccess(qObj) {
+function recordRevengeSuccess(qObj, bankId = activeBank) {
     const cur = mistakesMap[qObj.id];
     if (!cur) return { cleared: false, newStreak: 0 };
     const nextStreak = (cur.streak || 0) + 1;
     if (nextStreak >= 2) {
         delete mistakesMap[qObj.id];
-        syncMistakeToHubSrs(qObj, true);
+        syncMistakeToHubSrs(qObj, bankId, true);
         addHubXP(20);
-        saveState();
+        saveBankState();
         return { cleared: true, newStreak: 2 };
     } else {
         cur.streak = nextStreak;
         cur.flagged = false;
-        saveState();
+        saveBankState();
         return { cleared: false, newStreak: nextStreak };
     }
 }
 
 function manualClearMistake(qid) {
-    const qObj = KANJI_240_DATA.find(x => x.id === qid);
+    const qObj = getBankDataset().find(x => x.id === qid);
     delete mistakesMap[qid];
-    if (qObj) syncMistakeToHubSrs(qObj, true);
-    saveState();
+    if (qObj) syncMistakeToHubSrs(qObj, activeBank, true);
+    saveBankState();
     renderLobby();
     renderMistakesView();
 }
@@ -200,19 +342,14 @@ function fisherYatesShuffle(arr) {
     return copy;
 }
 
-// Generate 3 smart, believable distractors when Reverse Mode flips Mondai 1 <-> Mondai 2
-function buildReverseDistractors(qObj, targetMondai) {
+function buildKanjiReverseDistractors(qObj, targetMondai) {
     const correctText = targetMondai === 2 ? qObj.kanji_form : qObj.reading;
     const len = correctText.length;
-
-    // Candidate pool from all 240 items excluding identical answer
-    const candidates = KANJI_240_DATA
-        .map(x => targetMondai === 2 ? x.kanji_form : x.reading)
-        .filter(txt => txt && txt !== correctText);
-
-    const uniqueCands = Array.from(new Set(candidates));
-
-    // Prefer candidates with identical character length & similar ending (okurigana match for verbs/adj!)
+    const uniqueCands = Array.from(new Set(
+        KANJI_240_DATA
+            .map(x => targetMondai === 2 ? x.kanji_form : x.reading)
+            .filter(txt => txt && txt !== correctText)
+    ));
     const lastChar = correctText.slice(-1);
     const isKanaEnding = /[\u3040-\u309F]/.test(lastChar);
 
@@ -231,36 +368,98 @@ function buildReverseDistractors(qObj, targetMondai) {
     return [correctText, ...picked.slice(0, 3)];
 }
 
-function buildPreparedQuestion(qObj, antiRote) {
-    const isReversed = !!antiRote.reverseMode;
-    const effectiveMondai = isReversed ? (qObj.mondai === 1 ? 2 : 1) : qObj.mondai;
+// Build 3 smart N3 word distractors (A) when Synonym Reverse Mode flips B -> A
+function buildSynonymReverseOptions(qObj) {
+    const correctA = qObj.target_word;
+    const correctMeaning = qObj.meaning_vi;
 
-    let rawOptions;
-    let correctText;
+    // Deduplicate candidate N3 target words with distinct meanings
+    const byWord = new Map();
+    SYNONYM_N3_DATA.forEach(x => {
+        if (x.target_word !== correctA && x.synonym_word !== qObj.synonym_word && !byWord.has(x.target_word)) {
+            byWord.set(x.target_word, x.meaning_vi);
+        }
+    });
 
-    if (!isReversed) {
-        rawOptions = [...qObj.options];
-        correctText = qObj.options[qObj.answer];
-    } else {
-        rawOptions = buildReverseDistractors(qObj, effectiveMondai);
-        correctText = rawOptions[0];
+    const entries = Array.from(byWord.entries()); // [ [wordA, meaningVi], ... ]
+    const isKatakana = /^[\u30A0-\u30FFー]+$/.test(correctA);
+    const tail = correctA.slice(-1);
+
+    const tier1 = entries.filter(([w]) => (isKatakana && /^[\u30A0-\u30FFー]+$/.test(w)) || (!isKatakana && w.slice(-1) === tail));
+    const tier2 = entries.filter(([w]) => Math.abs(w.length - correctA.length) <= 2 && !tier1.some(t => t[0] === w));
+    const tier3 = entries.filter(([w]) => !tier1.some(t => t[0] === w) && !tier2.some(t => t[0] === w));
+
+    const picked = [[correctA, `${correctMeaning} (ĐÚNG)`]];
+    for (const pool of [tier1, tier2, tier3]) {
+        for (const item of fisherYatesShuffle(pool)) {
+            if (picked.length >= 4) break;
+            if (!picked.some(p => p[0] === item[0])) picked.push(item);
+        }
+        if (picked.length >= 4) break;
     }
+    return picked; // Array of [optionText, optionVi]
+}
 
-    const finalOptions = antiRote.shuffleOpt ? fisherYatesShuffle(rawOptions) : rawOptions;
-    const correctIdx = finalOptions.indexOf(correctText);
+function buildPreparedQuestion(qObj, antiRote, bankId = activeBank) {
+    const isReversed = !!antiRote.reverseMode;
 
-    const displayHtml = isReversed ? qObj.sentence_reverse_html : qObj.sentence_html;
-    const displayOnlyWord = effectiveMondai === 1 ? qObj.kanji_form : qObj.reading;
+    if (bankId === 'syn80') {
+        let pairedOptions; // [[text, viMeaning], ...]
+        let correctText;
 
-    return {
-        orig: qObj,
-        effectiveMondai,
-        isReversed,
-        displayHtml,
-        displayOnlyWord,
-        options: finalOptions,
-        correctIdx
-    };
+        if (!isReversed) {
+            pairedOptions = qObj.options.map((txt, i) => [txt, qObj.options_vi[i]]);
+            correctText = qObj.options[qObj.answer];
+        } else {
+            pairedOptions = buildSynonymReverseOptions(qObj);
+            correctText = qObj.target_word;
+        }
+
+        const finalPairs = antiRote.shuffleOpt ? fisherYatesShuffle(pairedOptions) : pairedOptions;
+        const finalOptions = finalPairs.map(p => p[0]);
+        const finalOptionsVi = finalPairs.map(p => p[1]);
+        const correctIdx = finalOptions.indexOf(correctText);
+
+        return {
+            bankId: 'syn80',
+            orig: qObj,
+            effectiveMondai: isReversed ? 2 : 1, // 1 = Forward (A->B), 2 = Reverse (B->A)
+            isReversed,
+            displayHtml: isReversed ? qObj.sentence_reverse_html : qObj.sentence_html,
+            displayOnlyWord: isReversed ? qObj.synonym_word : qObj.target_word,
+            options: finalOptions,
+            optionsVi: finalOptionsVi,
+            correctIdx
+        };
+    } else {
+        // Kanji 240
+        const effectiveMondai = isReversed ? (qObj.mondai === 1 ? 2 : 1) : qObj.mondai;
+        let rawOptions;
+        let correctText;
+
+        if (!isReversed) {
+            rawOptions = [...qObj.options];
+            correctText = qObj.options[qObj.answer];
+        } else {
+            rawOptions = buildKanjiReverseDistractors(qObj, effectiveMondai);
+            correctText = rawOptions[0];
+        }
+
+        const finalOptions = antiRote.shuffleOpt ? fisherYatesShuffle(rawOptions) : rawOptions;
+        const correctIdx = finalOptions.indexOf(correctText);
+
+        return {
+            bankId: 'kanji240',
+            orig: qObj,
+            effectiveMondai,
+            isReversed,
+            displayHtml: isReversed ? qObj.sentence_reverse_html : qObj.sentence_html,
+            displayOnlyWord: effectiveMondai === 1 ? qObj.kanji_form : qObj.reading,
+            options: finalOptions,
+            optionsVi: null,
+            correctIdx
+        };
+    }
 }
 
 // ==========================================
@@ -276,37 +475,42 @@ function showMainView(viewName) {
     document.getElementById('view-exam').style.display = viewName === 'exam' ? 'block' : 'none';
     document.getElementById('view-result').style.display = viewName === 'result' ? 'block' : 'none';
     document.getElementById('view-mistakes').style.display = viewName === 'mistakes' ? 'block' : 'none';
+    document.getElementById('view-pairs').style.display = viewName === 'pairs' ? 'block' : 'none';
 
     document.getElementById('nav-view-lobby-btn').classList.toggle('active', viewName === 'lobby');
     document.getElementById('nav-view-mistakes-btn').classList.toggle('active', viewName === 'mistakes');
+    document.getElementById('nav-view-pairs-btn').classList.toggle('active', viewName === 'pairs');
 
     if (viewName === 'lobby') renderLobby();
     if (viewName === 'mistakes') renderMistakesView();
+    if (viewName === 'pairs') renderPairsTable();
 }
 
 function renderLobby() {
+    const dataset = getBankDataset();
+    const cfg = getBankCfg();
     const mistakeIds = Object.keys(mistakesMap);
+
     document.getElementById('top-mistake-count').textContent = mistakeIds.length;
     document.getElementById('btn-revenge-cnt').textContent = mistakeIds.length;
     document.getElementById('kpi-mistakes').textContent = `${mistakeIds.length} câu`;
-    document.getElementById('kpi-touched').textContent = `${touchedSet.size} / ${KANJI_240_DATA.length}`;
+    document.getElementById('kpi-touched').textContent = `${touchedSet.size} / ${dataset.length}`;
 
     const m1Pct = historyData.m1Total > 0 ? `${Math.round((historyData.m1Correct / historyData.m1Total) * 100)}%` : '--%';
     const m2Pct = historyData.m2Total > 0 ? `${Math.round((historyData.m2Correct / historyData.m2Total) * 100)}%` : '--%';
     document.getElementById('kpi-m1-acc').textContent = m1Pct;
     document.getElementById('kpi-m2-acc').textContent = m2Pct;
 
-    // Render 4 Shift Session Cards
     const container = document.getElementById('sessions-cards-container');
     container.innerHTML = '';
     const sidebarChecklist = document.getElementById('sidebar-sprint-checklist');
     sidebarChecklist.innerHTML = '';
 
-    SHIFT_META.forEach(meta => {
+    cfg.shifts.forEach(meta => {
         const rec = historyData.sessions[meta.session];
         const bestStr = rec ? `Cao nhất: ${rec.best}/${rec.total} (${Math.round((rec.best / rec.total) * 100)}%)` : 'Chưa làm';
         const passed = rec && (rec.best / rec.total) >= 0.85;
-        const sessMistakeCount = KANJI_240_DATA.filter(q => q.session === meta.session && mistakesMap[q.id]).length;
+        const sessMistakeCount = dataset.filter(q => getItemSessionNum(q) === meta.session && mistakesMap[q.id]).length;
 
         const card = document.createElement('div');
         card.className = 'session-card';
@@ -314,7 +518,7 @@ function renderLobby() {
             <div class="session-top">
                 <div>
                     <span class="shift-badge"><i class="fa-solid ${meta.icon}"></i> ${meta.shift}</span>
-                    <h4 style="font-size: 18px; color: var(--hub-text); margin-top: 7px;">Buổi ${meta.session} — 60 Câu Kanji N3</h4>
+                    <h4 style="font-size: 17.5px; color: var(--hub-text); margin-top: 7px;">${meta.title}</h4>
                     <span style="font-size: 12.5px; color: var(--hub-text-sub);">${meta.desc}</span>
                 </div>
                 <span class="score-badge ${passed ? 'passed' : ''}">${passed ? '✅ ' : ''}${bestStr}</span>
@@ -327,7 +531,7 @@ function renderLobby() {
             </div>
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <button class="btn-pill primary" style="flex: 1;" onclick="launchSession(${meta.session}, 'exam')">
-                    <i class="fa-solid fa-stopwatch"></i> Thi Thử 15p
+                    <i class="fa-solid fa-stopwatch"></i> Thi Thử ${meta.timeLbl}
                 </button>
                 <button class="btn-pill" style="flex: 1;" onclick="launchSession(${meta.session}, 'drill')">
                     <i class="fa-solid fa-bolt"></i> Luyện Chữa Ngay
@@ -336,13 +540,12 @@ function renderLobby() {
         `;
         container.appendChild(card);
 
-        // Sidebar sprint item
         const sItem = document.createElement('div');
         sItem.style.padding = '9px 11px';
         sItem.style.borderRadius = '9px';
         sItem.style.background = 'var(--hub-surface-2)';
         sItem.style.borderLeft = `3px solid ${passed ? 'var(--hub-ok-text)' : (rec ? 'var(--hub-warn-text)' : 'var(--primary)')}`;
-        sItem.innerHTML = `<strong style="color: var(--hub-text);">${passed ? '✅' : '⏳'} ${meta.shift} (Buổi ${meta.session}):</strong> ${rec ? `${rec.best}/60 điểm` : 'Chưa chạy'}`;
+        sItem.innerHTML = `<strong style="color: var(--hub-text);">${passed ? '✅' : '⏳'} ${meta.shift}:</strong> ${rec ? `${rec.best}/${meta.count} điểm` : 'Chưa chạy'}`;
         sidebarChecklist.appendChild(sItem);
     });
 
@@ -350,10 +553,15 @@ function renderLobby() {
     renderHistoryLog();
 }
 
+// ==========================================
+// 4. AUTO-SAVE, RESUME, HISTORY & BACKUP
+// ==========================================
 function saveInProgressSession() {
     if (!activeSession || activeSession.finished) return;
     try {
+        const key = getBankCfg(activeSession.bankId).keys.inprogress;
         const snapshot = {
+            bankId: activeSession.bankId,
             title: activeSession.title,
             sessionNum: activeSession.sessionNum,
             mode: activeSession.mode,
@@ -361,11 +569,13 @@ function saveInProgressSession() {
             antiRote: activeSession.antiRote,
             items: activeSession.items.map(it => ({
                 qid: it.orig.id,
+                bankId: it.bankId,
                 effectiveMondai: it.effectiveMondai,
                 isReversed: it.isReversed,
                 displayHtml: it.displayHtml,
                 displayOnlyWord: it.displayOnlyWord,
                 options: it.options,
+                optionsVi: it.optionsVi,
                 correctIdx: it.correctIdx
             })),
             answers: activeSession.answers,
@@ -375,19 +585,19 @@ function saveInProgressSession() {
             timerSecondsLeft: activeSession.timerSecondsLeft,
             savedAt: new Date().toLocaleString('vi-VN')
         };
-        localStorage.setItem(LS_INPROGRESS_KEY, JSON.stringify(snapshot));
+        localStorage.setItem(key, JSON.stringify(snapshot));
     } catch (e) {}
 }
 
-function clearInProgressSession() {
-    localStorage.removeItem(LS_INPROGRESS_KEY);
+function clearInProgressSession(bankId = activeBank) {
+    localStorage.removeItem(getBankCfg(bankId).keys.inprogress);
 }
 
 function renderResumeBanner() {
     const banner = document.getElementById('resume-banner');
     if (!banner) return;
     let snap = null;
-    try { snap = JSON.parse(localStorage.getItem(LS_INPROGRESS_KEY)); } catch (e) {}
+    try { snap = JSON.parse(localStorage.getItem(getBankCfg().keys.inprogress)); } catch (e) {}
     if (!snap || !Array.isArray(snap.items) || snap.items.length === 0) {
         banner.style.display = 'none';
         return;
@@ -399,25 +609,28 @@ function renderResumeBanner() {
 }
 
 function resumeSavedSession() {
+    const bankId = activeBank;
     let snap = null;
-    try { snap = JSON.parse(localStorage.getItem(LS_INPROGRESS_KEY)); } catch (e) {}
+    try { snap = JSON.parse(localStorage.getItem(getBankCfg(bankId).keys.inprogress)); } catch (e) {}
     if (!snap || !Array.isArray(snap.items)) return;
 
+    const dataset = getBankDataset(bankId);
     const restoredItems = snap.items.map(it => {
-        const orig = KANJI_240_DATA.find(x => x.id === it.qid);
+        const orig = dataset.find(x => x.id === it.qid);
         if (!orig) return null;
-        return { ...it, orig };
+        return { ...it, bankId, orig };
     }).filter(Boolean);
 
     if (restoredItems.length === 0) {
-        clearInProgressSession();
+        clearInProgressSession(bankId);
         return;
     }
 
     activeSession = {
+        bankId,
         title: snap.title,
         sessionNum: snap.sessionNum,
-        sourceConfig: { title: snap.title, sessionNum: snap.sessionNum, pool: restoredItems.map(i => i.orig), mode: snap.mode, isRevenge: snap.isRevenge, antiRote: snap.antiRote },
+        sourceConfig: { bankId, title: snap.title, sessionNum: snap.sessionNum, pool: restoredItems.map(i => i.orig), mode: snap.mode, isRevenge: snap.isRevenge, antiRote: snap.antiRote },
         mode: snap.mode,
         isRevenge: snap.isRevenge,
         antiRote: snap.antiRote,
@@ -447,7 +660,7 @@ function renderHistoryLog() {
     if (cntEl) cntEl.textContent = logs.length;
 
     if (logs.length === 0) {
-        container.innerHTML = `<div style="font-size: 13px; color: var(--hub-text-sub); padding: 12px; text-align: center; background: var(--hub-surface-2); border-radius: 10px;">Chưa có lịch sử bài nộp nào. Hoàn thành Ca 1 để lưu cột mốc đầu tiên nhé!</div>`;
+        container.innerHTML = `<div style="font-size: 13px; color: var(--hub-text-sub); padding: 12px; text-align: center; background: var(--hub-surface-2); border-radius: 10px;">Chưa có lịch sử bài nộp nào cho kho ${getBankCfg().name}. Hoàn thành Ca 1 để lưu cột mốc đầu tiên nhé!</div>`;
         return;
     }
 
@@ -461,7 +674,7 @@ function renderHistoryLog() {
                 <strong style="font-size: 14px; color: var(--hub-text);">${log.title}</strong>
                 <span class="q-tag" style="margin-left: 6px; font-size: 11px;">${log.modeLabel}</span>
                 <div style="font-size: 12px; color: var(--hub-text-sub); margin-top: 3px;">
-                    🕒 ${log.timestamp} • M1: ${log.m1} • M2: ${log.m2} • Thời gian: ${log.duration}
+                    🕒 ${log.timestamp} • ${log.breakdown || `M1: ${log.m1} • M2: ${log.m2}`} • Thời gian: ${log.duration}
                 </div>
             </div>
             <span class="score-badge ${ok ? 'passed' : ''}" style="font-size: 13.5px;">
@@ -483,27 +696,20 @@ function getAntiRoteSettings(forceOverrides = {}) {
 }
 
 function setupLobbyEvents() {
-    document.getElementById('quick-revenge-btn').addEventListener('click', () => {
-        launchRevengeSession('drill', {});
-    });
-    document.getElementById('start-revenge-drill-btn').addEventListener('click', () => {
-        launchRevengeSession('drill', { shuffleQ: true, shuffleOpt: true });
-    });
-    document.getElementById('start-revenge-hard-btn').addEventListener('click', () => {
-        launchRevengeSession('drill', { shuffleQ: true, shuffleOpt: true, hideCtx: true, reverseMode: true });
-    });
+    document.getElementById('quick-revenge-btn').addEventListener('click', () => launchRevengeSession('drill', {}));
+    document.getElementById('start-revenge-drill-btn').addEventListener('click', () => launchRevengeSession('drill', { shuffleQ: true, shuffleOpt: true }));
+    document.getElementById('start-revenge-hard-btn').addEventListener('click', () => launchRevengeSession('drill', { shuffleQ: true, shuffleOpt: true, hideCtx: true, reverseMode: true }));
 
     document.getElementById('start-custom-drill-btn').addEventListener('click', () => launchCustom('drill'));
     document.getElementById('start-custom-exam-btn').addEventListener('click', () => launchCustom('exam'));
 
     document.getElementById('copy-kanji-report-btn').addEventListener('click', () => {
-        const report = buildAntigravityKanjiReport();
+        const report = buildAntigravityReport();
         navigator.clipboard.writeText(report).then(() => {
-            alert('📋 Đã copy Báo cáo 240 Câu Kanji & Danh sách Lỗ hổng! Hãy Paste (Ctrl+V) vào khung chat Antigravity để Sensei phân tích giúp bạn nhé.');
+            alert(`📋 Đã copy Báo cáo ${getBankCfg().name} & Danh sách Lỗ hổng! Hãy Paste (Ctrl+V) vào khung chat Antigravity để Sensei phân tích giúp bạn nhé.`);
         });
     });
 
-    // Resume / Discard in-progress exam
     const resumeBtn = document.getElementById('resume-exam-btn');
     const discardBtn = document.getElementById('discard-resume-btn');
     if (resumeBtn) resumeBtn.addEventListener('click', () => resumeSavedSession());
@@ -514,14 +720,13 @@ function setupLobbyEvents() {
         }
     });
 
-    // Export / Import JSON Backup
     const exportBtn = document.getElementById('export-backup-btn');
     const importBtn = document.getElementById('import-backup-btn');
     const importInput = document.getElementById('import-backup-input');
 
     if (exportBtn) {
         exportBtn.addEventListener('click', () => {
-            const payload = { version: 1, exportedAt: new Date().toISOString(), data: {} };
+            const payload = { version: 2, exportedAt: new Date().toISOString(), data: {} };
             ALL_BACKUP_KEYS.forEach(k => {
                 const v = localStorage.getItem(k);
                 if (v !== null) payload.data[k] = v;
@@ -553,9 +758,9 @@ function setupLobbyEvents() {
                             restored++;
                         }
                     });
-                    loadState();
+                    loadBankState();
                     renderLobby();
-                    alert(`✅ Đã khôi phục thành công ${restored} nhóm dữ liệu (Lịch sử thi, Kho Phục Thù, Hán tự, Từ vựng, Ngữ pháp)!`);
+                    alert(`✅ Đã khôi phục thành công ${restored} nhóm dữ liệu (Kanji 240, Đồng Nghĩa 80, Kho Phục Thù, Ngữ pháp, Hán tự, Từ vựng)!`);
                 } catch (err) {
                     alert('❌ File sao lưu không hợp lệ!');
                 }
@@ -567,13 +772,17 @@ function setupLobbyEvents() {
 }
 
 // ==========================================
-// 4. LAUNCHING EXAM / DRILL / REVENGE SESSIONS
+// 5. LAUNCHING EXAM / DRILL / REVENGE
 // ==========================================
 function launchSession(sessionNum, mode) {
-    const pool = KANJI_240_DATA.filter(q => q.session === sessionNum);
+    const cfg = getBankCfg();
+    const shiftMeta = cfg.shifts.find(s => s.session === sessionNum);
+    const pool = getBankDataset().filter(q => getItemSessionNum(q) === sessionNum);
     startQuizEngine({
-        title: `Buổi ${sessionNum} (60 câu Kanji N3)`,
+        bankId: activeBank,
+        title: shiftMeta ? shiftMeta.title : `Buổi ${sessionNum}`,
         sessionNum,
+        expectedFullCount: shiftMeta ? shiftMeta.count : pool.length,
         pool,
         mode,
         isRevenge: false,
@@ -583,21 +792,25 @@ function launchSession(sessionNum, mode) {
 
 function launchCustom(mode) {
     const sVal = document.getElementById('custom-session-select').value;
-    const mVal = document.getElementById('custom-mondai-select').value;
+    const mVal = activeBank === 'kanji240' ? document.getElementById('custom-mondai-select').value : 'all';
     const cntVal = parseInt(document.getElementById('custom-count-select').value, 10);
 
-    let pool = [...KANJI_240_DATA];
-    if (sVal !== 'all') pool = pool.filter(q => q.session === parseInt(sVal, 10));
+    let pool = [...getBankDataset()];
+    if (sVal !== 'all') pool = pool.filter(q => getItemSessionNum(q) === parseInt(sVal, 10));
     if (mVal !== 'all') pool = pool.filter(q => q.mondai === parseInt(mVal, 10));
 
     const antiRote = getAntiRoteSettings();
     if (antiRote.shuffleQ) pool = fisherYatesShuffle(pool);
     pool = pool.slice(0, Math.min(cntVal, pool.length));
 
-    const title = `${sVal === 'all' ? 'Tổng hợp 240 Kanji' : 'Buổi ' + sVal} • ${pool.length} câu`;
+    const prefix = activeBank === 'syn80'
+        ? (sVal === 'all' ? 'Tổng hợp Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`)
+        : (sVal === 'all' ? 'Tổng hợp 240 Kanji' : `Buổi ${sVal}`);
     startQuizEngine({
-        title,
+        bankId: activeBank,
+        title: `${prefix} • ${pool.length} câu`,
         sessionNum: sVal === 'all' ? null : parseInt(sVal, 10),
+        expectedFullCount: -1,
         pool,
         mode,
         isRevenge: false,
@@ -608,15 +821,17 @@ function launchCustom(mode) {
 
 function launchRevengeSession(mode, forceAntiRote = {}, subsetIds = null) {
     const targetIds = subsetIds || Object.keys(mistakesMap);
-    const pool = KANJI_240_DATA.filter(q => targetIds.includes(q.id));
+    const pool = getBankDataset().filter(q => targetIds.includes(q.id));
     if (pool.length === 0) {
-        alert('🎉 Hiện tại Kho Phục Thù đang trống! Bạn chưa có câu sai hay câu gắn cờ nào cần ôn lại.');
+        alert(`🎉 Kho Phục Thù của ${getBankCfg().name} đang trống! Bạn chưa có câu sai hay câu gắn cờ nào cần ôn lại.`);
         return;
     }
     const antiRote = getAntiRoteSettings({ shuffleQ: true, shuffleOpt: true, ...forceAntiRote });
     startQuizEngine({
-        title: `🔥 Phục Thù Lỗ Hổng (${pool.length} câu)`,
+        bankId: activeBank,
+        title: `🔥 Phục Thù ${activeBank === 'syn80' ? 'Đồng Nghĩa' : 'Kanji'} (${pool.length} câu)`,
         sessionNum: null,
+        expectedFullCount: -1,
         pool,
         mode,
         isRevenge: true,
@@ -625,15 +840,16 @@ function launchRevengeSession(mode, forceAntiRote = {}, subsetIds = null) {
 }
 
 function startQuizEngine(cfg) {
+    const bankId = cfg.bankId || activeBank;
     let orderedPool = cfg.alreadyShuffled ? [...cfg.pool] : (cfg.antiRote.shuffleQ ? fisherYatesShuffle(cfg.pool) : [...cfg.pool]);
-    const items = orderedPool.map(q => buildPreparedQuestion(q, cfg.antiRote));
-
-    // Exam timer: 15 seconds per Kanji question (60 questions = 15:00 exact JLPT speed!)
-    const totalSeconds = Math.max(120, items.length * 15);
+    const items = orderedPool.map(q => buildPreparedQuestion(q, cfg.antiRote, bankId));
+    const totalSeconds = Math.max(120, items.length * getBankCfg(bankId).secPerQuestion);
 
     activeSession = {
+        bankId,
         title: cfg.title,
         sessionNum: cfg.sessionNum,
+        expectedFullCount: cfg.expectedFullCount || -1,
         sourceConfig: cfg,
         mode: cfg.mode,
         isRevenge: cfg.isRevenge,
@@ -653,10 +869,9 @@ function startQuizEngine(cfg) {
     setupActiveExamHeader();
     renderQuestionStage();
     renderNavigatorGrid();
+    saveInProgressSession();
 
-    if (cfg.mode === 'exam') {
-        startExamTimer();
-    }
+    if (cfg.mode === 'exam') startExamTimer();
 }
 
 function setupActiveExamHeader() {
@@ -665,13 +880,12 @@ function setupActiveExamHeader() {
         ? '🔥 Phục Thù [2/2]'
         : (activeSession.mode === 'exam' ? '⏱️ Thi Thử Bấm Giờ' : '⚡ Luyện Nhanh Chữa Ngay');
 
-    // Show active Anti-Rote indicators
     const badgesEl = document.getElementById('active-antirote-badges');
     const tags = [];
     if (activeSession.antiRote.shuffleQ) tags.push('🔀 Xáo câu');
     if (activeSession.antiRote.shuffleOpt) tags.push('🎲 Xáo 1–4');
     if (activeSession.antiRote.hideCtx) tags.push('🙈 Ẩn câu');
-    if (activeSession.antiRote.reverseMode) tags.push('🔄 Đảo chiều');
+    if (activeSession.antiRote.reverseMode) tags.push(activeSession.bankId === 'syn80' ? '🔄 Đảo B→A' : '🔄 Đảo M1↔M2');
     badgesEl.innerHTML = tags.map(t => `<span class="q-tag" style="background: var(--hub-surface-2); color: var(--hub-text-body); font-size: 11px;">${t}</span>`).join('');
 
     const timerBox = document.getElementById('exam-timer-box');
@@ -721,23 +935,36 @@ function updateDrillLiveScore() {
 }
 
 // ==========================================
-// 5. RENDERING QUESTION STAGE & INTERACTION
+// 6. QUESTION STAGE & 5-WORD EXPLANATION
 // ==========================================
 function renderQuestionStage() {
     const idx = activeSession.currentIndex;
     const item = activeSession.items[idx];
     const orig = item.orig;
+    const isSyn = item.bankId === 'syn80';
     const chosen = activeSession.answers[idx];
     const isAnswered = chosen !== null;
     const isDrill = activeSession.mode === 'drill';
 
     document.getElementById('exam-progress-txt').textContent = `${idx + 1}/${activeSession.items.length}`;
-    document.getElementById('q-num-badge').textContent = `Câu ${idx + 1} / ${activeSession.items.length} (Gốc B${orig.session}-#${orig.num})`;
-    document.getElementById('q-mondai-badge').textContent = item.effectiveMondai === 1
-        ? `Mondai 1 • Đọc Kanji${item.isReversed ? ' (Đảo chiều)' : ''}`
-        : `Mondai 2 • Chọn chữ Kanji${item.isReversed ? ' (Đảo chiều)' : ''}`;
+    document.getElementById('q-num-badge').textContent = `Câu ${idx + 1} / ${activeSession.items.length} (Gốc B${getItemSessionNum(orig, item.bankId)}-#${orig.num})`;
 
-    // Revenge Mastery Gate badge
+    if (isSyn) {
+        document.getElementById('q-mondai-badge').textContent = item.isReversed
+            ? 'Mondai 4 • Đảo chiều (B → A)'
+            : 'Mondai 4 • Từ Đồng Nghĩa (A → B)';
+        document.getElementById('q-instruction-text').textContent = item.isReversed
+            ? '🔄 Đảo chiều (Chống vẹt): Chọn TỪ VỰNG N3 (A) có nghĩa gần nhất với cụm giải thích gạch chân (B).'
+            : '問題4：Chọn từ hoặc cụm từ có ý nghĩa gần nhất với phần gạch chân.';
+    } else {
+        document.getElementById('q-mondai-badge').textContent = item.effectiveMondai === 1
+            ? `Mondai 1 • Đọc Kanji${item.isReversed ? ' (Đảo chiều)' : ''}`
+            : `Mondai 2 • Chọn chữ Kanji${item.isReversed ? ' (Đảo chiều)' : ''}`;
+        document.getElementById('q-instruction-text').textContent = item.effectiveMondai === 1
+            ? '問題1：Chọn cách đọc Hiragana chính xác nhất cho phần gạch chân.'
+            : '問題2：Chọn chữ Kanji chính xác nhất tương ứng với phần gạch chân.';
+    }
+
     const revBadge = document.getElementById('q-revenge-badge');
     const mEntry = mistakesMap[orig.id];
     if (mEntry) {
@@ -747,7 +974,6 @@ function renderQuestionStage() {
         revBadge.style.display = 'none';
     }
 
-    // Flag button state
     const flagBtn = document.getElementById('q-flag-btn');
     const isFlagged = activeSession.flags[idx];
     flagBtn.classList.toggle('warn', isFlagged);
@@ -755,12 +981,6 @@ function renderQuestionStage() {
         ? '<i class="fa-solid fa-flag"></i> Đã gắn cờ 🚩'
         : '<i class="fa-regular fa-flag"></i> Cờ 🚩';
 
-    // Instruction text
-    document.getElementById('q-instruction-text').textContent = item.effectiveMondai === 1
-        ? '問題1：Chọn cách đọc Hiragana chính xác nhất cho phần gạch chân.'
-        : '問題2：Chọn chữ Kanji chính xác nhất tương ứng với phần gạch chân.';
-
-    // Sentence vs Only-Word Anti-Rote Display
     const sentBox = document.getElementById('q-sentence-display');
     const revealBtn = document.getElementById('q-reveal-ctx-btn');
     const hideCtxNow = activeSession.antiRote.hideCtx && !activeSession.revealedCtx[idx] && !(isDrill && isAnswered);
@@ -775,7 +995,6 @@ function renderQuestionStage() {
         revealBtn.style.display = 'none';
     }
 
-    // Hint (if PDF had a vocabulary hint like 奨学金)
     const hintBox = document.getElementById('q-hint-display');
     if (orig.hint && !hideCtxNow) {
         hintBox.style.display = 'block';
@@ -784,7 +1003,6 @@ function renderQuestionStage() {
         hintBox.style.display = 'none';
     }
 
-    // 4 Option Buttons
     const optContainer = document.getElementById('exam-options-container');
     optContainer.innerHTML = '';
     item.options.forEach((optTxt, optIdx) => {
@@ -804,7 +1022,6 @@ function renderQuestionStage() {
         optContainer.appendChild(btn);
     });
 
-    // Instant Explanation box (only in Drill mode after answering)
     const expContainer = document.getElementById('instant-exp-container');
     if (isDrill && isAnswered) {
         expContainer.style.display = 'block';
@@ -814,14 +1031,11 @@ function renderQuestionStage() {
         expContainer.innerHTML = '';
     }
 
-    // Prev / Next button state
     document.getElementById('q-prev-btn').disabled = idx === 0;
     const nextBtn = document.getElementById('q-next-btn');
-    if (idx === activeSession.items.length - 1) {
-        nextBtn.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> Hoàn tất & Xem tổng kết';
-    } else {
-        nextBtn.innerHTML = 'Câu tiếp theo <i class="fa-solid fa-chevron-right"></i>';
-    }
+    nextBtn.innerHTML = idx === activeSession.items.length - 1
+        ? '<i class="fa-solid fa-flag-checkered"></i> Hoàn tất & Xem tổng kết'
+        : 'Câu tiếp theo <i class="fa-solid fa-chevron-right"></i>';
 }
 
 function handleSelectOption(optIdx) {
@@ -830,14 +1044,13 @@ function handleSelectOption(optIdx) {
     const item = activeSession.items[idx];
     const isDrill = activeSession.mode === 'drill';
 
-    if (isDrill && activeSession.answers[idx] !== null) return; // Already graded in drill mode
+    if (isDrill && activeSession.answers[idx] !== null) return;
 
     activeSession.answers[idx] = optIdx;
     touchedSet.add(item.orig.id);
 
     if (isDrill) {
         const isCorrect = optIdx === item.correctIdx;
-        // Update Mondai stats
         if (item.effectiveMondai === 1) {
             historyData.m1Total += 1;
             if (isCorrect) historyData.m1Correct += 1;
@@ -849,17 +1062,16 @@ function handleSelectOption(optIdx) {
         if (isCorrect) {
             addHubXP(5);
             if (mistakesMap[item.orig.id]) {
-                const res = recordRevengeSuccess(item.orig);
-                item._revengeOutcome = res;
+                item._revengeOutcome = recordRevengeSuccess(item.orig, item.bankId);
             }
         } else {
-            recordMistakeOrFlag(item.orig, false);
+            recordMistakeOrFlag(item.orig, false, item.bankId);
             item._revengeOutcome = { cleared: false, newStreak: 0, reset: true };
         }
-        saveState();
+        saveBankState();
         updateDrillLiveScore();
     } else {
-        saveState();
+        saveBankState();
     }
 
     saveInProgressSession();
@@ -885,6 +1097,45 @@ function renderExplanationHTML(item, chosenIdx) {
     }
 
     const safeTts = q.sentence_tts.replace(/'/g, "\\'");
+
+    if (item.bankId === 'syn80') {
+        // 5-word breakdown for ALL 4 shuffled options!
+        const optsBreakdown = item.options.map((optTxt, oi) => {
+            const isAns = oi === item.correctIdx;
+            const vi = item.optionsVi ? item.optionsVi[oi] : '';
+            return `<div class="opt-vi-card ${isAns ? 'is-ans' : ''}"><strong>${oi + 1}. ${optTxt}</strong>: ${vi}</div>`;
+        }).join('');
+
+        return `
+            <div class="exp-box ${isCorrect ? 'is-correct' : 'is-wrong'}">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-weight: 700; font-size: 15px;">
+                    <div>${statusTitle}</div>
+                    <button class="btn-pill" style="padding: 5px 11px; font-size: 12.5px;" onclick="speakJapanese('${safeTts}')">
+                        <i class="fa-solid fa-volume-high"></i> Nghe phát âm
+                    </button>
+                </div>
+                <div class="exp-word-row">
+                    <strong style="font-size: 18px; color: var(--hub-text);">${q.target_word}</strong>
+                    <span style="font-size: 13.5px; color: var(--hub-text-sub);">(${q.target_reading})</span>
+                    <span style="font-weight: 800; color: var(--primary);">＝</span>
+                    <strong style="font-size: 18px; color: var(--primary);">${q.synonym_word}</strong>
+                    <span class="hanviet-pill">Nghĩa: ${q.meaning_vi}</span>
+                </div>
+                <div style="font-size: 14px; color: var(--hub-text-body); line-height: 1.5;">
+                    <strong>📖 Dịch câu:</strong> ${q.sentence_vi}
+                </div>
+                <div>
+                    <div style="font-size: 12px; font-weight: 700; color: var(--hub-text-sub); margin-bottom: 6px; text-transform: uppercase;">💡 Giải nghĩa cả 4 phương án (1 câu ăn luôn 5 từ):</div>
+                    <div class="opts-vi-grid">${optsBreakdown}</div>
+                </div>
+                <div class="trap-pill">
+                    <strong style="color: var(--hub-warn-text);"><i class="fa-solid fa-lightbulb"></i> Mẹo nhớ & Sắc thái:</strong> ${q.nuance_note}
+                </div>
+            </div>
+        `;
+    }
+
+    // Kanji 240 explanation
     return `
         <div class="exp-box ${isCorrect ? 'is-correct' : 'is-wrong'}">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-weight: 700; font-size: 15px;">
@@ -932,6 +1183,7 @@ function renderNavigatorGrid() {
         cell.textContent = i + 1;
         cell.addEventListener('click', () => {
             activeSession.currentIndex = i;
+            saveInProgressSession();
             renderQuestionStage();
             renderNavigatorGrid();
             document.getElementById('exam-nav-panel').classList.remove('mobile-open');
@@ -943,8 +1195,7 @@ function renderNavigatorGrid() {
 function setupExamEvents() {
     document.getElementById('exit-exam-btn').addEventListener('click', () => {
         if (activeSession && !activeSession.finished) {
-            const answered = activeSession.answers.filter(a => a !== null).length;
-            if (answered > 0 && !confirm('Bạn có muốn thoát về Sảnh? (Tiến độ phiên đang làm chưa nộp sẽ không tính điểm)')) return;
+            saveInProgressSession();
         }
         showMainView('lobby');
     });
@@ -958,6 +1209,7 @@ function setupExamEvents() {
     document.getElementById('q-prev-btn').addEventListener('click', () => {
         if (!activeSession || activeSession.currentIndex === 0) return;
         activeSession.currentIndex -= 1;
+        saveInProgressSession();
         renderQuestionStage();
         renderNavigatorGrid();
     });
@@ -966,6 +1218,7 @@ function setupExamEvents() {
         if (!activeSession) return;
         if (activeSession.currentIndex < activeSession.items.length - 1) {
             activeSession.currentIndex += 1;
+            saveInProgressSession();
             renderQuestionStage();
             renderNavigatorGrid();
         } else {
@@ -984,7 +1237,6 @@ function setupExamEvents() {
         document.getElementById('exam-nav-panel').classList.toggle('mobile-open');
     });
 
-    // Result screen filters & actions
     document.getElementById('filter-rev-wrong-btn').addEventListener('click', () => {
         lastResultFilter = 'wrong';
         document.getElementById('filter-rev-wrong-btn').classList.add('primary');
@@ -1021,7 +1273,7 @@ function toggleCurrentFlag() {
     const idx = activeSession.currentIndex;
     activeSession.flags[idx] = !activeSession.flags[idx];
     if (activeSession.flags[idx]) {
-        recordMistakeOrFlag(activeSession.items[idx].orig, true);
+        recordMistakeOrFlag(activeSession.items[idx].orig, true, activeSession.bankId);
     }
     saveInProgressSession();
     renderQuestionStage();
@@ -1029,7 +1281,7 @@ function toggleCurrentFlag() {
 }
 
 // ==========================================
-// 6. GRADING & DETAILED RESULT REVIEW
+// 7. GRADING & RESULT REVIEW
 // ==========================================
 function finishExamSession(timedOut = false) {
     if (!activeSession || activeSession.finished) return;
@@ -1039,10 +1291,10 @@ function finishExamSession(timedOut = false) {
         activeSession.timerInterval = null;
     }
 
+    const bankId = activeSession.bankId;
+    const isSyn = bankId === 'syn80';
     const elapsedSec = Math.max(1, Math.round((Date.now() - activeSession.startedAt) / 1000));
-    let totalCorrect = 0;
-    let m1Ok = 0, m1Tot = 0, m2Ok = 0, m2Tot = 0;
-    let wrongCnt = 0, flagCnt = 0;
+    let totalCorrect = 0, m1Ok = 0, m1Tot = 0, m2Ok = 0, m2Tot = 0, wrongCnt = 0, flagCnt = 0;
 
     activeSession.items.forEach((item, i) => {
         const chosen = activeSession.answers[i];
@@ -1056,7 +1308,6 @@ function finishExamSession(timedOut = false) {
         if (isCorrect) totalCorrect++;
         else wrongCnt++;
 
-        // For Exam mode (not already graded per question), record stats & mistakes now
         if (activeSession.mode === 'exam') {
             touchedSet.add(item.orig.id);
             if (item.effectiveMondai === 1) {
@@ -1067,35 +1318,34 @@ function finishExamSession(timedOut = false) {
                 if (isCorrect) historyData.m2Correct += 1;
             }
 
-            if (!isCorrect) {
-                recordMistakeOrFlag(item.orig, false);
-            } else if (isFlagged) {
-                recordMistakeOrFlag(item.orig, true);
-            } else if (mistakesMap[item.orig.id]) {
-                recordRevengeSuccess(item.orig);
-            }
+            if (!isCorrect) recordMistakeOrFlag(item.orig, false, bankId);
+            else if (isFlagged) recordMistakeOrFlag(item.orig, true, bankId);
+            else if (mistakesMap[item.orig.id]) recordRevengeSuccess(item.orig, bankId);
         } else if (isFlagged) {
-            recordMistakeOrFlag(item.orig, true);
+            recordMistakeOrFlag(item.orig, true, bankId);
         }
     });
 
-    // Save Session High Score if full 60-question session
-    if (activeSession.sessionNum && activeSession.items.length === 60) {
-        const prev = historyData.sessions[activeSession.sessionNum] || { best: 0, total: 60, attempts: 0 };
+    // Save Session High Score if full shift completed
+    if (activeSession.sessionNum && activeSession.items.length === activeSession.expectedFullCount) {
+        const prev = historyData.sessions[activeSession.sessionNum] || { best: 0, total: activeSession.items.length, attempts: 0 };
         historyData.sessions[activeSession.sessionNum] = {
             best: Math.max(prev.best, totalCorrect),
-            total: 60,
+            total: activeSession.items.length,
             attempts: prev.attempts + 1,
             lastScore: totalCorrect,
             lastAt: getTodayStr()
         };
     }
-    // Record into persistent Attempt History Log
-    const nowTime = new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+
     const total = activeSession.items.length;
     const pct = Math.round((totalCorrect / total) * 100);
     const minStr = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
     const secStr = String(elapsedSec % 60).padStart(2, '0');
+    const nowTime = new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    const breakdownStr = isSyn
+        ? (m2Tot > 0 ? `Đảo B→A: ${m2Ok}/${m2Tot}` : `Xuôi A→B: ${m1Ok}/${m1Tot}`)
+        : `M1: ${m1Ok}/${m1Tot} • M2: ${m2Ok}/${m2Tot}`;
 
     if (!Array.isArray(historyData.attemptsLog)) historyData.attemptsLog = [];
     historyData.attemptsLog.unshift({
@@ -1107,29 +1357,27 @@ function finishExamSession(timedOut = false) {
         pct,
         m1: `${m1Ok}/${m1Tot}`,
         m2: `${m2Ok}/${m2Tot}`,
+        breakdown: breakdownStr,
         duration: `${minStr}:${secStr}`
     });
     historyData.attemptsLog = historyData.attemptsLog.slice(0, 60);
 
-    clearInProgressSession();
+    clearInProgressSession(bankId);
     if (activeSession.mode === 'exam') addHubXP(totalCorrect * 3);
-    saveState();
-
-    // Render Result Dashboard
+    saveBankState();
 
     document.getElementById('res-mode-lbl').textContent = timedOut ? '⏰ Hết giờ — Tự động nộp bài' : `Kết quả • ${activeSession.title}`;
     document.getElementById('res-headline').textContent = pct >= 90
-        ? '🏆 Quá xuất sắc! Kanji N3 vững như bàn thạch!'
+        ? `🏆 Quá đỉnh! ${isSyn ? 'Đồng nghĩa N3' : 'Kanji N3'} chắc như đinh đóng cột!`
         : (pct >= 75 ? '🔥 Rất tốt! Chỉ cần vá nốt vài lỗ hổng bên dưới.' : '⚡ Đã bắt sống được nhiều lỗ hổng quan trọng — Phục thù ngay!');
-    document.getElementById('res-subtext').textContent = `Sai ${wrongCnt} câu • Gắn cờ đoán bừa ${flagCnt} câu (Tất cả đã được đưa vào Kho Phục Thù [0/2] và đồng bộ sang Chiến Dịch N3).`;
+    document.getElementById('res-subtext').textContent = `Sai ${wrongCnt} câu • Gắn cờ đoán bừa ${flagCnt} câu (Tất cả đã lưu vào Kho Phục Thù [0/2] và đồng bộ sang Chiến Dịch N3).`;
 
     document.getElementById('res-score-big').textContent = `${totalCorrect} / ${total}`;
     document.getElementById('res-pct-lbl').textContent = `${pct}% chính xác`;
-    document.getElementById('res-m1-m2').textContent = `M1: ${m1Ok}/${m1Tot} • M2: ${m2Ok}/${m2Tot}`;
+    document.getElementById('res-m1-m2').textContent = breakdownStr;
     document.getElementById('res-time-lbl').textContent = `Thời gian làm: ${minStr}:${secStr}`;
 
-    const revNowBtn = document.getElementById('res-revenge-now-btn');
-    revNowBtn.style.display = (wrongCnt + flagCnt) > 0 ? 'inline-flex' : 'none';
+    document.getElementById('res-revenge-now-btn').style.display = (wrongCnt + flagCnt) > 0 ? 'inline-flex' : 'none';
 
     lastResultFilter = (wrongCnt + flagCnt) > 0 ? 'wrong' : 'all';
     document.getElementById('filter-rev-wrong-btn').classList.toggle('primary', lastResultFilter === 'wrong');
@@ -1158,38 +1406,54 @@ function renderResultReviewList() {
         const correctText = `${item.correctIdx + 1}. ${item.options[item.correctIdx]}`;
         const safeTts = q.sentence_tts.replace(/'/g, "\\'");
 
+        let bodyHtml = '';
+        if (item.bankId === 'syn80') {
+            const optsBreakdown = item.options.map((optTxt, oi) => {
+                const isAns = oi === item.correctIdx;
+                const vi = item.optionsVi ? item.optionsVi[oi] : '';
+                return `<div class="opt-vi-card ${isAns ? 'is-ans' : ''}"><strong>${oi + 1}. ${optTxt}</strong>: ${vi}</div>`;
+            }).join('');
+            bodyHtml = `
+                <div class="exp-word-row" style="margin-bottom: 8px;">
+                    <strong style="font-size: 16.5px; color: var(--hub-text);">${q.target_word}</strong>
+                    <span style="font-size: 12.5px; color: var(--hub-text-sub);">(${q.target_reading})</span>
+                    <span style="color: var(--primary); font-weight: 800;">＝ ${q.synonym_word}</span>
+                    <span class="hanviet-pill">${q.meaning_vi}</span>
+                </div>
+                <div style="font-size: 13.5px; color: var(--hub-text-body); margin-bottom: 8px;"><strong>📖 Dịch:</strong> ${q.sentence_vi}</div>
+                <div class="opts-vi-grid" style="margin-bottom: 8px;">${optsBreakdown}</div>
+                <div style="font-size: 13px; color: var(--hub-text-sub);"><strong style="color: var(--hub-warn-text);">💡 Mẹo nhớ:</strong> ${q.nuance_note}</div>
+            `;
+        } else {
+            bodyHtml = `
+                <div class="exp-word-row" style="margin-bottom: 8px;">
+                    <strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}</strong>
+                    <span style="color: var(--primary); font-weight: 700;">（${q.reading}）</span>
+                    <span class="hanviet-pill">${q.han_viet}</span>
+                    <span style="font-size: 13.5px; color: var(--hub-text-body);">→ ${q.meaning_vi}</span>
+                </div>
+                <div style="font-size: 13.5px; color: var(--hub-text-body); margin-bottom: 6px;"><strong>📖 Dịch:</strong> ${q.sentence_vi}</div>
+                <div style="font-size: 13px; color: var(--hub-text-sub);"><strong style="color: var(--hub-warn-text);">⚡ Bẫy nhiễu:</strong> ${q.trap_note}</div>
+            `;
+        }
+
         card.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                    <span class="q-tag">Câu ${i + 1} (B${q.session}-#${q.num})</span>
-                    <span style="font-weight: 700; color: ${isCorrect ? 'var(--hub-ok-text)' : 'var(--hub-danger-text)'};">
-                        ${isCorrect ? '✅ Đúng' : '❌ Sai'}
-                    </span>
+                    <span class="q-tag">Câu ${i + 1} (B${getItemSessionNum(q, item.bankId)}-#${q.num})</span>
+                    <span style="font-weight: 700; color: ${isCorrect ? 'var(--hub-ok-text)' : 'var(--hub-danger-text)'};">${isCorrect ? '✅ Đúng' : '❌ Sai'}</span>
                     ${isFlagged ? '<span class="streak-pill">🚩 Đã gắn cờ</span>' : ''}
                 </div>
                 <button class="btn-pill" style="padding: 5px 10px; font-size: 12px;" onclick="speakJapanese('${safeTts}')">
                     <i class="fa-solid fa-volume-high"></i> Nghe câu
                 </button>
             </div>
-            <div style="font-size: 18px; font-weight: 700; color: var(--hub-text); margin-bottom: 10px;">
-                ${item.displayHtml}
-            </div>
+            <div style="font-size: 18px; font-weight: 700; color: var(--hub-text); margin-bottom: 10px;">${item.displayHtml}</div>
             <div style="font-size: 13.5px; color: var(--hub-text-body); display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 10px;">
                 <span>Bạn chọn: <strong style="color: ${isCorrect ? 'var(--hub-ok-text)' : 'var(--hub-danger-text)'};">${chosenText}</strong></span>
                 <span>Đáp án chuẩn: <strong style="color: var(--hub-ok-text);">${correctText}</strong></span>
             </div>
-            <div class="exp-word-row" style="margin-bottom: 8px;">
-                <strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}</strong>
-                <span style="color: var(--primary); font-weight: 700;">（${q.reading}）</span>
-                <span class="hanviet-pill">${q.han_viet}</span>
-                <span style="font-size: 13.5px; color: var(--hub-text-body);">→ ${q.meaning_vi}</span>
-            </div>
-            <div style="font-size: 13.5px; color: var(--hub-text-body); margin-bottom: 6px;">
-                <strong>📖 Dịch:</strong> ${q.sentence_vi}
-            </div>
-            <div style="font-size: 13px; color: var(--hub-text-sub); line-height: 1.5;">
-                <strong style="color: var(--hub-warn-text);">⚡ Bẫy nhiễu:</strong> ${q.trap_note}
-            </div>
+            ${bodyHtml}
         `;
         container.appendChild(card);
     });
@@ -1200,10 +1464,12 @@ function renderResultReviewList() {
 }
 
 // ==========================================
-// 7. MISTAKE BANK VIEW & KEYBOARD / TTS
+// 8. MISTAKE BANK & 80 SYNONYM PAIRS TABLE
 // ==========================================
 function renderMistakesView() {
     const container = document.getElementById('mistakes-bank-list');
+    const dataset = getBankDataset();
+    const isSyn = activeBank === 'syn80';
     const ids = Object.keys(mistakesMap);
     document.getElementById('top-mistake-count').textContent = ids.length;
 
@@ -1211,8 +1477,8 @@ function renderMistakesView() {
         container.innerHTML = `
             <div style="text-align: center; padding: 36px; background: var(--hub-surface-2); border-radius: 14px; color: var(--hub-text-sub);">
                 <i class="fa-solid fa-trophy" style="font-size: 36px; color: var(--hub-ok-text); margin-bottom: 10px;"></i>
-                <p style="font-size: 15px; font-weight: 600; color: var(--hub-text);">Kho Phục Thù đang sạch bóng!</p>
-                <p style="font-size: 13.5px; margin-top: 4px;">Hãy vào Sảnh 4 Ca để làm Thi Thử 60 câu — câu nào sai hoặc gắn cờ 🚩 sẽ tự động hội tụ tại đây.</p>
+                <p style="font-size: 15px; font-weight: 600; color: var(--hub-text);">Kho Phục Thù (${getBankCfg().name}) đang sạch bóng!</p>
+                <p style="font-size: 13.5px; margin-top: 4px;">Làm bài ở Sảnh hoặc gắn cờ 🚩 / đẩy cặp khó nhớ từ Bảng 80 Cặp để luyện phục thù tại đây.</p>
             </div>
         `;
         return;
@@ -1220,26 +1486,30 @@ function renderMistakesView() {
 
     container.innerHTML = '';
     ids.forEach(qid => {
-        const q = KANJI_240_DATA.find(x => x.id === qid);
+        const q = dataset.find(x => x.id === qid);
         if (!q) return;
         const m = mistakesMap[qid];
         const safeTts = q.sentence_tts.replace(/'/g, "\\'");
+
+        const headline = isSyn
+            ? `<strong style="font-size: 16.5px; color: var(--hub-text);">${q.target_word} ＝ ${q.synonym_word}</strong> <span class="hanviet-pill">${q.meaning_vi}</span>`
+            : `<strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}（${q.reading}）</strong> <span class="hanviet-pill">${q.han_viet}</span>`;
+        const subNote = isSyn ? q.nuance_note : q.trap_note;
 
         const div = document.createElement('div');
         div.className = 'mistake-item';
         div.innerHTML = `
             <div style="flex: 1; min-width: 240px;">
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 5px;">
-                    <span class="q-tag">Buổi ${q.session} • M${q.mondai}</span>
+                    <span class="q-tag">${isSyn ? 'Bài ' + q.part : 'Buổi ' + q.session + ' • M' + q.mondai}</span>
                     <span class="streak-pill">Tiến độ: [${m.streak || 0}/2]</span>
                     ${m.flagged ? '<span class="streak-pill">🚩 Cờ đoán bừa</span>' : ''}
-                    <strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}（${q.reading}）</strong>
-                    <span class="hanviet-pill">${q.han_viet}</span>
+                    ${headline}
                 </div>
                 <div style="font-size: 13.5px; color: var(--hub-text-body); margin-bottom: 4px;">
-                    ${q.meaning_vi} — <em>${q.sentence_vi}</em>
+                    ${isSyn ? '' : q.meaning_vi + ' — '}<em>${q.sentence_vi}</em>
                 </div>
-                <div style="font-size: 12.5px; color: var(--hub-text-sub);">⚡ ${q.trap_note}</div>
+                <div style="font-size: 12.5px; color: var(--hub-text-sub);">⚡ ${subNote}</div>
             </div>
             <div style="display: flex; gap: 8px; flex-shrink: 0;">
                 <button class="btn-pill" style="padding: 7px 11px;" onclick="speakJapanese('${safeTts}')" title="Nghe phát âm">
@@ -1254,6 +1524,105 @@ function renderMistakesView() {
     });
 }
 
+function setupPairsEvents() {
+    const searchEl = document.getElementById('pairs-search-input');
+    const catEl = document.getElementById('pairs-cat-select');
+    const shufBtn = document.getElementById('pairs-shuffle-btn');
+
+    if (searchEl) searchEl.addEventListener('input', () => renderPairsTable());
+    if (catEl) catEl.addEventListener('change', () => renderPairsTable());
+    if (shufBtn) shufBtn.addEventListener('click', () => {
+        currentPairsOrder = fisherYatesShuffle(currentPairsOrder);
+        renderPairsTable();
+    });
+}
+
+function setPairsMaskMode(mode) {
+    pairsMaskMode = mode;
+    document.getElementById('pairs-mask-none-btn').classList.toggle('primary', mode === 'none');
+    document.getElementById('pairs-mask-right-btn').classList.toggle('primary', mode === 'right');
+    document.getElementById('pairs-mask-left-btn').classList.toggle('primary', mode === 'left');
+    renderPairsTable();
+}
+
+function findQuizForPair(pair) {
+    return SYNONYM_N3_DATA.find(q =>
+        q.target_word.includes(pair.word_a.slice(0, 2)) ||
+        pair.word_a.includes(q.target_word.slice(0, 2)) ||
+        q.target_reading === pair.read_a ||
+        (pair.read_a.length >= 2 && q.target_reading.startsWith(pair.read_a.slice(0, 2))) ||
+        (pair.word_b.length >= 2 && q.synonym_word.includes(pair.word_b.slice(0, 2)))
+    );
+}
+
+function pushPairToRevenge(pairStt) {
+    const pair = SYNONYM_80_PAIRS.find(p => p.stt === pairStt);
+    if (!pair) return;
+    const match = findQuizForPair(pair);
+    if (match) {
+        recordMistakeOrFlag(match, true, 'syn80');
+        document.getElementById('top-mistake-count').textContent = Object.keys(mistakesMap).length;
+        renderPairsTable();
+    }
+}
+
+function renderPairsTable() {
+    const container = document.getElementById('pairs-grid-container');
+    if (!container || typeof SYNONYM_80_PAIRS === 'undefined') return;
+
+    const q = (document.getElementById('pairs-search-input').value || '').trim().toLowerCase();
+    const cat = document.getElementById('pairs-cat-select').value;
+
+    const list = currentPairsOrder.filter(p => {
+        const catOk = cat === 'all' || p.category === cat;
+        const qOk = !q ||
+            p.word_a.toLowerCase().includes(q) ||
+            p.read_a.toLowerCase().includes(q) ||
+            p.word_b.toLowerCase().includes(q) ||
+            p.read_b.toLowerCase().includes(q) ||
+            p.meaning_vi.toLowerCase().includes(q);
+        return catOk && qOk;
+    });
+
+    container.innerHTML = '';
+    list.forEach(p => {
+        const safeTts = `${p.word_a}、${p.word_b}`.replace(/'/g, "\\'");
+        const card = document.createElement('div');
+        card.className = 'pair-card';
+        card.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="q-tag">#${p.stt} • ${p.category}</span>
+                <div style="display: flex; gap: 6px;">
+                    <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="speakJapanese('${safeTts}')" title="Nghe phát âm cặp từ">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <button class="btn-pill danger" style="padding: 4px 9px; font-size: 11.5px;" onclick="pushPairToRevenge(${p.stt})" title="Đẩy vào Kho Phục Thù [2/2]">
+                        <i class="fa-solid fa-fire"></i> Ôn lại
+                    </button>
+                </div>
+            </div>
+            <div class="pair-eq-row">
+                <div class="pair-side ${pairsMaskMode === 'left' ? 'masked' : ''}" onclick="this.classList.toggle('masked')">
+                    <div class="pair-word-main">${p.word_a}</div>
+                    <div class="pair-word-read">${p.read_a}</div>
+                </div>
+                <strong style="color: var(--primary); font-size: 18px;">＝</strong>
+                <div class="pair-side ${pairsMaskMode === 'right' ? 'masked' : ''}" onclick="this.classList.toggle('masked')">
+                    <div class="pair-word-main" style="color: var(--primary);">${p.word_b}</div>
+                    <div class="pair-word-read">${p.read_b}</div>
+                </div>
+            </div>
+            <div style="font-size: 13px; color: var(--hub-text-body); text-align: center; font-weight: 600;">
+                ${p.meaning_vi}
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// ==========================================
+// 9. KEYBOARD SHORTCUTS, TTS & REPORT
+// ==========================================
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
         if (!activeSession || activeSession.finished) return;
@@ -1297,20 +1666,24 @@ function speakJapanese(text, rate = 0.95) {
     window.speechSynthesis.speak(utter);
 }
 
-function buildAntigravityKanjiReport() {
+function buildAntigravityReport() {
+    const dataset = getBankDataset();
+    const isSyn = activeBank === 'syn80';
     const ids = Object.keys(mistakesMap);
     const m1Acc = historyData.m1Total > 0 ? `${Math.round((historyData.m1Correct / historyData.m1Total) * 100)}%` : '--';
     const m2Acc = historyData.m2Total > 0 ? `${Math.round((historyData.m2Correct / historyData.m2Total) * 100)}%` : '--';
     const topItems = ids.slice(0, 15).map((id, idx) => {
-        const q = KANJI_240_DATA.find(x => x.id === id);
+        const q = dataset.find(x => x.id === id);
         if (!q) return '';
         const m = mistakesMap[id];
-        return `${idx + 1}. [B${q.session}-M${q.mondai} | ${m.streak}/2] ${q.kanji_form}（${q.reading}）[${q.han_viet}] — ${q.meaning_vi} | Bẫy: ${q.trap_note}`;
+        return isSyn
+            ? `${idx + 1}. [Bài ${q.part} | ${m.streak}/2] ${q.target_word} ＝ ${q.synonym_word} (${q.meaning_vi}) | ${q.nuance_note}`
+            : `${idx + 1}. [B${q.session}-M${q.mondai} | ${m.streak}/2] ${q.kanji_form}（${q.reading}）[${q.han_viet}] — ${q.meaning_vi} | Bẫy: ${q.trap_note}`;
     }).filter(Boolean).join('\n');
 
-    return `📊 BÁO CÁO LUYỆN ĐỀ 240 KANJI N3 (${getTodayStr()})
-- Đã quét: ${touchedSet.size}/240 câu
-- Tỷ lệ đúng Mondai 1 (Đọc): ${m1Acc} | Mondai 2 (Chọn chữ): ${m2Acc}
+    return `📊 BÁO CÁO ${getBankCfg().name.toUpperCase()} (${getTodayStr()})
+- Đã quét: ${touchedSet.size}/${dataset.length} câu
+- Tỷ lệ đúng: ${isSyn ? `Xuôi A→B ${m1Acc} | Đảo B→A ${m2Acc}` : `Mondai 1 ${m1Acc} | Mondai 2 ${m2Acc}`}
 - Đang chờ Phục Thù [2/2]: ${ids.length} câu
 - Danh sách câu sai/gắn cờ cần Sensei phân tích & ra mẹo nhớ:
 ${topItems || '(Chưa có câu sai nào!)'}`;

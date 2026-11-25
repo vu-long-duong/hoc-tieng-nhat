@@ -715,6 +715,95 @@
             font-weight: 700;
             color: var(--hub-text);
         }
+
+        /* 5-Word Option Breakdown Grid (Synonyms) */
+        .opts-vi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        @media (max-width: 640px) {
+            .opts-vi-grid { grid-template-columns: 1fr; }
+        }
+        .opt-vi-card {
+            padding: 8px 11px;
+            border-radius: 9px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            font-size: 13px;
+            color: var(--hub-text-body);
+            line-height: 1.4;
+        }
+        .opt-vi-card.is-ans {
+            background: var(--hub-ok-bg);
+            border-color: var(--hub-ok-border);
+            color: var(--hub-text);
+        }
+
+        /* 80 Synonym Pairs Quick-Study Table */
+        .pairs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 12px;
+        }
+        .pair-card {
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            border-radius: 13px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: border-color 0.2s;
+        }
+        .pair-card:hover {
+            border-color: var(--primary);
+        }
+        .pair-eq-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .pair-side {
+            flex: 1;
+            min-width: 110px;
+            padding: 8px 10px;
+            border-radius: 9px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pair-side.masked {
+            background: var(--bg-btn-active);
+            border: 1px dashed var(--primary);
+            color: var(--primary);
+        }
+        .pair-side.masked .pair-word-main,
+        .pair-side.masked .pair-word-read {
+            visibility: hidden;
+        }
+        .pair-side.masked::after {
+            content: "👁️ Bấm mở";
+            display: block;
+            margin-top: -28px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .pair-word-main {
+            font-size: 16.5px;
+            font-weight: 800;
+            color: var(--hub-text);
+        }
+        .pair-word-read {
+            font-size: 11.5px;
+            color: var(--hub-text-sub);
+        }
     </style>
 </head>
 <body>
@@ -741,7 +830,7 @@
 
             <div class="sidebar-content">
                 <div class="filter-section">
-                    <h3>Lịch Cày Siêu Tốc 240 Kanji</h3>
+                    <h3 id="sidebar-sprint-heading">Lịch Cày Siêu Tốc 240 Kanji</h3>
                     <div id="sidebar-sprint-checklist" style="font-size: 12.5px; color: var(--hub-text-body); display: flex; flex-direction: column; gap: 8px; line-height: 1.45;">
                         <!-- Injected by JS -->
                     </div>
@@ -793,7 +882,10 @@
 
                 <div class="tab-selectors">
                     <button class="tab-btn active" id="nav-view-lobby-btn" onclick="showMainView('lobby')">
-                        <i class="fa-solid fa-layer-group"></i> Sảnh Bộ Đề (4 Ca)
+                        <i class="fa-solid fa-layer-group"></i> <span id="nav-lobby-lbl">Sảnh Bộ Đề</span>
+                    </button>
+                    <button class="tab-btn" id="nav-view-pairs-btn" style="display: none;" onclick="showMainView('pairs')">
+                        <i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng 80 Cặp A = B
                     </button>
                     <button class="tab-btn" id="nav-view-mistakes-btn" onclick="showMainView('mistakes')">
                         <i class="fa-solid fa-fire" style="color: var(--hub-danger-text);"></i> Kho Phục Thù (<span id="top-mistake-count">0</span>)
@@ -828,19 +920,19 @@
 
                     <!-- Extensible Exam Library Selector -->
                     <div class="bank-strip">
-                        <div class="bank-chip active">
+                        <div class="bank-chip active" id="bank-chip-kanji240" onclick="switchBank('kanji240')">
                             <div class="bank-chip-title">
                                 <span>🈴 240 Câu Kanji N3</span>
                                 <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
                             </div>
                             <span class="bank-chip-sub">4 Buổi × 60 câu (Mondai 1 & 2)</span>
                         </div>
-                        <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 2 sau khi xong 240 Kanji">
+                        <div class="bank-chip" id="bank-chip-syn80" onclick="switchBank('syn80')">
                             <div class="bank-chip-title">
                                 <span>🔁 80 Cặp Đồng Nghĩa</span>
-                                <span style="font-size: 11px; color: var(--hub-text-sub);">GĐ 2</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
                             </div>
-                            <span class="bank-chip-sub">Từ đồng nghĩa chuẩn JLPT N3</span>
+                            <span class="bank-chip-sub">95 câu Mondai 4 + Bảng dò 80 cặp</span>
                         </div>
                         <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 3">
                             <div class="bank-chip-title">
@@ -866,7 +958,7 @@
                             </div>
                             <div>
                                 <div class="kpi-val" id="kpi-touched">0 / 240</div>
-                                <div class="kpi-lbl">Tiến độ đã quét</div>
+                                <div class="kpi-lbl" id="kpi-touched-lbl">Tiến độ đã quét</div>
                             </div>
                         </div>
                         <div class="kpi-card">
@@ -875,7 +967,7 @@
                             </div>
                             <div>
                                 <div class="kpi-val" id="kpi-m1-acc">--%</div>
-                                <div class="kpi-lbl">Mondai 1 (Đọc Kanji)</div>
+                                <div class="kpi-lbl" id="kpi-m1-lbl">Mondai 1 (Đọc Kanji)</div>
                             </div>
                         </div>
                         <div class="kpi-card">
@@ -884,7 +976,7 @@
                             </div>
                             <div>
                                 <div class="kpi-val" id="kpi-m2-acc">--%</div>
-                                <div class="kpi-lbl">Mondai 2 (Chọn Kanji)</div>
+                                <div class="kpi-lbl" id="kpi-m2-lbl">Mondai 2 (Chọn Kanji)</div>
                             </div>
                         </div>
                         <div class="kpi-card" style="cursor: pointer;" onclick="showMainView('mistakes')">
@@ -911,7 +1003,7 @@
                                 <input type="checkbox" id="opt-shuffle-questions" checked>
                                 <div>
                                     🔀 Xáo thứ tự câu hỏi
-                                    <span class="toggle-sub">Tắt nếu muốn đúng số 1–60 theo PDF</span>
+                                    <span class="toggle-sub">Tắt nếu muốn đúng số gốc theo PDF</span>
                                 </div>
                             </label>
                             <label class="toggle-chip">
@@ -925,56 +1017,46 @@
                                 <input type="checkbox" id="opt-hide-context">
                                 <div>
                                     🙈 Ẩn câu ngữ cảnh
-                                    <span class="toggle-sub">Chỉ hiện từ gạch chân, ép nhớ mặt chữ</span>
+                                    <span class="toggle-sub" id="toggle-hide-sub">Chỉ hiện từ gạch chân, ép nhớ mặt chữ</span>
                                 </div>
                             </label>
                             <label class="toggle-chip">
                                 <input type="checkbox" id="opt-reverse-mode">
                                 <div>
-                                    🔄 Đảo chiều (M1 ↔ M2)
-                                    <span class="toggle-sub">Kanji↔Hiragana với 3 nhiễu tự sinh</span>
+                                    <span id="toggle-rev-title">🔄 Đảo chiều (M1 ↔ M2)</span>
+                                    <span class="toggle-sub" id="toggle-rev-sub">Kanji↔Hiragana với 3 nhiễu tự sinh</span>
                                 </div>
                             </label>
                         </div>
                     </div>
 
-                    <!-- 4-Shift Sprint Sessions -->
+                    <!-- Sessions Sprint Cards -->
                     <div class="panel-card">
                         <h3>
-                            <span><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3</span>
-                            <button class="btn-pill danger" id="quick-revenge-btn">
-                                <i class="fa-solid fa-fire"></i> Phục Thù Toàn Bộ Câu Sai (<span id="btn-revenge-cnt">0</span>)
-                            </button>
+                            <span id="sessions-panel-title"><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3</span>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn-pill primary" id="open-pairs-quick-btn" style="display: none;" onclick="showMainView('pairs')">
+                                    <i class="fa-solid fa-table-list"></i> Mở Bảng Dò 80 Cặp A = B
+                                </button>
+                                <button class="btn-pill danger" id="quick-revenge-btn">
+                                    <i class="fa-solid fa-fire"></i> Phục Thù Toàn Bộ Câu Sai (<span id="btn-revenge-cnt">0</span>)
+                                </button>
+                            </div>
                         </h3>
                         <div class="sessions-grid" id="sessions-cards-container">
-                            <!-- 4 Session cards injected by JS -->
+                            <!-- Session cards injected by JS -->
                         </div>
                     </div>
 
                     <!-- Custom Mix / Short Burst Launcher -->
                     <div class="panel-card">
                         <h3>
-                            <span><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 240 Câu</span>
+                            <span id="custom-panel-title"><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng</span>
                         </h3>
                         <div class="custom-row">
-                            <select id="custom-session-select" class="hub-select">
-                                <option value="all">Trộn tổng cả 240 câu (4 Buổi)</option>
-                                <option value="1">Chỉ Buổi 1 (60 câu)</option>
-                                <option value="2">Chỉ Buổi 2 (60 câu)</option>
-                                <option value="3">Chỉ Buổi 3 (60 câu)</option>
-                                <option value="4">Chỉ Buổi 4 (60 câu)</option>
-                            </select>
-                            <select id="custom-mondai-select" class="hub-select">
-                                <option value="all">Cả Mondai 1 & Mondai 2</option>
-                                <option value="1">Chỉ Mondai 1 (Đọc Kanji)</option>
-                                <option value="2">Chỉ Mondai 2 (Chọn chữ Kanji)</option>
-                            </select>
-                            <select id="custom-count-select" class="hub-select">
-                                <option value="15">15 câu (Lượt nhanh 4 phút)</option>
-                                <option value="30" selected>30 câu (Nửa buổi 8 phút)</option>
-                                <option value="60">60 câu (Trọn 1 buổi 15 phút)</option>
-                                <option value="240">Tất cả câu lọc được</option>
-                            </select>
+                            <select id="custom-session-select" class="hub-select"></select>
+                            <select id="custom-mondai-select" class="hub-select"></select>
+                            <select id="custom-count-select" class="hub-select"></select>
                             <button class="btn-pill primary" id="start-custom-drill-btn">
                                 <i class="fa-solid fa-play"></i> Luyện Nhanh Chữa Ngay
                             </button>
@@ -1173,12 +1255,44 @@
                         </div>
                     </div>
                 </div>
+                <!-- ==========================================
+                     VIEW 5: BẢNG DÒ NHANH 80 CẶP ĐỒNG NGHĨA A = B
+                     ========================================== -->
+                <div id="view-pairs" style="display: none;">
+                    <div class="panel-card">
+                        <h3>
+                            <span><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 80 Cặp Từ Đồng Nghĩa N3 (A ＝ B)</span>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn-pill primary" id="pairs-mask-none-btn" onclick="setPairsMaskMode('none')">👁️ Hiện cả hai</button>
+                                <button class="btn-pill" id="pairs-mask-right-btn" onclick="setPairsMaskMode('right')">🙈 Che vế phải (A = ???)</button>
+                                <button class="btn-pill" id="pairs-mask-left-btn" onclick="setPairsMaskMode('left')">🙈 Che vế trái (??? = B)</button>
+                            </div>
+                        </h3>
+                        <div class="custom-row" style="margin-bottom: 16px;">
+                            <input type="text" id="pairs-search-input" class="hub-select" style="flex: 1; min-width: 220px; cursor: text;" placeholder="Tìm nhanh Kanji, Hiragana, Katakana hoặc nghĩa tiếng Việt...">
+                            <select id="pairs-cat-select" class="hub-select">
+                                <option value="all">Tất cả từ loại (80 cặp)</option>
+                                <option value="Động từ">Động từ</option>
+                                <option value="Tính từ">Tính từ</option>
+                                <option value="Danh từ">Danh từ</option>
+                                <option value="Phó từ">Phó từ</option>
+                                <option value="Katakana">Katakana</option>
+                                <option value="Cụm từ">Cụm từ</option>
+                            </select>
+                            <button class="btn-pill" id="pairs-shuffle-btn"><i class="fa-solid fa-shuffle"></i> Xáo bảng</button>
+                        </div>
+                        <div class="pairs-grid" id="pairs-grid-container">
+                            <!-- 80 Pair cards injected by JS -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- Load 240 Kanji Database + Logic -->
+    <!-- Load Databases + Logic -->
     <script src="data/kanji_240_data.js"></script>
+    <script src="data/synonym_n3_data.js"></script>
     <script src="assets/js/luyen_de_app.js"></script>
 </body>
 </html>
