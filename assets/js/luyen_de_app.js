@@ -5,8 +5,15 @@
 const LS_MISTAKES_KEY = 'n3_kanji240_mistakes';
 const LS_HISTORY_KEY = 'n3_kanji240_history';
 const LS_TOUCHED_KEY = 'n3_kanji240_touched';
+const LS_INPROGRESS_KEY = 'n3_kanji240_inprogress';
 const LS_HUB_SRS_KEY = 'n3_srs_mistakes';
 const LS_HUB_STATS_KEY = 'n3_campaign_stats';
+
+const ALL_BACKUP_KEYS = [
+    LS_MISTAKES_KEY, LS_HISTORY_KEY, LS_TOUCHED_KEY, LS_INPROGRESS_KEY,
+    LS_HUB_SRS_KEY, LS_HUB_STATS_KEY,
+    'n3_grammar_progress', 'kanji_progress', 'vocab_progress'
+];
 
 const SHIFT_META = [
     { session: 1, shift: 'Ca 1 • Sáng', icon: 'fa-sun', desc: 'Câu 1–60 (30 đọc Kanji + 30 chọn Kanji)' },
@@ -20,7 +27,8 @@ let mistakesMap = {}; // { qid: { streak: 0|1, wrongCount: n, flagged: bool, las
 let historyData = {
     sessions: { 1: null, 2: null, 3: null, 4: null },
     m1Correct: 0, m1Total: 0,
-    m2Correct: 0, m2Total: 0
+    m2Correct: 0, m2Total: 0,
+    attemptsLog: []
 };
 let touchedSet = new Set();
 
@@ -90,7 +98,7 @@ function loadState() {
     try { mistakesMap = JSON.parse(localStorage.getItem(LS_MISTAKES_KEY)) || {}; } catch (e) { mistakesMap = {}; }
     try {
         const h = JSON.parse(localStorage.getItem(LS_HISTORY_KEY));
-        if (h) historyData = { ...historyData, ...h, sessions: { 1: null, 2: null, 3: null, 4: null, ...(h.sessions || {}) } };
+        if (h) historyData = { ...historyData, ...h, sessions: { 1: null, 2: null, 3: null, 4: null, ...(h.sessions || {}) }, attemptsLog: Array.isArray(h.attemptsLog) ? h.attemptsLog : [] };
     } catch (e) {}
     try {
         const t = JSON.parse(localStorage.getItem(LS_TOUCHED_KEY));
@@ -337,6 +345,131 @@ function renderLobby() {
         sItem.innerHTML = `<strong style="color: var(--hub-text);">${passed ? '✅' : '⏳'} ${meta.shift} (Buổi ${meta.session}):</strong> ${rec ? `${rec.best}/60 điểm` : 'Chưa chạy'}`;
         sidebarChecklist.appendChild(sItem);
     });
+
+    renderResumeBanner();
+    renderHistoryLog();
+}
+
+function saveInProgressSession() {
+    if (!activeSession || activeSession.finished) return;
+    try {
+        const snapshot = {
+            title: activeSession.title,
+            sessionNum: activeSession.sessionNum,
+            mode: activeSession.mode,
+            isRevenge: activeSession.isRevenge,
+            antiRote: activeSession.antiRote,
+            items: activeSession.items.map(it => ({
+                qid: it.orig.id,
+                effectiveMondai: it.effectiveMondai,
+                isReversed: it.isReversed,
+                displayHtml: it.displayHtml,
+                displayOnlyWord: it.displayOnlyWord,
+                options: it.options,
+                correctIdx: it.correctIdx
+            })),
+            answers: activeSession.answers,
+            flags: activeSession.flags,
+            revealedCtx: activeSession.revealedCtx,
+            currentIndex: activeSession.currentIndex,
+            timerSecondsLeft: activeSession.timerSecondsLeft,
+            savedAt: new Date().toLocaleString('vi-VN')
+        };
+        localStorage.setItem(LS_INPROGRESS_KEY, JSON.stringify(snapshot));
+    } catch (e) {}
+}
+
+function clearInProgressSession() {
+    localStorage.removeItem(LS_INPROGRESS_KEY);
+}
+
+function renderResumeBanner() {
+    const banner = document.getElementById('resume-banner');
+    if (!banner) return;
+    let snap = null;
+    try { snap = JSON.parse(localStorage.getItem(LS_INPROGRESS_KEY)); } catch (e) {}
+    if (!snap || !Array.isArray(snap.items) || snap.items.length === 0) {
+        banner.style.display = 'none';
+        return;
+    }
+    const doneCnt = (snap.answers || []).filter(a => a !== null).length;
+    document.getElementById('resume-banner-desc').textContent =
+        `${snap.title} • Đã làm ${doneCnt}/${snap.items.length} câu (Lưu lúc ${snap.savedAt || 'gần đây'})`;
+    banner.style.display = 'block';
+}
+
+function resumeSavedSession() {
+    let snap = null;
+    try { snap = JSON.parse(localStorage.getItem(LS_INPROGRESS_KEY)); } catch (e) {}
+    if (!snap || !Array.isArray(snap.items)) return;
+
+    const restoredItems = snap.items.map(it => {
+        const orig = KANJI_240_DATA.find(x => x.id === it.qid);
+        if (!orig) return null;
+        return { ...it, orig };
+    }).filter(Boolean);
+
+    if (restoredItems.length === 0) {
+        clearInProgressSession();
+        return;
+    }
+
+    activeSession = {
+        title: snap.title,
+        sessionNum: snap.sessionNum,
+        sourceConfig: { title: snap.title, sessionNum: snap.sessionNum, pool: restoredItems.map(i => i.orig), mode: snap.mode, isRevenge: snap.isRevenge, antiRote: snap.antiRote },
+        mode: snap.mode,
+        isRevenge: snap.isRevenge,
+        antiRote: snap.antiRote,
+        items: restoredItems,
+        answers: snap.answers,
+        flags: snap.flags,
+        revealedCtx: snap.revealedCtx || new Array(restoredItems.length).fill(false),
+        currentIndex: Math.min(snap.currentIndex || 0, restoredItems.length - 1),
+        startedAt: Date.now(),
+        timerSecondsLeft: snap.timerSecondsLeft || 600,
+        timerInterval: null,
+        finished: false
+    };
+
+    showMainView('exam');
+    setupActiveExamHeader();
+    renderQuestionStage();
+    renderNavigatorGrid();
+    if (activeSession.mode === 'exam') startExamTimer();
+}
+
+function renderHistoryLog() {
+    const container = document.getElementById('history-log-container');
+    const cntEl = document.getElementById('history-log-count');
+    if (!container) return;
+    const logs = historyData.attemptsLog || [];
+    if (cntEl) cntEl.textContent = logs.length;
+
+    if (logs.length === 0) {
+        container.innerHTML = `<div style="font-size: 13px; color: var(--hub-text-sub); padding: 12px; text-align: center; background: var(--hub-surface-2); border-radius: 10px;">Chưa có lịch sử bài nộp nào. Hoàn thành Ca 1 để lưu cột mốc đầu tiên nhé!</div>`;
+        return;
+    }
+
+    container.innerHTML = '';
+    logs.slice(0, 30).forEach(log => {
+        const ok = log.pct >= 85;
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; padding:10px 14px; border-radius:10px; background:var(--hub-surface-2); border:1px solid var(--hub-border);';
+        row.innerHTML = `
+            <div>
+                <strong style="font-size: 14px; color: var(--hub-text);">${log.title}</strong>
+                <span class="q-tag" style="margin-left: 6px; font-size: 11px;">${log.modeLabel}</span>
+                <div style="font-size: 12px; color: var(--hub-text-sub); margin-top: 3px;">
+                    🕒 ${log.timestamp} • M1: ${log.m1} • M2: ${log.m2} • Thời gian: ${log.duration}
+                </div>
+            </div>
+            <span class="score-badge ${ok ? 'passed' : ''}" style="font-size: 13.5px;">
+                ${log.score}/${log.total} (${log.pct}%)
+            </span>
+        `;
+        container.appendChild(row);
+    });
 }
 
 function getAntiRoteSettings(forceOverrides = {}) {
@@ -369,6 +502,68 @@ function setupLobbyEvents() {
             alert('📋 Đã copy Báo cáo 240 Câu Kanji & Danh sách Lỗ hổng! Hãy Paste (Ctrl+V) vào khung chat Antigravity để Sensei phân tích giúp bạn nhé.');
         });
     });
+
+    // Resume / Discard in-progress exam
+    const resumeBtn = document.getElementById('resume-exam-btn');
+    const discardBtn = document.getElementById('discard-resume-btn');
+    if (resumeBtn) resumeBtn.addEventListener('click', () => resumeSavedSession());
+    if (discardBtn) discardBtn.addEventListener('click', () => {
+        if (confirm('Xóa bài đang làm dở này?')) {
+            clearInProgressSession();
+            renderResumeBanner();
+        }
+    });
+
+    // Export / Import JSON Backup
+    const exportBtn = document.getElementById('export-backup-btn');
+    const importBtn = document.getElementById('import-backup-btn');
+    const importInput = document.getElementById('import-backup-input');
+
+    if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+            const payload = { version: 1, exportedAt: new Date().toISOString(), data: {} };
+            ALL_BACKUP_KEYS.forEach(k => {
+                const v = localStorage.getItem(k);
+                if (v !== null) payload.data[k] = v;
+            });
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `jlpt_n3_backup_${getTodayStr()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    if (importBtn && importInput) {
+        importBtn.addEventListener('click', () => importInput.click());
+        importInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                try {
+                    const parsed = JSON.parse(ev.target.result);
+                    const map = parsed.data || parsed;
+                    let restored = 0;
+                    ALL_BACKUP_KEYS.forEach(k => {
+                        if (typeof map[k] === 'string') {
+                            localStorage.setItem(k, map[k]);
+                            restored++;
+                        }
+                    });
+                    loadState();
+                    renderLobby();
+                    alert(`✅ Đã khôi phục thành công ${restored} nhóm dữ liệu (Lịch sử thi, Kho Phục Thù, Hán tự, Từ vựng, Ngữ pháp)!`);
+                } catch (err) {
+                    alert('❌ File sao lưu không hợp lệ!');
+                }
+                importInput.value = '';
+            };
+            reader.readAsText(file);
+        });
+    }
 }
 
 // ==========================================
@@ -667,6 +862,7 @@ function handleSelectOption(optIdx) {
         saveState();
     }
 
+    saveInProgressSession();
     renderQuestionStage();
     renderNavigatorGrid();
 }
@@ -827,6 +1023,7 @@ function toggleCurrentFlag() {
     if (activeSession.flags[idx]) {
         recordMistakeOrFlag(activeSession.items[idx].orig, true);
     }
+    saveInProgressSession();
     renderQuestionStage();
     renderNavigatorGrid();
 }
@@ -893,14 +1090,32 @@ function finishExamSession(timedOut = false) {
             lastAt: getTodayStr()
         };
     }
-    if (activeSession.mode === 'exam') addHubXP(totalCorrect * 3);
-    saveState();
-
-    // Render Result Dashboard
+    // Record into persistent Attempt History Log
+    const nowTime = new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
     const total = activeSession.items.length;
     const pct = Math.round((totalCorrect / total) * 100);
     const minStr = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
     const secStr = String(elapsedSec % 60).padStart(2, '0');
+
+    if (!Array.isArray(historyData.attemptsLog)) historyData.attemptsLog = [];
+    historyData.attemptsLog.unshift({
+        timestamp: nowTime,
+        title: activeSession.title,
+        modeLabel: activeSession.isRevenge ? 'Phục Thù' : (activeSession.mode === 'exam' ? 'Thi Thử' : 'Luyện Nhanh'),
+        score: totalCorrect,
+        total,
+        pct,
+        m1: `${m1Ok}/${m1Tot}`,
+        m2: `${m2Ok}/${m2Tot}`,
+        duration: `${minStr}:${secStr}`
+    });
+    historyData.attemptsLog = historyData.attemptsLog.slice(0, 60);
+
+    clearInProgressSession();
+    if (activeSession.mode === 'exam') addHubXP(totalCorrect * 3);
+    saveState();
+
+    // Render Result Dashboard
 
     document.getElementById('res-mode-lbl').textContent = timedOut ? '⏰ Hết giờ — Tự động nộp bài' : `Kết quả • ${activeSession.title}`;
     document.getElementById('res-headline').textContent = pct >= 90

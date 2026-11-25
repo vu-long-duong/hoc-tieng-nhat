@@ -758,6 +758,15 @@
                     <button class="action-btn" id="copy-kanji-report-btn" style="background: var(--primary); color: #fff; margin-bottom: 8px;">
                         <i class="fa-solid fa-copy"></i> Copy Báo Cáo Lỗ Hổng
                     </button>
+                    <div style="display: flex; gap: 6px;">
+                        <button class="btn-pill" id="export-backup-btn" style="flex: 1; font-size: 12px; padding: 8px 6px;" title="Tải file sao lưu toàn bộ tiến độ về máy">
+                            <i class="fa-solid fa-download"></i> Sao lưu
+                        </button>
+                        <button class="btn-pill" id="import-backup-btn" style="flex: 1; font-size: 12px; padding: 8px 6px;" title="Khôi phục tiến độ từ file sao lưu">
+                            <i class="fa-solid fa-upload"></i> Khôi phục
+                        </button>
+                        <input type="file" id="import-backup-input" accept=".json" style="display: none;">
+                    </div>
                 </div>
             </div>
         </aside>
@@ -803,6 +812,20 @@
                      VIEW 1: SẢNH KHO BỘ ĐỀ (LOBBY)
                      ========================================== -->
                 <div id="view-lobby">
+                    <!-- Resume In-Progress Banner (Auto-saved if user closed tab mid-exam) -->
+                    <div id="resume-banner" class="panel-card" style="display: none; background: var(--hub-warn-bg); border-color: var(--hub-warn-border); padding: 14px 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                            <div>
+                                <strong style="color: var(--hub-warn-text); font-size: 15px;"><i class="fa-solid fa-floppy-disk"></i> Bạn có bài thi đang làm dở đã được tự động lưu!</strong>
+                                <div id="resume-banner-desc" style="font-size: 13px; color: var(--hub-text-body); margin-top: 3px;"></div>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn-pill primary" id="resume-exam-btn"><i class="fa-solid fa-play"></i> Tiếp tục làm tiếp</button>
+                                <button class="btn-pill" id="discard-resume-btn">Bỏ bài dở</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Extensible Exam Library Selector -->
                     <div class="bank-strip">
                         <div class="bank-chip active">
@@ -958,6 +981,17 @@
                             <button class="btn-pill warn" id="start-custom-exam-btn">
                                 <i class="fa-solid fa-stopwatch"></i> Thi Thử Bấm Giờ
                             </button>
+                        </div>
+                    </div>
+
+                    <!-- Past Attempts History Log -->
+                    <div class="panel-card">
+                        <h3>
+                            <span><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Lịch Sử Các Lần Kiểm Tra Trước (<span id="history-log-count">0</span> lần)</span>
+                            <span style="font-size: 12px; color: var(--hub-text-sub); font-weight: 500;">Tự động lưu vĩnh viễn trên trình duyệt</span>
+                        </h3>
+                        <div id="history-log-container" style="display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto;">
+                            <!-- History entries injected by JS -->
                         </div>
                     </div>
                 </div>
