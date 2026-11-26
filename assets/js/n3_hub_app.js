@@ -956,15 +956,30 @@ function renderChoukaiDrill() {
 // 7. JAPANESE TTS & AI SENSEI COMPANION
 // ==========================================
 function speakJapanese(text, rate = 0.95) {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'ja-JP';
-    utter.rate = rate;
-    const voices = window.speechSynthesis.getVoices();
-    const jaVoice = voices.find(v => v.lang.includes('ja') || v.lang.includes('JP'));
-    if (jaVoice) utter.voice = jaVoice;
-    window.speechSynthesis.speak(utter);
+    if (!text) return;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    const voices = ('speechSynthesis' in window) ? (window.speechSynthesis.getVoices() || []) : [];
+    const jaVoices = voices.filter(v => {
+        const lang = (v.lang || '').toLowerCase().replace('_', '-');
+        const name = (v.name || '').toLowerCase();
+        return lang.startsWith('ja') || name.includes('japanese') || name.includes('日本語');
+    });
+    const jaVoice = jaVoices.find(v => /google|nanami|keita|haruka|ayumi|ichiro|kyoko/i.test(v.name)) || jaVoices[0];
+    if (jaVoice) {
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = jaVoice.lang || 'ja-JP';
+        utter.voice = jaVoice;
+        utter.rate = rate;
+        window.speechSynthesis.speak(utter);
+        return;
+    }
+    try {
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ja&q=${encodeURIComponent(text)}`;
+        const audio = new Audio(url);
+        audio.referrerPolicy = 'no-referrer';
+        audio.playbackRate = rate;
+        audio.play().catch(() => {});
+    } catch (e) {}
 }
 
 function setupSenseiCompanion() {

@@ -893,26 +893,30 @@ function renderLibrary() {
 // WEB SPEECH SYNTHESIS (TTS)
 // ==========================================
 function speakJapanese(text) {
-    if (!('speechSynthesis' in window)) {
-        console.warn("Speech Synthesis is not supported in this browser.");
+    if (!text) return;
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    const voices = ('speechSynthesis' in window) ? (window.speechSynthesis.getVoices() || []) : [];
+    const jaVoices = voices.filter(v => {
+        const lang = (v.lang || '').toLowerCase().replace('_', '-');
+        const name = (v.name || '').toLowerCase();
+        return lang.startsWith('ja') || name.includes('japanese') || name.includes('日本語');
+    });
+    const jaVoice = jaVoices.find(v => /google|nanami|keita|haruka|ayumi|ichiro|kyoko/i.test(v.name)) || jaVoices[0];
+    if (jaVoice) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = jaVoice.lang || 'ja-JP';
+        utterance.voice = jaVoice;
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
         return;
     }
-    
-    // Stop any active speech
-    window.speechSynthesis.cancel();
-    
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP';
-    utterance.rate = 0.85; // Slightly slower for clear learning
-    
-    // Find Japanese voice
-    const voices = window.speechSynthesis.getVoices();
-    const jaVoice = voices.find(voice => voice.lang.startsWith('ja'));
-    if (jaVoice) {
-        utterance.voice = jaVoice;
-    }
-    
-    window.speechSynthesis.speak(utterance);
+    try {
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ja&q=${encodeURIComponent(text)}`;
+        const audio = new Audio(url);
+        audio.referrerPolicy = 'no-referrer';
+        audio.playbackRate = 0.9;
+        audio.play().catch(() => {});
+    } catch (e) {}
 }
 
 // Load voices when they are populated

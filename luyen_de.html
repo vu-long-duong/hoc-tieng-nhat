@@ -804,6 +804,36 @@
             font-size: 11.5px;
             color: var(--hub-text-sub);
         }
+        .pair-meaning {
+            font-size: 13px;
+            color: var(--hub-text-body);
+            text-align: center;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pair-meaning.masked {
+            background: var(--hub-surface);
+            border: 1px dashed var(--hub-border-strong);
+            color: transparent;
+            user-select: none;
+            position: relative;
+        }
+        .pair-meaning.masked::after {
+            content: "🙈 Đã ẩn nghĩa tiếng Việt (Bấm để mở)";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--hub-text-sub);
+        }
     </style>
 </head>
 <body>
@@ -1263,9 +1293,9 @@
                         <h3>
                             <span><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 80 Cặp Từ Đồng Nghĩa N3 (A ＝ B)</span>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                <button class="btn-pill primary" id="pairs-mask-none-btn" onclick="setPairsMaskMode('none')">👁️ Hiện cả hai</button>
-                                <button class="btn-pill" id="pairs-mask-right-btn" onclick="setPairsMaskMode('right')">🙈 Che vế phải (A = ???)</button>
-                                <button class="btn-pill" id="pairs-mask-left-btn" onclick="setPairsMaskMode('left')">🙈 Che vế trái (??? = B)</button>
+                                <button class="btn-pill primary" id="pairs-mask-none-btn" onclick="setPairsMaskMode('none')">👁️ Hiện tất cả</button>
+                                <button class="btn-pill" id="pairs-mask-right-btn" onclick="setPairsMaskMode('right')">🙈 Che vế phải & Nghĩa (A = ???)</button>
+                                <button class="btn-pill" id="pairs-mask-left-btn" onclick="setPairsMaskMode('left')">🙈 Che vế trái & Nghĩa (??? = B)</button>
                             </div>
                         </h3>
                         <div class="custom-row" style="margin-bottom: 16px;">

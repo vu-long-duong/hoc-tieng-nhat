@@ -1586,14 +1586,20 @@ function renderPairsTable() {
 
     container.innerHTML = '';
     list.forEach(p => {
-        const safeTts = `${p.word_a}、${p.word_b}`.replace(/'/g, "\\'");
+        // Use pure Hiragana/Katakana readings for TTS so it never triggers Chinese Kanji pronunciation
+        const cleanReadB = p.read_b.split('/')[0].trim();
+        const safeKanaTts = `${p.read_a}。${cleanReadB}`.replace(/'/g, "\\'");
+        const safeReadA = p.read_a.replace(/'/g, "\\'");
+        const safeReadB = cleanReadB.replace(/'/g, "\\'");
+        const isMaskedInit = pairsMaskMode !== 'none';
+
         const card = document.createElement('div');
         card.className = 'pair-card';
         card.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span class="q-tag">#${p.stt} • ${p.category}</span>
                 <div style="display: flex; gap: 6px;">
-                    <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="speakJapanese('${safeTts}')" title="Nghe phát âm cặp từ">
+                    <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="speakPairAudio(this, '${safeKanaTts}', '${safeReadA}', '${safeReadB}')" title="Nghe phát âm chuẩn tiếng Nhật">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
                     <button class="btn-pill danger" style="padding: 4px 9px; font-size: 11.5px;" onclick="pushPairToRevenge(${p.stt})" title="Đẩy vào Kho Phục Thù [2/2]">
@@ -1602,22 +1608,50 @@ function renderPairsTable() {
                 </div>
             </div>
             <div class="pair-eq-row">
-                <div class="pair-side ${pairsMaskMode === 'left' ? 'masked' : ''}" onclick="this.classList.toggle('masked')">
+                <div class="pair-side pair-side-left ${pairsMaskMode === 'left' ? 'masked' : ''}" onclick="togglePairCardMask(this)">
                     <div class="pair-word-main">${p.word_a}</div>
                     <div class="pair-word-read">${p.read_a}</div>
                 </div>
                 <strong style="color: var(--primary); font-size: 18px;">＝</strong>
-                <div class="pair-side ${pairsMaskMode === 'right' ? 'masked' : ''}" onclick="this.classList.toggle('masked')">
+                <div class="pair-side pair-side-right ${pairsMaskMode === 'right' ? 'masked' : ''}" onclick="togglePairCardMask(this)">
                     <div class="pair-word-main" style="color: var(--primary);">${p.word_b}</div>
                     <div class="pair-word-read">${p.read_b}</div>
                 </div>
             </div>
-            <div style="font-size: 13px; color: var(--hub-text-body); text-align: center; font-weight: 600;">
+            <div class="pair-meaning ${isMaskedInit ? 'masked' : ''}" onclick="togglePairCardMask(this)">
                 ${p.meaning_vi}
             </div>
         `;
         container.appendChild(card);
     });
+}
+
+function togglePairCardMask(el) {
+    const card = el.closest('.pair-card');
+    if (!card || pairsMaskMode === 'none') return;
+    const targetSide = card.querySelector(pairsMaskMode === 'left' ? '.pair-side-left' : '.pair-side-right');
+    const meaningBox = card.querySelector('.pair-meaning');
+    const currentlyMasked = (targetSide && targetSide.classList.contains('masked')) || (meaningBox && meaningBox.classList.contains('masked'));
+    if (targetSide) targetSide.classList.toggle('masked', !currentlyMasked);
+    if (meaningBox) meaningBox.classList.toggle('masked', !currentlyMasked);
+}
+
+function speakPairAudio(btnEl, fullKana, readA, readB) {
+    const card = btnEl.closest('.pair-card');
+    if (card) {
+        const leftMasked = card.querySelector('.pair-side-left')?.classList.contains('masked');
+        const rightMasked = card.querySelector('.pair-side-right')?.classList.contains('masked');
+        // If one side is masked, only speak the visible side so audio doesn't spoil the hidden answer!
+        if (rightMasked && !leftMasked) {
+            speakJapanese(readA);
+            return;
+        }
+        if (leftMasked && !rightMasked) {
+            speakJapanese(readB);
+            return;
+        }
+    }
+    speakJapanese(fullKana);
 }
 
 // ==========================================
@@ -1654,16 +1688,75 @@ function setupKeyboardShortcuts() {
     });
 }
 
+// Pre-warm browser voices & prevent Windows SAPI from routing Kanji to Chinese (zh-CN) TTS!
+let cachedJaVoice = null;
+let activeCloudAudio = null;
+
+function findBestJapaneseVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices() || [];
+    const jaVoices = voices.filter(v => {
+        const lang = (v.lang || '').toLowerCase().replace('_', '-');
+        const name = (v.name || '').toLowerCase();
+        return lang.startsWith('ja') || name.includes('japanese') || name.includes('日本語');
+    });
+    if (jaVoices.length === 0) return null;
+    // Prefer natural neural voices (Google 日本語, Microsoft Nanami/Keita/Haruka/Ayumi, Kyoko)
+    return jaVoices.find(v => /google|nanami|keita|haruka|ayumi|ichiro|kyoko|siri/i.test(v.name)) || jaVoices[0];
+}
+
+if ('speechSynthesis' in window) {
+    cachedJaVoice = findBestJapaneseVoice();
+    window.speechSynthesis.onvoiceschanged = () => {
+        cachedJaVoice = findBestJapaneseVoice();
+    };
+}
+
+function playCloudJapaneseTts(text, rate = 0.95) {
+    try {
+        if (activeCloudAudio) {
+            activeCloudAudio.pause();
+            activeCloudAudio = null;
+        }
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ja&q=${encodeURIComponent(text)}`;
+        const audio = new Audio(url);
+        audio.referrerPolicy = 'no-referrer';
+        audio.playbackRate = rate;
+        activeCloudAudio = audio;
+        audio.play().catch(() => {});
+    } catch (e) {}
+}
+
 function speakJapanese(text, rate = 0.95) {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'ja-JP';
-    utter.rate = rate;
-    const voices = window.speechSynthesis.getVoices();
-    const jaVoice = voices.find(v => v.lang.includes('ja') || v.lang.includes('JP'));
-    if (jaVoice) utter.voice = jaVoice;
-    window.speechSynthesis.speak(utter);
+    if (!text) return;
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+    const jaVoice = cachedJaVoice || findBestJapaneseVoice();
+    if (jaVoice) {
+        cachedJaVoice = jaVoice;
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = jaVoice.lang || 'ja-JP';
+        utter.voice = jaVoice;
+        utter.rate = rate;
+        window.speechSynthesis.speak(utter);
+        return;
+    }
+    // If voices haven't populated yet on first click, wait 120ms and re-check before falling back to Cloud Native ja-JP Audio
+    setTimeout(() => {
+        const retryVoice = findBestJapaneseVoice();
+        if (retryVoice) {
+            cachedJaVoice = retryVoice;
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = retryVoice.lang || 'ja-JP';
+            utter.voice = retryVoice;
+            utter.rate = rate;
+            window.speechSynthesis.speak(utter);
+        } else {
+            // No local ja-JP pack installed on Windows (prevents Windows from using Chinese zh-CN voice!)
+            playCloudJapaneseTts(text, rate);
+        }
+    }, 120);
 }
 
 function buildAntigravityReport() {
