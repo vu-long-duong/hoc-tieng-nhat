@@ -1,0 +1,1067 @@
+# -*- coding: utf-8 -*-
+import json, os, sys
+sys.stdout.reconfigure(encoding="utf-8")
+
+OUT_PATH = r"c:\Users\duong\OneDrive\Máy tính\Tiếng nhật\Học hán tự\data\jlpt_n3_2022_12.js"
+
+PASSAGES = {
+    "2022_12_bm3": {
+        "title": "京都旅行（留学生の作文・グエン ティ ラン）",
+        "kind": "cloze",
+        "html": (
+            "<div class='passage-header-meta'><strong>京都旅行</strong><span class='passage-author'>グエン ティ ラン</span></div>"
+            "<p>私は夏休みに京都を旅行しました。日本で旅行するとき、普段はホテルに泊まりますが、京都では温泉のある旅館に泊まりました。畳の部屋に入るのは初めてでした。<span class='p-anchor' data-qid='2022_12_bd_19'>（ 19 ）</span>にも初めて入りました。夕食もおいしかったです。</p>"
+            "<p>次の日、部屋で出発の準備をしていたら、腕時計<span class='p-anchor' data-qid='2022_12_bd_20'>（ 20 ）</span>ないことに気がつきました。かばんの中を探しても見つからなくて、腕時計が落ちていなかったかフロントで聞きましたが、ありませんでした。母にもらった大切な時計だったので、私はもう一度、部屋に戻って探すことにしました。フロントの人も旅館の中を探してみると言ってくれました。</p>"
+            "<p>やはり部屋にはなく、泣きそうになっていたとき、フロントの人が私の時計を見つけて、部屋に持ってきてくれました。温泉の入り口のところに<span class='p-anchor' data-qid='2022_12_bd_21'>（ 21 ）</span>。朝、温泉に入ったときに、落としてしまったようです。時計が見つかって、旅館の人たちもとても喜んでくれました。</p>"
+            "<p>京都旅行の一番の思い出は、時計が見つかったことを一緒に喜んでくれた旅館の人たちの笑顔です。旅行では観光地や食べ物だけではなく、人の優しさもいい思い出に<span class='p-anchor' data-qid='2022_12_bd_22'>（ 22 ）</span>。</p>"
+        ),
+        "summary_vi": "Du học sinh Nguyễn Thị Lan đi du lịch Kyoto, lần đầu ở nhà trọ kiểu Nhật có suối nước nóng (onsen). Hôm sau phát hiện mất chiếc đồng hồ quý mẹ tặng, nhân viên lễ tân nhiệt tình tìm giúp và thấy rơi ngay cửa onsen. Kỷ niệm đẹp nhất chuyến đi chính là nụ cười vui mừng cùng cô của nhân viên nhà trọ."
+    },
+    "2022_12_dm4_1": {
+        "title": "問題4（1）— コピー機の上の貼り紙",
+        "kind": "short",
+        "html": (
+            "<div class='passage-box-note'>"
+            "<p class='passage-note-intro'>（会社で）コピー機の上に、この紙が置いてある。</p>"
+            "<p><strong>営業課の皆さんへ</strong></p>"
+            "<p>営業課のコピー機は今、故障していて使えません。修理を頼んでいますが、明日の午後まで来られないそうです。急ぎでないコピーは、明日まで待ってください。</p>"
+            "<p><span class='p-anchor' data-qid='2022_12_bd_23'>今日中にコピーしなければならない書類がある場合は、会計課のコピー機を使用してください。50枚以上コピーをする場合は、先に会計課に連絡をしておく必要がありますので、コピーをする前に中島に知らせてください。</span></p>"
+            "</div>"
+        ),
+        "summary_vi": "Thông báo máy photocopy phòng Kinh doanh bị hỏng đến chiều mai mới sửa. Nếu cần photo gấp trong hôm nay thì sang phòng Kế toán dùng; chỉ khi photo từ 50 tờ trở lên mới cần báo trước cho anh Nakajima."
+    },
+    "2022_12_dm4_2": {
+        "title": "問題4（2）— 娘のボール投げ練習",
+        "kind": "short",
+        "html": (
+            "<p>6歳の娘がボールを上手に投げられるようになりたいと言う。私は娘の投げ方の悪い点をいろいろと説明して、何回もボールを投げさせているが、娘はなかなかうまくならない。</p>"
+            "<p>昨日、あるテレビ番組でボール投げについて取り上げていた。<span class='p-anchor' data-qid='2022_12_bd_24'>番組では、子供に大きさや重さの違うさまざまなボールを投げさせたり、紙飛行機を飛ばさせたりして、ちょうどいい力の入れ方を体で覚えさせていた。娘に必要なのは、これかもしれない。</span>次は、このやり方を娘にやらせてみようと思う。</p>"
+        ),
+        "summary_vi": "Con gái 6 tuổi tập ném bóng mãi không tiến bộ dù bố đã chỉ lỗi sai và bắt ném nhiều lần. Xem TV thấy cách cho trẻ ném nhiều loại bóng kích cỡ/trọng lượng khác nhau và phi máy bay giấy để cơ thể tự cảm nhận lực phù hợp — tác giả nhận ra đây mới là điều con gái cần."
+    },
+    "2022_12_dm4_3": {
+        "title": "問題4（3）— 財布専門店からのメール",
+        "kind": "short",
+        "html": (
+            "<div class='passage-box-note'>"
+            "<p class='passage-note-intro'>これは、ある店が客の寺坂さんに書いたメールである。</p>"
+            "<p>寺坂ゆき様<br>いつもご利用いただき、ありがとうございます。</p>"
+            "<p>2月4日にいただいたご注文についてのご連絡です。寺坂様がホームページからご注文になった革製財布（茶色）ですが、直前の電話注文で品切れになっておりました。大変申し訳ございません。<span class='p-anchor' data-qid='2022_12_bd_25'>お届けできるのは3月上旬になってしまいますが、いかがいたしましょうか。キャンセルもお受けいたしますので、ご希望をお聞かせください。</span></p>"
+            "<p>なお、同じ商品の違う色でしたら、すぐにお送りできます。あわせてご検討ください。</p>"
+            "<p style='text-align:right;'>財布専門店タキグチ 広田<br>t.hirota@saifu-takiguchi.co.jp</p>"
+            "</div>"
+        ),
+        "summary_vi": "Email từ shop ví da gửi chị Terasaka: ví màu nâu đã hết hàng ngay trước đó nên phải đầu tháng 3 mới giao được, hỏi ý khách muốn chờ, hủy đơn, hay đổi sang màu khác có thể gửi ngay."
+    },
+    "2022_12_dm4_4": {
+        "title": "問題4（4）— 古い靴の回収ちらし",
+        "kind": "short",
+        "html": (
+            "<p>私の家には、履かなくなった古い靴がたくさんある。捨てようかと思っていたとき、ある靴屋のちらしを見た。いらない靴を店に持っていけば、その店で使える割引券と交換してくれるそうだ。回収した靴を燃やす<sup>（注）</sup>ときに出る熱が、電気を作るためのエネルギーに利用できて、環境にいいとも書かれていた。<span class='p-anchor' data-qid='2022_12_bd_26'>私一人が持っていっても、環境にそんなに大きい影響はないと思うが、新しい靴が安く買えるなら、古い靴は捨てないで店に持っていこうと思った。</span></p>"
+            "<p class='passage-footnote'>（注）燃やす：焼く</p>"
+        ),
+        "summary_vi": "Tác giả thấy tờ rơi tiệm giày thu gom giày cũ đổi phiếu giảm giá (và đốt tạo điện tốt cho môi trường). Nghĩ một mình mình mang đến cũng chẳng tác động lớn tới môi trường đâu, nhưng nếu mua được giày mới giá rẻ thì cứ mang ra tiệm."
+    },
+    "2022_12_dm5_1": {
+        "title": "問題5（1）— 父の古いラジオ",
+        "kind": "medium",
+        "html": (
+            "<p>先日、押し入れから父の古いラジオが出てきた。スイッチを入れてみたら、<span class='p-anchor' data-qid='2022_12_bd_27'>①<u>懐かしい声</u></span>が流れてきた。高校生のころ、大好きだったラジオの音楽番組のアナウンサーだった。私はつい番組を聞き続けてしまった。</p>"
+            "<p>あのころ私はよくラジオを聞いていた。ラジオのおかげで、勉強をしながらでも、ニュースや最新の音楽などさまざまな情報を知ることができた。今考えると、私にとってラジオはテレビよりも身近で便利なものだった。</p>"
+            "<p>今はラジオを聞く人が減っているそうだ。インターネットなどで、好きなときに知りたいニュースが見られるし、聞きたい音楽も聞けるようになったのだから、当然だ。</p>"
+            "<p>しかし、考えてみれば、車を運転する人や畑で仕事をする人などは、今でもよくラジオを聞いている。<span class='p-anchor' data-qid='2022_12_bd_29'>ほかのことをしながらでも、さまざまな情報が手に入るというラジオにしかない良さ、便利さがあるのだ。</span>私も掃除や料理をするようなときには、<span class='p-anchor' data-qid='2022_12_bd_28'>②<u>また、ラジオを聞こうと思った</u></span>。</p>"
+        ),
+        "summary_vi": "Tác giả bật chiếc radio cũ của bố và nghe lại giọng phát thanh viên quen thuộc thời cấp 3. Dù thời đại Internet ít người nghe radio hơn, nhưng radio có cái hay riêng là vừa làm việc khác (lái xe, nấu ăn, dọn dẹp) vừa tiếp nhận thông tin được, nên tác giả quyết định sẽ nghe lại radio."
+    },
+    "2022_12_dm5_2": {
+        "title": "問題5（2）— 田舎暮らしの説明会",
+        "kind": "medium",
+        "html": (
+            "<p>私たち夫婦の夢は、田舎に引っ越して農業を始めることです。</p>"
+            "<p>そこで先日、ある町が東京で開いた<span class='p-anchor' data-qid='2022_12_bd_30'>①<u>説明会</u></span>に参加してみました。その町では人口が減ったので、町民を募集するために説明会を開いています。もう100人以上が移り住んでいて、多くの人は楽しく生活しています。しかし、うまくいかなかった例もあるそうです。</p>"
+            "<p>そのような例には<span class='p-anchor' data-qid='2022_12_bd_31'>②<u>共通点</u></span>があると思いました。ある人は、田舎の生活にあこがれて引っ越して来ましたが、すぐに退屈な毎日が嫌になったそうです。農業がしたくて来たのにあまりにも大変で、都会に戻ってしまった例もありました。毎月の町内の掃除など、都会では経験したことがなかったことが意外にめんどうくさいと感じる人もいるそうです。説明会では、このような例も知ってから検討してほしいと言っていました。</p>"
+            "<p><span class='p-anchor' data-qid='2022_12_bd_32'>成功例ばかり見ていた私たちは、考えが甘かったようです。でも、夢はあきらめたくないので、よく調べて、計画を立てて、実行できるように頑張りたいと思います。</span></p>"
+        ),
+        "summary_vi": "Hai vợ chồng tác giả mơ về quê làm nông nên đi dự buổi giới thiệu chiêu mộ cư dân của một thị trấn. Ngoài các ca thành công còn nhiều ca thất bại có điểm chung là vỡ mộng vì thực tế khác kỳ vọng. Tác giả thấy trước giờ suy nghĩ còn đơn giản nhưng không bỏ ước mơ, sẽ tìm hiểu kỹ và lập kế hoạch bài bản."
+    },
+    "2022_12_dm6": {
+        "title": "問題6 — よく眠るための方法",
+        "kind": "long",
+        "html": (
+            "<p>最近、私は布団に入ってもしばらく眠れなくて、悩んでいる。朝は決まった時間に起きなければならないので、眠る時間が短くなって、昼間に眠くなってしまう。それで、体が疲れるまで運動をすれば、布団に入ってすぐに眠くなるだろうと考えて、寝る1時間前に走ることにした。だが、2週間続けてみても、<span class='p-anchor' data-qid='2022_12_bd_33'>①<u>全然変わらない</u></span>。</p>"
+            "<p>そこで、どうやったら眠れるようになるか調べてみた。すると、<span class='p-anchor' data-qid='2022_12_bd_34'>②<u>体の中心の温度の変化が重要だ</u></span>ということがわかった。例えば、寝る2、3時間前に軽く走ったり、ぬるめの風呂にゆっくり入ったりするといいそうだ。こうすることで、体が中心まで温まる。すると、体は表面から熱を出そうとする。表面から熱が出ていくと、中心の温度が下がっていく。このようにして、中心の温度が下がる状態を作ると、人は眠りやすくなるのだそうだ。</p>"
+            "<p>注意したほうがいいこととして、こんなことも書いてあった。寝る直前に運動しすぎたり、熱い風呂に入ったりするのは、体は温まるが、頭がはっきりして眠くなくなってしまうので、逆効果らしい。つまり、私のやっていたことは<span class='p-anchor' data-qid='2022_12_bd_35'>③<u>間違い</u></span>だったのだ。</p>"
+            "<p>眠るために頑張っていたが、夜に一人で走るのは少し怖いと思っていたし、実は運動も好きではない。運動以外にいい方法があると知ってうれしくなった。これからは、<span class='p-anchor' data-qid='2022_12_bd_36'>（　　　）</span>と思う。</p>"
+        ),
+        "summary_vi": "Tác giả khó ngủ nên chạy mệt nhoài trước khi ngủ 1 tiếng nhưng 2 tuần vẫn không hiệu quả. Tìm hiểu mới biết muốn dễ ngủ cần làm ấm thân nhiệt trung tâm trước 2–3 tiếng (chạy nhẹ hoặc ngâm bồn nước ấm vừa) để sau đó thân nhiệt hạ dần; chạy quá sức sát giờ ngủ lại phản tác dụng. Vì không thích chạy tối nên từ giờ tác giả sẽ ngâm bồn nước ấm vừa trước khi ngủ."
+    },
+    "2022_12_dm7": {
+        "title": "問題7 — 秋の日帰りバス旅行のご案内（チラシ）",
+        "kind": "info_table",
+        "html": (
+            "<div class='flyer-box'>"
+            "<div class='flyer-title'>秋の日帰りバス旅行のご案内</div>"
+            "<table class='flyer-table'>"
+            "<thead><tr><th>① 川中市内観光と川中東温泉</th><th>② 大岩チーズ場見学と川中美術館</th></tr></thead>"
+            "<tbody>"
+            "<tr>"
+            "<td class='p-anchor' data-qid='2022_12_bd_38'>"
+            "<strong>料金：</strong>平日 7,500円 ／ <strong>土・日 8,500円</strong><br>"
+            "<strong>食事：</strong>ついていません<br>"
+            "<strong>出発日：</strong><strong>10月6日（土）</strong>、11月12日（月）"
+            "</td>"
+            "<td>"
+            "<strong>料金：</strong>平日 8,500円 ／ 土・日 9,500円<br>"
+            "<strong>食事：</strong>昼食<br>"
+            "<strong>出発日：</strong>10月30日（火）、11月10日（土）"
+            "</td>"
+            "</tr>"
+            "<tr><th style='background:var(--hub-surface-2);'>③ 北森市立博物館と花丸温泉</th><th style='background:var(--hub-surface-2);'>④ 空石山ハイキングと空石温泉</th></tr>"
+            "<tr>"
+            "<td>"
+            "<strong>料金：</strong>平日 11,000円 ／ 土・日 12,000円<br>"
+            "<strong>食事：</strong>昼食<br>"
+            "<strong>出発日：</strong>10月29日（月）、11月11日（日）"
+            "</td>"
+            "<td class='p-anchor' data-qid='2022_12_bd_37'>"
+            "<strong>料金：</strong>平日 10,000円 ／ 土・日 11,000円<br>"
+            "<strong>食事：</strong><strong>昼食</strong><br>"
+            "<strong>出発日：</strong>10月25日（木）、<strong>11月3日（土）</strong>"
+            "</td>"
+            "</tr>"
+            "</tbody>"
+            "</table>"
+            "<div class='flyer-notes'>"
+            "<p>※ 料金は大人一人分です。小学生は、大人の半分の料金になります（5歳以下は無料）。<br>"
+            "※ 料金には入館料などが含まれています。</p>"
+            "<p><strong>【当日の集合時間と集合場所】</strong><br>"
+            "・①〜④すべて、午前8時に西山駅北口にお集まりください。</p>"
+            "<p><strong>【お申し込み・お支払い】</strong><br>"
+            "・お申し込みは、ご出発日の3か月前から10日前まで、インターネット、お電話、窓口で受け付けます。料金は、お申し込み後7日以内にお支払いください。現金のほかに、クレジットカード、銀行振り込みもご利用になれます。</p>"
+            "<p class='p-anchor' data-qid='2022_12_bd_38'><strong>【キャンセル料】</strong><br>"
+            "・お申し込み後のキャンセル料は、出発日の10日前〜8日前までは料金の20%、出発日の7日前〜2日前までは30%、<strong>出発日の前日は40%</strong>、当日の出発前までは50%、出発後は100%になります。<br>"
+            "・キャンセルのご連絡は、受付時間内にお願いします。</p>"
+            "</div>"
+            "<div class='flyer-footer'>ゆうやけ観光　電話：06-6012-3456　受付時間：7:30〜18:00</div>"
+            "</div>"
+        ),
+        "summary_vi": "Tờ rơi 4 tour xe buýt đi về trong ngày mùa thu của công ty Yuyake: so sánh giá ngày thường/cuối tuần, có ăn trưa hay không, lịch khởi hành và biểu phí hủy tour theo số ngày trước khởi hành."
+    }
+}
+
+QUESTIONS = [
+    # ========== MOJI-GOI MONDAI 1 (1..8) ==========
+    {
+        "id": "2022_12_mg_1", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 1, "passage_id": None, "is_star": False,
+        "sentence_html": "この店では、いろいろな<u class='q-target'>容器</u>を売っています。",
+        "sentence_tts": "この店では、いろいろな容器を売っています。",
+        "options": ["ようぎ", "ようき", "どうぐ", "どうく"], "answer": 1,
+        "sentence_vi": "Cửa hàng này bán rất nhiều loại đồ đựng/hộp đựng.",
+        "explain_vi": "容器（ようき • DUNG KHÍ）= hộp đựng, đồ chứa. Nhớ 器 đọc âm trong き (đừng nhầm với 道具 どうぐ = dụng cụ).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_2", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 2, "passage_id": None, "is_star": False,
+        "sentence_html": "山本さんは何と何を<u class='q-target'>比べた</u>んですか。",
+        "sentence_tts": "山本さんは何と何を比べたんですか。",
+        "options": ["くらべた", "ならべた", "しらべた", "えらべた"], "answer": 0,
+        "sentence_vi": "Anh Yamamoto đã so sánh cái gì với cái gì vậy?",
+        "explain_vi": "比べる（くらべる • TỶ）= so sánh. Bẫy bộ 4 động từ N3: 並べる(ならべる: xếp hàng), 調べる(しらべる: điều tra), 選ぶ(えらぶ: chọn).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_3", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 3, "passage_id": None, "is_star": False,
+        "sentence_html": "書類が<u class='q-target'>複数</u>あるので、間違えないでください。",
+        "sentence_tts": "書類が複数あるので、間違えないでください。",
+        "options": ["ふくす", "ふうすう", "ふくすう", "ふうす"], "answer": 2,
+        "sentence_vi": "Vì có nhiều bản/nhiều loại tài liệu nên đừng nhầm lẫn nhé.",
+        "explain_vi": "複数（ふくすう • PHỨC SỐ）= số nhiều, nhiều hơn 1. Chú ý ふく không trường âm, 数 có trường âm すう.",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_4", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 4, "passage_id": None, "is_star": False,
+        "sentence_html": "昨日病院で<u class='q-target'>血圧</u>を計りました。",
+        "sentence_tts": "昨日病院で血圧を計りました。",
+        "options": ["けつあつ", "けつやつ", "ちあつ", "ちやつ"], "answer": 0,
+        "sentence_vi": "Hôm qua tôi đã đo huyết áp ở bệnh viện.",
+        "explain_vi": "血圧（けつあつ • HUYẾT ÁP）= huyết áp. 血 đọc âm On là けつ (khi đứng 1 mình mới là ち), 圧 là あつ.",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_5", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 5, "passage_id": None, "is_star": False,
+        "sentence_html": "ここから見る<u class='q-target'>夕日</u>はきれいだ。",
+        "sentence_tts": "ここから見る夕日はきれいだ。",
+        "options": ["ゆび", "ゆひ", "ゆうび", "ゆうひ"], "answer": 3,
+        "sentence_vi": "Ánh hoàng hôn nhìn từ đây thật đẹp.",
+        "explain_vi": "夕日（ゆうひ • TỊCH NHẬT）= mặt trời lặn, hoàng hôn. Có trường âm ゆう và âm trong ひ (đừng nhầm với 指 ゆび = ngón tay).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_6", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 6, "passage_id": None, "is_star": False,
+        "sentence_html": "そこに一人で行くのは<u class='q-target'>難しい</u>と思います。",
+        "sentence_tts": "そこに一人で行くのは難しいと思います。",
+        "options": ["きびしい", "めずらしい", "さびしい", "むずかしい"], "answer": 3,
+        "sentence_vi": "Tôi nghĩ đi một mình đến đó là khó đấy.",
+        "explain_vi": "難しい（むずかしい • NAN）= khó. Phân biệt: 厳しい(きびしい: nghiêm khắc), 珍しい(めずらしい: hiếm), 寂しい(さびしい: cô đơn).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_7", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 7, "passage_id": None, "is_star": False,
+        "sentence_html": "中村さんから出張の<u class='q-target'>件</u>でお電話がありました。",
+        "sentence_tts": "中村さんから出張の件でお電話がありました。",
+        "options": ["けい", "よう", "けん", "よん"], "answer": 2,
+        "sentence_vi": "Anh Nakamura đã gọi điện đến về việc chuyến công tác.",
+        "explain_vi": "件（けん • KIỆN）= sự việc, vấn đề (cụm công sở tủ N3: 〜の件で = về việc...).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_8", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 1,
+        "mondai_label": "文字・語彙 問題1 (Đọc Kanji)", "num": 8, "passage_id": None, "is_star": False,
+        "sentence_html": "ここを<u class='q-target'>横断</u>するときは気をつけてください。",
+        "sentence_tts": "ここを横断するときは気をつけてください。",
+        "options": ["おうざん", "おうだん", "きだん", "きざん"], "answer": 1,
+        "sentence_vi": "Khi băng qua đường ở chỗ này xin hãy cẩn thận.",
+        "explain_vi": "横断（おうだん • HOÀNH ĐOẠN）= đi ngang qua, băng qua đường (như 横断歩道 おうだんほどう = vạch qua đường).",
+        "evidence_jp": None, "star_order": None
+    },
+
+    # ========== MOJI-GOI MONDAI 2 (9..14) ==========
+    {
+        "id": "2022_12_mg_9", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 2,
+        "mondai_label": "文字・語彙 問題2 (Chọn Kanji)", "num": 9, "passage_id": None, "is_star": False,
+        "sentence_html": "車から出て、外の空気を<u class='q-target'>すった</u>。",
+        "sentence_tts": "車から出て、外の空気を吸った。",
+        "options": ["吹った", "呼った", "吸った", "叫った"], "answer": 2,
+        "sentence_vi": "Tôi bước ra khỏi xe và hít thở bầu không khí bên ngoài.",
+        "explain_vi": "吸う（すう • HẤP）= hít, hút (空気を吸う / タバコを吸う). Bẫy bộ Khẩu: 吹く(thổi), 呼ぶ(gọi), 叫ぶ(hét).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_10", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 2,
+        "mondai_label": "文字・語彙 問題2 (Chọn Kanji)", "num": 10, "passage_id": None, "is_star": False,
+        "sentence_html": "あしたのアルバイトは、いつもより時間が<u class='q-target'>みじかい</u>。",
+        "sentence_tts": "あしたのアルバイトは、いつもより時間が短い。",
+        "options": ["早い", "長い", "短い", "遅い"], "answer": 2,
+        "sentence_vi": "Ca làm thêm ngày mai thời gian ngắn hơn mọi khi.",
+        "explain_vi": "短い（みじかい • ĐOẢN）= ngắn. Trái nghĩa với 長い(ながい: dài).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_11", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 2,
+        "mondai_label": "文字・語彙 問題2 (Chọn Kanji)", "num": 11, "passage_id": None, "is_star": False,
+        "sentence_html": "今日は少し、<u class='q-target'>い</u>の調子がよくない。",
+        "sentence_tts": "今日は少し、胃の調子がよくない。",
+        "options": ["肩", "胃", "腰", "肌"], "answer": 1,
+        "sentence_vi": "Hôm nay dạ dày tôi hơi không được ổn lắm.",
+        "explain_vi": "胃（い • VỊ）= dạ dày (chữ Điền 田 trên chữ Nguyệt 月). Phân biệt: 肩(かた: vai), 腰(こし: thắt lưng), 肌(はだ: làn da).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_12", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 2,
+        "mondai_label": "文字・語彙 問題2 (Chọn Kanji)", "num": 12, "passage_id": None, "is_star": False,
+        "sentence_html": "その話を聞いて、みんなが<u class='q-target'>えがお</u>になった。",
+        "sentence_tts": "その話を聞いて、みんなが笑顔になった。",
+        "options": ["楽顔", "悲顔", "泣顔", "笑顔"], "answer": 3,
+        "sentence_vi": "Nghe câu chuyện đó, ai nấy đều nở nụ cười trên khuôn mặt.",
+        "explain_vi": "笑顔（えがお • TIẾU NHAN）= khuôn mặt tươi cười, nụ cười.",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_13", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 2,
+        "mondai_label": "文字・語彙 問題2 (Chọn Kanji)", "num": 13, "passage_id": None, "is_star": False,
+        "sentence_html": "<u class='q-target'>こくばん</u>を見てください。",
+        "sentence_tts": "黒板を見てください。",
+        "options": ["黒板", "黒坂", "告板", "告坂"], "answer": 0,
+        "sentence_vi": "Hãy nhìn lên bảng đen.",
+        "explain_vi": "黒板（こくばん • HẮC BẢN）= bảng đen. Bẫy bộ thủ: 板 (bộ Mộc = tấm ván/bảng) vs 坂 (bộ Thổ = con dốc さか)!",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_14", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 2,
+        "mondai_label": "文字・語彙 問題2 (Chọn Kanji)", "num": 14, "passage_id": None, "is_star": False,
+        "sentence_html": "それは<u class='q-target'>いっぱんてき</u>なことだと思う。",
+        "sentence_tts": "それは一般的なことだと思う。",
+        "options": ["一段的", "一般的", "一役的", "一設的"], "answer": 1,
+        "sentence_vi": "Tôi nghĩ đó là chuyện phổ biến/thông thường.",
+        "explain_vi": "一般的（いっぱんてき • NHẤT BAN ĐÍCH）= phổ thông, thông thường. Nhớ chữ 般 có bộ Chu (舟) bên trái!",
+        "evidence_jp": None, "star_order": None
+    },
+
+    # ========== MOJI-GOI MONDAI 3 (15..25) ==========
+    {
+        "id": "2022_12_mg_15", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 15, "passage_id": None, "is_star": False,
+        "sentence_html": "田中さんは私のめいと結婚したので、私たちは<u class='q-target'>（　　　）</u>になりました。",
+        "sentence_tts": "田中さんは私のめいと結婚したので、私たちは親戚になりました。",
+        "options": ["夫婦", "家内", "親戚", "兄弟"], "answer": 2,
+        "sentence_vi": "Vì anh Tanaka kết hôn với cháu gái (めい) tôi nên chúng tôi đã trở thành họ hàng.",
+        "explain_vi": "親戚（しんせき • THÂN THÍCH）= họ hàng, bà con. 夫婦(vợ chồng), 家内(vợ mình), 兄弟(anh em).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_16", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 16, "passage_id": None, "is_star": False,
+        "sentence_html": "昨日は駅で、学生時代の友達に<u class='q-target'>（　　　）</u>会って、びっくりした。",
+        "sentence_tts": "昨日は駅で、学生時代の友達に偶然会って、びっくりした。",
+        "options": ["ついでに", "当然", "たまに", "偶然"], "answer": 3,
+        "sentence_vi": "Hôm qua ở nhà ga tôi tình cờ gặp bạn thời sinh viên nên bất ngờ quá.",
+        "explain_vi": "偶然（ぐうぜん • NGẪU NHIÊN）= tình cờ, ngẫu nhiên. ついでに(tiện thể), 当然(đương nhiên), たまに(thỉnh thoảng).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_17", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 17, "passage_id": None, "is_star": False,
+        "sentence_html": "洗剤は種類が多いので、どれを買おうか<u class='q-target'>（　　　）</u>しまう。",
+        "sentence_tts": "洗剤は種類が多いので、どれを買おうか迷ってしまう。",
+        "options": ["迷って", "騒いで", "疑って", "飽きて"], "answer": 0,
+        "sentence_vi": "Bột giặt/nước rửa có nhiều loại quá nên cứ phân vân không biết mua loại nào.",
+        "explain_vi": "迷う（まよう • MÊ）= phân vân, lưỡng lự (ngoài nghĩa lạc đường). 騒ぐ(làm ồn), 疑う(nghi ngờ), 飽きる(chán).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_18", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 18, "passage_id": None, "is_star": False,
+        "sentence_html": "足に<u class='q-target'>（　　　）</u>合う靴がなかなか見つからない。",
+        "sentence_tts": "足にぴったり合う靴がなかなか見つからない。",
+        "options": ["はっきり", "ぴったり", "うっかり", "がっかり"], "answer": 1,
+        "sentence_vi": "Mãi mà không tìm thấy đôi giày nào vừa khít với chân.",
+        "explain_vi": "ぴったり合う = vừa khít, vừa vặn hoàn hảo! Bộ 4 phó từ tủ N3: はっきり(rõ ràng), うっかり(lơ đễnh quên), がっかり(thất vọng).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_19", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 19, "passage_id": None, "is_star": False,
+        "sentence_html": "天気がいいので、庭に洗濯物を<u class='q-target'>（　　　）</u>。",
+        "sentence_tts": "天気がいいので、庭に洗濯物を干した。",
+        "options": ["混ぜた", "揚げた", "干した", "こぼした"], "answer": 2,
+        "sentence_vi": "Vì thời tiết đẹp nên tôi đã phơi đồ giặt ngoài sân.",
+        "explain_vi": "洗濯物を干す（ほす • CAN）= phơi quần áo. 混ぜる(trộn), 揚げる(chiên rán), こぼす(làm đổ).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_20", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 20, "passage_id": None, "is_star": False,
+        "sentence_html": "今日の晩ご飯は、森さんが教えてくれた日本料理の<u class='q-target'>（　　　）</u>を見て作りました。",
+        "sentence_tts": "今日の晩ご飯は、森さんが教えてくれた日本料理のレシピを見て作りました。",
+        "options": ["メッセージ", "レシピ", "サイン", "アナウンス"], "answer": 1,
+        "sentence_vi": "Bữa tối nay tôi đã xem công thức nấu món Nhật mà anh Mori chỉ cho để làm.",
+        "explain_vi": "レシピ (recipe) = công thức nấu ăn. メッセージ(tin nhắn), サイン(chữ ký), アナウンス(thông báo loa).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_21", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 21, "passage_id": None, "is_star": False,
+        "sentence_html": "映画の中に<u class='q-target'>（　　　）</u>する男性が、父にそっくりだった。",
+        "sentence_tts": "映画の中に登場する男性が、父にそっくりだった。",
+        "options": ["発生", "支出", "掲示", "登場"], "answer": 3,
+        "sentence_vi": "Người đàn ông xuất hiện trong bộ phim giống bố tôi như đúc.",
+        "explain_vi": "登場する（とうじょう • ĐĂNG TRƯỜNG）= xuất hiện (nhân vật trong phim, truyện, sân khấu). 発生(phát sinh sự cố), 支出(chi tiêu), 掲示(niêm yết).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_22", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 22, "passage_id": None, "is_star": False,
+        "sentence_html": "大勢の前で歌うのは初めてだったので、<u class='q-target'>（　　　）</u>した。",
+        "sentence_tts": "大勢の前で歌うのは初めてだったので、どきどきした。",
+        "options": ["どきどき", "だぶだぶ", "ぐうぐう", "ざあざあ"], "answer": 0,
+        "sentence_vi": "Vì là lần đầu hát trước đông người nên tim tôi đập thình thịch (hồi hộp).",
+        "explain_vi": "どきどきする = hồi hộp, tim đập mạnh. だぶだぶ(quần áo rộng thùng thình), ぐうぐう(ngủ khò khò/bụng kêu), ざあざあ(mưa rào).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_23", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 23, "passage_id": None, "is_star": False,
+        "sentence_html": "ホテルで海側の部屋を<u class='q-target'>（　　　）</u>したが、空いていなかった。",
+        "sentence_tts": "ホテルで海側の部屋を希望したが、空いていなかった。",
+        "options": ["納得", "承知", "希望", "準備"], "answer": 2,
+        "sentence_vi": "Tôi đã bày tỏ mong muốn/yêu cầu phòng hướng biển ở khách sạn nhưng không còn trống.",
+        "explain_vi": "希望する（きぼう • HY VỌNG）= mong muốn, yêu cầu (chọn phòng, khung giờ). 納得(chấp nhận/hiểu ra), 承知(tuân lệnh/hiểu rõ), 準備(chuẩn bị).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_24", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 24, "passage_id": None, "is_star": False,
+        "sentence_html": "夜になると、隣の家の犬が<u class='q-target'>（　　　）</u>ので、うるさくてなかなか眠れない。",
+        "sentence_tts": "夜になると、隣の家の犬がほえるので、うるさくてなかなか眠れない。",
+        "options": ["ほえる", "ひびく", "しゃべる", "どなる"], "answer": 0,
+        "sentence_vi": "Cứ đến đêm là chó nhà hàng xóm lại sủa nên ồn quá mãi chẳng ngủ được.",
+        "explain_vi": "犬が吠える（ほえる）= chó sủa. 響く(vang vọng), しゃべる(nói chuyện — người), 怒鳴る(quát tháo — người).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_25", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 3,
+        "mondai_label": "文字・語彙 問題3 (Điền từ vào câu)", "num": 25, "passage_id": None, "is_star": False,
+        "sentence_html": "この道は狭いので、前の車を<u class='q-target'>（　　　）</u>のは危険ですよ。",
+        "sentence_tts": "この道は狭いので、前の車を追い越すのは危険ですよ。",
+        "options": ["飛び出す", "追い越す", "押し込む", "取り替える"], "answer": 1,
+        "sentence_vi": "Con đường này hẹp nên việc vượt xe phía trước rất nguy hiểm đấy.",
+        "explain_vi": "追い越す（おいこす • TRUY VIỆT）= vượt qua (xe khác / đối thủ phía trước). 飛び出す(lao ra), 押し込む(nhét vào), 取り替える(thay thế).",
+        "evidence_jp": None, "star_order": None
+    },
+
+    # ========== MOJI-GOI MONDAI 4 (26..30) ==========
+    {
+        "id": "2022_12_mg_26", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 4,
+        "mondai_label": "文字・語彙 問題4 (Từ đồng nghĩa)", "num": 26, "passage_id": None, "is_star": False,
+        "sentence_html": "もう少し時間を<u class='q-target'>あたえ</u>ようと思う。",
+        "sentence_tts": "もう少し時間をあたえようと思う。",
+        "options": ["あげよう", "もらおう", "作ろう", "使おう"], "answer": 0,
+        "sentence_vi": "Tôi định sẽ cho thêm một chút thời gian nữa.",
+        "explain_vi": "与える（あたえる • DỮ）＝ あげる (cho, trao cho). Tránh nhầm với もらう (nhận).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_27", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 4,
+        "mondai_label": "文字・語彙 問題4 (Từ đồng nghĩa)", "num": 27, "passage_id": None, "is_star": False,
+        "sentence_html": "ここは車が<u class='q-target'>ずいぶん</u>多いですね。",
+        "sentence_tts": "ここは車がずいぶん多いですね。",
+        "options": ["最も", "非常に", "まあまあ", "やっぱり"], "answer": 1,
+        "sentence_vi": "Ở đây xe cộ đông ghê/rất nhiều nhỉ.",
+        "explain_vi": "ずいぶん ＝ 非常に（ひじょうに）= rất, vô cùng, khá nhiều (vượt mức tưởng tượng). Tủ 80 cặp đồng nghĩa N3!",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_28", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 4,
+        "mondai_label": "文字・語彙 問題4 (Từ đồng nghĩa)", "num": 28, "passage_id": None, "is_star": False,
+        "sentence_html": "荷物は、<u class='q-target'>指定の</u>場所に置いてください。",
+        "sentence_tts": "荷物は、指定の場所に置いてください。",
+        "options": ["決められた", "空いている", "近くの", "ほかの"], "answer": 0,
+        "sentence_vi": "Hành lý xin hãy đặt ở vị trí đã quy định.",
+        "explain_vi": "指定の（していの • CHỈ ĐỊNH）＝ 決められた (đã được quy định sẵn).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_29", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 4,
+        "mondai_label": "文字・語彙 問題4 (Từ đồng nghĩa)", "num": 29, "passage_id": None, "is_star": False,
+        "sentence_html": "山田さんの話を聞くまでは<u class='q-target'>不安</u>だった。",
+        "sentence_tts": "山田さんの話を聞くまでは不安だった。",
+        "options": ["賛成", "大変", "心配", "反対"], "answer": 2,
+        "sentence_vi": "Cho đến trước khi nghe anh Yamada nói thì tôi vẫn thấy bất an.",
+        "explain_vi": "不安（ふあん • BẤT AN）＝ 心配（しんぱい）= lo lắng, bất an.",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_30", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 4,
+        "mondai_label": "文字・語彙 問題4 (Từ đồng nghĩa)", "num": 30, "passage_id": None, "is_star": False,
+        "sentence_html": "<u class='q-target'>スケジュール</u>は川井さんに聞いてください。",
+        "sentence_tts": "スケジュールは川井さんに聞いてください。",
+        "options": ["行き方", "理由", "やり方", "予定"], "answer": 3,
+        "sentence_vi": "Về lịch trình thì hãy hỏi chị Kawai nhé.",
+        "explain_vi": "スケジュール (schedule) ＝ 予定（よてい）= lịch trình, kế hoạch. Trúng tủ cả 80 Đồng Nghĩa lẫn 78 Katakana N3!",
+        "evidence_jp": None, "star_order": None
+    },
+
+    # ========== MOJI-GOI MONDAI 5 (31..35) ==========
+    {
+        "id": "2022_12_mg_31", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 5,
+        "mondai_label": "文字・語彙 問題5 (Cách dùng từ)", "num": 31, "passage_id": None, "is_star": False,
+        "sentence_html": "Chọn câu dùng từ <u class='q-target'>発展</u> (はってん) đúng nhất:",
+        "sentence_tts": "この町は歴史的な建物が多く、観光地として発展してきた。",
+        "options": [
+            "毎朝ジョギングを続けたら、健康が発展するだろう。",
+            "テレビで紹介されてから、この店は客の数が発展した。",
+            "林さんは中学校のとき、成績が急に発展したそうだ。",
+            "この町は歴史的な建物が多く、観光地として発展してきた。"
+        ], "answer": 3,
+        "sentence_vi": "Thị trấn này có nhiều công trình lịch sử và đã phát triển trở thành điểm du lịch.",
+        "explain_vi": "発展する（PHÁT TRIỂN）dùng cho quy mô lớn (đô thị, kinh tế, kỹ thuật, khu du lịch). Câu 1 sức khỏe (よくなる), Câu 2 lượng khách (増えた), Câu 3 thành tích (伸びた/上がった).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_32", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 5,
+        "mondai_label": "文字・語彙 問題5 (Cách dùng từ)", "num": 32, "passage_id": None, "is_star": False,
+        "sentence_html": "Chọn câu dùng từ <u class='q-target'>だく</u> (抱く) đúng nhất:",
+        "sentence_tts": "生まれた子を初めてだいたとき、とても小さくて軽いと感じた。",
+        "options": [
+            "朝作ったお弁当を大きめのハンカチでだいてかばんに入れた。",
+            "生まれた子を初めてだいたとき、とても小さくて軽いと感じた。",
+            "けがをしないように、包丁をしっかりだいて魚を切った。",
+            "引っ越しのとき運びやすいように、本や雑誌をひもでだいた。"
+        ], "answer": 1,
+        "sentence_vi": "Khi lần đầu bế đứa con mới sinh, tôi cảm thấy bé thật nhỏ và nhẹ.",
+        "explain_vi": "抱く（だく）= bế, ôm vào lòng (em bé, thú cưng). Câu 1 gói hộp cơm (包んで), Câu 3 cầm dao (握って/持って), Câu 4 buộc dây (縛った/結んだ).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_33", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 5,
+        "mondai_label": "文字・語彙 問題5 (Cách dùng từ)", "num": 33, "passage_id": None, "is_star": False,
+        "sentence_html": "Chọn câu dùng từ <u class='q-target'>原料</u> (げんりょう) đúng nhất:",
+        "sentence_tts": "牛乳を原料にして、チーズやバターが作られます。",
+        "options": [
+            "ここから見える景色を原料にして、抽象的な絵をかくつもりだ。",
+            "大学を卒業したら、留学の経験を原料にして仕事がしたい。",
+            "このドラマは、海外の小説を原料にしたそうです。",
+            "牛乳を原料にして、チーズやバターが作られます。"
+        ], "answer": 3,
+        "sentence_vi": "Phô mai và bơ được làm ra từ nguyên liệu là sữa bò.",
+        "explain_vi": "原料（NGUYÊN LIỆU）= nguyên liệu vật chất tạo nên sản phẩm chế biến (sữa → phô mai/bơ). Câu 1–3 là chất liệu tinh thần/ý tưởng (phải dùng もとに / 生かして / 原作に).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_34", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 5,
+        "mondai_label": "文字・語彙 問題5 (Cách dùng từ)", "num": 34, "passage_id": None, "is_star": False,
+        "sentence_html": "Chọn câu dùng từ <u class='q-target'>異常</u> (いじょう) đúng nhất:",
+        "sentence_tts": "今年の夏は異常な暑さで、エアコンがよく売れたそうだ。",
+        "options": [
+            "今年の夏は異常な暑さで、エアコンがよく売れたそうだ。",
+            "その色は見えにくいので、赤などの異常な色を使ってください。",
+            "妹の作文は上手に書けていたが、異常な漢字が一つあった。",
+            "姉の靴は、私とは異常なサイズなので、借りることができない。"
+        ], "answer": 0,
+        "sentence_vi": "Nghe nói mùa hè năm nay nóng bất thường nên điều hòa bán rất chạy.",
+        "explain_vi": "異常（DỊ THƯỜNG）= bất thường, khác hẳn quy luật thông thường (thời tiết, cơ thể, máy móc). Câu 2 phải là 目立つ(nổi bật), Câu 3 là 間違った(sai), Câu 4 là 違う(khác).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_mg_35", "exam_id": "2022_12", "section": "moji_goi", "jlpt_shift": 1, "mondai": 5,
+        "mondai_label": "文字・語彙 問題5 (Cách dùng từ)", "num": 35, "passage_id": None, "is_star": False,
+        "sentence_html": "Chọn câu dùng từ <u class='q-target'>重なる</u> (かさなる) đúng nhất:",
+        "sentence_tts": "子どもの運動会が大切な会議と重なって、見に行けない。",
+        "options": [
+            "A銀行とB銀行が重なって、新しい銀行ができました。",
+            "私たちの研究会に、来月から新しい仲間が重なります。",
+            "子どもの運動会が大切な会議と重なって、見に行けない。",
+            "貯金がたくさん重なったら、車を買おうと思っている。"
+        ], "answer": 2,
+        "sentence_vi": "Hội thao của con bị trùng lịch với cuộc họp quan trọng nên tôi không đi xem được.",
+        "explain_vi": "重なる = xếp chồng lên nhau / bị trùng lịch trình! Câu 1 sáp nhập (合併して), Câu 2 gia nhập thêm (加わります), Câu 4 tích lũy tiền (たまったら).",
+        "evidence_jp": None, "star_order": None
+    },
+
+    # ========== BUNPOU MONDAI 1 (1..13) ==========
+    {
+        "id": "2022_12_bd_1", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 1, "passage_id": None, "is_star": False,
+        "sentence_html": "（教室で）<br>アン「先生、スピーチ大会の申込書を書いてきました。書き方がよくわからないところなんですが、ここの書き方はこれ<u class='q-target'>（　　　）</u>大丈夫でしょうか。」",
+        "sentence_tts": "ここの書き方はこれで大丈夫でしょうか。",
+        "options": ["に", "で", "と", "が"], "answer": 1,
+        "sentence_vi": "An: Thưa thầy, chỗ này viết như thế này có ổn không ạ?",
+        "explain_vi": "「これで大丈夫 / これでいい」= như thế này là được/ổn (trợ từ で chỉ trạng thái/phương thức/mức độ đủ).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_2", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 2, "passage_id": None, "is_star": False,
+        "sentence_html": "（北山市のホームページで）<br>7月25日と26日の2日間、北山公園<u class='q-target'>（　　　）</u>夏祭りが行われました。",
+        "sentence_tts": "北山公園において夏祭りが行われました。",
+        "options": ["において", "にとって", "に対して", "について"], "answer": 0,
+        "sentence_vi": "Trong 2 ngày 25 và 26/7, lễ hội mùa hè đã được tổ chức tại công viên Kitayama.",
+        "explain_vi": "「N + において」= tại N (dạng trang trọng của で chỉ địa điểm/thời điểm tổ chức sự kiện trên văn bản thông báo).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_3", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 3, "passage_id": None, "is_star": False,
+        "sentence_html": "私は、誰<u class='q-target'>（　　　）</u>親切で優しい兄をとても尊敬している。",
+        "sentence_tts": "私は、誰にでも親切で優しい兄をとても尊敬している。",
+        "options": ["にだけ", "からだけ", "にでも", "からでも"], "answer": 2,
+        "sentence_vi": "Tôi rất kính trọng người anh trai luôn thân thiện và dịu dàng với bất kỳ ai.",
+        "explain_vi": "「誰にでも親切だ」= tử tế với bất kỳ ai (từ để hỏi + 助詞 + でも = bất cứ...). 親切 đi với trợ từ に (tử tế VỚI ai).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_4", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 4, "passage_id": None, "is_star": False,
+        "sentence_html": "（教室で）<br>先生「来週の授業でこのプリントを使いますから、<u class='q-target'>（　　　）</u>持ってきてください。」",
+        "sentence_tts": "来週の授業でこのプリントを使いますから、必ず持ってきてください。",
+        "options": ["全く", "非常に", "決して", "必ず"], "answer": 3,
+        "sentence_vi": "Giáo viên: Tiết học tuần sau sẽ dùng tờ bài in này nên nhất định hãy mang theo nhé.",
+        "explain_vi": "「必ず〜てください」= nhất định hãy... (mệnh lệnh/yêu cầu khẳng định). 全く và 決して đi với câu phủ định.",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_5", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 5, "passage_id": None, "is_star": False,
+        "sentence_html": "友達の結婚式に招待されたが、出張があって<u class='q-target'>（　　　）</u>行けない。",
+        "sentence_tts": "友達の結婚式に招待されたが、出張があってどうしても行けない。",
+        "options": ["どうしても", "それほど", "せっかく", "つい"], "answer": 0,
+        "sentence_vi": "Được mời dự đám cưới bạn nhưng vì có chuyến công tác nên dù thế nào cũng không thể đi được.",
+        "explain_vi": "「どうしても〜ない」= dù cố thế nào cũng không thể... (bất khả kháng). それほど〜ない(không đến mức đó), つい(lỡ tay).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_6", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 6, "passage_id": None, "is_star": False,
+        "sentence_html": "私の応援している野球選手が、肩のけがの<u class='q-target'>（　　　）</u>、しばらく試合に出られなくなった。とても心配だ。",
+        "sentence_tts": "肩のけがのために、しばらく試合に出られなくなった。",
+        "options": ["途中で", "一方で", "ように", "ために"], "answer": 3,
+        "sentence_vi": "Cầu thủ bóng chày tôi cổ vũ đã tạm thời không thể ra sân thi đấu vì chấn thương vai. Thật đáng lo quá.",
+        "explain_vi": "「N + のために」= vì, do N (chỉ nguyên nhân: do chấn thương vai). Loại 途中で(giữa chừng), 一方で(mặt khác), ように(để).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_7", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 7, "passage_id": None, "is_star": False,
+        "sentence_html": "歯医者「歯を<u class='q-target'>（　　　）</u>寝てしまうと、虫歯になりやすくなります。寝る前にきちんと磨くようにしてください。」",
+        "sentence_tts": "歯を磨かずに寝てしまうと、虫歯になりやすくなります。",
+        "options": ["磨いて", "磨かずに", "磨くたび", "磨かなくて"], "answer": 1,
+        "sentence_vi": "Nha sĩ: Nếu không đánh răng mà đi ngủ thì rất dễ bị sâu răng.",
+        "explain_vi": "「Vずに」(= Vないで) = mà không làm V (磨かずに寝る = đi ngủ mà không đánh răng). Chú ý: 磨かなくて chỉ nguyên nhân (vì không đánh) chứ không diễn tả trạng thái đi kèm khi đi ngủ!",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_8", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 8, "passage_id": None, "is_star": False,
+        "sentence_html": "（電話で）<br>中川「もしもし。林さん、今ちょっといい？」<br>林「あ、ごめん。これから<u class='q-target'>（　　　）</u>、あとでこっちから電話するね。」",
+        "sentence_tts": "あ、ごめん。これから出かけるところだから、あとでこっちから電話するね。",
+        "options": ["出かけるところなのに", "出かけているところなのに", "出かけるところだから", "出かけているところだから"], "answer": 2,
+        "sentence_vi": "Hayashi: À xin lỗi nhé. Vì ngay bây giờ mình sắp sửa ra ngoài rồi nên lát nữa mình gọi lại cho nhé.",
+        "explain_vi": "2 chốt điểm: (1) Có これから (ngay bây giờ sắp làm) -> dùng 「Vる + ところ」(sắp sửa ra ngoài, không phải Vている); (2) Nêu lý do dẫn đến lời hứa gọi lại -> 「だから」(không phải なのに).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_9", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 9, "passage_id": None, "is_star": False,
+        "sentence_html": "（道で）<br>A「すみません。東図書館を探しているんですが……。」<br>B「ああ、東図書館ですね。この坂を<u class='q-target'>（　　　）</u>郵便局がありますから、その角を右に曲がってください。」",
+        "sentence_tts": "この坂をのぼっていくと郵便局がありますから、その角を右に曲がってください。",
+        "options": ["のぼっていくと", "のぼっていきながら", "のぼってくるには", "のぼってくるとき"], "answer": 0,
+        "sentence_vi": "B: À, thư viện Higashi phải không. Cứ đi lên con dốc này là sẽ thấy bưu điện, hãy rẽ phải ở góc đó.",
+        "explain_vi": "Mẫu chỉ đường kinh điển: 「Vていく + と」(đi tiếp về phía trước thì sẽ gặp/thấy...). Dùng いく vì đi xa dần khỏi vị trí hiện tại.",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_10", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 10, "passage_id": None, "is_star": False,
+        "sentence_html": "A「さくら駅の近くに新しくできたラーメン屋、<u class='q-target'>（　　　）</u>？」<br>B「ううん、知らない。」<br>A「昨日初めて行ったんだけど、すごくおいしかったよ。」",
+        "sentence_tts": "さくら駅の近くに新しくできたラーメン屋、知ってる？",
+        "options": ["知っとく", "知っちゃう", "知ってく", "知ってる"], "answer": 3,
+        "sentence_vi": "A: Cậu có biết quán mì ramen mới mở gần ga Sakura không? B: Không, tớ không biết.",
+        "explain_vi": "「知ってる」là dạng nói rút gọn của 「知っている」(= có biết không?). Phân biệt các dạng rút gọn N3: とく(ておく), ちゃう(てしまう), てく(ていく).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_11", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 11, "passage_id": None, "is_star": False,
+        "sentence_html": "（電話で）<br>山下「はい、X建設営業課、山下です。」<br>石田「ABC銀行の石田と申しますが、中川さんか林さんはいらっしゃいますか。」<br>山下「はい、中川が<u class='q-target'>（　　　）</u>ので、今、代わります。」",
+        "sentence_tts": "はい、中川がおりますので、今、代わります。",
+        "options": ["いたします", "おります", "いただきます", "ございます"], "answer": 1,
+        "sentence_vi": "Yamashita: Vâng, anh Nakagawa đang có mặt ở đây nên tôi chuyển máy ngay ạ.",
+        "explain_vi": "Kính ngữ chuẩn công sở N3: Khi nói về người cùng công ty mình với khách bên ngoài, dùng khiêm nhường ngữ của います là 「おります」! (いたします = します, いただきます = もらいます, ございます = あります).",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_12", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 12, "passage_id": None, "is_star": False,
+        "sentence_html": "私は美術館が好きで、今までいろいろな美術館に行った。国内の美術館が多いが、海外の美術館に<u class='q-target'>（　　　）</u>。",
+        "sentence_tts": "国内の美術館が多いが、海外の美術館に行ったこともある。",
+        "options": ["行ったこともある", "行ったことはない", "行くこともできる", "行くこともできない"], "answer": 0,
+        "sentence_vi": "Tôi thích bảo tàng mỹ thuật và đã đi nhiều nơi. Phần lớn là bảo tàng trong nước, nhưng tôi cũng từng đi bảo tàng ở nước ngoài.",
+        "explain_vi": "Chú ý logic câu: 「国内の美術館が多いが」(Phần lớn là trong nước, NHƯNG...) -> hàm ý không phải 100% trong nước, mà cũng từng đi nước ngoài -> 「行ったこともある」!",
+        "evidence_jp": None, "star_order": None
+    },
+    {
+        "id": "2022_12_bd_13", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 1,
+        "mondai_label": "文法 問題1 (Chọn ngữ pháp)", "num": 13, "passage_id": None, "is_star": False,
+        "sentence_html": "（靴屋で）<br>客「すみません。この靴、<u class='q-target'>（　　　）</u>。」<br>店員「どうぞ。サイズはこちらでよろしいですか。」<br>客「はい。」",
+        "sentence_tts": "すみません。この靴、履いてみてもいいですか。",
+        "options": ["履いてもらえませんか", "履かないんですか", "履いてみてもいいですか", "履くことになりますか"], "answer": 2,
+        "sentence_vi": "Khách: Xin lỗi, đôi giày này tôi đi thử có được không? Nhân viên: Xin mời ạ.",
+        "explain_vi": "「Vてみる + てもいいですか」= tôi làm thử V có được không? (xin phép đi thử giày).",
+        "evidence_jp": None, "star_order": None
+    },
+
+    # ========== BUNPOU MONDAI 2 ★ (14..18) ==========
+    {
+        "id": "2022_12_bd_14", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 2,
+        "mondai_label": "文法 問題2 (Sắp xếp dấu sao ★)", "num": 14, "passage_id": None, "is_star": True,
+        "sentence_html": "留学している息子<span class='star-slots'>＿＿＿　＿＿＿　<u class='q-target'>＿★＿</u>　＿＿＿</span>毎日楽しく過ごしていると書かれていて安心した。",
+        "sentence_tts": "留学している息子からのメールに毎日楽しく過ごしていると書かれていて安心した。",
+        "options": ["メール", "から", "に", "の"], "answer": 0,
+        "sentence_vi": "Trong email từ cậu con trai đang đi du học có viết rằng ngày nào con cũng sống rất vui vẻ nên tôi yên tâm rồi.",
+        "explain_vi": "Cụm danh từ 「息子からのメール」(email từ con trai) + trợ từ 「に」đi với 「〜と書かれている」(được viết trong email rằng...).",
+        "evidence_jp": None,
+        "star_order": "2(から) → 4(の) → ★1(メール) → 3(に)"
+    },
+    {
+        "id": "2022_12_bd_15", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 2,
+        "mondai_label": "文法 問題2 (Sắp xếp dấu sao ★)", "num": 15, "passage_id": None, "is_star": True,
+        "sentence_html": "来週から1か月間、出張で東京に行く。東京には<span class='star-slots'>＿＿＿　＿＿＿　<u class='q-target'>＿★＿</u>　＿＿＿</span>一緒に食事でもしたいと思う。",
+        "sentence_tts": "東京には友達がいるので東京にいる間に一緒に食事でもしたいと思う。",
+        "options": ["いるので", "いる間に", "友達が", "東京に"], "answer": 3,
+        "sentence_vi": "Tuần sau tôi đi công tác Tokyo 1 tháng. Vì ở Tokyo có bạn nên trong thời gian ở Tokyo tôi muốn cùng nhau đi ăn uống gì đó.",
+        "explain_vi": "Tách rõ 2 vế: 「東京には友達がいるので」(vì ở Tokyo có bạn) + 「東京にいる間に」(trong lúc đang ở Tokyo) + 一緒に食事でもしたい.",
+        "evidence_jp": None,
+        "star_order": "3(友達が) → 1(いるので) → ★4(東京に) → 2(いる間に)"
+    },
+    {
+        "id": "2022_12_bd_16", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 2,
+        "mondai_label": "文法 問題2 (Sắp xếp dấu sao ★)", "num": 16, "passage_id": None, "is_star": True,
+        "sentence_html": "バイオリンが<span class='star-slots'>＿＿＿　＿＿＿　<u class='q-target'>＿★＿</u>　＿＿＿</span>こんなに面白い楽器はないと感じる。",
+        "sentence_tts": "バイオリンが弾けるようになりたくて1年前に習い始めたのだが弾けば弾くほどこんなに面白い楽器はないと感じる。",
+        "options": ["1年前に習い始めたのだが", "弾くほど", "弾けば", "弾けるようになりたくて"], "answer": 2,
+        "sentence_vi": "Vì muốn chơi được violin nên 1 năm trước tôi bắt đầu đi học, càng chơi càng cảm thấy chẳng có nhạc cụ nào thú vị bằng.",
+        "explain_vi": "Cấu trúc tủ N3 「Vば + Vるほど」(càng chơi càng...: 弾けば弾くほど)! Mệnh đề mở đầu: バイオリンが弾けるようになりたくて → 1年前に習い始めたのだが.",
+        "evidence_jp": None,
+        "star_order": "4(弾けるようになりたくて) → 1(1年前に習い始めたのだが) → ★3(弾けば) → 2(弾くほど)"
+    },
+    {
+        "id": "2022_12_bd_17", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 2,
+        "mondai_label": "文法 問題2 (Sắp xếp dấu sao ★)", "num": 17, "passage_id": None, "is_star": True,
+        "sentence_html": "A「お誕生日おめでとう。これ、プレゼントだよ。」<br>B「わあ、かばんだ。ちょうど<span class='star-slots'>＿＿＿　＿＿＿　<u class='q-target'>＿★＿</u>　＿＿＿</span>んだ。ありがとう。」",
+        "sentence_tts": "ちょうどこういう色のかばんが欲しいと思っていたんだ。ありがとう。",
+        "options": ["こういう色の", "欲しい", "と思っていた", "かばんが"], "answer": 1,
+        "sentence_vi": "B: Ôi túi xách à! Đúng lúc tớ đang nghĩ muốn có một chiếc túi màu kiểu này đấy. Cảm ơn nhé.",
+        "explain_vi": "Cụm danh từ 「こういう色のかばんが」+ 「欲しいと思っていたんだ」(vốn đang nghĩ là muốn có...).",
+        "evidence_jp": None,
+        "star_order": "1(こういう色の) → 4(かばんが) → ★2(欲しい) → 3(と思っていた)"
+    },
+    {
+        "id": "2022_12_bd_18", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 2,
+        "mondai_label": "文法 問題2 (Sắp xếp dấu sao ★)", "num": 18, "passage_id": None, "is_star": True,
+        "sentence_html": "都会と田舎には違うところも多いが、どちらも、人が働き、<span class='star-slots'>＿＿＿　＿＿＿　<u class='q-target'>＿★＿</u>　＿＿＿</span>。",
+        "sentence_tts": "どちらも、人が働き、生活しているという点で違いはない。",
+        "options": ["という点で", "違いは", "生活している", "ない"], "answer": 1,
+        "sentence_vi": "Thành thị và nông thôn tuy có nhiều điểm khác nhau, nhưng xét ở phương diện đều là nơi con người làm việc và sinh sống thì không có sự khác biệt.",
+        "explain_vi": "Ngữ pháp N3 「〜という点で」= xét ở điểm là... Ghép: 人が働き、生活している + という点で + 違いは + ない.",
+        "evidence_jp": None,
+        "star_order": "3(生活している) → 1(という点で) → ★2(違いは) → 4(ない)"
+    },
+
+    # ========== BUNPOU MONDAI 3 (19..22) ==========
+    {
+        "id": "2022_12_bd_19", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 3,
+        "mondai_label": "文法 問題3 (Ngữ pháp đoạn văn)", "num": 19, "passage_id": "2022_12_bm3", "is_star": False,
+        "sentence_html": "Chọn đáp án điền vào chỗ trống <u class='q-target'>（ 19 ）</u> trong bài đọc bên trái:",
+        "sentence_tts": "畳の部屋に入るのは初めてでした。温泉にも初めて入りました。",
+        "options": ["温泉", "あの温泉", "そんな温泉", "これらの温泉"], "answer": 0,
+        "sentence_vi": "Vào phòng chiếu tatami là lần đầu tiên. Tôi cũng lần đầu tiên được tắm suối nước nóng.",
+        "explain_vi": "Câu trước nói chung 「畳の部屋に入るのは初めて」(lần đầu vào phòng tatami — trải nghiệm chung lần đầu trong đời) -> nối tiếp song song bằng 「温泉にも初めて入りました」(không dùng あの/そんな/これら để chỉ riêng 1 chỗ cụ thể).",
+        "evidence_jp": "畳の部屋に入るのは初めてでした。［温泉］にも初めて入りました。", "star_order": None
+    },
+    {
+        "id": "2022_12_bd_20", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 3,
+        "mondai_label": "文法 問題3 (Ngữ pháp đoạn văn)", "num": 20, "passage_id": "2022_12_bm3", "is_star": False,
+        "sentence_html": "Chọn đáp án điền vào chỗ trống <u class='q-target'>（ 20 ）</u> trong bài đọc bên trái:",
+        "sentence_tts": "部屋で出発の準備をしていたら、腕時計がないことに気がつきました。",
+        "options": ["まで", "しか", "は", "が"], "answer": 3,
+        "sentence_vi": "Hôm sau khi đang chuẩn bị rời phòng thì tôi phát hiện ra không thấy đồng hồ đeo tay đâu.",
+        "explain_vi": "Cấu trúc phát hiện sự việc trong mệnh đề phụ 「腕時計がないことに気がつきました」: dùng trợ từ chủ ngữ 「が」 (không dùng しか vì sẽ thành 'chỉ có đồng hồ không có').",
+        "evidence_jp": "部屋で出発の準備をしていたら、腕時計［が］ないことに気がつきました。", "star_order": None
+    },
+    {
+        "id": "2022_12_bd_21", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 3,
+        "mondai_label": "文法 問題3 (Ngữ pháp đoạn văn)", "num": 21, "passage_id": "2022_12_bm3", "is_star": False,
+        "sentence_html": "Chọn đáp án điền vào chỗ trống <u class='q-target'>（ 21 ）</u> trong bài đọc bên trái:",
+        "sentence_tts": "温泉の入り口のところに落ちていたそうです。",
+        "options": ["落ちたままです", "落ちたばかりです", "落ちていたそうです", "落ちていたことです"], "answer": 2,
+        "sentence_vi": "Nghe nói là nó đã rơi ở chỗ lối vào suối nước nóng.",
+        "explain_vi": "Nhân viên lễ tân tìm thấy rồi kể lại cho tác giả -> dùng mẫu truyền đạt nghe kể lại 「Vていた + そうです」!",
+        "evidence_jp": "フロントの人が私の時計を見つけて、部屋に持ってきてくれました。温泉の入り口のところに［落ちていたそうです］。", "star_order": None
+    },
+    {
+        "id": "2022_12_bd_22", "exam_id": "2022_12", "section": "bunpou", "jlpt_shift": 2, "mondai": 3,
+        "mondai_label": "文法 問題3 (Ngữ pháp đoạn văn)", "num": 22, "passage_id": "2022_12_bm3", "is_star": False,
+        "sentence_html": "Chọn đáp án điền vào chỗ trống <u class='q-target'>（ 22 ）</u> trong bài đọc bên trái:",
+        "sentence_tts": "旅行では観光地や食べ物だけではなく、人の優しさもいい思い出になるのだと感じました。",
+        "options": ["なっただろうと思います", "なるのだと感じました", "なったのではないでしょうか", "なるでしょうか"], "answer": 1,
+        "sentence_vi": "Tôi cảm nhận được rằng trong du lịch, không chỉ thắng cảnh hay món ăn, mà lòng tốt của con người cũng trở thành kỷ niệm đẹp.",
+        "explain_vi": "Câu kết nêu chân lý/cảm ngộ chung tác giả rút ra từ chuyến đi -> dùng hiện tại giải thích 「〜になるのだ」+ 「と感じました」(tôi đã cảm nhận rằng...). Loại 1, 3, 4 vì là phỏng đoán/nghi vấn không hợp mạch kết bài.",
+        "evidence_jp": "旅行では観光地や食べ物だけではなく、人の優しさもいい思い出に［なるのだと感じました］。", "star_order": None
+    },
+
+    # ========== DOKKAI MONDAI 4 (23..26) ==========
+    {
+        "id": "2022_12_bd_23", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 4,
+        "mondai_label": "読解 問題4 (Đoạn ngắn)", "num": 23, "passage_id": "2022_12_dm4_1", "is_star": False,
+        "sentence_html": "営業課のホンさんは、明日の朝の会議で使う資料を今日中に5枚コピーしたいと考えている。どうしなければならないか。",
+        "sentence_tts": "営業課のホンさんは今日中に5枚コピーしたいと考えている。どうしなければならないか。",
+        "options": [
+            "営業課でコピーをする。中島さんに言う必要はない。",
+            "会計課でコピーをする。中島さんに言う必要はない。",
+            "中島さんに言ってから、営業課でコピーをする。",
+            "中島さんに言ってから、会計課でコピーをする。"
+        ], "answer": 1,
+        "sentence_vi": "Anh Hong (phòng Kinh doanh) muốn photo 5 tờ tài liệu trong hôm nay để dùng họp sáng mai. Anh ấy phải làm thế nào?",
+        "explain_vi": "Đáp án 2! Check 2 điều kiện: (1) Máy phòng Kinh doanh hỏng đến chiều mai, cần gấp hôm nay -> dùng máy phòng Kế toán (会計課); (2) Chỉ khi photo từ 50 tờ trở lên mới cần báo Nakajima -> 5 tờ thì KHÔNG cần báo!",
+        "evidence_jp": "今日中にコピーしなければならない書類がある場合は、会計課のコピー機を使用してください。50枚以上コピーをする場合は…中島に知らせてください。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_24", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 4,
+        "mondai_label": "読解 問題4 (Đoạn ngắn)", "num": 24, "passage_id": "2022_12_dm4_2", "is_star": False,
+        "sentence_html": "テレビ番組を見て、「私」は娘のボール投げがうまくならないのは、なぜだと思ったか。",
+        "sentence_tts": "テレビ番組を見て、私は娘のボール投げがうまくならないのは、なぜだと思ったか。",
+        "options": [
+            "上手な投げ方についての「私」の説明が下手だったから。",
+            "繰り返し同じ投げ方で投げる練習をさせていなかったから。",
+            "実際に「私」が上手に投げているところを見せていなかったから。",
+            "ちょうどいい力の入れ方を体で覚える練習をさせていなかったから。"
+        ], "answer": 3,
+        "sentence_vi": "Sau khi xem chương trình TV, tác giả nghĩ lý do con gái ném bóng mãi không giỏi là gì?",
+        "explain_vi": "Đáp án 4 khớp sát cụm 「ちょうどいい力の入れ方を体で覚えさせていた。娘に必要なのは、これかもしれない」: vì chưa cho con luyện tập để cơ thể tự cảm nhận lực ném vừa phải.",
+        "evidence_jp": "ちょうどいい力の入れ方を体で覚えさせていた。娘に必要なのは、これかもしれない。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_25", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 4,
+        "mondai_label": "読解 問題4 (Đoạn ngắn)", "num": 25, "passage_id": "2022_12_dm4_3", "is_star": False,
+        "sentence_html": "このメールで言いたいこととして、合っているのはどれか。",
+        "sentence_tts": "このメールで言いたいこととして、合っているのはどれか。",
+        "options": [
+            "商品が品切れになったから、3月上旬に送る。",
+            "商品が品切れになったから、3月上旬にもう一度注文してほしい。",
+            "商品が品切れで、届けるまでに時間がかかるから、どうしたいか知らせてほしい。",
+            "注文と違う色の商品を送ってしまったから、正しい色のものをすぐに送る。"
+        ], "answer": 2,
+        "sentence_vi": "Ý nào đúng với điều email này muốn truyền đạt?",
+        "explain_vi": "Đáp án 3: Sản phẩm hết hàng, phải đầu tháng 3 mới giao được (mất thời gian) nên muốn khách báo lại nguyện vọng (chờ, hủy, hay đổi màu). Loại 1 vì shop chưa tự ý gửi khi chưa hỏi ý khách.",
+        "evidence_jp": "お届けできるのは3月上旬になってしまいますが、いかがいたしましょうか。キャンセルもお受けいたしますので、ご希望をお聞かせください。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_26", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 4,
+        "mondai_label": "読解 問題4 (Đoạn ngắn)", "num": 26, "passage_id": "2022_12_dm4_4", "is_star": False,
+        "sentence_html": "「私」が古い靴を店に持っていこうと思った理由の中で、最も大きいものはどれか。",
+        "sentence_tts": "私が古い靴を店に持っていこうと思った理由の中で、最も大きいものはどれか。",
+        "options": [
+            "古い靴を割引券と交換して、新しい靴を買うときに使いたいと思ったから。",
+            "古い靴を売ってお金をもらい、そのお金で新しい靴を買いたいと思ったから。",
+            "古い靴をきれいに直してもらって、もう一度履きたいと思ったから。",
+            "古い靴を利用してもらって、環境をよくしたいと思ったから。"
+        ], "answer": 0,
+        "sentence_vi": "Trong các lý do tác giả định mang giày cũ ra cửa hàng, lý do lớn nhất là gì?",
+        "explain_vi": "Đáp án 1! Bẫy cực điển hình ở câu cuối: tác giả gạt nhẹ lý do môi trường (環境にそんなに大きい影響はないと思うが) và nhấn mạnh vế sau 「新しい靴が安く買えるなら」-> vì muốn đổi phiếu giảm giá để mua giày mới rẻ hơn! (Loại 2 vì đổi 割引券 chứ không phải tiền mặt).",
+        "evidence_jp": "私一人が持っていっても、環境にそんなに大きい影響はないと思うが、新しい靴が安く買えるなら、古い靴は捨てないで店に持っていこうと思った。",
+        "star_order": None
+    },
+
+    # ========== DOKKAI MONDAI 5 (27..32) ==========
+    {
+        "id": "2022_12_bd_27", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 5,
+        "mondai_label": "読解 問題5 (Đoạn trung 1)", "num": 27, "passage_id": "2022_12_dm5_1", "is_star": False,
+        "sentence_html": "①<u class='q-target'>懐かしい声</u>とあるが、何か。",
+        "sentence_tts": "懐かしい声とあるが、何か。",
+        "options": [
+            "「私」が高校生のころの父の声。",
+            "「私」が高校生のころの自分の声。",
+            "「私」が高校生のころ大好きだった歌手の声。",
+            "「私」が高校生のころ聞いていたアナウンサーの声。"
+        ], "answer": 3,
+        "sentence_vi": "①'Giọng nói hoài niệm' là giọng của ai?",
+        "explain_vi": "Đáp án 4 khớp chính xác câu ngay sau gạch chân: Giọng của phát thanh viên (アナウンサー) chương trình âm nhạc trên radio mà tác giả từng thích thời cấp 3 (chú ý bẫy câu 3 'ca sĩ').",
+        "evidence_jp": "高校生のころ、大好きだったラジオの音楽番組のアナウンサーだった。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_28", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 5,
+        "mondai_label": "読解 問題5 (Đoạn trung 1)", "num": 28, "passage_id": "2022_12_dm5_1", "is_star": False,
+        "sentence_html": "②<u class='q-target'>また、ラジオを聞こうと思った</u>のはどうしてか。",
+        "sentence_tts": "また、ラジオを聞こうと思ったのはどうしてか。",
+        "options": [
+            "ラジオは、テレビより小さくて身近に置くことができるから。",
+            "ラジオは、インターネットより多くのことを教えてくれるから。",
+            "ラジオは、新しいことだけでなく古いことも伝えてくれるから。",
+            "ラジオは、何かをしながらでも、いろいろなことを知ることができるから。"
+        ], "answer": 3,
+        "sentence_vi": "Tại sao tác giả lại nghĩ ②'sẽ nghe radio trở lại'?",
+        "explain_vi": "Đáp án 4: Vì radio có ưu điểm độc đáo là vừa làm việc khác (nấu ăn, dọn dẹp) vừa tiếp nhận được nhiều thông tin.",
+        "evidence_jp": "ほかのことをしながらでも、さまざまな情報が手に入るというラジオにしかない良さ、便利さがあるのだ。私も掃除や料理をするようなときには、②また、ラジオを聞こうと思った。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_29", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 5,
+        "mondai_label": "読解 問題5 (Đoạn trung 1)", "num": 29, "passage_id": "2022_12_dm5_1", "is_star": False,
+        "sentence_html": "この文章のテーマは何か。",
+        "sentence_tts": "この文章のテーマは何か。",
+        "options": [
+            "ラジオ番組の楽しさ。",
+            "ラジオの良さ。",
+            "ラジオの歴史の長さ。",
+            "ラジオの使い方の工夫。"
+        ], "answer": 1,
+        "sentence_vi": "Chủ đề của bài văn này là gì?",
+        "explain_vi": "Đáp án 2: 「ラジオの良さ」(Những điểm hay/ưu điểm của radio) — xuyên suốt bài viết từ hồi cấp 3 đến hiện tại đều nhấn mạnh sự tiện lợi, gần gũi và ưu điểm riêng chỉ radio mới có.",
+        "evidence_jp": "ほかのことをしながらでも、さまざまな情報が手に入るというラジオにしかない良さ、便利さがあるのだ。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_30", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 5,
+        "mondai_label": "読解 問題5 (Đoạn trung 2)", "num": 30, "passage_id": "2022_12_dm5_2", "is_star": False,
+        "sentence_html": "町が①<u class='q-target'>説明会</u>を開いた目的は何か。",
+        "sentence_tts": "町が説明会を開いた目的は何か。",
+        "options": [
+            "町に引っ越して来てくれる人を募集すること。",
+            "町に引っ越して来る人を助けてくれる町民を募集すること。",
+            "町の農業について、アドバイスをしてくれる専門家を募集すること。",
+            "町の人口を増やすにはどうしたらいいか、考えてくれる人を募集すること。"
+        ], "answer": 0,
+        "sentence_vi": "Mục đích thị trấn tổ chức ①'buổi giải thích' là gì?",
+        "explain_vi": "Đáp án 1 khớp nguyên văn câu ngay sau gạch chân: Do dân số giảm nên tổ chức để chiêu mộ cư dân chuyển đến sống ở thị trấn (町民を募集するため).",
+        "evidence_jp": "その町では人口が減ったので、町民を募集するために説明会を開いています。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_31", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 5,
+        "mondai_label": "読解 問題5 (Đoạn trung 2)", "num": 31, "passage_id": "2022_12_dm5_2", "is_star": False,
+        "sentence_html": "②<u class='q-target'>共通点</u>とあるが、それはどのような点だと考えられるか。",
+        "sentence_tts": "共通点とあるが、それはどのような点だと考えられるか。",
+        "options": [
+            "期待していた生活ができていないが、我慢して生活している点。",
+            "期待していた生活ができるようになり、楽しく生活ができている点。",
+            "期待していた生活と実際の生活が同じではなかったが、満足している点。",
+            "期待していた生活と実際の生活が違い、不満を感じた点。"
+        ], "answer": 3,
+        "sentence_vi": "②'Điểm chung' (của những trường hợp không suôn sẻ) là điểm nào?",
+        "explain_vi": "Đáp án 4: Thực tế khác xa kỳ vọng dẫn đến chán nản/bất mãn (mơ mộng về quê rồi thấy buồn chán, làm nông vất vả quá phải quay lại thành phố, thấy dọn dẹp khu phố phiền phức).",
+        "evidence_jp": "あこがれて引っ越して来ましたが、すぐに退屈な毎日が嫌になった…農業がしたくて来たのにあまりにも大変で都会に戻ってしまった…意外にめんどうくさいと感じる人もいる。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_32", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 5,
+        "mondai_label": "読解 問題5 (Đoạn trung 2)", "num": 32, "passage_id": "2022_12_dm5_2", "is_star": False,
+        "sentence_html": "説明会に行ってから、自分の夢について、「私」はどう思うようになったか。",
+        "sentence_tts": "説明会に行ってから、自分の夢について、私はどう思うようになったか。",
+        "options": [
+            "失敗例が多すぎるから、実行するのはあきらめたほうがよさそうだ。",
+            "失敗例を知ったので、実行するかしないかを検討したい。",
+            "失敗例のことも考えて、しっかり計画を立てて実行したい。",
+            "失敗例より成功例がたくさんあるから、失敗例は気にせずにすぐ実行したい。"
+        ], "answer": 2,
+        "sentence_vi": "Sau khi đi dự buổi giới thiệu, tác giả nghĩ thế nào về ước mơ của mình?",
+        "explain_vi": "Đáp án 3: Không từ bỏ ước mơ, cân nhắc cả các trường hợp thất bại để tìm hiểu kỹ, lập kế hoạch bài bản rồi mới thực hiện (loại 1 'từ bỏ', loại 2 'cân nhắc có làm hay không', loại 4 'làm ngay').",
+        "evidence_jp": "でも、夢はあきらめたくないので、よく調べて、計画を立てて、実行できるように頑張りたいと思います。",
+        "star_order": None
+    },
+
+    # ========== DOKKAI MONDAI 6 (33..36) ==========
+    {
+        "id": "2022_12_bd_33", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 6,
+        "mondai_label": "読解 問題6 (Đoạn dài)", "num": 33, "passage_id": "2022_12_dm6", "is_star": False,
+        "sentence_html": "①<u class='q-target'>全然変わらない</u>とあるが、何が変わらないのか。",
+        "sentence_tts": "全然変わらないとあるが、何が変わらないのか。",
+        "options": [
+            "布団に入ってもしばらく眠れないこと。",
+            "運動しないと眠れないこと。",
+            "朝、決まった時間に起きられないこと。",
+            "1時間も走り続けられないこと。"
+        ], "answer": 0,
+        "sentence_vi": "①'Hoàn toàn không thay đổi' — là cái gì không thay đổi?",
+        "explain_vi": "Đáp án 1: Tình trạng chui vào chăn rồi mà một lúc lâu vẫn không ngủ được (câu mở đầu đoạn 1) vẫn không hề cải thiện dù đã chạy bộ 2 tuần.",
+        "evidence_jp": "最近、私は布団に入ってもしばらく眠れなくて、悩んでいる。…寝る1時間前に走ることにした。だが、2週間続けてみても、①全然変わらない。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_34", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 6,
+        "mondai_label": "読解 問題6 (Đoạn dài)", "num": 34, "passage_id": "2022_12_dm6", "is_star": False,
+        "sentence_html": "②<u class='q-target'>体の中心の温度の変化が重要だ</u>とあるが、この変化を起こすためには、どうすればいいか。",
+        "sentence_tts": "この変化を起こすためには、どうすればいいか。",
+        "options": [
+            "体の中心の温度をまず下げることで、中心の温度が上がる状態を作る。",
+            "体の中心の温度をまず上げることで、中心の温度が下がる状態を作る。",
+            "体の中心の温度を上げて、中心の温度が決まった温度から下がらない状態を作る。",
+            "体の中心の温度を上げたり下げたりして、中心の温度が変化し続ける状態を作る。"
+        ], "answer": 1,
+        "sentence_vi": "Để tạo ra ②'sự thay đổi nhiệt độ trung tâm cơ thể' giúp dễ ngủ, cần làm thế nào?",
+        "explain_vi": "Đáp án 2 khớp đúng cơ chế 3 bước trong đoạn 2: Trước tiên làm ấm (tăng) nhiệt độ trung tâm cơ thể → cơ thể tỏa nhiệt ra ngoài → tạo trạng thái nhiệt độ trung tâm hạ xuống giúp dễ ngủ.",
+        "evidence_jp": "体が中心まで温まる。すると、体は表面から熱を出そうとする。表面から熱が出ていくと、中心の温度が下がっていく。このようにして、中心の温度が下がる状態を作ると、人は眠りやすくなる。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_35", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 6,
+        "mondai_label": "読解 問題6 (Đoạn dài)", "num": 35, "passage_id": "2022_12_dm6", "is_star": False,
+        "sentence_html": "③<u class='q-target'>間違い</u>とあるが、「私」が間違えてしていたことは何か。",
+        "sentence_tts": "間違いとあるが、私が間違えてしていたことは何か。",
+        "options": [
+            "寝る1時間前に体が疲れるまで運動をすること。",
+            "寝る1時間前に軽い運動をすること。",
+            "寝る2、3時間前に体が疲れるまで運動をすること。",
+            "寝る2、3時間前に軽い運動をすること。"
+        ], "answer": 0,
+        "sentence_vi": "③'Sai lầm' — việc mà tác giả đã làm sai là gì?",
+        "explain_vi": "Đáp án 1: Trong đoạn 1 tác giả chọn chạy bộ đến mức cơ thể mệt nhoài (体が疲れるまで) vào lúc 1 tiếng trước khi ngủ (寝る1時間前) — đây chính là tập quá sức sát giờ ngủ nên bị phản tác dụng.",
+        "evidence_jp": "体が疲れるまで運動をすれば…と考えて、寝る1時間前に走ることにした。／寝る直前に運動しすぎたり…逆効果らしい。",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_36", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 6,
+        "mondai_label": "読解 問題6 (Đoạn dài)", "num": 36, "passage_id": "2022_12_dm6", "is_star": False,
+        "sentence_html": "文章の最後の<u class='q-target'>（　　　）</u>に入れるのに最もよいものはどれか。",
+        "sentence_tts": "これからは、ぬるめの風呂にゆっくり入ってから寝ようと思う。",
+        "options": [
+            "起きる時間を遅くしよう",
+            "布団に入って自然に眠くなるのを待とう",
+            "ぬるめの風呂にゆっくり入ってから寝よう",
+            "軽く走ってから寝よう"
+        ], "answer": 2,
+        "sentence_vi": "Chọn câu phù hợp nhất điền vào chỗ trống cuối bài đọc:",
+        "explain_vi": "Đáp án 3! Bẫy câu 4: đoạn cuối tác giả bảo chạy tối một mình hơi sợ, lại KHÔNG thích vận động và mừng vì có cách NGOÀI vận động (運動以外にいい方法がある) -> chính là ngâm bồn nước ấm vừa rồi đi ngủ (đoạn 2 đã nêu 2 cách: chạy nhẹ hoặc ngâm bồn nước ấm vừa)!",
+        "evidence_jp": "夜に一人で走るのは少し怖いと思っていたし、実は運動も好きではない。運動以外にいい方法があると知ってうれしくなった。",
+        "star_order": None
+    },
+
+    # ========== DOKKAI MONDAI 7 (37..38) ==========
+    {
+        "id": "2022_12_bd_37", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 7,
+        "mondai_label": "読解 問題7 (Tìm kiếm thông tin)", "num": 37, "passage_id": "2022_12_dm7", "is_star": False,
+        "sentence_html": "田中さんは、出発日が土曜日のバス旅行に申し込みたいと思っている。昼食がついていて、温泉に行けるものがいい。田中さんの希望に合うのはどれか。",
+        "sentence_tts": "田中さんの希望に合うのはどれか。",
+        "options": ["①", "②", "③", "④"], "answer": 3,
+        "sentence_vi": "Anh Tanaka muốn đăng ký tour xe buýt khởi hành vào Thứ Bảy, có bao gồm bữa trưa và có đi suối nước nóng (onsen). Tour nào khớp yêu cầu?",
+        "explain_vi": "Đáp án 4 (Tour ④)! Loại trừ nhanh 3 điều kiện (Thứ Bảy + Ăn trưa + Onsen): ① có T7 & Onsen nhưng KHÔNG ăn trưa; ② có T7 & ăn trưa nhưng KHÔNG Onsen; ③ có ăn trưa & Onsen nhưng chỉ khởi hành T2 & CN (không có T7); ④ thỏa cả 3: 11/3(土) + 昼食 + 空石温泉!",
+        "evidence_jp": "④空石山ハイキングと空石温泉｜食事：昼食｜出発日：11月3日（土）",
+        "star_order": None
+    },
+    {
+        "id": "2022_12_bd_38", "exam_id": "2022_12", "section": "dokkai", "jlpt_shift": 2, "mondai": 7,
+        "mondai_label": "読解 問題7 (Tìm kiếm thông tin)", "num": 38, "passage_id": "2022_12_dm7", "is_star": False,
+        "sentence_html": "ロバートさんは、出発日が明日10月6日（土）の「①川中市内観光と川中東温泉」に申し込んでいたが、行けなくなった。今日の受付時間のうちにキャンセルする場合、キャンセル料はどうなるか。",
+        "sentence_tts": "今日の受付時間のうちにキャンセルする場合、キャンセル料はどうなるか。",
+        "options": [
+            "7,500円の40%を払う。",
+            "8,500円の40%を払う。",
+            "7,500円の50%を払う。",
+            "8,500円の50%を払う。"
+        ], "answer": 1,
+        "sentence_vi": "Anh Robert đã đăng ký Tour ① khởi hành ngày mai Thứ Bảy 6/10, nhưng không đi được nữa. Nếu báo hủy trong giờ tiếp nhận hôm nay thì phí hủy thế nào?",
+        "explain_vi": "Đáp án 2! Check 2 bẫy số liệu: (1) Ngày khởi hành là Thứ Bảy (土) -> giá gốc cuối tuần là 8,500円 (bẫy: 7,500円 là giá ngày thường); (2) Khởi hành ngày mai mà hủy hôm nay trong giờ tiếp nhận = trước 1 ngày (出発日の前日) -> phí hủy 40%!",
+        "evidence_jp": "①土・日：8,500円｜キャンセル料：出発日の前日は40%（受付時間内に連絡）",
+        "star_order": None
+    }
+]
+
+def validate_and_write():
+    assert len(QUESTIONS) == 73, f"Expected 73, got {len(QUESTIONS)}"
+    ids = set()
+    for q in QUESTIONS:
+        assert q["id"] not in ids, f"Duplicate id: {q['id']}"
+        ids.add(q["id"])
+        assert len(q["options"]) == 4 and len(set(q["options"])) == 4, f"Bad options on {q['id']}: {q['options']}"
+        assert 0 <= q["answer"] <= 3, f"Bad answer on {q['id']}"
+        if q["passage_id"]:
+            assert q["passage_id"] in PASSAGES, f"Missing passage {q['passage_id']}"
+        if q["is_star"]:
+            assert q["star_order"], f"Missing star_order on {q['id']}"
+
+    exam_obj = {
+        "exam_id": "2022_12",
+        "label": "JLPT N3 — Tháng 12/2022",
+        "short_label": "T12/2022",
+        "wave": 1,
+        "counts": {
+            "moji_goi": sum(1 for q in QUESTIONS if q["section"] == "moji_goi"),
+            "bunpou": sum(1 for q in QUESTIONS if q["section"] == "bunpou"),
+            "dokkai": sum(1 for q in QUESTIONS if q["section"] == "dokkai"),
+            "total": len(QUESTIONS)
+        },
+        "passages": PASSAGES,
+        "questions": QUESTIONS
+    }
+
+    js = (
+        "// Verified JLPT N3 Official Past Exam: December 2022 (Moji-Goi + Bunpou + Dokkai, No Listening)\n"
+        "window.JLPT_PAST_EXAMS = window.JLPT_PAST_EXAMS || [];\n"
+        f"window.JLPT_PAST_EXAMS.push({json.dumps(exam_obj, ensure_ascii=False, indent=2)});\n"
+    )
+    with open(OUT_PATH, "w", encoding="utf-8") as f:
+        f.write(js)
+    print(f"SUCCESS! Wrote {OUT_PATH} | Counts: {exam_obj['counts']} | Passages: {len(PASSAGES)}")
+
+if __name__ == "__main__":
+    validate_and_write()

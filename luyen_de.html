@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luyện Đề JLPT N3 - Kanji 240 • Đồng Nghĩa 80 • Katakana 78</title>
+    <title>Luyện Đề JLPT N3 - Kanji • Đồng Nghĩa • Katakana • Đề Thi Thật 2021–2023</title>
 
     <!-- Google Fonts: Outfit & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -850,6 +850,282 @@
             font-weight: 600;
             color: var(--hub-text-sub);
         }
+
+        /* ==========================================
+           PAST JLPT N3 EXAMS — SPLIT-SCREEN & FLYER UI
+           ========================================== */
+        .exam-workspace.has-passage {
+            grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+            gap: 18px;
+        }
+        .exam-workspace.has-passage .exam-nav-panel {
+            grid-column: 1 / -1;
+        }
+        .exam-workspace.has-passage .q-nav-grid {
+            grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+        }
+        @media (max-width: 960px) {
+            .exam-workspace.has-passage {
+                grid-template-columns: 1fr;
+            }
+            .passage-pane {
+                position: static !important;
+                max-height: 46vh !important;
+            }
+        }
+        .passage-pane {
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border);
+            border-radius: 18px;
+            padding: 18px 20px;
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 14px;
+            max-height: 76vh;
+            overflow-y: auto;
+        }
+        .passage-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--hub-border);
+        }
+        .passage-body {
+            font-size: var(--passage-fs, 16px);
+            line-height: 1.9;
+            color: var(--hub-text);
+            word-break: break-word;
+        }
+        .passage-body p {
+            margin-bottom: 12px;
+            text-indent: 1em;
+        }
+        .passage-header-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--hub-border-strong);
+            font-size: 1.08em;
+        }
+        .passage-author {
+            font-size: 0.85em;
+            color: var(--hub-text-sub);
+        }
+        .passage-box-note {
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+        }
+        .passage-box-note p {
+            text-indent: 0;
+        }
+        .passage-note-intro {
+            font-size: 0.85em;
+            color: var(--hub-text-sub);
+            margin-bottom: 10px !important;
+            font-style: italic;
+        }
+        .passage-subbox {
+            margin: 10px 0;
+            padding: 10px 13px;
+            border-radius: 9px;
+            background: var(--hub-surface);
+            border: 1px dashed var(--hub-border-strong);
+            line-height: 1.75;
+        }
+        .passage-footnote {
+            font-size: 0.85em;
+            color: var(--hub-text-sub);
+            text-indent: 0 !important;
+            border-top: 1px solid var(--hub-border);
+            padding-top: 8px;
+        }
+        .p-anchor {
+            border-radius: 5px;
+            padding: 1px 4px;
+            transition: background 0.25s, box-shadow 0.25s;
+        }
+        .p-anchor.active-anchor {
+            background: var(--hub-warn-bg);
+            color: var(--hub-text);
+            box-shadow: 0 0 0 2px var(--hub-warn-border);
+            font-weight: 700;
+        }
+        .passage-summary-box {
+            margin-top: 14px;
+            padding: 11px 14px;
+            border-radius: 10px;
+            background: var(--hub-ok-bg);
+            border: 1px solid var(--hub-ok-border);
+            color: var(--hub-text);
+            font-size: 13.5px;
+            line-height: 1.55;
+        }
+
+        /* Mondai 7 Information Flyer & Table */
+        .flyer-box {
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--hub-surface-2);
+            border: 2px solid var(--hub-border-strong);
+        }
+        .flyer-box p {
+            text-indent: 0;
+            margin-bottom: 10px;
+        }
+        .flyer-title {
+            text-align: center;
+            font-size: 1.18em;
+            font-weight: 800;
+            color: var(--hub-text);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--primary);
+        }
+        .flyer-highlight {
+            padding: 10px 12px;
+            border-radius: 9px;
+            background: var(--hub-surface);
+            border: 1px solid var(--hub-border-strong);
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        .flyer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 14px 0;
+            background: var(--hub-surface);
+            font-size: 0.92em;
+        }
+        .flyer-table th, .flyer-table td {
+            border: 1px solid var(--hub-border-strong);
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.65;
+        }
+        .flyer-table thead th {
+            background: var(--bg-btn-active);
+            color: var(--hub-text);
+            font-weight: 800;
+            text-align: center;
+        }
+        .flyer-badge {
+            display: inline-block;
+            padding: 1px 7px;
+            border-radius: 5px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.86em;
+            margin-right: 5px;
+        }
+        .flyer-section ul {
+            margin: 6px 0 10px 20px;
+            line-height: 1.7;
+        }
+        .flyer-footer {
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--hub-border-strong);
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--hub-text-sub);
+        }
+
+        /* Star Slots & Past Exam Cards */
+        .star-slots {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: var(--hub-surface);
+            border: 1px dashed var(--primary);
+            margin: 0 4px;
+            letter-spacing: 1px;
+        }
+        .past-mode-switch {
+            display: inline-flex;
+            padding: 3px;
+            border-radius: 10px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            gap: 4px;
+        }
+        .past-mode-switch button {
+            padding: 6px 11px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--hub-text-sub);
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+        .past-mode-switch button.active {
+            background: var(--primary);
+            color: #ffffff;
+        }
+        .past-split-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--hub-border);
+        }
+        .past-split-row .btn-pill {
+            padding: 6px 10px;
+            font-size: 12px;
+            flex: 1;
+            min-width: 96px;
+        }
+        .jlpt-score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .jlpt-score-box {
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+        }
+        .jlpt-score-box.is-fail {
+            background: var(--hub-danger-bg);
+            border-color: var(--hub-danger-border);
+        }
+        .jlpt-score-box.is-pass {
+            background: var(--hub-ok-bg);
+            border-color: var(--hub-ok-border);
+        }
+        .evidence-box {
+            padding: 10px 13px;
+            border-radius: 10px;
+            background: var(--hub-ok-bg);
+            border: 1px solid var(--hub-ok-border);
+            color: var(--hub-text);
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+        .star-ans-box {
+            padding: 10px 13px;
+            border-radius: 10px;
+            background: var(--hub-warn-bg);
+            border: 1px solid var(--hub-warn-border);
+            color: var(--hub-text);
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -987,12 +1263,12 @@
                             </div>
                             <span class="bank-chip-sub">78 câu Mondai 3 + Bảng dò 78 từ</span>
                         </div>
-                        <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 4">
+                        <div class="bank-chip" id="bank-chip-pastN3" onclick="switchBank('pastN3')">
                             <div class="bank-chip-title">
-                                <span>📜 Đề Thi N3 (2010–2023)</span>
-                                <span style="font-size: 11px; color: var(--hub-text-sub);">GĐ 4</span>
+                                <span>📜 Đề Thi N3 (2021–2023)</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
                             </div>
-                            <span class="bank-chip-sub">Đề full các năm + Nghe MP3</span>
+                            <span class="bank-chip-sub">Đề thật (Bỏ Nghe) • Split-Screen Dokkai</span>
                         </div>
                     </div>
 
@@ -1080,7 +1356,11 @@
                     <div class="panel-card">
                         <h3>
                             <span id="sessions-panel-title"><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3</span>
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                                <div class="past-mode-switch" id="past-mode-switch" style="display: none;">
+                                    <button type="button" id="past-mode-exam-btn" class="active" onclick="setPastLaunchMode('exam')">⏱️ Thi Thử</button>
+                                    <button type="button" id="past-mode-drill-btn" onclick="setPastLaunchMode('drill')">⚡ Chữa Ngay</button>
+                                </div>
                                 <button class="btn-pill primary" id="open-pairs-quick-btn" style="display: none;" onclick="showMainView('pairs')">
                                     <i class="fa-solid fa-table-list"></i> <span id="open-pairs-quick-lbl">Mở Bảng Dò 80 Cặp A = B</span>
                                 </button>
@@ -1151,8 +1431,21 @@
                         </div>
                     </div>
 
-                    <div class="exam-workspace">
-                        <!-- Left: Question Stage -->
+                    <div class="exam-workspace" id="exam-workspace">
+                        <!-- Optional Left Split-Screen Passage Pane (Bunpou M3 & Dokkai M4-M7) -->
+                        <div class="passage-pane" id="passage-pane" style="display: none;">
+                            <div class="passage-toolbar">
+                                <strong id="passage-title-lbl" style="font-size: 14.5px; color: var(--hub-text);">Bài đọc</strong>
+                                <div style="display: flex; gap: 6px; align-items: center;">
+                                    <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="adjustPassageFontSize(-1)" title="Giảm cỡ chữ bài đọc">A-</button>
+                                    <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="adjustPassageFontSize(1)" title="Tăng cỡ chữ bài đọc">A+</button>
+                                </div>
+                            </div>
+                            <div class="passage-body" id="passage-body-content"></div>
+                            <div class="passage-summary-box" id="passage-summary-box" style="display: none;"></div>
+                        </div>
+
+                        <!-- Main Question Stage -->
                         <div class="question-stage">
                             <div class="q-meta-bar">
                                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
@@ -1263,6 +1556,9 @@
                         </div>
                     </div>
 
+                    <!-- Estimated JLPT N3 Scorecard (/60 + /60 = /120, only shown for pastN3) -->
+                    <div class="panel-card" id="jlpt-score-panel" style="display: none;"></div>
+
                     <div class="panel-card">
                         <h3>
                             <span><i class="fa-solid fa-microscope" style="color: var(--primary);"></i> Chữa Bài Chi Tiết & Phân Tích Đáp Án</span>
@@ -1334,6 +1630,8 @@
     <script src="data/kanji_240_data.js"></script>
     <script src="data/synonym_n3_data.js"></script>
     <script src="data/katakana_n3_data.js"></script>
+    <script src="data/jlpt_n3_2022_07.js"></script>
+    <script src="data/jlpt_n3_2022_12.js"></script>
     <script src="assets/js/luyen_de_app.js"></script>
 </body>
 </html>
