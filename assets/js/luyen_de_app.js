@@ -1,6 +1,6 @@
 // ==========================================
-// LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE (10 BANKS • 1,674 Qs)
-// Supports: [kanji240: 352] | [m3_191: 191] | [syn80: 95] | [kata78: 90] | [hira35: 35] | [m5_107: 107] | [gp_m1: 273] | [gp_star: 99] | [gp_m3: 141] | [pastN3: 291]
+// LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE (10 BANKS • 2,086 Qs)
+// Supports: [kanji240: 352 + 3 M2 Trap Tables] | [m3_191: 191] | [syn80: 270] | [kata78: 90] | [hira35: 35] | [m5_107: 239] | [gp_m1: 273] | [gp_star: 99] | [gp_m3: 141] | [pastN3: 291 + 105 Mock]
 // ==========================================
 
 const LS_HUB_SRS_KEY = 'n3_srs_mistakes';
@@ -13,6 +13,12 @@ const PAST_EXAM_CATALOG = [
     { exam_id: '2022_12', label: 'JLPT N3 — Tháng 12/2022', short_label: 'T12/2022', wave: 1, note: '73 câu thật (35 Từ vựng • 22 Ngữ pháp • 16 Đọc hiểu)' },
     { exam_id: '2022_07', label: 'JLPT N3 — Tháng 07/2022', short_label: 'T7/2022', wave: 1, note: '72 câu thật (34 Từ vựng • 22 Ngữ pháp • 16 Đọc hiểu)' },
     { exam_id: '2021_12', label: 'JLPT N3 — Tháng 12/2021', short_label: 'T12/2021', wave: 2, note: '73 câu thật (35 Từ vựng • 22 Ngữ pháp • 16 Đọc hiểu)' }
+];
+
+const TAISAKU_MOCK_CATALOG = [
+    { exam_id: 'taisaku_m1', label: 'Taisaku Đề Thi Thử Từ Vựng #1 (第1回)', short_label: 'Taisaku TV #1', is_vocab_mock: true, custom_seconds: 1200, note: '35 câu chuẩn JLPT (8 M1 • 6 M2 • 11 M3 • 5 M4 • 5 M5) • Tốc độ 20 phút' },
+    { exam_id: 'taisaku_m2', label: 'Taisaku Đề Thi Thử Từ Vựng #2 (第2回)', short_label: 'Taisaku TV #2', is_vocab_mock: true, custom_seconds: 1200, note: '35 câu chuẩn JLPT (8 M1 • 6 M2 • 11 M3 • 5 M4 • 5 M5) • Tốc độ 20 phút' },
+    { exam_id: 'taisaku_m3', label: 'Taisaku Đề Thi Thử Từ Vựng #3 (第3回)', short_label: 'Taisaku TV #3', is_vocab_mock: true, custom_seconds: 1200, note: '35 câu chuẩn JLPT (8 M1 • 6 M2 • 11 M3 • 5 M4 • 5 M5) • Tốc độ 20 phút' }
 ];
 
 const BANK_CONFIGS = {
@@ -37,7 +43,7 @@ const BANK_CONFIGS = {
     },
     syn80: {
         id: 'syn80',
-        name: '80 Cặp Từ Đồng Nghĩa N3',
+        name: '270 Câu Đồng Nghĩa M4 (Gốc + Taisaku)',
         keys: {
             mistakes: 'n3_syn80_mistakes',
             history: 'n3_syn80_history',
@@ -48,7 +54,11 @@ const BANK_CONFIGS = {
         shifts: [
             { session: 1, shift: 'Ca 1 • Đề Gốc', icon: 'fa-sun', title: 'Bài 1 — 40 Câu Đồng Nghĩa', desc: 'Mondai 4 chuẩn đề gốc (40 câu đầu)', count: 40, timeLbl: '10p' },
             { session: 2, shift: 'Ca 2 • Đề Gốc', icon: 'fa-cloud-sun', title: 'Bài 2 — 40 Câu Đồng Nghĩa', desc: 'Mondai 4 chuẩn đề gốc (40 câu sau)', count: 40, timeLbl: '10p' },
-            { session: 3, shift: 'Ca 3 • Phủ Kín', icon: 'fa-sparkles', title: 'Bài 3 Bổ Sung — 15 Câu Phủ Kín Bảng 80', desc: '15 cặp bảng 80 chưa hỏi ở Bài 1 & 2 (延期, 輝く, がっかり...)', count: 15, timeLbl: '4p' }
+            { session: 3, shift: 'Ca 3 • Phủ Kín', icon: 'fa-sparkles', title: 'Bài 3 Bổ Sung — 15 Câu Phủ Kín Bảng 80', desc: '15 cặp bảng 80 chưa hỏi ở Bài 1 & 2 (延期, 輝く, がっかり...)', count: 15, timeLbl: '4p' },
+            { session: 4, shift: '⭐ Ca 4 • Đề Thật Taisaku', icon: 'fa-star', title: 'Bài 4 Mới — 34 Câu M4 Đề Thật Taisaku', desc: '34 câu đề thi thật 2012–2020 bổ sung từ Taisaku Ch5 (đã lọc trùng 95 câu gốc)', count: 34, timeLbl: '9p' },
+            { session: 5, shift: '🔮 Ca 5 • Dự Đoán P1', icon: 'fa-wand-magic-sparkles', title: 'Bài 5 Mới — 47 Câu M4 Dự Đoán #1–#47', desc: 'Taisaku Ch5 予想問題 phần 1 — ép phản xạ đồng nghĩa tốc độ cao (1 câu ăn 5 từ)', count: 47, timeLbl: '12p' },
+            { session: 6, shift: '🔮 Ca 6 • Dự Đoán P2', icon: 'fa-wand-magic-sparkles', title: 'Bài 6 Mới — 47 Câu M4 Dự Đoán #48–#94', desc: 'Taisaku Ch5 予想問題 phần 2 — phủ sâu từ đồng nghĩa N3 hay bẫy', count: 47, timeLbl: '12p' },
+            { session: 7, shift: '🔮 Ca 7 • Dự Đoán P3', icon: 'fa-trophy', title: 'Bài 7 Mới — 47 Câu M4 Dự Đoán #95–#141', desc: 'Taisaku Ch5 予想問題 phần 3 — chốt hạ toàn bộ 141 câu dự đoán M4', count: 47, timeLbl: '12p' }
         ]
     },
     kata78: {
@@ -101,7 +111,7 @@ const BANK_CONFIGS = {
     },
     m5_107: {
         id: 'm5_107',
-        name: '107 Cách Dùng Từ Mondai 5',
+        name: '239 Cách Dùng Từ M5 (Đề Thật + Taisaku)',
         keys: {
             mistakes: 'n3_m5_107_mistakes',
             history: 'n3_m5_107_history',
@@ -112,7 +122,10 @@ const BANK_CONFIGS = {
         shifts: [
             { session: 1, shift: '⭐ Trọng Tâm • Bài 1 (Lặp M5)', icon: 'fa-fire', title: 'Bài 1 — Top 22 Từ Siêu Tủ Lặp 2–3x M5', desc: 'Tầng 1 Ưu tiên: 22 từ thi lại nhiều lần ở M5 (募集, 渋滞, 発展, 修理, 消費, 知り合う...)', count: 22, timeLbl: '9p' },
             { session: 2, shift: '⭐ Trọng Tâm • Bài 2 (Chéo & 2021–2026)', icon: 'fa-star', title: 'Bài 2 — 43 Từ Trọng Tâm Chéo & Đề Mới', desc: 'Tầng 1 Ưu tiên: 30 từ lặp chéo M1–M5 + 13 từ mới 2021–2026 (整理, 清潔, 期限, 交流...)', count: 43, timeLbl: '18p' },
-            { session: 3, shift: '🛡️ Phủ Kín • Bài 3 (2010–2019)', icon: 'fa-shield-halved', title: 'Bài 3 — 42 Từ Phủ Kín 100% Đề Thật', desc: 'Tầng 2 Phủ kín: 42 từ còn lại 2010–2019 để ăn trọn 5/5 câu M5 (満員, 沸騰, 翻訳, ゆるい...)', count: 42, timeLbl: '17p' }
+            { session: 3, shift: '🛡️ Phủ Kín • Bài 3 (2010–2019)', icon: 'fa-shield-halved', title: 'Bài 3 — 42 Từ Phủ Kín Đề Thật', desc: 'Tầng 2 Phủ kín: 42 từ còn lại 2010–2019 để ăn trọn 5/5 câu M5 (満員, 沸騰, 翻訳, ゆるい...)', count: 42, timeLbl: '17p' },
+            { session: 4, shift: '🔮 Taisaku • Bài 4 (Đề Thật + Dự Đoán P1)', icon: 'fa-wand-magic-sparkles', title: 'Bài 4 Mới — 44 Câu (5 Đề Thật + 39 Dự Đoán)', desc: '5 từ đề thật còn thiếu (受取る, 割引, 気づく, 栄養, ふらふら) + 39 câu Dự đoán Ch6 #1–#39', count: 44, timeLbl: '18p' },
+            { session: 5, shift: '🔮 Taisaku • Bài 5 (Dự Đoán P2)', icon: 'fa-wand-magic-sparkles', title: 'Bài 5 Mới — 44 Câu Dự Đoán #40–#83', desc: 'Taisaku Ch6 予想問題 phần 2 — giải thích sắc nét 1 câu ĐÚNG + 3 bẫy SAI', count: 44, timeLbl: '18p' },
+            { session: 6, shift: '🔮 Taisaku • Bài 6 (Dự Đoán P3)', icon: 'fa-trophy', title: 'Bài 6 Mới — 44 Câu Dự Đoán #84–#127', desc: 'Taisaku Ch6 予想問題 phần 3 — chốt hạ toàn bộ 127 câu Dự đoán M5', count: 44, timeLbl: '18p' }
         ]
     },
     gp_m1: {
@@ -214,9 +227,10 @@ let pastLaunchMode = 'drill'; // Default to 'drill' (Học Chữa Ngay) so learn
 let lastRenderedPassageId = null;
 let passageFontSize = 16;
 
-// Quick-Study Table State (Vocab Lists + 3 Grammar Formula Cheat-Sheets)
+// Quick-Study Table State (Vocab Lists + 3 M2 Kanji Trap Tables + 3 Grammar Formula Cheat-Sheets)
 let pairsMaskMode = 'none'; // 'none' | 'right' | 'left'
 let currentKanjiOrder = [];
+let currentKanjiTrapsOrder = [];
 let currentM3Order = [];
 let currentPairsOrder = [];
 let currentKataOrder = [];
@@ -231,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
     activeBank = localStorage.getItem(LS_ACTIVE_BANK_KEY) || 'kanji240';
     if (!BANK_CONFIGS[activeBank]) activeBank = 'kanji240';
     if (typeof KANJI_MASTER_LIST !== 'undefined') currentKanjiOrder = [...KANJI_MASTER_LIST];
+    if (typeof KANJI_M2_TRAPS_LIST !== 'undefined') currentKanjiTrapsOrder = [...KANJI_M2_TRAPS_LIST];
     if (typeof MONDAI3_191_LIST !== 'undefined') currentM3Order = [...MONDAI3_191_LIST];
     if (typeof SYNONYM_80_PAIRS !== 'undefined') currentPairsOrder = [...SYNONYM_80_PAIRS];
     if (typeof KATAKANA_78_LIST !== 'undefined') currentKataOrder = [...KATAKANA_78_LIST];
@@ -307,7 +322,9 @@ function getItemSessionNum(qObj, bankId = activeBank) {
 }
 
 function getPastExamShortLabel(examId) {
-    const ex = getPastExamById(examId) || PAST_EXAM_CATALOG.find(x => x.exam_id === examId);
+    const ex = getPastExamById(examId)
+        || PAST_EXAM_CATALOG.find(x => x.exam_id === examId)
+        || TAISAKU_MOCK_CATALOG.find(x => x.exam_id === examId);
     return ex ? ex.short_label : examId;
 }
 
@@ -429,23 +446,23 @@ function applyBankUI() {
         navPairsLbl.textContent = isGpM1
             ? 'Bảng Công Thức NP M1'
             : (isGpStar ? 'Bảng Công Thức Dấu Sao ★' : (isGpM3 ? 'Bảng 45 Liên Từ & こ・そ・あ' : (isKanji
-                ? 'Bảng 311 Kanji Đề Thật'
-                : (isM3 ? 'Bảng 191 Từ Mondai 3' : (isM5 ? 'Bảng 107 Từ Mondai 5' : (isKata ? 'Bảng 90 Từ Katakana' : (isHira ? 'Bảng 35 Hiragana & Từ Láy' : 'Bảng 80 Cặp A = B')))))));
+                ? 'Bảng 311 Kanji & 3 Bẫy M2'
+                : (isM3 ? 'Bảng 191 Từ Mondai 3' : (isM5 ? 'Bảng 239 Từ Mondai 5' : (isKata ? 'Bảng 90 Từ Katakana' : (isHira ? 'Bảng 35 Hiragana & Từ Láy' : 'Bảng 255 Cặp A = B')))))));
     }
     if (openPairsLbl) {
         openPairsLbl.textContent = isGpM1
             ? 'Mở Bảng Công Thức NP M1'
             : (isGpStar ? 'Mở Bảng Công Thức Ghép ★' : (isGpM3 ? 'Mở Bảng Liên Từ & Chỉ Thị Từ' : (isKanji
-                ? 'Mở Bảng Tra Cứu 311 Kanji'
-                : (isM3 ? 'Mở Bảng Tra Cứu 191 Từ M3' : (isM5 ? 'Mở Bảng Tra Cứu 107 Từ M5' : (isKata ? 'Mở Bảng Dò 90 Từ Katakana' : (isHira ? 'Mở Bảng Dò 35 Hiragana' : 'Mở Bảng Dò 80 Cặp A = B')))))));
+                ? 'Mở Bảng 311 Kanji & 3 Bảng Bẫy M2'
+                : (isM3 ? 'Mở Bảng Tra Cứu 191 Từ M3' : (isM5 ? 'Mở Bảng Tra Cứu 239 Từ M5' : (isKata ? 'Mở Bảng Dò 90 Từ Katakana' : (isHira ? 'Mở Bảng Dò 35 Hiragana' : 'Mở Bảng Dò 255 Cặp A = B')))))));
     }
 
     document.getElementById('nav-lobby-lbl').textContent = isPast
-        ? 'Sảnh Đề Thi Thật'
-        : (isGpM1 ? 'Sảnh Ngữ Pháp M1 (6 Ca)' : (isGpStar ? 'Sảnh Dấu Sao ★ (3 Ca)' : (isGpM3 ? 'Sảnh Đoạn Văn M3 (3 Ca)' : (isM3 ? 'Sảnh Ngữ Cảnh M3 (4 Ca)' : (isM5 ? 'Sảnh Cách Dùng M5 (3 Ca)' : (isHira ? 'Sảnh Hiragana (2 Ca)' : (isKata ? 'Sảnh Katakana (3 Ca)' : (isSyn ? 'Sảnh Đồng Nghĩa' : 'Sảnh Kanji (6 Ca)'))))))));
+        ? 'Sảnh 7 Đề Thi & Thi Thử'
+        : (isGpM1 ? 'Sảnh Ngữ Pháp M1 (6 Ca)' : (isGpStar ? 'Sảnh Dấu Sao ★ (3 Ca)' : (isGpM3 ? 'Sảnh Đoạn Văn M3 (3 Ca)' : (isM3 ? 'Sảnh Ngữ Cảnh M3 (4 Ca)' : (isM5 ? 'Sảnh Cách Dùng M5 (6 Ca)' : (isHira ? 'Sảnh Hiragana (2 Ca)' : (isKata ? 'Sảnh Katakana (3 Ca)' : (isSyn ? 'Sảnh Đồng Nghĩa (7 Ca)' : 'Sảnh Kanji (6 Ca)'))))))));
     document.getElementById('sidebar-sprint-heading').textContent = isPast
-        ? 'Lịch Thực Chiến 4 Đề Thật N3'
-        : (isGpM1 ? 'Lộ Trình 6 Ca Ngữ Pháp M1' : (isGpStar ? 'Lộ Trình 3 Ca Dấu Sao ★' : (isGpM3 ? 'Lộ Trình 3 Ca Đoạn Văn M3' : (isM3 ? 'Lịch Cày 191 Từ Mondai 3' : (isM5 ? 'Lịch Cày 107 Từ Mondai 5' : (isHira ? 'Lịch Cày 35 Hiragana & Từ Láy' : (isKata ? 'Lịch Cày 90 Từ Katakana N3' : (isSyn ? 'Lịch Cày 80 Cặp Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 352 Kanji'))))))));
+        ? 'Lịch Thực Chiến 4 Đề Thật + 3 Đề 20p'
+        : (isGpM1 ? 'Lộ Trình 6 Ca Ngữ Pháp M1' : (isGpStar ? 'Lộ Trình 3 Ca Dấu Sao ★' : (isGpM3 ? 'Lộ Trình 3 Ca Đoạn Văn M3' : (isM3 ? 'Lịch Cày 191 Từ Mondai 3' : (isM5 ? 'Lịch Cày 239 Từ Mondai 5' : (isHira ? 'Lịch Cày 35 Hiragana & Từ Láy' : (isKata ? 'Lịch Cày 90 Từ Katakana N3' : (isSyn ? 'Lịch Cày 270 Câu Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 352 Kanji'))))))));
 
     // Update KPI labels
     document.getElementById('kpi-m1-lbl').textContent = isPast
@@ -469,7 +486,7 @@ function applyBankUI() {
         : (isM5 ? 'Cho câu chuẩn chứa từ M5, chọn đúng nghĩa tiếng Việt' : (isHira ? 'Cho từ Hiragana/từ láy trong câu, chọn đúng nghĩa Việt' : (isKata ? 'Cho Katakana trong câu, chọn đúng nghĩa tiếng Việt' : (isSyn ? 'Cho nghĩa B trong câu, chọn ngược từ N3 A' : 'Kanji↔Hiragana với 3 nhiễu tự sinh'))));
 
     document.getElementById('sessions-panel-title').innerHTML = isPast
-        ? '<i class="fa-solid fa-scroll" style="color: var(--primary);"></i> Kho Đề Thi Chính Thức JLPT N3 (Bỏ Nghe • Học Chữa Ngay & Thi Thử)'
+        ? '<i class="fa-solid fa-scroll" style="color: var(--primary);"></i> Kho 4 Đề Thi Thật JLPT N3 & 3 Đề Thi Thử Tốc Độ Từ Vựng Taisaku (20p)'
         : (isGpM1
             ? '<i class="fa-solid fa-book-open" style="color: var(--primary);"></i> Lộ Trình 6 Chuyên Đề — 273 Câu Ngữ Pháp M1 (Taisaku Đề Thật + Kính Ngữ)'
             : (isGpStar
@@ -479,14 +496,14 @@ function applyBankUI() {
                     : (isM3
                         ? '<i class="fa-solid fa-puzzle-piece" style="color: var(--primary);"></i> Lộ Trình 2 Tầng — 191 Từ Ngữ Cảnh Mondai 3 (⭐ Trọng Tâm 97 + 🛡️ Phủ Kín 94)'
                         : (isM5
-                            ? '<i class="fa-solid fa-bullseye" style="color: var(--primary);"></i> Lộ Trình 2 Tầng — 107 Cách Dùng Từ Mondai 5 (⭐ Trọng Tâm 65 + 🛡️ Phủ Kín 42)'
+                            ? '<i class="fa-solid fa-bullseye" style="color: var(--primary);"></i> Lộ Trình 6 Ca — 239 Cách Dùng Từ Mondai 5 (112 Đề Thật + 127 Dự Đoán Taisaku)'
                             : (isHira
                                 ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 2 Ca Thực Chiến — 35 Hiragana & Từ Láy Tủ (Ra ≥2x)'
                                 : (isKata
                                     ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 90 Từ Katakana N3 (78 Gốc + 12 Đề Thật)'
                                     : (isSyn
-                                        ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 80 Cặp Đồng Nghĩa (95 Câu)'
-                                        : '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 6 Ca Siêu Tốc — 352 Câu Kanji N3 (240 Gốc + 112 Mới)'))))))));
+                                        ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 7 Ca — 270 Câu Đồng Nghĩa M4 (95 Gốc + 34 Đề Thật + 141 Dự Đoán)'
+                                        : '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 6 Ca Siêu Tốc — 352 Câu Kanji N3 (+ 3 Bảng Bẫy M2 Taisaku)'))))))));
 
     document.getElementById('custom-panel-title').innerHTML = isPast
         ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Luyện Chuyên Sâu Theo Dạng Bài (Dấu ★ • Cách dùng từ • Đọc hiểu)'
@@ -499,13 +516,13 @@ function applyBankUI() {
                     : (isM3
                         ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 191 Từ Mondai 3'
                         : (isM5
-                            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 107 Câu Mondai 5'
+                            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 239 Câu Mondai 5'
                             : (isHira
                                 ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 35 Hiragana & Từ Láy'
                                 : (isKata
                                     ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 90 Câu Katakana'
                                     : (isSyn
-                                        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 95 Câu Đồng Nghĩa'
+                                        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 270 Câu Đồng Nghĩa M4'
                                         : '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 352 Câu Kanji'))))))));
 
     // Populate custom selects per bank
@@ -625,12 +642,16 @@ function applyBankUI() {
         `;
     } else if (isM5) {
         sessSel.innerHTML = `
-            <option value="all">Trộn tổng cả 107 từ Mondai 5 (2010–2026)</option>
-            <option value="core">⭐ Chỉ Nhóm Trọng Tâm — 65 từ (Bài 1 + Bài 2)</option>
+            <option value="all">Trộn tổng cả 239 từ Mondai 5 (Đề thật + Dự đoán)</option>
+            <option value="core">⭐ Chỉ Nhóm Trọng Tâm — 70 từ (Bài 1–2 + 5 Đề thật mới)</option>
             <option value="full">🛡️ Chỉ Nhóm Phủ Kín — 42 từ (Bài 3)</option>
+            <option value="pred">🔮 Chỉ 127 Câu Dự Đoán Taisaku (Ch6)</option>
             <option value="1">🔥 Chỉ Bài 1 — Top 22 Siêu Tủ Lặp 2–3x M5</option>
             <option value="2">⭐ Chỉ Bài 2 — 43 Từ Chéo M1–M5 & 2021–2026</option>
             <option value="3">🛡️ Chỉ Bài 3 — 42 Từ Phủ Kín 2010–2019</option>
+            <option value="4">🔮 Chỉ Bài 4 Mới — 44 Câu (5 Đề Thật + 39 Dự Đoán)</option>
+            <option value="5">🔮 Chỉ Bài 5 Mới — 44 Câu Dự Đoán #40–#83</option>
+            <option value="6">🔮 Chỉ Bài 6 Mới — 44 Câu Dự Đoán #84–#127</option>
         `;
         monSel.style.display = 'inline-block';
         monSel.innerHTML = `
@@ -642,9 +663,9 @@ function applyBankUI() {
         cntSel.innerHTML = `
             <option value="10">10 câu (Lượt nhanh 4 phút)</option>
             <option value="22" selected>22 câu (Trọn 1 lượt chuẩn)</option>
-            <option value="43">43 câu (Trọn Bài 2)</option>
-            <option value="65">65 câu (Trọn Nhóm Trọng Tâm)</option>
-            <option value="107">Tất cả 107 câu</option>
+            <option value="44">44 câu (Trọn 1 bài Taisaku)</option>
+            <option value="70">70 câu (Trọn Nhóm Trọng Tâm)</option>
+            <option value="239">Tất cả câu lọc được</option>
         `;
     } else if (isHira) {
         sessSel.innerHTML = `
@@ -690,17 +711,25 @@ function applyBankUI() {
         `;
     } else if (isSyn) {
         sessSel.innerHTML = `
-            <option value="all">Trộn tổng cả 95 câu (Bài 1 + 2 + 3)</option>
+            <option value="all">Trộn tổng cả 270 câu M4 (7 Bài: Gốc + Taisaku)</option>
+            <option value="orig95">📘 Chỉ 95 Câu Gốc (Bài 1–3)</option>
+            <option value="prac_new">⭐ Chỉ 34 Câu Đề Thật Taisaku (Bài 4)</option>
+            <option value="pred">🔮 Chỉ 141 Câu Dự Đoán Taisaku (Bài 5–7)</option>
             <option value="1">Chỉ Bài 1 Gốc (40 câu)</option>
             <option value="2">Chỉ Bài 2 Gốc (40 câu)</option>
-            <option value="3">Chỉ Bài 3 Bổ Sung (15 câu phủ kín)</option>
+            <option value="3">Chỉ Bài 3 Bổ Sung (15 câu)</option>
+            <option value="4">⭐ Chỉ Bài 4 Đề Thật Taisaku (34 câu)</option>
+            <option value="5">🔮 Chỉ Bài 5 Dự Đoán #1–#47 (47 câu)</option>
+            <option value="6">🔮 Chỉ Bài 6 Dự Đoán #48–#94 (47 câu)</option>
+            <option value="7">🔮 Chỉ Bài 7 Dự Đoán #95–#141 (47 câu)</option>
         `;
         monSel.style.display = 'none';
         cntSel.innerHTML = `
             <option value="15">15 câu (Lượt nhanh 4 phút)</option>
             <option value="30" selected>30 câu (8 phút)</option>
-            <option value="40">40 câu (Trọn 1 bài 10 phút)</option>
-            <option value="95">Tất cả 95 câu</option>
+            <option value="47">47 câu (Trọn 1 bài Dự đoán 12 phút)</option>
+            <option value="95">95 câu (Trọn bộ gốc)</option>
+            <option value="270">Tất cả câu lọc được</option>
         `;
     } else {
         sessSel.innerHTML = `
@@ -813,29 +842,38 @@ function applyBankUI() {
             `;
         }
     } else if (isM5) {
-        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Tra Cứu 107 Cách Dùng Từ Mondai 5 (⭐ Trọng Tâm 65 • 🛡️ Phủ Kín 42)';
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Tra Cứu 239 Cách Dùng Từ Mondai 5 (⭐ Trọng Tâm 70 • 🛡️ Phủ Kín 42 • 🔮 Dự Đoán 127)';
         if (maskRightBtn) maskRightBtn.textContent = '🙈 Che Công Thức & Bẫy (Từ → ???)';
         if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che Từ & Nghĩa (??? ← Công thức)';
         if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh từ, Hiragana, nghĩa Việt, cụm kết hợp hoặc kỳ thi (vd: T7/2026)...';
         if (pairsCat) {
             pairsCat.innerHTML = `
-                <option value="all">Tất cả 107 từ (Trọng tâm + Phủ kín)</option>
-                <option value="core">⭐ Nhóm Trọng Tâm (65 từ — Học trước)</option>
+                <option value="all">Tất cả 239 từ (Đề thật + Dự đoán Taisaku)</option>
+                <option value="core">⭐ Nhóm Trọng Tâm (70 từ — Học trước)</option>
                 <option value="top22">🔥 Top 22 Siêu Tủ (Lặp 2–3x M5)</option>
-                <option value="full">🛡️ Nhóm Phủ Kín (42 từ — Lấy điểm tối đa)</option>
+                <option value="full">🛡️ Nhóm Phủ Kín Đề Thật (42 từ)</option>
+                <option value="pred">🔮 Nhóm Dự Đoán Taisaku Ch6 (127 từ)</option>
                 <option value="Danh từ">Loại: Danh từ / Danh động từ</option>
                 <option value="Động từ">Loại: Động từ</option>
                 <option value="Tính từ / Phó từ">Loại: Tính từ / Phó từ / Từ láy</option>
             `;
         }
     } else if (isKanji) {
-        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Tra Cứu 311 Kanji Đề Thật N3 (2010–2026 + 10 Ảnh)';
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Tra Cứu 311 Kanji Đề Thật & 3 Bảng Bẫy Kanji M2 (Taisaku Ch3)';
         if (maskRightBtn) maskRightBtn.textContent = '🙈 Che Hiragana & Nghĩa (Kanji → ???)';
         if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che Kanji & Nghĩa (??? ← Hiragana)';
-        if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh Kanji, Hiragana, Hán Việt, nghĩa Việt hoặc kỳ thi (vd: T7/2026)...';
+        if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh Kanji, Hiragana, Hán Việt, nghĩa Việt, bẫy M2 hoặc kỳ thi (vd: T7/2026)...';
         if (pairsCat) {
+            const trapCnt = typeof KANJI_M2_TRAPS_LIST !== 'undefined' ? KANJI_M2_TRAPS_LIST.length : 0;
+            const onCnt = typeof KANJI_M2_TRAPS_LIST !== 'undefined' ? KANJI_M2_TRAPS_LIST.filter(x => x.trap_type === 'on').length : 0;
+            const shCnt = typeof KANJI_M2_TRAPS_LIST !== 'undefined' ? KANJI_M2_TRAPS_LIST.filter(x => x.trap_type === 'shape').length : 0;
+            const kunCnt = typeof KANJI_M2_TRAPS_LIST !== 'undefined' ? KANJI_M2_TRAPS_LIST.filter(x => x.trap_type === 'kun').length : 0;
             pairsCat.innerHTML = `
-                <option value="all">Tất cả 311 từ độc nhất</option>
+                <option value="all">Tất cả 311 từ độc nhất (Đề thật 2010–2026)</option>
+                <option value="trap_all">⚠️ 3 Bảng Bẫy Kanji M2 Taisaku (${trapCnt} nhóm)</option>
+                <option value="trap_on">🔊 Bẫy M2: Âm On giống nhau (${onCnt} nhóm)</option>
+                <option value="trap_shape">👀 Bẫy M2: Hình dạng giống nhau (${shCnt} nhóm)</option>
+                <option value="trap_kun">🔀 Bẫy M2: Âm Kun dễ nhớ nhầm (${kunCnt} nhóm)</option>
                 <option value="new112">🆕 Chỉ 112 từ mới (Buổi 5–6)</option>
                 <option value="both">🔀 Nhóm Lẫn lộn M1 + M2 (27 từ)</option>
                 <option value="ge2">🔥 Ra thi ≥ 2 lần M1/M2 (65 từ)</option>
@@ -878,19 +916,22 @@ function applyBankUI() {
             `;
         }
     } else {
-        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 80 Cặp Từ Đồng Nghĩa N3 (A ＝ B)';
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 255 Cặp Đồng Nghĩa N3 (80 Gốc + 34 Đề Thật + 141 Dự Đoán)';
         if (maskRightBtn) maskRightBtn.textContent = '🙈 Che vế phải & Nghĩa (A = ???)';
         if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che vế trái & Nghĩa (??? = B)';
         if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh Kanji, Hiragana, Katakana hoặc nghĩa tiếng Việt...';
         if (pairsCat) {
             pairsCat.innerHTML = `
-                <option value="all">Tất cả từ loại (80 cặp)</option>
-                <option value="Động từ">Động từ</option>
-                <option value="Tính từ">Tính từ</option>
-                <option value="Danh từ">Danh từ</option>
-                <option value="Phó từ">Phó từ</option>
-                <option value="Katakana">Katakana</option>
-                <option value="Cụm từ">Cụm từ</option>
+                <option value="all">Tất cả 255 cặp đồng nghĩa (Gốc + Taisaku)</option>
+                <option value="orig80">📘 80 Cặp Gốc (Bài 1–3)</option>
+                <option value="prac_new">⭐ 34 Cặp Đề Thật Taisaku (Bài 4)</option>
+                <option value="pred">🔮 141 Cặp Dự Đoán Taisaku (Bài 5–7)</option>
+                <option value="Động từ">Loại: Động từ</option>
+                <option value="Tính từ">Loại: Tính từ</option>
+                <option value="Danh từ">Loại: Danh từ</option>
+                <option value="Phó từ">Loại: Phó từ</option>
+                <option value="Katakana">Loại: Katakana</option>
+                <option value="Cụm từ">Loại: Cụm từ</option>
             `;
         }
     }
@@ -1482,10 +1523,10 @@ function renderLobby() {
 
 const PAST_MONDAI_META = {
     moji_goi_1: { label: 'M1 Đọc Kanji', short: 'M1', suggestBank: 'kanji240', suggestLabel: '🈴 352 Kanji (M1)' },
-    moji_goi_2: { label: 'M2 Chọn Kanji', short: 'M2', suggestBank: 'kanji240', suggestLabel: '🈴 352 Kanji (M2)' },
+    moji_goi_2: { label: 'M2 Chọn Kanji', short: 'M2', suggestBank: 'kanji240', suggestLabel: '🈴 352 Kanji & 3 Bẫy M2' },
     moji_goi_3: { label: 'M3 Ngữ cảnh', short: 'M3', suggestBank: 'm3_191', suggestLabel: '🧩 191 Từ Ngữ Cảnh M3' },
-    moji_goi_4: { label: 'M4 Đồng nghĩa', short: 'M4', suggestBank: 'syn80', suggestLabel: '🔁 80 Cặp Đồng Nghĩa' },
-    moji_goi_5: { label: 'M5 Cách dùng', short: 'M5', suggestBank: 'm5_107', suggestLabel: '🎯 107 Cách Dùng Từ M5' },
+    moji_goi_4: { label: 'M4 Đồng nghĩa', short: 'M4', suggestBank: 'syn80', suggestLabel: '🔁 270 Đồng Nghĩa M4' },
+    moji_goi_5: { label: 'M5 Cách dùng', short: 'M5', suggestBank: 'm5_107', suggestLabel: '🎯 239 Cách Dùng Từ M5' },
     bunpou_1: { label: 'NP M1 Ngữ pháp', short: 'NP1', suggestBank: 'gp_m1', suggestLabel: '📘 Ngữ Pháp M1 (273 câu)' },
     bunpou_2: { label: 'NP M2 Dấu sao ★', short: 'NP★', suggestBank: 'gp_star', suggestLabel: '⭐ Dấu Sao ★ (99 câu)' },
     bunpou_3: { label: 'NP M3 Đoạn văn', short: 'NP3', suggestBank: 'gp_m3', suggestLabel: '📄 Đoạn Văn M3 (141 câu)' },
@@ -1685,6 +1726,71 @@ function renderPastExamsLobby(container, sidebarChecklist) {
         sItem.innerHTML = `<strong style="color: var(--hub-text);">${passed ? '✅' : '📜'} ${loadedExam.short_label}:</strong> ${agg && agg.total120 !== null ? `${agg.total120}/120 ước lượng` : `${examTouched}/${c.total} câu đã làm`}`;
         sidebarChecklist.appendChild(sItem);
     });
+
+    // Sub-section: 3 Taisaku Speed Vocab Mock Exams (Ch7 • 35 Qs • 20 Minutes Each)
+    const mockDivider = document.createElement('div');
+    mockDivider.className = 'past-section-divider';
+    mockDivider.innerHTML = `
+        <div>
+            <strong style="font-size: 15px; color: var(--hub-text);"><i class="fa-solid fa-gauge-high" style="color: var(--primary);"></i> 3 Đề Thi Thử Tốc Độ Từ Vựng Taisaku (Ch7 • 35 Câu M1–M5 • 20 Phút/Đề)</strong>
+            <div style="font-size: 12px; color: var(--hub-text-sub); margin-top: 2px;">Ép tốc độ nhanh hơn chuẩn JLPT 30p (chỉ 20 phút/đề) — chấm điểm lẻ M1–M5 & nhảy 1-click vá phần yếu!</div>
+        </div>
+        <span class="tier-pill pred">⚡ 105 Câu Thực Chiến</span>
+    `;
+    container.appendChild(mockDivider);
+
+    TAISAKU_MOCK_CATALOG.forEach(meta => {
+        const loadedExam = getPastExamById(meta.exam_id);
+        const card = document.createElement('div');
+        card.className = 'session-card';
+        if (!loadedExam) {
+            card.style.opacity = '0.68';
+            card.innerHTML = `<div class="session-top"><div><span class="shift-badge">⏳ Đang nạp</span><h4 style="margin-top:6px;">${meta.label}</h4></div></div>`;
+            container.appendChild(card);
+            return;
+        }
+        const c = loadedExam.counts;
+        const agg = getExamAggregateScore(meta.exam_id);
+        const bestMg = agg && agg.mg ? agg.mg : null;
+        const bestPct = bestMg ? Math.round((bestMg.best / bestMg.total) * 100) : null;
+        const passed = bestPct !== null && bestPct >= 80;
+        const examMistakes = loadedExam.questions.filter(q => mistakesMap[q.id]).length;
+        const examTouched = loadedExam.questions.filter(q => touchedSet.has(q.id)).length;
+        const topBadge = bestMg
+            ? `<span class="score-badge ${passed ? 'passed' : ''}">${passed ? '✅ ' : ''}Cao nhất: ${bestMg.best}/${bestMg.total} (${bestPct}%)</span>`
+            : (examTouched > 0 ? `<span class="score-badge">Đã quét ${examTouched}/${c.total} câu</span>` : '<span class="score-badge">Chưa thi</span>');
+
+        card.innerHTML = `
+            <div class="session-top">
+                <div>
+                    <span class="shift-badge" style="background: rgba(139, 92, 246, 0.14); color: var(--primary);"><i class="fa-solid fa-gauge-high"></i> Tốc Độ 20 Phút • Taisaku Ch7</span>
+                    <h4 style="font-size: 17px; color: var(--hub-text); margin-top: 7px;">${meta.label}</h4>
+                    <span style="font-size: 12.5px; color: var(--hub-text-sub);">${meta.note}</span>
+                </div>
+                ${topBadge}
+            </div>
+            <div style="font-size: 12.5px; color: var(--hub-text-body); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                <span>Độ phủ: <strong>${examTouched}/${c.total} câu</strong> • Ước lượng: <strong>${bestMg ? `${Math.round((bestMg.best / bestMg.total) * 60)}/60` : '--/60'}</strong></span>
+                <span style="color: ${examMistakes > 0 ? 'var(--hub-danger-text)' : 'var(--hub-ok-text)'}; font-weight: 600;">
+                    ${examMistakes > 0 ? `⚠️ ${examMistakes} câu sai` : '✨ Sạch lỗi'}
+                </span>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button class="btn-pill primary" style="flex: 1; min-width: 155px;" onclick="launchPastExam('${meta.exam_id}', 'vocab_mock', 'exam')">
+                    <i class="fa-solid fa-stopwatch"></i> Thi Thử Tốc Độ 20p
+                </button>
+                <button class="btn-pill ok" style="flex: 1; min-width: 155px;" onclick="launchPastExam('${meta.exam_id}', 'vocab_mock', 'drill')">
+                    <i class="fa-solid fa-bolt"></i> Học Chữa Ngay (35c)
+                </button>
+            </div>
+        `;
+        container.appendChild(card);
+
+        const sItem = document.createElement('div');
+        sItem.style.cssText = `padding:9px 11px; border-radius:9px; background:var(--hub-surface-2); border-left:3px solid ${passed ? 'var(--hub-ok-text)' : (bestMg ? 'var(--hub-warn-text)' : '#7c3aed')};`;
+        sItem.innerHTML = `<strong style="color: var(--hub-text);">${passed ? '✅' : '🧪'} ${loadedExam.short_label}:</strong> ${bestMg ? `${bestMg.best}/${bestMg.total} (${bestPct}%)` : `${examTouched}/${c.total} câu`}`;
+        sidebarChecklist.appendChild(sItem);
+    });
 }
 
 function launchPastExam(examId, partType, overrideMode = null) {
@@ -1695,7 +1801,11 @@ function launchPastExam(examId, partType, overrideMode = null) {
     let partTitle = '';
     let customSeconds = 1800;
 
-    if (partType === 'shift1' || partType === 'moji_goi') {
+    if (exam.is_vocab_mock || partType === 'vocab_mock') {
+        pool = exam.questions.filter(q => q.section === 'moji_goi');
+        partTitle = 'Tốc Độ Từ Vựng M1–M5 (20p)';
+        customSeconds = exam.custom_seconds || (20 * 60);
+    } else if (partType === 'shift1' || partType === 'moji_goi') {
         pool = exam.questions.filter(q => q.section === 'moji_goi');
         partTitle = partType === 'shift1' ? 'Ca 1: Từ vựng (30p)' : 'Tách lẻ: Từ vựng (30p)';
         customSeconds = 30 * 60;
@@ -1982,7 +2092,10 @@ function launchCustom(mode) {
     if (sVal !== 'all') {
         if (activeBank === 'pastN3') pool = pool.filter(q => q.exam_id === sVal);
         else if (activeBank === 'kanji240' && sVal === 'extra') pool = pool.filter(q => q.session >= 5);
-        else if ((activeBank === 'm5_107' || activeBank === 'm3_191') && (sVal === 'core' || sVal === 'full')) pool = pool.filter(q => q.tier === sVal);
+        else if ((activeBank === 'm5_107' || activeBank === 'm3_191') && (sVal === 'core' || sVal === 'full' || sVal === 'pred')) pool = pool.filter(q => q.tier === sVal);
+        else if (activeBank === 'syn80' && sVal === 'orig95') pool = pool.filter(q => q.part <= 3);
+        else if (activeBank === 'syn80' && sVal === 'prac_new') pool = pool.filter(q => q.part === 4);
+        else if (activeBank === 'syn80' && sVal === 'pred') pool = pool.filter(q => q.part >= 5);
         else pool = pool.filter(q => getItemSessionNum(q) === parseInt(sVal, 10));
     }
     if (mVal !== 'all') {
@@ -2036,15 +2149,15 @@ function launchCustom(mode) {
                     : (activeBank === 'm3_191'
                         ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 3' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 3' : (sVal === 'all' ? 'Tổng hợp 191 Mondai 3' : `Bài ${sVal} Mondai 3`)))
                         : (activeBank === 'm5_107'
-                            ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 5' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 5' : (sVal === 'all' ? 'Tổng hợp 107 Mondai 5' : `Bài ${sVal} Mondai 5`)))
+                            ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 5' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 5' : (sVal === 'pred' ? '🔮 Dự Đoán M5 Taisaku' : (sVal === 'all' ? 'Tổng hợp 239 Mondai 5' : `Bài ${sVal} Mondai 5`))))
                             : (activeBank === 'hira35'
                                 ? (sVal === 'all' ? 'Tổng hợp Hiragana & Từ Láy' : `Bài ${sVal} Hiragana`)
                                 : (activeBank === 'kata78'
                                     ? (sVal === 'all' ? 'Tổng hợp Katakana N3' : `Bài ${sVal} Katakana`)
                                     : (activeBank === 'syn80'
-                                        ? (sVal === 'all' ? 'Tổng hợp Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`)
+                                        ? (sVal === 'orig95' ? '📘 95 Câu Gốc Đồng Nghĩa' : (sVal === 'prac_new' ? '⭐ 34 Đề Thật M4 Taisaku' : (sVal === 'pred' ? '🔮 141 Dự Đoán M4 Taisaku' : (sVal === 'all' ? 'Tổng hợp 270 Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`))))
                                         : (sVal === 'extra' ? '112 Kanji Mới (B5–B6)' : (sVal === 'all' ? 'Tổng hợp 352 Kanji' : `Buổi ${sVal}`))))))))));
-    const specialVals = ['all', 'extra', 'core', 'full'];
+    const specialVals = ['all', 'extra', 'core', 'full', 'orig95', 'prac_new', 'pred'];
     startQuizEngine({
         bankId: activeBank,
         title: `${prefix} • ${pool.length} câu`,
@@ -2636,7 +2749,7 @@ function renderExplanationHTML(item, chosenIdx) {
 
     if (item.bankId === 'm5_107') {
         const safeRead = (q.reading || '').replace(/'/g, "\\'");
-        const tierCls = q.tier === 'core' ? 'core' : 'full';
+        const tierCls = q.tier === 'core' ? 'core' : (q.tier === 'pred' ? 'pred' : 'full');
         let optsBreakdown = '';
         if (item.isReversed && item.optionsKata) {
             optsBreakdown = `<div class="opts-vi-grid">${item.options.map((optTxt, oi) => {
@@ -2783,6 +2896,9 @@ function renderExplanationHTML(item, chosenIdx) {
             const vi = item.optionsVi ? item.optionsVi[oi] : '';
             return `<div class="opt-vi-card ${isAns ? 'is-ans' : ''}"><strong>${oi + 1}. ${optTxt}</strong>: ${vi}</div>`;
         }).join('');
+        const synSrcBadge = q.source_label
+            ? `<span class="tier-pill ${q.source_tier === 'pred' ? 'pred' : 'core'}">${q.source_label}</span>`
+            : '';
 
         return `
             <div class="exp-box ${isCorrect ? 'is-correct' : 'is-wrong'}">
@@ -2797,6 +2913,7 @@ function renderExplanationHTML(item, chosenIdx) {
                     <span style="font-size: 13.5px; color: var(--hub-text-sub);">(${q.target_reading})</span>
                     <span style="font-weight: 800; color: var(--primary);">＝</span>
                     <strong style="font-size: 18px; color: var(--primary);">${q.synonym_word}</strong>
+                    ${synSrcBadge}
                     <span class="hanviet-pill">Nghĩa: ${q.meaning_vi}</span>
                 </div>
                 <div style="font-size: 14px; color: var(--hub-text-body); line-height: 1.5;">
@@ -3049,15 +3166,15 @@ function finishExamSession(timedOut = false) {
                 if (!historyData.examStats[eid]) historyData.examStats[eid] = { attempts: 0 };
                 const st = historyData.examStats[eid];
                 st.attempts = (st.attempts || 0) + 1;
-                if (jlptEst.mgTot === exam.counts.moji_goi) {
+                if (exam.counts.moji_goi > 0 && jlptEst.mgTot === exam.counts.moji_goi) {
                     const prev = st.moji_goi || { best: 0, total: jlptEst.mgTot };
                     st.moji_goi = { best: Math.max(prev.best, jlptEst.mgOk), total: jlptEst.mgTot };
                 }
-                if (jlptEst.bpTot === exam.counts.bunpou) {
+                if (exam.counts.bunpou > 0 && jlptEst.bpTot === exam.counts.bunpou) {
                     const prev = st.bunpou || { best: 0, total: jlptEst.bpTot };
                     st.bunpou = { best: Math.max(prev.best, jlptEst.bpOk), total: jlptEst.bpTot };
                 }
-                if (jlptEst.dokTot === exam.counts.dokkai) {
+                if (exam.counts.dokkai > 0 && jlptEst.dokTot === exam.counts.dokkai) {
                     const prev = st.dokkai || { best: 0, total: jlptEst.dokTot, bestReadScore: 0 };
                     st.dokkai = {
                         best: Math.max(prev.best, jlptEst.dokOk),
@@ -3313,7 +3430,7 @@ function renderResultReviewList() {
                 <div style="font-size: 13px; color: var(--hub-text-sub);"><strong style="color: var(--hub-warn-text);">💡 Mẹo nhớ:</strong> ${q.note_vi}</div>
             `;
         } else if (item.bankId === 'm5_107') {
-            const tierCls = q.tier === 'core' ? 'core' : 'full';
+            const tierCls = q.tier === 'core' ? 'core' : (q.tier === 'pred' ? 'pred' : 'full');
             const freqHtml = renderFreqBadgeHTML(q);
             const optsBreakdown = (item.isReversed && item.optionsKata)
                 ? `<div class="opts-vi-grid" style="margin-bottom: 8px;">${item.options.map((optTxt, oi) => {
@@ -3540,7 +3657,9 @@ function setupPairsEvents() {
     if (catEl) catEl.addEventListener('change', () => renderPairsTable());
     if (shufBtn) shufBtn.addEventListener('click', () => {
         if (activeBank === 'kanji240') {
-            currentKanjiOrder = fisherYatesShuffle(currentKanjiOrder);
+            const curCat = catEl ? catEl.value : 'all';
+            if (curCat.startsWith('trap_')) currentKanjiTrapsOrder = fisherYatesShuffle(currentKanjiTrapsOrder);
+            else currentKanjiOrder = fisherYatesShuffle(currentKanjiOrder);
         } else if (activeBank === 'm3_191') {
             currentM3Order = fisherYatesShuffle(currentM3Order);
         } else if (activeBank === 'm5_107') {
@@ -3571,6 +3690,10 @@ function setPairsMaskMode(mode) {
 }
 
 function findQuizForPair(pair) {
+    if (pair.quiz_id) {
+        const exact = SYNONYM_N3_DATA.find(q => q.id === pair.quiz_id);
+        if (exact) return exact;
+    }
     return SYNONYM_N3_DATA.find(q =>
         q.target_word.includes(pair.word_a.slice(0, 2)) ||
         pair.word_a.includes(q.target_word.slice(0, 2)) ||
@@ -3831,6 +3954,7 @@ function renderPairsTable() {
             if (cat === 'core') catOk = p.tier === 'core';
             else if (cat === 'top22') catOk = (p.freq_m5 || 0) >= 2;
             else if (cat === 'full') catOk = p.tier === 'full';
+            else if (cat === 'pred') catOk = p.tier === 'pred';
             else if (cat !== 'all') catOk = (p.pos || '').startsWith(cat);
 
             const qOk = !q ||
@@ -3843,7 +3967,10 @@ function renderPairsTable() {
             return catOk && qOk;
         });
 
-        if (countBar) countBar.textContent = `Đang hiển thị ${list.length} / ${MONDAI5_107_LIST.length} từ Mondai 5 (⭐ Trọng tâm: 65 • 🛡️ Phủ kín: 42 — Phát âm chuẩn bằng Hiragana)`;
+        const coreCnt = MONDAI5_107_LIST.filter(x => x.tier === 'core').length;
+        const fullCnt = MONDAI5_107_LIST.filter(x => x.tier === 'full').length;
+        const predCnt = MONDAI5_107_LIST.filter(x => x.tier === 'pred').length;
+        if (countBar) countBar.textContent = `Đang hiển thị ${list.length} / ${MONDAI5_107_LIST.length} từ Mondai 5 (⭐ Trọng tâm: ${coreCnt} • 🛡️ Phủ kín: ${fullCnt} • 🔮 Dự đoán: ${predCnt} — Phát âm Hiragana chuẩn)`;
         if (list.length === 0) { renderEmpty(); return; }
 
         container.innerHTML = '';
@@ -3851,7 +3978,7 @@ function renderPairsTable() {
             const safeRead = (p.reading || '').replace(/'/g, "\\'");
             const safeSent = (p.sample_jp || '').replace(/'/g, "\\'");
             const inRevenge = !!mistakesMap[p.quiz_id];
-            const tierCls = p.tier === 'core' ? 'core' : 'full';
+            const tierCls = p.tier === 'core' ? 'core' : (p.tier === 'pred' ? 'pred' : 'full');
             const isHot = (p.freq_badge || '').startsWith('🔥');
 
             const card = document.createElement('div');
@@ -3900,6 +4027,77 @@ function renderPairsTable() {
     }
 
     if (activeBank === 'kanji240') {
+        if (cat.startsWith('trap_')) {
+            if (typeof KANJI_M2_TRAPS_LIST === 'undefined') { renderEmpty(); return; }
+            const wantType = cat === 'trap_all' ? 'all' : cat.replace('trap_', '');
+            const tList = currentKanjiTrapsOrder.filter(t => {
+                const typeOk = wantType === 'all' || t.trap_type === wantType;
+                const qOk = !q ||
+                    (t.group_title || '').toLowerCase().includes(q) ||
+                    (t.diff_tip || '').toLowerCase().includes(q) ||
+                    (t.items || []).some(it =>
+                        (it.kanji || '').toLowerCase().includes(q) ||
+                        (it.hv || '').toLowerCase().includes(q) ||
+                        (it.read || '').toLowerCase().includes(q) ||
+                        (it.word_jp || '').toLowerCase().includes(q) ||
+                        (it.word_read || '').toLowerCase().includes(q) ||
+                        (it.meaning_vi || '').toLowerCase().includes(q)
+                    );
+                return typeOk && qOk;
+            });
+
+            const typeTitle = wantType === 'on'
+                ? 'Âm On giống nhau (音読みが似ている)'
+                : (wantType === 'shape' ? 'Hình dạng giống nhau (形が似ている)' : (wantType === 'kun' ? 'Âm Kun dễ nhớ nhầm (訓読みが覚え違いやすい)' : 'Cả 3 Bảng Bẫy Kanji M2 (Taisaku Ch3)'));
+            if (countBar) countBar.textContent = `Đang hiển thị ${tList.length} nhóm bẫy — ${typeTitle} (Bấm loa nghe phát âm thuần Hiragana • Bấm ô bị che để tự dò)`;
+            if (tList.length === 0) { renderEmpty(); return; }
+
+            container.innerHTML = '';
+            tList.forEach(t => {
+                const safeTts = (t.tts || '').replace(/'/g, "\\'");
+                const pillCls = t.trap_type === 'on' ? 'core' : (t.trap_type === 'shape' ? 'pred' : 'full');
+                const subCardsHtml = (t.items || []).map(it => {
+                    const safeItemRead = (it.word_read || it.read || '').replace(/'/g, "\\'");
+                    return `
+                        <div class="m2-trap-subcard" onclick="toggleM2TrapSubMask(this)">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 4px;">
+                                <div class="m2-trap-mask-box m2-trap-left ${pairsMaskMode === 'left' ? 'masked' : ''}" style="min-height: 40px;">
+                                    <div class="m2-trap-kanji">${it.kanji}</div>
+                                    <div class="m2-trap-hv">${it.hv}</div>
+                                </div>
+                                ${safeItemRead ? `<button class="btn-pill" style="padding: 2px 6px; font-size: 10.5px;" onclick="event.stopPropagation(); speakJapanese('${safeItemRead}')" title="Nghe từ ghép"><i class="fa-solid fa-volume-low"></i></button>` : ''}
+                            </div>
+                            <div class="m2-trap-mask-box m2-trap-right ${pairsMaskMode === 'right' ? 'masked' : ''}" style="margin-top: 2px; min-height: 46px;">
+                                <div class="m2-trap-read">${it.read}</div>
+                                <div class="m2-trap-word"><strong>${it.word_jp}</strong> (${it.word_read})</div>
+                                <div style="font-size: 11.5px; color: var(--hub-text-sub); margin-top: 1px;">${it.meaning_vi}</div>
+                                ${it.exams ? `<div style="font-size: 10.5px; color: var(--primary); font-weight: 600; margin-top: 2px;">📌 ${it.exams}</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                const card = document.createElement('div');
+                card.className = 'pair-card';
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;">
+                            <span class="q-tag">#${t.stt}</span>
+                            <span class="tier-pill ${pillCls}">${t.trap_label}</span>
+                            <strong style="font-size: 13.5px; color: var(--hub-text);">${t.group_title}</strong>
+                        </div>
+                        ${safeTts ? `<button class="btn-pill" style="padding: 4px 9px; font-size: 11.5px;" onclick="speakJapanese('${safeTts}')" title="Nghe cả nhóm bằng Hiragana chuẩn"><i class="fa-solid fa-volume-high"></i> Nghe nhóm</button>` : ''}
+                    </div>
+                    <div class="m2-trap-items-grid">${subCardsHtml}</div>
+                    <div class="pair-meaning ${isMaskedInit ? 'masked' : ''}" data-mask-label="🙈 Đã ẩn Mẹo phân biệt bộ thủ (Bấm để mở)" onclick="togglePairCardMask(this)" style="text-align: left; font-weight: 500; font-size: 12.2px; line-height: 1.48; color: var(--hub-text-body);">
+                        <strong style="color: var(--hub-warn-text);">💡 Mẹo phân biệt chống nhầm:</strong> ${t.diff_tip}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            return;
+        }
+
         if (typeof KANJI_MASTER_LIST === 'undefined') return;
         const list = currentKanjiOrder.filter(p => {
             let catOk = true;
@@ -4089,7 +4287,12 @@ function renderPairsTable() {
 
     if (typeof SYNONYM_80_PAIRS === 'undefined') return;
     const list = currentPairsOrder.filter(p => {
-        const catOk = cat === 'all' || p.category === cat;
+        let catOk = true;
+        if (cat === 'orig80') catOk = !p.source_tier;
+        else if (cat === 'prac_new') catOk = p.source_tier === 'prac_new';
+        else if (cat === 'pred') catOk = p.source_tier === 'pred';
+        else if (cat !== 'all') catOk = p.category === cat;
+
         const qOk = !q ||
             p.word_a.toLowerCase().includes(q) ||
             p.read_a.toLowerCase().includes(q) ||
@@ -4099,7 +4302,7 @@ function renderPairsTable() {
         return catOk && qOk;
     });
 
-    if (countBar) countBar.textContent = `Đang hiển thị ${list.length} / ${SYNONYM_80_PAIRS.length} cặp từ đồng nghĩa N3 (A ＝ B)`;
+    if (countBar) countBar.textContent = `Đang hiển thị ${list.length} / ${SYNONYM_80_PAIRS.length} cặp từ đồng nghĩa N3 (80 Gốc + 34 Đề thật + 141 Dự đoán Taisaku)`;
     if (list.length === 0) { renderEmpty(); return; }
 
     container.innerHTML = '';
@@ -4111,12 +4314,18 @@ function renderPairsTable() {
         const safeReadB = cleanReadB.replace(/'/g, "\\'");
         const matchQ = findQuizForPair(p);
         const inRevenge = matchQ && !!mistakesMap[matchQ.id];
+        const srcPill = p.source_label
+            ? `<span class="tier-pill ${p.source_tier === 'pred' ? 'pred' : 'core'}">${p.source_label}</span>`
+            : '';
 
         const card = document.createElement('div');
         card.className = 'pair-card';
         card.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="q-tag">#${p.stt} • ${p.category}</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;">
+                    <span class="q-tag">#${p.stt} • ${p.category}</span>
+                    ${srcPill}
+                </div>
                 <div style="display: flex; gap: 6px;">
                     <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="speakPairAudio(this, '${safeKanaTts}', '${safeReadA}', '${safeReadB}')" title="Nghe phát âm chuẩn tiếng Nhật">
                         <i class="fa-solid fa-volume-high"></i>
@@ -4143,6 +4352,12 @@ function renderPairsTable() {
         `;
         container.appendChild(card);
     });
+}
+
+function toggleM2TrapSubMask(subCard) {
+    if (!subCard || pairsMaskMode === 'none') return;
+    const targetBox = subCard.querySelector(pairsMaskMode === 'left' ? '.m2-trap-left' : '.m2-trap-right');
+    if (targetBox) targetBox.classList.toggle('masked');
 }
 
 function togglePairCardMask(el) {
