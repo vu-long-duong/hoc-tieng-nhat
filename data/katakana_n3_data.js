@@ -1,0 +1,3126 @@
+// Verified JLPT N3 78 Katakana Words & Mondai 3 Practice Database
+const KATAKANA_78_LIST = [
+  {
+    "id": "kpair_1",
+    "quiz_id": "kata_p1_q1",
+    "stt": 1,
+    "word": "パートナー",
+    "meaning_vi": "Đối tác, bạn đồng hành",
+    "origin": "partner (Anh)",
+    "native_jp": "相手・協力者",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "パートナー vừa dùng trong kinh doanh (đối tác), vừa dùng cho bạn nhảy/bạn đời."
+  },
+  {
+    "id": "kpair_2",
+    "quiz_id": "kata_p1_q2",
+    "stt": 2,
+    "word": "リーダー",
+    "meaning_vi": "Lãnh đạo, trưởng nhóm",
+    "origin": "leader (Anh)",
+    "native_jp": "指導者・代表",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Chú ý có 2 trường âm ー: リー + ダー. Phân biệt với クラスメート (bạn cùng lớp)."
+  },
+  {
+    "id": "kpair_3",
+    "quiz_id": "kata_p1_q3",
+    "stt": 3,
+    "word": "ボランティア",
+    "meaning_vi": "Tình nguyện viên, hoạt động tình nguyện",
+    "origin": "volunteer (Anh)",
+    "native_jp": "奉仕活動",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Cụm hay thi JLPT N3: ボランティアに参加する / ボランティア活動 (hoạt động tình nguyện)."
+  },
+  {
+    "id": "kpair_4",
+    "quiz_id": "kata_p1_q4",
+    "stt": 4,
+    "word": "コミュニケーション",
+    "meaning_vi": "Giao tiếp, trao đổi thông tin",
+    "origin": "communication (Anh)",
+    "native_jp": "意思疎通",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Cụm cố định: コミュニケーションをとる (giao tiếp, giữ liên lạc trao đổi)."
+  },
+  {
+    "id": "kpair_5",
+    "quiz_id": "kata_p1_q5",
+    "stt": 5,
+    "word": "ユーモア",
+    "meaning_vi": "Sự hài hước, óc khôi hài",
+    "origin": "humor (Anh)",
+    "native_jp": "おもしろみ",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Cụm hay gặp: ユーモアがある (có khiếu hài hước). Lưu ý cách viết ユーモア (không có âm h)."
+  },
+  {
+    "id": "kpair_6",
+    "quiz_id": "kata_p1_q6",
+    "stt": 6,
+    "word": "ショック",
+    "meaning_vi": "Sốc, cú sốc tinh thần",
+    "origin": "shock (Anh)",
+    "native_jp": "衝撃",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Cụm cố định JLPT N3: ショックを受ける (bị sốc). Đừng nhầm với ストレスがたまる (tích tụ stress)."
+  },
+  {
+    "id": "kpair_7",
+    "quiz_id": "kata_p1_q7",
+    "stt": 7,
+    "word": "ストレス",
+    "meaning_vi": "Stress, sự căng thẳng",
+    "origin": "stress (Anh)",
+    "native_jp": "精神的負担",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Cụm tủ JLPT N3: ストレスがたまる (tích tụ stress) / ストレスを解消する (giải tỏa stress)."
+  },
+  {
+    "id": "kpair_8",
+    "quiz_id": "kata_p1_q8",
+    "stt": 8,
+    "word": "バランス",
+    "meaning_vi": "Sự cân bằng",
+    "origin": "balance (Anh)",
+    "native_jp": "つり合い",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Cụm tủ: バランスがいい (cân bằng tốt) / バランスをとる (giữ cân bằng)."
+  },
+  {
+    "id": "kpair_9",
+    "quiz_id": "kata_p1_q9",
+    "stt": 9,
+    "word": "レベル",
+    "meaning_vi": "Trình độ, cấp độ",
+    "origin": "level (Anh)",
+    "native_jp": "水準・程度",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "⚠️ Bẫy nhìn nhầm 1 chữ Katakana: レベル (level: trình độ) khác với ラベル (label: nhãn dán)!"
+  },
+  {
+    "id": "kpair_10",
+    "quiz_id": "kata_p1_q10",
+    "stt": 10,
+    "word": "アップ",
+    "meaning_vi": "Tăng lên, nâng cao; cận cảnh",
+    "origin": "up (Anh)",
+    "native_jp": "上昇・向上",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Dùng rất nhiều trong ghép từ kiểu Nhật: スピードアップ (tăng tốc), レベルアップ (lên trình)."
+  },
+  {
+    "id": "kpair_11",
+    "quiz_id": "kata_p1_q11",
+    "stt": 11,
+    "word": "ダウン",
+    "meaning_vi": "Hạ xuống, giảm sút; gục ngã",
+    "origin": "down (Anh)",
+    "native_jp": "低下・減少",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: ダウンする ngoài 'giảm xuống' còn nghĩa 'ngã bệnh/gục vì quá mệt' (kèm ダウンロード = tải xuống)."
+  },
+  {
+    "id": "kpair_12",
+    "quiz_id": "kata_p1_q12",
+    "stt": 12,
+    "word": "コンテスト",
+    "meaning_vi": "Cuộc thi (hùng biện, ảnh, sắc đẹp...)",
+    "origin": "contest (Anh)",
+    "native_jp": "競技会・大会",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "Hay ghép: スピーチコンテスト (thi hùng biện), 写真コンテスト (thi nhiếp ảnh)."
+  },
+  {
+    "id": "kpair_13",
+    "quiz_id": "kata_p1_q13",
+    "stt": 13,
+    "word": "プラス",
+    "meaning_vi": "Cộng, dương, mặt tích cực",
+    "origin": "plus (Anh)",
+    "native_jp": "足し算・有利",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Cặp đối lập: プラスになる (có lợi/tích cực) <-> マイナスになる (gây bất lợi/tiêu cực)."
+  },
+  {
+    "id": "kpair_14",
+    "quiz_id": "kata_p1_q14",
+    "stt": 14,
+    "word": "マイナス",
+    "meaning_vi": "Trừ, âm, lỗ, mặt tiêu cực",
+    "origin": "minus (Anh)",
+    "native_jp": "引き算・不利",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Vừa dùng cho số âm (マイナス3度) vừa dùng cho mặt bất lợi (マイナスになる)."
+  },
+  {
+    "id": "kpair_15",
+    "quiz_id": "kata_p1_q15",
+    "stt": 15,
+    "word": "イメージ",
+    "meaning_vi": "Hình ảnh, ấn tượng hình dung",
+    "origin": "image (Anh)",
+    "native_jp": "印象・心象",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "イメージ = 印象 (ấn tượng/hình ảnh trong đầu). Cụm hay gặp: イメージチェンジ (thay đổi hình tượng)."
+  },
+  {
+    "id": "kpair_16",
+    "quiz_id": "kata_p1_q16",
+    "stt": 16,
+    "word": "プライバシー",
+    "meaning_vi": "Sự riêng tư, đời tư",
+    "origin": "privacy (Anh)",
+    "native_jp": "私生活の秘密",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Cụm cố định: プライバシーを守る (bảo vệ đời tư) / プライバシーを侵害する (xâm phạm đời tư)."
+  },
+  {
+    "id": "kpair_17",
+    "quiz_id": "kata_p1_q17",
+    "stt": 17,
+    "word": "オフィス",
+    "meaning_vi": "Văn phòng, công sở",
+    "origin": "office (Anh)",
+    "native_jp": "事務所・会社",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "オフィス = 事務所(じむしょ). Ghép từ: オフィスビル (tòa nhà văn phòng)."
+  },
+  {
+    "id": "kpair_18",
+    "quiz_id": "kata_p1_q18",
+    "stt": 18,
+    "word": "ルール",
+    "meaning_vi": "Luật lệ, quy tắc",
+    "origin": "rule (Anh)",
+    "native_jp": "規則・決まり",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Phân biệt: ルール (quy tắc bắt buộc ＝ 規則) vs マナー (phép lịch sự, tác phong cư xử)."
+  },
+  {
+    "id": "kpair_19",
+    "quiz_id": "kata_p1_q19",
+    "stt": 19,
+    "word": "マスコミ",
+    "meaning_vi": "Giới truyền thông đại chúng",
+    "origin": "mass communication (Wasei)",
+    "native_jp": "報道機関",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật (Wasei-eigo): マス・コミュニケーション -> rút ngắn còn マスコミ!"
+  },
+  {
+    "id": "kpair_20",
+    "quiz_id": "kata_p1_q20",
+    "stt": 20,
+    "word": "マナー",
+    "meaning_vi": "Tác phong, phép lịch sự, cách cư xử",
+    "origin": "manner (Anh)",
+    "native_jp": "礼儀作法",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Hay gặp ở Đọc hiểu N3: 食事のマナー (phép lịch sự bàn ăn), マナーを守る (giữ phép lịch sự)."
+  },
+  {
+    "id": "kpair_21",
+    "quiz_id": "kata_p1_q21",
+    "stt": 21,
+    "word": "ミス",
+    "meaning_vi": "Lỗi, sự sai sót",
+    "origin": "mistake (Wasei)",
+    "native_jp": "間違い・失敗",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: mistake -> rút còn ミス! Hay dùng: ミスをする (mắc lỗi), ケアレスミス (lỗi bất cẩn)."
+  },
+  {
+    "id": "kpair_22",
+    "quiz_id": "kata_p1_q22",
+    "stt": 22,
+    "word": "スケジュール",
+    "meaning_vi": "Lịch trình, thời gian biểu",
+    "origin": "schedule (Anh)",
+    "native_jp": "予定・日程",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Đồng nghĩa chuẩn N3: スケジュール ＝ 予定(よてい)."
+  },
+  {
+    "id": "kpair_23",
+    "quiz_id": "kata_p1_q23",
+    "stt": 23,
+    "word": "タイトル",
+    "meaning_vi": "Tiêu đề, nhan đề (sách, phim, bài hát)",
+    "origin": "title (Anh)",
+    "native_jp": "題名・表題",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "Phân biệt bộ 3 phim/sách: タイトル (tựa đề), テーマ (chủ đề cốt lõi), ストーリー (cốt truyện)."
+  },
+  {
+    "id": "kpair_24",
+    "quiz_id": "kata_p1_q24",
+    "stt": 24,
+    "word": "テーマ",
+    "meaning_vi": "Chủ đề, đề tài",
+    "origin": "Thema (Đức)",
+    "native_jp": "主題・話題",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Thema) nên đọc là テーマ chứ không đọc theo tiếng Anh (theme)!"
+  },
+  {
+    "id": "kpair_25",
+    "quiz_id": "kata_p1_q25",
+    "stt": 25,
+    "word": "ストーリー",
+    "meaning_vi": "Câu chuyện, cốt truyện",
+    "origin": "story (Anh)",
+    "native_jp": "物語・あらすじ",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "ストーリー ＝ 物語(ものがたり) / あらすじ (cốt truyện)."
+  },
+  {
+    "id": "kpair_26",
+    "quiz_id": "kata_p1_q26",
+    "stt": 26,
+    "word": "ヒット",
+    "meaning_vi": "Nổi tiếng, thành công vang dội (hit)",
+    "origin": "hit (Anh)",
+    "native_jp": "大成功・大流行",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "Cụm hay gặp: 大ヒットする (trở thành cú hit lớn), ヒット商品 (sản phẩm bán chạy đình đám)."
+  },
+  {
+    "id": "kpair_27",
+    "quiz_id": "kata_p1_q27",
+    "stt": 27,
+    "word": "ブランド",
+    "meaning_vi": "Thương hiệu, nhãn hiệu nổi tiếng",
+    "origin": "brand (Anh)",
+    "native_jp": "商標・銘柄",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "ブランド品 (hàng hiệu). Đừng nhầm với グラウンド (sân vận động)!"
+  },
+  {
+    "id": "kpair_28",
+    "quiz_id": "kata_p1_q28",
+    "stt": 28,
+    "word": "レンタル",
+    "meaning_vi": "Thuê, cho thuê (xe, đĩa, đồ)",
+    "origin": "rental (Anh)",
+    "native_jp": "貸し出し",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "Ghép từ phổ biến: レンタカー (xe thuê), レンタルショップ (tiệm cho thuê)."
+  },
+  {
+    "id": "kpair_29",
+    "quiz_id": "kata_p1_q29",
+    "stt": 29,
+    "word": "リサイクル",
+    "meaning_vi": "Tái chế",
+    "origin": "recycle (Anh)",
+    "native_jp": "再利用",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Rất hay xuất hiện trong bài đọc hiểu phân loại rác ở Nhật: リサイクルショップ (tiệm đồ cũ tái sử dụng)."
+  },
+  {
+    "id": "kpair_30",
+    "quiz_id": "kata_p1_q30",
+    "stt": 30,
+    "word": "ラベル",
+    "meaning_vi": "Nhãn dán, tem mác (trên chai/hàng)",
+    "origin": "label (Anh)",
+    "native_jp": "荷札・表示",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "⚠️ Rất hay lừa với レベル (trình độ)! Nhớ: ラ(la)ベル = nhãn dán, レ(le)ベル = trình độ."
+  },
+  {
+    "id": "kpair_31",
+    "quiz_id": "kata_p1_q31",
+    "stt": 31,
+    "word": "タイプ",
+    "meaning_vi": "Kiểu, loại, mẫu (người/sản phẩm)",
+    "origin": "type (Anh)",
+    "native_jp": "型・種類",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Vừa chỉ chủng loại máy móc, vừa chỉ 'gu / kiểu người' (好きなタイプ)."
+  },
+  {
+    "id": "kpair_32",
+    "quiz_id": "kata_p1_q32",
+    "stt": 32,
+    "word": "スタイル",
+    "meaning_vi": "Dáng người, phong cách, kiểu dáng",
+    "origin": "style (Anh)",
+    "native_jp": "姿・様式",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: スタイルがいい thường dùng để khen 'vóc dáng/body chuẩn đẹp'!"
+  },
+  {
+    "id": "kpair_33",
+    "quiz_id": "kata_p1_q33",
+    "stt": 33,
+    "word": "キャンセル",
+    "meaning_vi": "Hủy bỏ (đặt chỗ, lịch hẹn, đơn hàng)",
+    "origin": "cancel (Anh)",
+    "native_jp": "取り消し・中止",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Từ Katakana cực hay thi N3! キャンセルする ＝ 取り消す / 中止する (bổ sung thay thế cho từ trùng #26)."
+  },
+  {
+    "id": "kpair_34",
+    "quiz_id": "kata_p1_q34",
+    "stt": 34,
+    "word": "ウイルス",
+    "meaning_vi": "Virus (bệnh tật hoặc máy tính)",
+    "origin": "virus (Latinh/Anh)",
+    "native_jp": "病原体",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Chú ý cách đọc tiếng Nhật là ウイルス (u-i-ru-su), không đọc 'vai-rớt'!"
+  },
+  {
+    "id": "kpair_35",
+    "quiz_id": "kata_p1_q35",
+    "stt": 35,
+    "word": "ロボット",
+    "meaning_vi": "Người máy, rô-bốt",
+    "origin": "robot (Séc/Anh)",
+    "native_jp": "自動機械",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Lưu ý có âm ngắt ッ: ロボット."
+  },
+  {
+    "id": "kpair_36",
+    "quiz_id": "kata_p1_q36",
+    "stt": 36,
+    "word": "エネルギー",
+    "meaning_vi": "Năng lượng, nguồn điện/nhiên liệu",
+    "origin": "Energie (Đức)",
+    "native_jp": "動力・活力",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Energie) nên đọc エネルギー (không đọc theo tiếng Anh 'energy')!"
+  },
+  {
+    "id": "kpair_37",
+    "quiz_id": "kata_p1_q37",
+    "stt": 37,
+    "word": "デジタル",
+    "meaning_vi": "Kỹ thuật số",
+    "origin": "digital (Anh)",
+    "native_jp": "数値化",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Trái nghĩa với アナログ (analog: thủ công/tương tự). Rút gọn hay gặp: デジカメ (máy ảnh KTS)."
+  },
+  {
+    "id": "kpair_38",
+    "quiz_id": "kata_p1_q38",
+    "stt": 38,
+    "word": "マイク",
+    "meaning_vi": "Micro, ống nói",
+    "origin": "microphone (Wasei)",
+    "native_jp": "拡声器",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: microphone -> マイク! Đừng nhìn nhầm với バイク (xe máy)!"
+  },
+  {
+    "id": "kpair_39",
+    "quiz_id": "kata_p1_q39",
+    "stt": 39,
+    "word": "ブレーキ",
+    "meaning_vi": "Phanh, thắng xe",
+    "origin": "brake (Anh)",
+    "native_jp": "制動装置",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "Cụm cố định JLPT: ブレーキを踏む (đạp phanh ô tô) / ブレーキをかける (bóp/phanh lại)."
+  },
+  {
+    "id": "kpair_40",
+    "quiz_id": "kata_p2_q1",
+    "stt": 40,
+    "word": "ペンキ",
+    "meaning_vi": "Sơn (sơn tường, gỗ, sắt)",
+    "origin": "pek (Hà Lan)",
+    "native_jp": "塗料",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "⚠️ Từ mượn tiếng HÀ LAN (pek)! Cực dễ bị lừa nếu chỉ đoán theo tiếng Anh. Cụm: ペンキを塗る (quét sơn)."
+  },
+  {
+    "id": "kpair_41",
+    "quiz_id": "kata_p2_q2",
+    "stt": 41,
+    "word": "カーブ",
+    "meaning_vi": "Khúc cua, đường cong",
+    "origin": "curve (Anh)",
+    "native_jp": "曲がり角・曲線",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "Đồng nghĩa N3 đã học: カーブしている ＝ 曲がっている."
+  },
+  {
+    "id": "kpair_42",
+    "quiz_id": "kata_p2_q3",
+    "stt": 42,
+    "word": "クラスメート",
+    "meaning_vi": "Bạn cùng lớp",
+    "origin": "classmate (Anh)",
+    "native_jp": "同級生",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "クラス (lớp) + メート (bạn) ＝ 同級生(どうきゅうせい)."
+  },
+  {
+    "id": "kpair_43",
+    "quiz_id": "kata_p2_q4",
+    "stt": 43,
+    "word": "グループ",
+    "meaning_vi": "Nhóm, tập đoàn",
+    "origin": "group (Anh)",
+    "native_jp": "集団・組",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Phân biệt: グループ (nhóm nói chung, thảo luận/du lịch) vs チーム (đội cùng thi đấu/phối hợp mục tiêu)."
+  },
+  {
+    "id": "kpair_44",
+    "quiz_id": "kata_p2_q5",
+    "stt": 44,
+    "word": "チーム",
+    "meaning_vi": "Đội, nhóm (thi đấu/công việc)",
+    "origin": "team (Anh)",
+    "native_jp": "組・団",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "Hay dùng: チームワーク (tinh thần đồng đội)."
+  },
+  {
+    "id": "kpair_45",
+    "quiz_id": "kata_p2_q6",
+    "stt": 45,
+    "word": "プロフェッショナル",
+    "meaning_vi": "Chuyên nghiệp",
+    "origin": "professional (Anh)",
+    "native_jp": "専門家・本職",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "Thường viết rút gọn là プロ (プロ野球: bóng chày chuyên nghiệp). Trái nghĩa hoàn toàn với アマチュア!"
+  },
+  {
+    "id": "kpair_46",
+    "quiz_id": "kata_p2_q7",
+    "stt": 46,
+    "word": "アマチュア",
+    "meaning_vi": "Nghiệp dư, không chuyên",
+    "origin": "amateur (Pháp/Anh)",
+    "native_jp": "素人・愛好家",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "Cặp trái nghĩa hay thi: プロ(フェッショナル) <-> アマチュア (hay viết tắt là アマ)."
+  },
+  {
+    "id": "kpair_47",
+    "quiz_id": "kata_p2_q8",
+    "stt": 47,
+    "word": "トレーニング",
+    "meaning_vi": "Luyện tập (thể lực, kỹ năng)",
+    "origin": "training (Anh)",
+    "native_jp": "訓練・練習",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "トレーニング ＝ 練習・訓練 (thường nhấn mạnh rèn luyện thể lực, cơ bắp)."
+  },
+  {
+    "id": "kpair_48",
+    "quiz_id": "kata_p2_q9",
+    "stt": 48,
+    "word": "マッサージ",
+    "meaning_vi": "Xoa bóp, mát xa",
+    "origin": "massage (Pháp/Anh)",
+    "native_jp": "あんま・揉みほぐし",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "⚠️ Cẩn thận nhìn nhầm với メッセージ (tin nhắn)! マッサージ (mát xa) vs メッセージ (tin nhắn)."
+  },
+  {
+    "id": "kpair_49",
+    "quiz_id": "kata_p2_q10",
+    "stt": 49,
+    "word": "アドバイス",
+    "meaning_vi": "Lời khuyên, sự tư vấn",
+    "origin": "advice (Anh)",
+    "native_jp": "助言・忠告",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Cụm cố định: アドバイスをする (khuyên) / アドバイスをもらう (nhận lời khuyên)."
+  },
+  {
+    "id": "kpair_50",
+    "quiz_id": "kata_p2_q11",
+    "stt": 50,
+    "word": "アイディア",
+    "meaning_vi": "Ý tưởng, sáng kiến",
+    "origin": "idea (Anh)",
+    "native_jp": "考え・案",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "Đồng nghĩa chuẩn N3: アイディア (hoặc アイデア) ＝ 案(あん)."
+  },
+  {
+    "id": "kpair_51",
+    "quiz_id": "kata_p2_q12",
+    "stt": 51,
+    "word": "トップ",
+    "meaning_vi": "Đứng đầu, vị trí số 1, đỉnh",
+    "origin": "top (Anh)",
+    "native_jp": "首位・一番上",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "トップ ＝ 一番 / 首位 (đứng nhất bảng)."
+  },
+  {
+    "id": "kpair_52",
+    "quiz_id": "kata_p2_q13",
+    "stt": 52,
+    "word": "スピード",
+    "meaning_vi": "Tốc độ",
+    "origin": "speed (Anh)",
+    "native_jp": "速度・速さ",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "Cụm tủ JLPT: スピードを出す (tăng tốc) / スピードを落とす (giảm tốc)."
+  },
+  {
+    "id": "kpair_53",
+    "quiz_id": "kata_p2_q14",
+    "stt": 53,
+    "word": "ラッシュ",
+    "meaning_vi": "Giờ cao điểm, cảnh chen chúc đông nghẹt",
+    "origin": "rush hour (Wasei)",
+    "native_jp": "混雑時",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: rush hour -> ラッシュ (hoặc ラッシュアワー: giờ cao điểm kẹt cứng)."
+  },
+  {
+    "id": "kpair_54",
+    "quiz_id": "kata_p2_q15",
+    "stt": 54,
+    "word": "バイク",
+    "meaning_vi": "Xe mô tô, xe gắn máy",
+    "origin": "bike (Wasei)",
+    "native_jp": "オートバイ",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "⚠️ CẢNH BÁO WASEI-EIGO KINH ĐIỂN: Trong tiếng Nhật, バイク là XE MÁY (không phải xe đạp 自転車)!"
+  },
+  {
+    "id": "kpair_55",
+    "quiz_id": "kata_p2_q16",
+    "stt": 55,
+    "word": "ヘルメット",
+    "meaning_vi": "Mũ bảo hiểm",
+    "origin": "helmet (Anh)",
+    "native_jp": "安全帽",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "Động từ đi kèm đồ đội đầu: ヘルメットをかぶる (đội mũ bảo hiểm)."
+  },
+  {
+    "id": "kpair_56",
+    "quiz_id": "kata_p2_q17",
+    "stt": 56,
+    "word": "コンタクトレンズ",
+    "meaning_vi": "Kính áp tròng",
+    "origin": "contact lens (Anh)",
+    "native_jp": "接触眼鏡",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Thường gọi ngắn là コンタクト. Động từ: つける (đeo vào) / 外す(はずす: tháo ra)."
+  },
+  {
+    "id": "kpair_57",
+    "quiz_id": "kata_p2_q18",
+    "stt": 57,
+    "word": "ガラス",
+    "meaning_vi": "Kính, thủy tinh",
+    "origin": "glas (Hà Lan)",
+    "native_jp": "硝子",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "⚠️ Phân biệt: ガラス (chất liệu thủy tinh/cửa kính) khác グラス (cái cốc/ly uống nước)!"
+  },
+  {
+    "id": "kpair_58",
+    "quiz_id": "kata_p2_q19",
+    "stt": 58,
+    "word": "プラスチック",
+    "meaning_vi": "Nhựa (chất dẻo)",
+    "origin": "plastic (Anh)",
+    "native_jp": "合成樹脂",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Lưu ý chính tả chuẩn: プラスチック (chữ チ chứ KHÔNG phải チェ!)."
+  },
+  {
+    "id": "kpair_59",
+    "quiz_id": "kata_p2_q20",
+    "stt": 59,
+    "word": "ベランダ",
+    "meaning_vi": "Ban công",
+    "origin": "veranda (Bồ Đào Nha/Anh)",
+    "native_jp": "縁側・張り出し縁",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Cụm hay gặp ở Đọc hiểu/Nghe hiểu đời sống Nhật: ベランダに洗濯物を干す (phơi đồ ngoài ban công)."
+  },
+  {
+    "id": "kpair_60",
+    "quiz_id": "kata_p2_q21",
+    "stt": 60,
+    "word": "デザイン",
+    "meaning_vi": "Thiết kế, kiểu dáng",
+    "origin": "design (Anh)",
+    "native_jp": "設計・意匠",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "Vừa là danh từ (thiết kế) vừa dùng デザインする (thiết kế ra)."
+  },
+  {
+    "id": "kpair_61",
+    "quiz_id": "kata_p2_q22",
+    "stt": 61,
+    "word": "セール",
+    "meaning_vi": "Đợt giảm giá, xả hàng (sale)",
+    "origin": "sale (Anh)",
+    "native_jp": "特売・安売り",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "Hay gặp: タイムセール (giảm giá theo khung giờ), 年中セール (giảm giá quanh năm)."
+  },
+  {
+    "id": "kpair_62",
+    "quiz_id": "kata_p2_q23",
+    "stt": 62,
+    "word": "パート",
+    "meaning_vi": "Việc làm bán thời gian (part-time)",
+    "origin": "part-time (Wasei)",
+    "native_jp": "非常勤・アルバイト",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: パート thường chỉ việc làm thêm của các bà nội trợ/người lớn; アルバイト hay dùng cho sinh viên."
+  },
+  {
+    "id": "kpair_63",
+    "quiz_id": "kata_p2_q24",
+    "stt": 63,
+    "word": "コンビニ",
+    "meaning_vi": "Cửa hàng tiện lợi",
+    "origin": "convenience store (Wasei)",
+    "native_jp": "24時間営業店",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "⚠️ Từ rút gọn siêu phổ biến: コンビニエンスストア -> コンビニ!"
+  },
+  {
+    "id": "kpair_64",
+    "quiz_id": "kata_p2_q25",
+    "stt": 64,
+    "word": "レジ",
+    "meaning_vi": "Quầy tính tiền, máy thu ngân",
+    "origin": "cash register (Wasei)",
+    "native_jp": "会計場",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "⚠️ Rút gọn từ register -> レジ! Đừng nhầm với レシート (hóa đơn)!"
+  },
+  {
+    "id": "kpair_65",
+    "quiz_id": "kata_p2_q26",
+    "stt": 65,
+    "word": "レシート",
+    "meaning_vi": "Hóa đơn, biên lai thanh toán",
+    "origin": "receipt (Anh)",
+    "native_jp": "領収書",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "Phân biệt: レシート (biên lai in tự động ở máy tính tiền) vs 領収書 (hóa đơn đỏ có ghi tên công ty)."
+  },
+  {
+    "id": "kpair_66",
+    "quiz_id": "kata_p2_q27",
+    "stt": 66,
+    "word": "インスタント",
+    "meaning_vi": "Ăn liền, pha liền, tức thì",
+    "origin": "instant (Anh)",
+    "native_jp": "即席",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "Hay ghép: インスタントコーヒー (cà phê hòa tan), インスタント食品 (thực phẩm ăn liền)."
+  },
+  {
+    "id": "kpair_67",
+    "quiz_id": "kata_p2_q28",
+    "stt": 67,
+    "word": "フルーツ",
+    "meaning_vi": "Hoa quả, trái cây",
+    "origin": "fruits (Anh)",
+    "native_jp": "果物",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "フルーツ ＝ 果物(くだもの). Hay gặp ở thực đơn: フルーツジュース, フルーツケーキ."
+  },
+  {
+    "id": "kpair_68",
+    "quiz_id": "kata_p2_q29",
+    "stt": 68,
+    "word": "ファストフード",
+    "meaning_vi": "Thức ăn nhanh",
+    "origin": "fast food (Anh)",
+    "native_jp": "手軽な軽食",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "Cũng hay viết là ファーストフード (đều hiểu là đồ ăn nhanh)."
+  },
+  {
+    "id": "kpair_69",
+    "quiz_id": "kata_p2_q30",
+    "stt": 69,
+    "word": "デザート",
+    "meaning_vi": "Món tráng miệng",
+    "origin": "dessert (Pháp/Anh)",
+    "native_jp": "食後の菓子",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "Cẩn thận cách viết: デザート (tráng miệng) — có âm đục ザ và trường âm ー!"
+  },
+  {
+    "id": "kpair_70",
+    "quiz_id": "kata_p2_q31",
+    "stt": 70,
+    "word": "インターネット",
+    "meaning_vi": "Mạng Internet",
+    "origin": "Internet (Anh)",
+    "native_jp": "情報通信網",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Lưu ý có 2 trường âm ー: イン+ター+ネッ+ト (thường viết tắt là ネット)."
+  },
+  {
+    "id": "kpair_71",
+    "quiz_id": "kata_p2_q32",
+    "stt": 71,
+    "word": "チャイム",
+    "meaning_vi": "Chuông (chuông cửa, chuông báo giờ học)",
+    "origin": "chime (Anh)",
+    "native_jp": "呼び鈴・鐘",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "Cụm cố định: チャイムが鳴る (chuông reo), チャイムを押す (bấm chuông cửa)."
+  },
+  {
+    "id": "kpair_72",
+    "quiz_id": "kata_p2_q33",
+    "stt": 72,
+    "word": "アナウンス",
+    "meaning_vi": "Thông báo (qua loa phát thanh ở ga/sân bay)",
+    "origin": "announce (Anh)",
+    "native_jp": "場内放送・案内",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "アナウンス ＝ 案内放送 (thông báo bằng giọng nói qua loa). Nghề phát thanh viên là アナウンサー."
+  },
+  {
+    "id": "kpair_73",
+    "quiz_id": "kata_p2_q34",
+    "stt": 73,
+    "word": "メッセージ",
+    "meaning_vi": "Tin nhắn, lời nhắn gửi",
+    "origin": "message (Anh)",
+    "native_jp": "伝言",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "⚠️ Cặp bẫy mặt chữ: メッセージ (tin nhắn ＝ 伝言) vs マッサージ (mát xa)!"
+  },
+  {
+    "id": "kpair_74",
+    "quiz_id": "kata_p2_q35",
+    "stt": 74,
+    "word": "パンフレット",
+    "meaning_vi": "Ấn phẩm quảng cáo, tờ rơi, sách giới thiệu",
+    "origin": "pamphlet (Anh)",
+    "native_jp": "小冊子・案内書",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "Rất hay xuất hiện trong Đọc hiểu Mondai 4 (Thông tin du lịch/Trường học)!"
+  },
+  {
+    "id": "kpair_75",
+    "quiz_id": "kata_p2_q36",
+    "stt": 75,
+    "word": "カード",
+    "meaning_vi": "Thẻ (thẻ tín dụng, thẻ tích điểm, thiệp)",
+    "origin": "card (Anh)",
+    "native_jp": "札・会員証",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "Hay gặp: クレジットカード (thẻ tín dụng), ポイントカード (thẻ tích điểm), キャッシュカード (thẻ ATM)."
+  },
+  {
+    "id": "kpair_76",
+    "quiz_id": "kata_p2_q37",
+    "stt": 76,
+    "word": "インタビュー",
+    "meaning_vi": "Cuộc phỏng vấn (báo chí, truyền hình)",
+    "origin": "interview (Anh)",
+    "native_jp": "取材・会見",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "Phân biệt: インタビュー (phỏng vấn báo chí/TV) vs 面接(めんせつ: phỏng vấn xin việc/nhập học)!"
+  },
+  {
+    "id": "kpair_77",
+    "quiz_id": "kata_p2_q38",
+    "stt": 77,
+    "word": "アンケート",
+    "meaning_vi": "Bảng điều tra, phiếu khảo sát ý kiến",
+    "origin": "enquête (Pháp)",
+    "native_jp": "意識調査",
+    "category": "Truyền thông & Văn hóa",
+    "wasei_note": "⚠️ Từ mượn tiếng PHÁP (enquête)! Cực kỳ hay thi JLPT N3: アンケートをとる / アンケートに答える."
+  },
+  {
+    "id": "kpair_78",
+    "quiz_id": "kata_p2_q39",
+    "stt": 78,
+    "word": "パーセント",
+    "meaning_vi": "Phần trăm (%)",
+    "origin": "percent (Anh)",
+    "native_jp": "百分率・割",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "Thường đi với tỷ lệ thời tiết (降水確率), giảm giá (20パーセント引き), thống kê biểu đồ Dokkai."
+  }
+];
+
+const KATAKANA_N3_DATA = [
+  {
+    "id": "kata_p1_q1",
+    "stt": 1,
+    "part": 1,
+    "num": 1,
+    "word": "パートナー",
+    "meaning_vi": "Đối tác, bạn đồng hành",
+    "origin": "partner (Anh)",
+    "native_jp": "相手・協力者",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "この プロジェクトは、信頼できる <u class=\"q-target\">（　　　）</u> と 一緒に 進めたい。",
+    "sentence_reverse_html": "この プロジェクトは、信頼できる <u class=\"q-target\">パートナー</u> と 一緒に 進めたい。",
+    "sentence_tts": "このプロジェクトは、信頼できるパートナーと一緒に進めたい。",
+    "options": [
+      "パートナー",
+      "リーダー",
+      "ボランティア",
+      "クラスメート"
+    ],
+    "options_vi": [
+      "Đối tác, bạn đồng hành (ĐÚNG)",
+      "Lãnh đạo, trưởng nhóm",
+      "Tình nguyện viên, hoạt động tình nguyện",
+      "Bạn cùng lớp"
+    ],
+    "answer": 0,
+    "sentence_vi": "Dự án này tôi muốn cùng tiến hành với một đối tác đáng tin cậy.",
+    "wasei_note": "パートナー vừa dùng trong kinh doanh (đối tác), vừa dùng cho bạn nhảy/bạn đời."
+  },
+  {
+    "id": "kata_p1_q2",
+    "stt": 2,
+    "part": 1,
+    "num": 2,
+    "word": "リーダー",
+    "meaning_vi": "Lãnh đạo, trưởng nhóm",
+    "origin": "leader (Anh)",
+    "native_jp": "指導者・代表",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "田中さんが 今度の チームの <u class=\"q-target\">（　　　）</u> に 選ばれました。",
+    "sentence_reverse_html": "田中さんが 今度の チームの <u class=\"q-target\">リーダー</u> に 選ばれました。",
+    "sentence_tts": "田中さんが今度のチームのリーダーに選ばれました。",
+    "options": [
+      "パートナー",
+      "アマチュア",
+      "トップ",
+      "リーダー"
+    ],
+    "options_vi": [
+      "Đối tác, bạn đồng hành",
+      "Nghiệp dư, không chuyên",
+      "Đứng đầu, vị trí số 1, đỉnh",
+      "Lãnh đạo, trưởng nhóm (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Anh Tanaka đã được chọn làm trưởng nhóm của đội lần này.",
+    "wasei_note": "Chú ý có 2 trường âm ー: リー + ダー. Phân biệt với クラスメート (bạn cùng lớp)."
+  },
+  {
+    "id": "kata_p1_q3",
+    "stt": 3,
+    "part": 1,
+    "num": 3,
+    "word": "ボランティア",
+    "meaning_vi": "Tình nguyện viên, hoạt động tình nguyện",
+    "origin": "volunteer (Anh)",
+    "native_jp": "奉仕活動",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "休みの 日に、地域の 清掃 <u class=\"q-target\">（　　　）</u> に 参加しています。",
+    "sentence_reverse_html": "休みの 日に、地域の 清掃 <u class=\"q-target\">ボランティア</u> に 参加しています。",
+    "sentence_tts": "休みの日に、地域の清掃ボランティアに参加しています。",
+    "options": [
+      "パート",
+      "トレーニング",
+      "ボランティア",
+      "コンテスト"
+    ],
+    "options_vi": [
+      "Việc làm bán thời gian (part-time)",
+      "Luyện tập (thể lực, kỹ năng)",
+      "Tình nguyện viên, hoạt động tình nguyện (ĐÚNG)",
+      "Cuộc thi (hùng biện, ảnh, sắc đẹp...)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Vào ngày nghỉ, tôi tham gia hoạt động tình nguyện dọn dẹp vệ sinh ở địa phương.",
+    "wasei_note": "Cụm hay thi JLPT N3: ボランティアに参加する / ボランティア活動 (hoạt động tình nguyện)."
+  },
+  {
+    "id": "kata_p1_q4",
+    "stt": 4,
+    "part": 1,
+    "num": 4,
+    "word": "コミュニケーション",
+    "meaning_vi": "Giao tiếp, trao đổi thông tin",
+    "origin": "communication (Anh)",
+    "native_jp": "意思疎通",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "職場では、同僚との <u class=\"q-target\">（　　　）</u> が とても 大切だ。",
+    "sentence_reverse_html": "職場では、同僚との <u class=\"q-target\">コミュニケーション</u> が とても 大切だ。",
+    "sentence_tts": "職場では、同僚とのコミュニケーションがとても大切だ。",
+    "options": [
+      "プライバシー",
+      "コミュニケーション",
+      "スケジュール",
+      "メッセージ"
+    ],
+    "options_vi": [
+      "Sự riêng tư, đời tư",
+      "Giao tiếp, trao đổi thông tin (ĐÚNG)",
+      "Lịch trình, thời gian biểu",
+      "Tin nhắn, lời nhắn gửi"
+    ],
+    "answer": 1,
+    "sentence_vi": "Ở nơi làm việc, việc giao tiếp với đồng nghiệp rất quan trọng.",
+    "wasei_note": "Cụm cố định: コミュニケーションをとる (giao tiếp, giữ liên lạc trao đổi)."
+  },
+  {
+    "id": "kata_p1_q5",
+    "stt": 5,
+    "part": 1,
+    "num": 5,
+    "word": "ユーモア",
+    "meaning_vi": "Sự hài hước, óc khôi hài",
+    "origin": "humor (Anh)",
+    "native_jp": "おもしろみ",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "山田先生は <u class=\"q-target\">（　　　）</u> が あって、授業が いつも 楽しい。",
+    "sentence_reverse_html": "山田先生は <u class=\"q-target\">ユーモア</u> が あって、授業が いつも 楽しい。",
+    "sentence_tts": "山田先生はユーモアがあって、授業がいつも楽しい。",
+    "options": [
+      "ユーモア",
+      "マナー",
+      "センス",
+      "イメージ"
+    ],
+    "options_vi": [
+      "Sự hài hước, óc khôi hài (ĐÚNG)",
+      "Tác phong, phép lịch sự, cách cư xử",
+      "Gu thẩm mỹ, khiếu tinh tế",
+      "Hình ảnh, ấn tượng hình dung"
+    ],
+    "answer": 0,
+    "sentence_vi": "Thầy Yamada có óc hài hước nên giờ học lúc nào cũng vui.",
+    "wasei_note": "Cụm hay gặp: ユーモアがある (có khiếu hài hước). Lưu ý cách viết ユーモア (không có âm h)."
+  },
+  {
+    "id": "kata_p1_q6",
+    "stt": 6,
+    "part": 1,
+    "num": 6,
+    "word": "ショック",
+    "meaning_vi": "Sốc, cú sốc tinh thần",
+    "origin": "shock (Anh)",
+    "native_jp": "衝撃",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "試験に 落ちて、大きな <u class=\"q-target\">（　　　）</u> を 受けた。",
+    "sentence_reverse_html": "試験に 落ちて、大きな <u class=\"q-target\">ショック</u> を 受けた。",
+    "sentence_tts": "試験に落ちて、大きなショックを受けた。",
+    "options": [
+      "ストレス",
+      "ミス",
+      "マイナス",
+      "ショック"
+    ],
+    "options_vi": [
+      "Stress, sự căng thẳng",
+      "Lỗi, sự sai sót",
+      "Trừ, âm, lỗ, mặt tiêu cực",
+      "Sốc, cú sốc tinh thần (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Trượt kỳ thi khiến tôi chịu một cú sốc lớn.",
+    "wasei_note": "Cụm cố định JLPT N3: ショックを受ける (bị sốc). Đừng nhầm với ストレスがたまる (tích tụ stress)."
+  },
+  {
+    "id": "kata_p1_q7",
+    "stt": 7,
+    "part": 1,
+    "num": 7,
+    "word": "ストレス",
+    "meaning_vi": "Stress, sự căng thẳng",
+    "origin": "stress (Anh)",
+    "native_jp": "精神的負担",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "仕事が 忙しくて、最近 <u class=\"q-target\">（　　　）</u> が たまっている。",
+    "sentence_reverse_html": "仕事が 忙しくて、最近 <u class=\"q-target\">ストレス</u> が たまっている。",
+    "sentence_tts": "仕事が忙しくて、最近ストレスがたまっている。",
+    "options": [
+      "ショック",
+      "バランス",
+      "ストレス",
+      "エネルギー"
+    ],
+    "options_vi": [
+      "Sốc, cú sốc tinh thần",
+      "Sự cân bằng",
+      "Stress, sự căng thẳng (ĐÚNG)",
+      "Năng lượng, nguồn điện/nhiên liệu"
+    ],
+    "answer": 2,
+    "sentence_vi": "Công việc bận rộn nên gần đây tôi bị tích tụ căng thẳng.",
+    "wasei_note": "Cụm tủ JLPT N3: ストレスがたまる (tích tụ stress) / ストレスを解消する (giải tỏa stress)."
+  },
+  {
+    "id": "kata_p1_q8",
+    "stt": 8,
+    "part": 1,
+    "num": 8,
+    "word": "バランス",
+    "meaning_vi": "Sự cân bằng",
+    "origin": "balance (Anh)",
+    "native_jp": "つり合い",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "健康の ために、栄養の <u class=\"q-target\">（　　　）</u> を 考えて 食べている。",
+    "sentence_reverse_html": "健康の ために、栄養の <u class=\"q-target\">バランス</u> を 考えて 食べている。",
+    "sentence_tts": "健康のために、栄養のバランスを考えて食べている。",
+    "options": [
+      "レベル",
+      "バランス",
+      "スタイル",
+      "スピード"
+    ],
+    "options_vi": [
+      "Trình độ, cấp độ",
+      "Sự cân bằng (ĐÚNG)",
+      "Dáng người, phong cách, kiểu dáng",
+      "Tốc độ"
+    ],
+    "answer": 1,
+    "sentence_vi": "Vì sức khỏe nên tôi chú ý cân bằng dinh dưỡng khi ăn uống.",
+    "wasei_note": "Cụm tủ: バランスがいい (cân bằng tốt) / バランスをとる (giữ cân bằng)."
+  },
+  {
+    "id": "kata_p1_q9",
+    "stt": 9,
+    "part": 1,
+    "num": 9,
+    "word": "レベル",
+    "meaning_vi": "Trình độ, cấp độ",
+    "origin": "level (Anh)",
+    "native_jp": "水準・程度",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "毎日 練習したので、日本語の <u class=\"q-target\">（　　　）</u> が 上がった。",
+    "sentence_reverse_html": "毎日 練習したので、日本語の <u class=\"q-target\">レベル</u> が 上がった。",
+    "sentence_tts": "毎日練習したので、日本語のレベルが上がった。",
+    "options": [
+      "レベル",
+      "ラベル",
+      "タイプ",
+      "トップ"
+    ],
+    "options_vi": [
+      "Trình độ, cấp độ (ĐÚNG)",
+      "Nhãn dán, tem mác (trên chai/hàng)",
+      "Kiểu, loại, mẫu (người/sản phẩm)",
+      "Đứng đầu, vị trí số 1, đỉnh"
+    ],
+    "answer": 0,
+    "sentence_vi": "Nhờ luyện tập mỗi ngày mà trình độ tiếng Nhật của tôi đã tăng lên.",
+    "wasei_note": "⚠️ Bẫy nhìn nhầm 1 chữ Katakana: レベル (level: trình độ) khác với ラベル (label: nhãn dán)!"
+  },
+  {
+    "id": "kata_p1_q10",
+    "stt": 10,
+    "part": 1,
+    "num": 10,
+    "word": "アップ",
+    "meaning_vi": "Tăng lên, nâng cao; cận cảnh",
+    "origin": "up (Anh)",
+    "native_jp": "上昇・向上",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "今年の 春から、商品の 値段が 10% <u class=\"q-target\">（　　　）</u> した。",
+    "sentence_reverse_html": "今年の 春から、商品の 値段が 10% <u class=\"q-target\">アップ</u> した。",
+    "sentence_tts": "今年の春から、商品の値段が10%アップした。",
+    "options": [
+      "ダウン",
+      "マイナス",
+      "キャンセル",
+      "アップ"
+    ],
+    "options_vi": [
+      "Hạ xuống, giảm sút; gục ngã",
+      "Trừ, âm, lỗ, mặt tiêu cực",
+      "Hủy bỏ (đặt chỗ, lịch hẹn, đơn hàng)",
+      "Tăng lên, nâng cao; cận cảnh (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Từ mùa xuân năm nay, giá sản phẩm đã tăng lên 10%.",
+    "wasei_note": "Dùng rất nhiều trong ghép từ kiểu Nhật: スピードアップ (tăng tốc), レベルアップ (lên trình)."
+  },
+  {
+    "id": "kata_p1_q11",
+    "stt": 11,
+    "part": 1,
+    "num": 11,
+    "word": "ダウン",
+    "meaning_vi": "Hạ xuống, giảm sút; gục ngã",
+    "origin": "down (Anh)",
+    "native_jp": "低下・減少",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "あまりの 暑さに、途中で <u class=\"q-target\">（　　　）</u> してしまった。",
+    "sentence_reverse_html": "あまりの 暑さに、途中で <u class=\"q-target\">ダウン</u> してしまった。",
+    "sentence_tts": "あまりの暑さに、途中でダウンしてしまった。",
+    "options": [
+      "アップ",
+      "プラス",
+      "ダウン",
+      "ヒット"
+    ],
+    "options_vi": [
+      "Tăng lên, nâng cao; cận cảnh",
+      "Cộng, dương, mặt tích cực",
+      "Hạ xuống, giảm sút; gục ngã (ĐÚNG)",
+      "Nổi tiếng, thành công vang dội (hit)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Vì trời nóng quá sức nên giữa chừng tôi đã bị gục ngã/kiệt sức.",
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: ダウンする ngoài 'giảm xuống' còn nghĩa 'ngã bệnh/gục vì quá mệt' (kèm ダウンロード = tải xuống)."
+  },
+  {
+    "id": "kata_p1_q12",
+    "stt": 12,
+    "part": 1,
+    "num": 12,
+    "word": "コンテスト",
+    "meaning_vi": "Cuộc thi (hùng biện, ảnh, sắc đẹp...)",
+    "origin": "contest (Anh)",
+    "native_jp": "競技会・大会",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "来月 行われる スピーチ <u class=\"q-target\">（　　　）</u> に 参加する 予定です。",
+    "sentence_reverse_html": "来月 行われる スピーチ <u class=\"q-target\">コンテスト</u> に 参加する 予定です。",
+    "sentence_tts": "来月行われるスピーチコンテストに参加する予定です。",
+    "options": [
+      "インタビュー",
+      "コンテスト",
+      "アンケート",
+      "トレーニング"
+    ],
+    "options_vi": [
+      "Cuộc phỏng vấn (báo chí, truyền hình)",
+      "Cuộc thi (hùng biện, ảnh, sắc đẹp...) (ĐÚNG)",
+      "Bảng điều tra, phiếu khảo sát ý kiến",
+      "Luyện tập (thể lực, kỹ năng)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Tháng sau tôi dự định tham gia cuộc thi hùng biện được tổ chức.",
+    "wasei_note": "Hay ghép: スピーチコンテスト (thi hùng biện), 写真コンテスト (thi nhiếp ảnh)."
+  },
+  {
+    "id": "kata_p1_q13",
+    "stt": 13,
+    "part": 1,
+    "num": 13,
+    "word": "プラス",
+    "meaning_vi": "Cộng, dương, mặt tích cực",
+    "origin": "plus (Anh)",
+    "native_jp": "足し算・有利",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "海外での 経験は、将来の 仕事に <u class=\"q-target\">（　　　）</u> に なるだろう。",
+    "sentence_reverse_html": "海外での 経験は、将来の 仕事に <u class=\"q-target\">プラス</u> に なるだろう。",
+    "sentence_tts": "海外での経験は、将来の仕事にプラスになるだろう。",
+    "options": [
+      "プラス",
+      "マイナス",
+      "ミス",
+      "ダウン"
+    ],
+    "options_vi": [
+      "Cộng, dương, mặt tích cực (ĐÚNG)",
+      "Trừ, âm, lỗ, mặt tiêu cực",
+      "Lỗi, sự sai sót",
+      "Hạ xuống, giảm sút; gục ngã"
+    ],
+    "answer": 0,
+    "sentence_vi": "Kinh nghiệm ở nước ngoài chắc hẳn sẽ mang lại lợi ích tích cực cho công việc tương lai.",
+    "wasei_note": "Cặp đối lập: プラスになる (có lợi/tích cực) <-> マイナスになる (gây bất lợi/tiêu cực)."
+  },
+  {
+    "id": "kata_p1_q14",
+    "stt": 14,
+    "part": 1,
+    "num": 14,
+    "word": "マイナス",
+    "meaning_vi": "Trừ, âm, lỗ, mặt tiêu cực",
+    "origin": "minus (Anh)",
+    "native_jp": "引き算・不利",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "今朝の 気温は <u class=\"q-target\">（　　　）</u> 3度まで 下がった。",
+    "sentence_reverse_html": "今朝の 気温は <u class=\"q-target\">マイナス</u> 3度まで 下がった。",
+    "sentence_tts": "今朝の気温はマイナス3度まで下がった。",
+    "options": [
+      "プラス",
+      "アップ",
+      "パーセント",
+      "マイナス"
+    ],
+    "options_vi": [
+      "Cộng, dương, mặt tích cực",
+      "Tăng lên, nâng cao; cận cảnh",
+      "Phần trăm (%)",
+      "Trừ, âm, lỗ, mặt tiêu cực (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Nhiệt độ sáng nay đã giảm xuống tới âm 3 độ.",
+    "wasei_note": "Vừa dùng cho số âm (マイナス3度) vừa dùng cho mặt bất lợi (マイナスになる)."
+  },
+  {
+    "id": "kata_p1_q15",
+    "stt": 15,
+    "part": 1,
+    "num": 15,
+    "word": "イメージ",
+    "meaning_vi": "Hình ảnh, ấn tượng hình dung",
+    "origin": "image (Anh)",
+    "native_jp": "印象・心象",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "実際に 会ってみたら、思っていた <u class=\"q-target\">（　　　）</u> と 違っていた。",
+    "sentence_reverse_html": "実際に 会ってみたら、思っていた <u class=\"q-target\">イメージ</u> と 違っていた。",
+    "sentence_tts": "実際に会ってみたら、思っていたイメージと違っていた。",
+    "options": [
+      "デザイン",
+      "タイトル",
+      "イメージ",
+      "スタイル"
+    ],
+    "options_vi": [
+      "Thiết kế, kiểu dáng",
+      "Tiêu đề, nhan đề (sách, phim, bài hát)",
+      "Hình ảnh, ấn tượng hình dung (ĐÚNG)",
+      "Dáng người, phong cách, kiểu dáng"
+    ],
+    "answer": 2,
+    "sentence_vi": "Khi gặp mặt trực tiếp thì thấy khác hẳn với hình dung ban đầu của tôi.",
+    "wasei_note": "イメージ = 印象 (ấn tượng/hình ảnh trong đầu). Cụm hay gặp: イメージチェンジ (thay đổi hình tượng)."
+  },
+  {
+    "id": "kata_p1_q16",
+    "stt": 16,
+    "part": 1,
+    "num": 16,
+    "word": "プライバシー",
+    "meaning_vi": "Sự riêng tư, đời tư",
+    "origin": "privacy (Anh)",
+    "native_jp": "私生活の秘密",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "他人の <u class=\"q-target\">（　　　）</u> を 守る ことは 大切な マナーだ。",
+    "sentence_reverse_html": "他人の <u class=\"q-target\">プライバシー</u> を 守る ことは 大切な マナーだ。",
+    "sentence_tts": "他人のプライバシーを守ることは大切なマナーだ。",
+    "options": [
+      "マスコミ",
+      "プライバシー",
+      "コミュニケーション",
+      "ルール"
+    ],
+    "options_vi": [
+      "Giới truyền thông đại chúng",
+      "Sự riêng tư, đời tư (ĐÚNG)",
+      "Giao tiếp, trao đổi thông tin",
+      "Luật lệ, quy tắc"
+    ],
+    "answer": 1,
+    "sentence_vi": "Việc bảo vệ sự riêng tư của người khác là phép lịch sự quan trọng.",
+    "wasei_note": "Cụm cố định: プライバシーを守る (bảo vệ đời tư) / プライバシーを侵害する (xâm phạm đời tư)."
+  },
+  {
+    "id": "kata_p1_q17",
+    "stt": 17,
+    "part": 1,
+    "num": 17,
+    "word": "オフィス",
+    "meaning_vi": "Văn phòng, công sở",
+    "origin": "office (Anh)",
+    "native_jp": "事務所・会社",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "うちの 会社の <u class=\"q-target\">（　　　）</u> は 駅の すぐ 近くに あります。",
+    "sentence_reverse_html": "うちの 会社の <u class=\"q-target\">オフィス</u> は 駅の すぐ 近くに あります。",
+    "sentence_tts": "うちの会社のオフィスは駅のすぐ近くにあります。",
+    "options": [
+      "オフィス",
+      "コンビニ",
+      "ベランダ",
+      "レジ"
+    ],
+    "options_vi": [
+      "Văn phòng, công sở (ĐÚNG)",
+      "Cửa hàng tiện lợi",
+      "Ban công",
+      "Quầy tính tiền, máy thu ngân"
+    ],
+    "answer": 0,
+    "sentence_vi": "Văn phòng công ty chúng tôi nằm ngay gần nhà ga.",
+    "wasei_note": "オフィス = 事務所(じむしょ). Ghép từ: オフィスビル (tòa nhà văn phòng)."
+  },
+  {
+    "id": "kata_p1_q18",
+    "stt": 18,
+    "part": 1,
+    "num": 18,
+    "word": "ルール",
+    "meaning_vi": "Luật lệ, quy tắc",
+    "origin": "rule (Anh)",
+    "native_jp": "規則・決まり",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "この スポーツは <u class=\"q-target\">（　　　）</u> が 単純なので、すぐ 覚えられる。",
+    "sentence_reverse_html": "この スポーツは <u class=\"q-target\">ルール</u> が 単純なので、すぐ 覚えられる。",
+    "sentence_tts": "このスポーツはルールが単純なので、すぐ覚えられる。",
+    "options": [
+      "マナー",
+      "テーマ",
+      "スケジュール",
+      "ルール"
+    ],
+    "options_vi": [
+      "Tác phong, phép lịch sự, cách cư xử",
+      "Chủ đề, đề tài",
+      "Lịch trình, thời gian biểu",
+      "Luật lệ, quy tắc (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Môn thể thao này luật chơi đơn giản nên có thể nhớ ngay.",
+    "wasei_note": "Phân biệt: ルール (quy tắc bắt buộc ＝ 規則) vs マナー (phép lịch sự, tác phong cư xử)."
+  },
+  {
+    "id": "kata_p1_q19",
+    "stt": 19,
+    "part": 1,
+    "num": 19,
+    "word": "マスコミ",
+    "meaning_vi": "Giới truyền thông đại chúng",
+    "origin": "mass communication (Wasei)",
+    "native_jp": "報道機関",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "その 事件は テレビや 新聞などの <u class=\"q-target\">（　　　）</u> に 大きく 報道された。",
+    "sentence_reverse_html": "その 事件は テレビや 新聞などの <u class=\"q-target\">マスコミ</u> に 大きく 報道された。",
+    "sentence_tts": "その事件はテレビや新聞などのマスコミに大きく報道された。",
+    "options": [
+      "インターネット",
+      "アナウンス",
+      "マスコミ",
+      "パンフレット"
+    ],
+    "options_vi": [
+      "Mạng Internet",
+      "Thông báo (qua loa phát thanh ở ga/sân bay)",
+      "Giới truyền thông đại chúng (ĐÚNG)",
+      "Ấn phẩm quảng cáo, tờ rơi, sách giới thiệu"
+    ],
+    "answer": 2,
+    "sentence_vi": "Vụ việc đó đã được các phương tiện truyền thông như tivi, báo chí đưa tin rầm rộ.",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật (Wasei-eigo): マス・コミュニケーション -> rút ngắn còn マスコミ!"
+  },
+  {
+    "id": "kata_p1_q20",
+    "stt": 20,
+    "part": 1,
+    "num": 20,
+    "word": "マナー",
+    "meaning_vi": "Tác phong, phép lịch sự, cách cư xử",
+    "origin": "manner (Anh)",
+    "native_jp": "礼儀作法",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "電車の中で 電話を しないのは 日本の <u class=\"q-target\">（　　　）</u> です。",
+    "sentence_reverse_html": "電車の中で 電話を しないのは 日本の <u class=\"q-target\">マナー</u> です。",
+    "sentence_tts": "電車の中で電話をしないのは日本のマナーです。",
+    "options": [
+      "ルール",
+      "マナー",
+      "ユーモア",
+      "タイプ"
+    ],
+    "options_vi": [
+      "Luật lệ, quy tắc",
+      "Tác phong, phép lịch sự, cách cư xử (ĐÚNG)",
+      "Sự hài hước, óc khôi hài",
+      "Kiểu, loại, mẫu (người/sản phẩm)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Không gọi điện thoại trên tàu điện là phép lịch sự ở Nhật Bản.",
+    "wasei_note": "Hay gặp ở Đọc hiểu N3: 食事のマナー (phép lịch sự bàn ăn), マナーを守る (giữ phép lịch sự)."
+  },
+  {
+    "id": "kata_p1_q21",
+    "stt": 21,
+    "part": 1,
+    "num": 21,
+    "word": "ミス",
+    "meaning_vi": "Lỗi, sự sai sót",
+    "origin": "mistake (Wasei)",
+    "native_jp": "間違い・失敗",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "急いで 書いたので、計算 <u class=\"q-target\">（　　　）</u> を してしまった。",
+    "sentence_reverse_html": "急いで 書いたので、計算 <u class=\"q-target\">ミス</u> を してしまった。",
+    "sentence_tts": "急いで書いたので、計算ミスをしてしまった。",
+    "options": [
+      "ミス",
+      "ショック",
+      "ストレス",
+      "キャンセル"
+    ],
+    "options_vi": [
+      "Lỗi, sự sai sót (ĐÚNG)",
+      "Sốc, cú sốc tinh thần",
+      "Stress, sự căng thẳng",
+      "Hủy bỏ (đặt chỗ, lịch hẹn, đơn hàng)"
+    ],
+    "answer": 0,
+    "sentence_vi": "Vì viết vội nên tôi đã làm nhầm lỗi tính toán.",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: mistake -> rút còn ミス! Hay dùng: ミスをする (mắc lỗi), ケアレスミス (lỗi bất cẩn)."
+  },
+  {
+    "id": "kata_p1_q22",
+    "stt": 22,
+    "part": 1,
+    "num": 22,
+    "word": "スケジュール",
+    "meaning_vi": "Lịch trình, thời gian biểu",
+    "origin": "schedule (Anh)",
+    "native_jp": "予定・日程",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "来週の 出張の <u class=\"q-target\">（　　　）</u> を メールで 送ってください。",
+    "sentence_reverse_html": "来週の 出張の <u class=\"q-target\">スケジュール</u> を メールで 送ってください。",
+    "sentence_tts": "来週の出張のスケジュールをメールで送ってください。",
+    "options": [
+      "アドバイス",
+      "アイディア",
+      "アンケート",
+      "スケジュール"
+    ],
+    "options_vi": [
+      "Lời khuyên, sự tư vấn",
+      "Ý tưởng, sáng kiến",
+      "Bảng điều tra, phiếu khảo sát ý kiến",
+      "Lịch trình, thời gian biểu (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Hãy gửi lịch trình chuyến công tác tuần sau qua email cho tôi.",
+    "wasei_note": "Đồng nghĩa chuẩn N3: スケジュール ＝ 予定(よてい)."
+  },
+  {
+    "id": "kata_p1_q23",
+    "stt": 23,
+    "part": 1,
+    "num": 23,
+    "word": "タイトル",
+    "meaning_vi": "Tiêu đề, nhan đề (sách, phim, bài hát)",
+    "origin": "title (Anh)",
+    "native_jp": "題名・表題",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "昨日 見た 映画の <u class=\"q-target\">（　　　）</u> が 思い出せない。",
+    "sentence_reverse_html": "昨日 見た 映画の <u class=\"q-target\">タイトル</u> が 思い出せない。",
+    "sentence_tts": "昨日見た映画のタイトルが思い出せない。",
+    "options": [
+      "テーマ",
+      "ストーリー",
+      "タイトル",
+      "ラベル"
+    ],
+    "options_vi": [
+      "Chủ đề, đề tài",
+      "Câu chuyện, cốt truyện",
+      "Tiêu đề, nhan đề (sách, phim, bài hát) (ĐÚNG)",
+      "Nhãn dán, tem mác (trên chai/hàng)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Tôi không thể nhớ ra tiêu đề bộ phim đã xem hôm qua.",
+    "wasei_note": "Phân biệt bộ 3 phim/sách: タイトル (tựa đề), テーマ (chủ đề cốt lõi), ストーリー (cốt truyện)."
+  },
+  {
+    "id": "kata_p1_q24",
+    "stt": 24,
+    "part": 1,
+    "num": 24,
+    "word": "テーマ",
+    "meaning_vi": "Chủ đề, đề tài",
+    "origin": "Thema (Đức)",
+    "native_jp": "主題・話題",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "今日の 会議の <u class=\"q-target\">（　　　）</u> は 「環境問題」です。",
+    "sentence_reverse_html": "今日の 会議の <u class=\"q-target\">テーマ</u> は 「環境問題」です。",
+    "sentence_tts": "今日の会議のテーマは「環境問題」です。",
+    "options": [
+      "タイトル",
+      "テーマ",
+      "ストーリー",
+      "ルール"
+    ],
+    "options_vi": [
+      "Tiêu đề, nhan đề (sách, phim, bài hát)",
+      "Chủ đề, đề tài (ĐÚNG)",
+      "Câu chuyện, cốt truyện",
+      "Luật lệ, quy tắc"
+    ],
+    "answer": 1,
+    "sentence_vi": "Chủ đề của cuộc họp hôm nay là 'Vấn đề môi trường'.",
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Thema) nên đọc là テーマ chứ không đọc theo tiếng Anh (theme)!"
+  },
+  {
+    "id": "kata_p1_q25",
+    "stt": 25,
+    "part": 1,
+    "num": 25,
+    "word": "ストーリー",
+    "meaning_vi": "Câu chuyện, cốt truyện",
+    "origin": "story (Anh)",
+    "native_jp": "物語・あらすじ",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "この 小説は <u class=\"q-target\">（　　　）</u> が 面白くて、一気に 読んでしまった。",
+    "sentence_reverse_html": "この 小説は <u class=\"q-target\">ストーリー</u> が 面白くて、一気に 読んでしまった。",
+    "sentence_tts": "この小説はストーリーが面白くて、一気に読んでしまった。",
+    "options": [
+      "ストーリー",
+      "タイトル",
+      "テーマ",
+      "メッセージ"
+    ],
+    "options_vi": [
+      "Câu chuyện, cốt truyện (ĐÚNG)",
+      "Tiêu đề, nhan đề (sách, phim, bài hát)",
+      "Chủ đề, đề tài",
+      "Tin nhắn, lời nhắn gửi"
+    ],
+    "answer": 0,
+    "sentence_vi": "Cuốn tiểu thuyết này cốt truyện hấp dẫn nên tôi đã đọc một mạch hết luôn.",
+    "wasei_note": "ストーリー ＝ 物語(ものがたり) / あらすじ (cốt truyện)."
+  },
+  {
+    "id": "kata_p1_q26",
+    "stt": 26,
+    "part": 1,
+    "num": 26,
+    "word": "ヒット",
+    "meaning_vi": "Nổi tiếng, thành công vang dội (hit)",
+    "origin": "hit (Anh)",
+    "native_jp": "大成功・大流行",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "あの 歌手の 新曲は 若者の 間で 大 <u class=\"q-target\">（　　　）</u> している。",
+    "sentence_reverse_html": "あの 歌手の 新曲は 若者の 間で 大 <u class=\"q-target\">ヒット</u> している。",
+    "sentence_tts": "あの歌手の新曲は若者の間で大ヒットしている。",
+    "options": [
+      "トップ",
+      "ブランド",
+      "セール",
+      "ヒット"
+    ],
+    "options_vi": [
+      "Đứng đầu, vị trí số 1, đỉnh",
+      "Thương hiệu, nhãn hiệu nổi tiếng",
+      "Đợt giảm giá, xả hàng (sale)",
+      "Nổi tiếng, thành công vang dội (hit) (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Ca khúc mới của ca sĩ đó đang cực kỳ nổi tiếng trong giới trẻ.",
+    "wasei_note": "Cụm hay gặp: 大ヒットする (trở thành cú hit lớn), ヒット商品 (sản phẩm bán chạy đình đám)."
+  },
+  {
+    "id": "kata_p1_q27",
+    "stt": 27,
+    "part": 1,
+    "num": 27,
+    "word": "ブランド",
+    "meaning_vi": "Thương hiệu, nhãn hiệu nổi tiếng",
+    "origin": "brand (Anh)",
+    "native_jp": "商標・銘柄",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "彼女は 有名な <u class=\"q-target\">（　　　）</u> の バッグを 持っている。",
+    "sentence_reverse_html": "彼女は 有名な <u class=\"q-target\">ブランド</u> の バッグを 持っている。",
+    "sentence_tts": "彼女は有名なブランドのバッグを持っている。",
+    "options": [
+      "デザイン",
+      "タイプ",
+      "ブランド",
+      "ラベル"
+    ],
+    "options_vi": [
+      "Thiết kế, kiểu dáng",
+      "Kiểu, loại, mẫu (người/sản phẩm)",
+      "Thương hiệu, nhãn hiệu nổi tiếng (ĐÚNG)",
+      "Nhãn dán, tem mác (trên chai/hàng)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Cô ấy đang mang một chiếc túi của thương hiệu nổi tiếng.",
+    "wasei_note": "ブランド品 (hàng hiệu). Đừng nhầm với グラウンド (sân vận động)!"
+  },
+  {
+    "id": "kata_p1_q28",
+    "stt": 28,
+    "part": 1,
+    "num": 28,
+    "word": "レンタル",
+    "meaning_vi": "Thuê, cho thuê (xe, đĩa, đồ)",
+    "origin": "rental (Anh)",
+    "native_jp": "貸し出し",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "旅行先で 車を <u class=\"q-target\">（　　　）</u> して、観光地を 回った。",
+    "sentence_reverse_html": "旅行先で 車を <u class=\"q-target\">レンタル</u> して、観光地を 回った。",
+    "sentence_tts": "旅行先で車をレンタルして、観光地を回った。",
+    "options": [
+      "リサイクル",
+      "レンタル",
+      "セール",
+      "キャンセル"
+    ],
+    "options_vi": [
+      "Tái chế",
+      "Thuê, cho thuê (xe, đĩa, đồ) (ĐÚNG)",
+      "Đợt giảm giá, xả hàng (sale)",
+      "Hủy bỏ (đặt chỗ, lịch hẹn, đơn hàng)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Tôi đã thuê xe ở điểm du lịch và đi tham quan các danh thắng.",
+    "wasei_note": "Ghép từ phổ biến: レンタカー (xe thuê), レンタルショップ (tiệm cho thuê)."
+  },
+  {
+    "id": "kata_p1_q29",
+    "stt": 29,
+    "part": 1,
+    "num": 29,
+    "word": "リサイクル",
+    "meaning_vi": "Tái chế",
+    "origin": "recycle (Anh)",
+    "native_jp": "再利用",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "ペットボトルは 洗ってから <u class=\"q-target\">（　　　）</u> に 出してください。",
+    "sentence_reverse_html": "ペットボトルは 洗ってから <u class=\"q-target\">リサイクル</u> に 出してください。",
+    "sentence_tts": "ペットボトルは洗ってからリサイクルに出してください。",
+    "options": [
+      "リサイクル",
+      "レンタル",
+      "プラスチック",
+      "エネルギー"
+    ],
+    "options_vi": [
+      "Tái chế (ĐÚNG)",
+      "Thuê, cho thuê (xe, đĩa, đồ)",
+      "Nhựa (chất dẻo)",
+      "Năng lượng, nguồn điện/nhiên liệu"
+    ],
+    "answer": 0,
+    "sentence_vi": "Chai nhựa hãy rửa sạch trước rồi mới đem đi tái chế nhé.",
+    "wasei_note": "Rất hay xuất hiện trong bài đọc hiểu phân loại rác ở Nhật: リサイクルショップ (tiệm đồ cũ tái sử dụng)."
+  },
+  {
+    "id": "kata_p1_q30",
+    "stt": 30,
+    "part": 1,
+    "num": 30,
+    "word": "ラベル",
+    "meaning_vi": "Nhãn dán, tem mác (trên chai/hàng)",
+    "origin": "label (Anh)",
+    "native_jp": "荷札・表示",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "ペットボトルを 捨てる ときは、<u class=\"q-target\">（　　　）</u> を はがしてください。",
+    "sentence_reverse_html": "ペットボトルを 捨てる ときは、<u class=\"q-target\">ラベル</u> を はがしてください。",
+    "sentence_tts": "ペットボトルを捨てるときは、ラベルをはがしてください。",
+    "options": [
+      "レベル",
+      "カード",
+      "レシート",
+      "ラベル"
+    ],
+    "options_vi": [
+      "Trình độ, cấp độ",
+      "Thẻ (thẻ tín dụng, thẻ tích điểm, thiệp)",
+      "Hóa đơn, biên lai thanh toán",
+      "Nhãn dán, tem mác (trên chai/hàng) (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Khi vứt chai nhựa, xin hãy bóc nhãn dán ra.",
+    "wasei_note": "⚠️ Rất hay lừa với レベル (trình độ)! Nhớ: ラ(la)ベル = nhãn dán, レ(le)ベル = trình độ."
+  },
+  {
+    "id": "kata_p1_q31",
+    "stt": 31,
+    "part": 1,
+    "num": 31,
+    "word": "タイプ",
+    "meaning_vi": "Kiểu, loại, mẫu (người/sản phẩm)",
+    "origin": "type (Anh)",
+    "native_jp": "型・種類",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "姉と 私は 性格が 全然 違う <u class=\"q-target\">（　　　）</u> だ。",
+    "sentence_reverse_html": "姉と 私は 性格が 全然 違う <u class=\"q-target\">タイプ</u> だ。",
+    "sentence_tts": "姉と私は性格が全然違うタイプだ。",
+    "options": [
+      "スタイル",
+      "デザイン",
+      "タイプ",
+      "ブランド"
+    ],
+    "options_vi": [
+      "Dáng người, phong cách, kiểu dáng",
+      "Thiết kế, kiểu dáng",
+      "Kiểu, loại, mẫu (người/sản phẩm) (ĐÚNG)",
+      "Thương hiệu, nhãn hiệu nổi tiếng"
+    ],
+    "answer": 2,
+    "sentence_vi": "Chị gái và tôi là hai kiểu người có tính cách hoàn toàn khác nhau.",
+    "wasei_note": "Vừa chỉ chủng loại máy móc, vừa chỉ 'gu / kiểu người' (好きなタイプ)."
+  },
+  {
+    "id": "kata_p1_q32",
+    "stt": 32,
+    "part": 1,
+    "num": 32,
+    "word": "スタイル",
+    "meaning_vi": "Dáng người, phong cách, kiểu dáng",
+    "origin": "style (Anh)",
+    "native_jp": "姿・様式",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "彼女は 背が 高くて <u class=\"q-target\">（　　　）</u> が とても いい。",
+    "sentence_reverse_html": "彼女は 背が 高くて <u class=\"q-target\">スタイル</u> が とても いい。",
+    "sentence_tts": "彼女は背が高くてスタイルがとてもいい。",
+    "options": [
+      "タイプ",
+      "スタイル",
+      "デザイン",
+      "バランス"
+    ],
+    "options_vi": [
+      "Kiểu, loại, mẫu (người/sản phẩm)",
+      "Dáng người, phong cách, kiểu dáng (ĐÚNG)",
+      "Thiết kế, kiểu dáng",
+      "Sự cân bằng"
+    ],
+    "answer": 1,
+    "sentence_vi": "Cô ấy cao ráo và có vóc dáng rất đẹp.",
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: スタイルがいい thường dùng để khen 'vóc dáng/body chuẩn đẹp'!"
+  },
+  {
+    "id": "kata_p1_q33",
+    "stt": 33,
+    "part": 1,
+    "num": 33,
+    "word": "キャンセル",
+    "meaning_vi": "Hủy bỏ (đặt chỗ, lịch hẹn, đơn hàng)",
+    "origin": "cancel (Anh)",
+    "native_jp": "取り消し・中止",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "急に 仕事が 入ったので、ホテルの 予約を <u class=\"q-target\">（　　　）</u> した。",
+    "sentence_reverse_html": "急に 仕事が 入ったので、ホテルの 予約を <u class=\"q-target\">キャンセル</u> した。",
+    "sentence_tts": "急に仕事が入ったので、ホテルの予約をキャンセルした。",
+    "options": [
+      "キャンセル",
+      "レンタル",
+      "ダウン",
+      "ミス"
+    ],
+    "options_vi": [
+      "Hủy bỏ (đặt chỗ, lịch hẹn, đơn hàng) (ĐÚNG)",
+      "Thuê, cho thuê (xe, đĩa, đồ)",
+      "Hạ xuống, giảm sút; gục ngã",
+      "Lỗi, sự sai sót"
+    ],
+    "answer": 0,
+    "sentence_vi": "Vì đột nhiên có việc nên tôi đã hủy đặt phòng khách sạn.",
+    "wasei_note": "Từ Katakana cực hay thi N3! キャンセルする ＝ 取り消す / 中止する (bổ sung thay thế cho từ trùng #26)."
+  },
+  {
+    "id": "kata_p1_q34",
+    "stt": 34,
+    "part": 1,
+    "num": 34,
+    "word": "ウイルス",
+    "meaning_vi": "Virus (bệnh tật hoặc máy tính)",
+    "origin": "virus (Latinh/Anh)",
+    "native_jp": "病原体",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "パソコンが <u class=\"q-target\">（　　　）</u> に 感染して 動かなくなった。",
+    "sentence_reverse_html": "パソコンが <u class=\"q-target\">ウイルス</u> に 感染して 動かなくなった。",
+    "sentence_tts": "パソコンがウイルスに感染して動かなくなった。",
+    "options": [
+      "デジタル",
+      "ロボット",
+      "インターネット",
+      "ウイルス"
+    ],
+    "options_vi": [
+      "Kỹ thuật số",
+      "Người máy, rô-bốt",
+      "Mạng Internet",
+      "Virus (bệnh tật hoặc máy tính) (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Máy tính bị nhiễm virus nên không chạy được nữa.",
+    "wasei_note": "Chú ý cách đọc tiếng Nhật là ウイルス (u-i-ru-su), không đọc 'vai-rớt'!"
+  },
+  {
+    "id": "kata_p1_q35",
+    "stt": 35,
+    "part": 1,
+    "num": 35,
+    "word": "ロボット",
+    "meaning_vi": "Người máy, rô-bốt",
+    "origin": "robot (Séc/Anh)",
+    "native_jp": "自動機械",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "この 工場では <u class=\"q-target\">（　　　）</u> が 自動車を 組み立てている。",
+    "sentence_reverse_html": "この 工場では <u class=\"q-target\">ロボット</u> が 自動車を 組み立てている。",
+    "sentence_tts": "この工場ではロボットが自動車を組み立てている。",
+    "options": [
+      "ウイルス",
+      "マイク",
+      "ロボット",
+      "ブレーキ"
+    ],
+    "options_vi": [
+      "Virus (bệnh tật hoặc máy tính)",
+      "Micro, ống nói",
+      "Người máy, rô-bốt (ĐÚNG)",
+      "Phanh, thắng xe"
+    ],
+    "answer": 2,
+    "sentence_vi": "Ở nhà máy này, rô-bốt đang lắp ráp ô tô.",
+    "wasei_note": "Lưu ý có âm ngắt ッ: ロボット."
+  },
+  {
+    "id": "kata_p1_q36",
+    "stt": 36,
+    "part": 1,
+    "num": 36,
+    "word": "エネルギー",
+    "meaning_vi": "Năng lượng, nguồn điện/nhiên liệu",
+    "origin": "Energie (Đức)",
+    "native_jp": "動力・活力",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "太陽や 風などの 自然 <u class=\"q-target\">（　　　）</u> を 利用する 研究が 進んでいる。",
+    "sentence_reverse_html": "太陽や 風などの 自然 <u class=\"q-target\">エネルギー</u> を 利用する 研究が 進んでいる。",
+    "sentence_tts": "太陽や風などの自然エネルギーを利用する研究が進んでいる。",
+    "options": [
+      "バランス",
+      "エネルギー",
+      "ストレス",
+      "リサイクル"
+    ],
+    "options_vi": [
+      "Sự cân bằng",
+      "Năng lượng, nguồn điện/nhiên liệu (ĐÚNG)",
+      "Stress, sự căng thẳng",
+      "Tái chế"
+    ],
+    "answer": 1,
+    "sentence_vi": "Nghiên cứu sử dụng các nguồn năng lượng tự nhiên như mặt trời, gió đang tiến triển.",
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Energie) nên đọc エネルギー (không đọc theo tiếng Anh 'energy')!"
+  },
+  {
+    "id": "kata_p1_q37",
+    "stt": 37,
+    "part": 1,
+    "num": 37,
+    "word": "デジタル",
+    "meaning_vi": "Kỹ thuật số",
+    "origin": "digital (Anh)",
+    "native_jp": "数値化",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "最近は <u class=\"q-target\">（　　　）</u> カメラではなく、スマホで 写真を 撮る 人が 多い。",
+    "sentence_reverse_html": "最近は <u class=\"q-target\">デジタル</u> カメラではなく、スマホで 写真を 撮る 人が 多い。",
+    "sentence_tts": "最近はデジタルカメラではなく、スマホで写真を撮る人が多い。",
+    "options": [
+      "デジタル",
+      "インスタント",
+      "プロフェッショナル",
+      "プラスチック"
+    ],
+    "options_vi": [
+      "Kỹ thuật số (ĐÚNG)",
+      "Ăn liền, pha liền, tức thì",
+      "Chuyên nghiệp",
+      "Nhựa (chất dẻo)"
+    ],
+    "answer": 0,
+    "sentence_vi": "Gần đây nhiều người chụp ảnh bằng smartphone thay vì máy ảnh kỹ thuật số.",
+    "wasei_note": "Trái nghĩa với アナログ (analog: thủ công/tương tự). Rút gọn hay gặp: デジカメ (máy ảnh KTS)."
+  },
+  {
+    "id": "kata_p1_q38",
+    "stt": 38,
+    "part": 1,
+    "num": 38,
+    "word": "マイク",
+    "meaning_vi": "Micro, ống nói",
+    "origin": "microphone (Wasei)",
+    "native_jp": "拡声器",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "後ろの 人にも 聞こえるように、<u class=\"q-target\">（　　　）</u> を 使って 話してください。",
+    "sentence_reverse_html": "後ろの 人にも 聞こえるように、<u class=\"q-target\">マイク</u> を 使って 話してください。",
+    "sentence_tts": "後ろの人にも聞こえるように、マイクを使って話してください。",
+    "options": [
+      "チャイム",
+      "アナウンス",
+      "バイク",
+      "マイク"
+    ],
+    "options_vi": [
+      "Chuông (chuông cửa, chuông báo giờ học)",
+      "Thông báo (qua loa phát thanh ở ga/sân bay)",
+      "Xe mô tô, xe gắn máy",
+      "Micro, ống nói (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Để người ngồi phía sau cũng nghe được, xin hãy dùng micro khi nói.",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: microphone -> マイク! Đừng nhìn nhầm với バイク (xe máy)!"
+  },
+  {
+    "id": "kata_p1_q39",
+    "stt": 39,
+    "part": 1,
+    "num": 39,
+    "word": "ブレーキ",
+    "meaning_vi": "Phanh, thắng xe",
+    "origin": "brake (Anh)",
+    "native_jp": "制動装置",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "子どもが 飛び出してきたので、慌てて <u class=\"q-target\">（　　　）</u> を 踏んだ。",
+    "sentence_reverse_html": "子どもが 飛び出してきたので、慌てて <u class=\"q-target\">ブレーキ</u> を 踏んだ。",
+    "sentence_tts": "子どもが飛び出してきたので、慌ててブレーキを踏んだ。",
+    "options": [
+      "カーブ",
+      "スピード",
+      "ブレーキ",
+      "バイク"
+    ],
+    "options_vi": [
+      "Khúc cua, đường cong",
+      "Tốc độ",
+      "Phanh, thắng xe (ĐÚNG)",
+      "Xe mô tô, xe gắn máy"
+    ],
+    "answer": 2,
+    "sentence_vi": "Vì đứa trẻ bất ngờ lao ra đường nên tôi cuống cuồng đạp phanh.",
+    "wasei_note": "Cụm cố định JLPT: ブレーキを踏む (đạp phanh ô tô) / ブレーキをかける (bóp/phanh lại)."
+  },
+  {
+    "id": "kata_p2_q1",
+    "stt": 40,
+    "part": 2,
+    "num": 1,
+    "word": "ペンキ",
+    "meaning_vi": "Sơn (sơn tường, gỗ, sắt)",
+    "origin": "pek (Hà Lan)",
+    "native_jp": "塗料",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "壁に 塗った <u class=\"q-target\">（　　　）</u> が まだ 乾いていないので、触らないでください。",
+    "sentence_reverse_html": "壁に 塗った <u class=\"q-target\">ペンキ</u> が まだ 乾いていないので、触らないでください。",
+    "sentence_tts": "壁に塗ったペンキがまだ乾いていないので、触らないでください。",
+    "options": [
+      "プラスチック",
+      "ペンキ",
+      "ガラス",
+      "デザイン"
+    ],
+    "options_vi": [
+      "Nhựa (chất dẻo)",
+      "Sơn (sơn tường, gỗ, sắt) (ĐÚNG)",
+      "Kính, thủy tinh",
+      "Thiết kế, kiểu dáng"
+    ],
+    "answer": 1,
+    "sentence_vi": "Sơn mới quét lên tường vẫn chưa khô nên xin đừng chạm vào.",
+    "wasei_note": "⚠️ Từ mượn tiếng HÀ LAN (pek)! Cực dễ bị lừa nếu chỉ đoán theo tiếng Anh. Cụm: ペンキを塗る (quét sơn)."
+  },
+  {
+    "id": "kata_p2_q2",
+    "stt": 41,
+    "part": 2,
+    "num": 2,
+    "word": "カーブ",
+    "meaning_vi": "Khúc cua, đường cong",
+    "origin": "curve (Anh)",
+    "native_jp": "曲がり角・曲線",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "この 先は 急な <u class=\"q-target\">（　　　）</u> が あるので、スピードを 落としてください。",
+    "sentence_reverse_html": "この 先は 急な <u class=\"q-target\">カーブ</u> が あるので、スピードを 落としてください。",
+    "sentence_tts": "この先は急なカーブがあるので、スピードを落としてください。",
+    "options": [
+      "カーブ",
+      "ブレーキ",
+      "ラッシュ",
+      "スピード"
+    ],
+    "options_vi": [
+      "Khúc cua, đường cong (ĐÚNG)",
+      "Phanh, thắng xe",
+      "Giờ cao điểm, cảnh chen chúc đông nghẹt",
+      "Tốc độ"
+    ],
+    "answer": 0,
+    "sentence_vi": "Phía trước có khúc cua gấp nên hãy giảm tốc độ xuống.",
+    "wasei_note": "Đồng nghĩa N3 đã học: カーブしている ＝ 曲がっている."
+  },
+  {
+    "id": "kata_p2_q3",
+    "stt": 42,
+    "part": 2,
+    "num": 3,
+    "word": "クラスメート",
+    "meaning_vi": "Bạn cùng lớp",
+    "origin": "classmate (Anh)",
+    "native_jp": "同級生",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "高校 時代の <u class=\"q-target\">（　　　）</u> と 10年ぶりに 会った。",
+    "sentence_reverse_html": "高校 時代の <u class=\"q-target\">クラスメート</u> と 10年ぶりに 会った。",
+    "sentence_tts": "高校時代のクラスメートと10年ぶりに会った。",
+    "options": [
+      "パートナー",
+      "リーダー",
+      "ボランティア",
+      "クラスメート"
+    ],
+    "options_vi": [
+      "Đối tác, bạn đồng hành",
+      "Lãnh đạo, trưởng nhóm",
+      "Tình nguyện viên, hoạt động tình nguyện",
+      "Bạn cùng lớp (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Tôi đã gặp lại bạn cùng lớp thời cấp 3 sau 10 năm.",
+    "wasei_note": "クラス (lớp) + メート (bạn) ＝ 同級生(どうきゅうせい)."
+  },
+  {
+    "id": "kata_p2_q4",
+    "stt": 43,
+    "part": 2,
+    "num": 4,
+    "word": "グループ",
+    "meaning_vi": "Nhóm, tập đoàn",
+    "origin": "group (Anh)",
+    "native_jp": "集団・組",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "4人ずつの <u class=\"q-target\">（　　　）</u> に 分かれて、話し合ってください。",
+    "sentence_reverse_html": "4人ずつの <u class=\"q-target\">グループ</u> に 分かれて、話し合ってください。",
+    "sentence_tts": "4人ずつのグループに分かれて、話し合ってください。",
+    "options": [
+      "チーム",
+      "クラスメート",
+      "グループ",
+      "オフィス"
+    ],
+    "options_vi": [
+      "Đội, nhóm (thi đấu/công việc)",
+      "Bạn cùng lớp",
+      "Nhóm, tập đoàn (ĐÚNG)",
+      "Văn phòng, công sở"
+    ],
+    "answer": 2,
+    "sentence_vi": "Hãy chia thành từng nhóm 4 người rồi cùng thảo luận nhé.",
+    "wasei_note": "Phân biệt: グループ (nhóm nói chung, thảo luận/du lịch) vs チーム (đội cùng thi đấu/phối hợp mục tiêu)."
+  },
+  {
+    "id": "kata_p2_q5",
+    "stt": 44,
+    "part": 2,
+    "num": 5,
+    "word": "チーム",
+    "meaning_vi": "Đội, nhóm (thi đấu/công việc)",
+    "origin": "team (Anh)",
+    "native_jp": "組・団",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "私たちの サッカー <u class=\"q-target\">（　　　）</u> は 今年の 大会で 優勝した。",
+    "sentence_reverse_html": "私たちの サッカー <u class=\"q-target\">チーム</u> は 今年の 大会で 優勝した。",
+    "sentence_tts": "私たちのサッカーチームは今年の大会で優勝した。",
+    "options": [
+      "グループ",
+      "チーム",
+      "リーダー",
+      "コンテスト"
+    ],
+    "options_vi": [
+      "Nhóm, tập đoàn",
+      "Đội, nhóm (thi đấu/công việc) (ĐÚNG)",
+      "Lãnh đạo, trưởng nhóm",
+      "Cuộc thi (hùng biện, ảnh, sắc đẹp...)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Đội bóng đá của chúng tôi đã vô địch giải đấu năm nay.",
+    "wasei_note": "Hay dùng: チームワーク (tinh thần đồng đội)."
+  },
+  {
+    "id": "kata_p2_q6",
+    "stt": 45,
+    "part": 2,
+    "num": 6,
+    "word": "プロフェッショナル",
+    "meaning_vi": "Chuyên nghiệp",
+    "origin": "professional (Anh)",
+    "native_jp": "専門家・本職",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "彼は どんな 仕事も 完璧に こなす <u class=\"q-target\">（　　　）</u> だ。",
+    "sentence_reverse_html": "彼は どんな 仕事も 完璧に こなす <u class=\"q-target\">プロフェッショナル</u> だ。",
+    "sentence_tts": "彼はどんな仕事も完璧にこなすプロフェッショナルだ。",
+    "options": [
+      "プロフェッショナル",
+      "アマチュア",
+      "ボランティア",
+      "パートナー"
+    ],
+    "options_vi": [
+      "Chuyên nghiệp (ĐÚNG)",
+      "Nghiệp dư, không chuyên",
+      "Tình nguyện viên, hoạt động tình nguyện",
+      "Đối tác, bạn đồng hành"
+    ],
+    "answer": 0,
+    "sentence_vi": "Anh ấy là một người chuyên nghiệp, xử lý hoàn hảo mọi công việc.",
+    "wasei_note": "Thường viết rút gọn là プロ (プロ野球: bóng chày chuyên nghiệp). Trái nghĩa hoàn toàn với アマチュア!"
+  },
+  {
+    "id": "kata_p2_q7",
+    "stt": 46,
+    "part": 2,
+    "num": 7,
+    "word": "アマチュア",
+    "meaning_vi": "Nghiệp dư, không chuyên",
+    "origin": "amateur (Pháp/Anh)",
+    "native_jp": "素人・愛好家",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "彼女は <u class=\"q-target\">（　　　）</u> だが、プロに 負けないくらい ピアノが 上手だ。",
+    "sentence_reverse_html": "彼女は <u class=\"q-target\">アマチュア</u> だが、プロに 負けないくらい ピアノが 上手だ。",
+    "sentence_tts": "彼女はアマチュアだが、プロに負けないくらいピアノが上手だ。",
+    "options": [
+      "プロフェッショナル",
+      "リーダー",
+      "パート",
+      "アマチュア"
+    ],
+    "options_vi": [
+      "Chuyên nghiệp",
+      "Lãnh đạo, trưởng nhóm",
+      "Việc làm bán thời gian (part-time)",
+      "Nghiệp dư, không chuyên (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Cô ấy chỉ là người nghiệp dư nhưng chơi piano giỏi không kém gì dân chuyên nghiệp.",
+    "wasei_note": "Cặp trái nghĩa hay thi: プロ(フェッショナル) <-> アマチュア (hay viết tắt là アマ)."
+  },
+  {
+    "id": "kata_p2_q8",
+    "stt": 47,
+    "part": 2,
+    "num": 8,
+    "word": "トレーニング",
+    "meaning_vi": "Luyện tập (thể lực, kỹ năng)",
+    "origin": "training (Anh)",
+    "native_jp": "訓練・練習",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "マラソン 大会に 向けて、毎日 ジムで <u class=\"q-target\">（　　　）</u> している。",
+    "sentence_reverse_html": "マラソン 大会に 向けて、毎日 ジムで <u class=\"q-target\">トレーニング</u> している。",
+    "sentence_tts": "マラソン大会に向けて、毎日ジムでトレーニングしている。",
+    "options": [
+      "マッサージ",
+      "コンテスト",
+      "トレーニング",
+      "ボランティア"
+    ],
+    "options_vi": [
+      "Xoa bóp, mát xa",
+      "Cuộc thi (hùng biện, ảnh, sắc đẹp...)",
+      "Luyện tập (thể lực, kỹ năng) (ĐÚNG)",
+      "Tình nguyện viên, hoạt động tình nguyện"
+    ],
+    "answer": 2,
+    "sentence_vi": "Để chuẩn bị cho giải chạy marathon, ngày nào tôi cũng tập luyện ở phòng gym.",
+    "wasei_note": "トレーニング ＝ 練習・訓練 (thường nhấn mạnh rèn luyện thể lực, cơ bắp)."
+  },
+  {
+    "id": "kata_p2_q9",
+    "stt": 48,
+    "part": 2,
+    "num": 9,
+    "word": "マッサージ",
+    "meaning_vi": "Xoa bóp, mát xa",
+    "origin": "massage (Pháp/Anh)",
+    "native_jp": "あんま・揉みほぐし",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "肩が こったので、プロに <u class=\"q-target\">（　　　）</u> を して もらった。",
+    "sentence_reverse_html": "肩が こったので、プロに <u class=\"q-target\">マッサージ</u> を して もらった。",
+    "sentence_tts": "肩がこったので、プロにマッサージをしてもらった。",
+    "options": [
+      "トレーニング",
+      "マッサージ",
+      "メッセージ",
+      "ストレス"
+    ],
+    "options_vi": [
+      "Luyện tập (thể lực, kỹ năng)",
+      "Xoa bóp, mát xa (ĐÚNG)",
+      "Tin nhắn, lời nhắn gửi",
+      "Stress, sự căng thẳng"
+    ],
+    "answer": 1,
+    "sentence_vi": "Vì bị mỏi vai nên tôi đã đi nhờ chuyên viên mát xa cho.",
+    "wasei_note": "⚠️ Cẩn thận nhìn nhầm với メッセージ (tin nhắn)! マッサージ (mát xa) vs メッセージ (tin nhắn)."
+  },
+  {
+    "id": "kata_p2_q10",
+    "stt": 49,
+    "part": 2,
+    "num": 10,
+    "word": "アドバイス",
+    "meaning_vi": "Lời khuyên, sự tư vấn",
+    "origin": "advice (Anh)",
+    "native_jp": "助言・忠告",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "就職 活動に ついて、先輩から 親切な <u class=\"q-target\">（　　　）</u> を もらった。",
+    "sentence_reverse_html": "就職 活動に ついて、先輩から 親切な <u class=\"q-target\">アドバイス</u> を もらった。",
+    "sentence_tts": "就職活動について、先輩から親切なアドバイスをもらった。",
+    "options": [
+      "アドバイス",
+      "アイディア",
+      "アナウンス",
+      "アンケート"
+    ],
+    "options_vi": [
+      "Lời khuyên, sự tư vấn (ĐÚNG)",
+      "Ý tưởng, sáng kiến",
+      "Thông báo (qua loa phát thanh ở ga/sân bay)",
+      "Bảng điều tra, phiếu khảo sát ý kiến"
+    ],
+    "answer": 0,
+    "sentence_vi": "Về chuyện xin việc, tôi đã nhận được lời khuyên tận tình từ tiền bối.",
+    "wasei_note": "Cụm cố định: アドバイスをする (khuyên) / アドバイスをもらう (nhận lời khuyên)."
+  },
+  {
+    "id": "kata_p2_q11",
+    "stt": 50,
+    "part": 2,
+    "num": 11,
+    "word": "アイディア",
+    "meaning_vi": "Ý tưởng, sáng kiến",
+    "origin": "idea (Anh)",
+    "native_jp": "考え・案",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "新商品の 開発に ついて、何か いい <u class=\"q-target\">（　　　）</u> は ありませんか。",
+    "sentence_reverse_html": "新商品の 開発に ついて、何か いい <u class=\"q-target\">アイディア</u> は ありませんか。",
+    "sentence_tts": "新商品の開発について、何かいいアイディアはありませんか。",
+    "options": [
+      "アドバイス",
+      "イメージ",
+      "テーマ",
+      "アイディア"
+    ],
+    "options_vi": [
+      "Lời khuyên, sự tư vấn",
+      "Hình ảnh, ấn tượng hình dung",
+      "Chủ đề, đề tài",
+      "Ý tưởng, sáng kiến (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Về việc phát triển sản phẩm mới, có ý tưởng nào hay không?",
+    "wasei_note": "Đồng nghĩa chuẩn N3: アイディア (hoặc アイデア) ＝ 案(あん)."
+  },
+  {
+    "id": "kata_p2_q12",
+    "stt": 51,
+    "part": 2,
+    "num": 12,
+    "word": "トップ",
+    "meaning_vi": "Đứng đầu, vị trí số 1, đỉnh",
+    "origin": "top (Anh)",
+    "native_jp": "首位・一番上",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "彼女は 常に クラスで <u class=\"q-target\">（　　　）</u> の 成績を キープしている。",
+    "sentence_reverse_html": "彼女は 常に クラスで <u class=\"q-target\">トップ</u> の 成績を キープしている。",
+    "sentence_tts": "彼女は常にクラスでトップの成績をキープしている。",
+    "options": [
+      "レベル",
+      "ヒット",
+      "トップ",
+      "アップ"
+    ],
+    "options_vi": [
+      "Trình độ, cấp độ",
+      "Nổi tiếng, thành công vang dội (hit)",
+      "Đứng đầu, vị trí số 1, đỉnh (ĐÚNG)",
+      "Tăng lên, nâng cao; cận cảnh"
+    ],
+    "answer": 2,
+    "sentence_vi": "Cô ấy luôn giữ vững thành tích đứng đầu lớp.",
+    "wasei_note": "トップ ＝ 一番 / 首位 (đứng nhất bảng)."
+  },
+  {
+    "id": "kata_p2_q13",
+    "stt": 52,
+    "part": 2,
+    "num": 13,
+    "word": "スピード",
+    "meaning_vi": "Tốc độ",
+    "origin": "speed (Anh)",
+    "native_jp": "速度・速さ",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "高速道路でも、<u class=\"q-target\">（　　　）</u> の 出しすぎには 注意してください。",
+    "sentence_reverse_html": "高速道路でも、<u class=\"q-target\">スピード</u> の 出しすぎには 注意してください。",
+    "sentence_tts": "高速道路でも、スピードの出しすぎには注意してください。",
+    "options": [
+      "カーブ",
+      "スピード",
+      "ブレーキ",
+      "ラッシュ"
+    ],
+    "options_vi": [
+      "Khúc cua, đường cong",
+      "Tốc độ (ĐÚNG)",
+      "Phanh, thắng xe",
+      "Giờ cao điểm, cảnh chen chúc đông nghẹt"
+    ],
+    "answer": 1,
+    "sentence_vi": "Kể cả trên đường cao tốc, xin hãy chú ý đừng chạy quá tốc độ.",
+    "wasei_note": "Cụm tủ JLPT: スピードを出す (tăng tốc) / スピードを落とす (giảm tốc)."
+  },
+  {
+    "id": "kata_p2_q14",
+    "stt": 53,
+    "part": 2,
+    "num": 14,
+    "word": "ラッシュ",
+    "meaning_vi": "Giờ cao điểm, cảnh chen chúc đông nghẹt",
+    "origin": "rush hour (Wasei)",
+    "native_jp": "混雑時",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "朝の 通勤 <u class=\"q-target\">（　　　）</u> の 電車は とても 混んでいる。",
+    "sentence_reverse_html": "朝の 通勤 <u class=\"q-target\">ラッシュ</u> の 電車は とても 混んでいる。",
+    "sentence_tts": "朝の通勤ラッシュの電車はとても混んでいる。",
+    "options": [
+      "ラッシュ",
+      "カーブ",
+      "スピード",
+      "セール"
+    ],
+    "options_vi": [
+      "Giờ cao điểm, cảnh chen chúc đông nghẹt (ĐÚNG)",
+      "Khúc cua, đường cong",
+      "Tốc độ",
+      "Đợt giảm giá, xả hàng (sale)"
+    ],
+    "answer": 0,
+    "sentence_vi": "Tàu điện vào giờ cao điểm đi làm buổi sáng rất đông đúc.",
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: rush hour -> ラッシュ (hoặc ラッシュアワー: giờ cao điểm kẹt cứng)."
+  },
+  {
+    "id": "kata_p2_q15",
+    "stt": 54,
+    "part": 2,
+    "num": 15,
+    "word": "バイク",
+    "meaning_vi": "Xe mô tô, xe gắn máy",
+    "origin": "bike (Wasei)",
+    "native_jp": "オートバイ",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "駅から 家まで 遠いので、<u class=\"q-target\">（　　　）</u> で 通勤しています。",
+    "sentence_reverse_html": "駅から 家まで 遠いので、<u class=\"q-target\">バイク</u> で 通勤しています。",
+    "sentence_tts": "駅から家まで遠いので、バイクで通勤しています。",
+    "options": [
+      "マイク",
+      "ヘルメット",
+      "ブレーキ",
+      "バイク"
+    ],
+    "options_vi": [
+      "Micro, ống nói",
+      "Mũ bảo hiểm",
+      "Phanh, thắng xe",
+      "Xe mô tô, xe gắn máy (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Vì từ ga đến nhà xa nên tôi đi làm bằng xe máy.",
+    "wasei_note": "⚠️ CẢNH BÁO WASEI-EIGO KINH ĐIỂN: Trong tiếng Nhật, バイク là XE MÁY (không phải xe đạp 自転車)!"
+  },
+  {
+    "id": "kata_p2_q16",
+    "stt": 55,
+    "part": 2,
+    "num": 16,
+    "word": "ヘルメット",
+    "meaning_vi": "Mũ bảo hiểm",
+    "origin": "helmet (Anh)",
+    "native_jp": "安全帽",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "バイクに 乗る ときは、必ず <u class=\"q-target\">（　　　）</u> を かぶってください。",
+    "sentence_reverse_html": "バイクに 乗る ときは、必ず <u class=\"q-target\">ヘルメット</u> を かぶってください。",
+    "sentence_tts": "バイクに乗るときは、必ずヘルメットをかぶってください。",
+    "options": [
+      "コンタクトレンズ",
+      "バイク",
+      "ヘルメット",
+      "ガラス"
+    ],
+    "options_vi": [
+      "Kính áp tròng",
+      "Xe mô tô, xe gắn máy",
+      "Mũ bảo hiểm (ĐÚNG)",
+      "Kính, thủy tinh"
+    ],
+    "answer": 2,
+    "sentence_vi": "Khi đi xe máy nhất định phải đội mũ bảo hiểm nhé.",
+    "wasei_note": "Động từ đi kèm đồ đội đầu: ヘルメットをかぶる (đội mũ bảo hiểm)."
+  },
+  {
+    "id": "kata_p2_q17",
+    "stt": 56,
+    "part": 2,
+    "num": 17,
+    "word": "コンタクトレンズ",
+    "meaning_vi": "Kính áp tròng",
+    "origin": "contact lens (Anh)",
+    "native_jp": "接触眼鏡",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "寝る 前に、<u class=\"q-target\">（　　　）</u> を 外すのを 忘れないでください。",
+    "sentence_reverse_html": "寝る 前に、<u class=\"q-target\">コンタクトレンズ</u> を 外すのを 忘れないでください。",
+    "sentence_tts": "寝る前に、コンタクトレンズを外すのを忘れないでください。",
+    "options": [
+      "ガラス",
+      "コンタクトレンズ",
+      "ヘルメット",
+      "カード"
+    ],
+    "options_vi": [
+      "Kính, thủy tinh",
+      "Kính áp tròng (ĐÚNG)",
+      "Mũ bảo hiểm",
+      "Thẻ (thẻ tín dụng, thẻ tích điểm, thiệp)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Trước khi đi ngủ đừng quên tháo kính áp tròng ra nhé.",
+    "wasei_note": "Thường gọi ngắn là コンタクト. Động từ: つける (đeo vào) / 外す(はずす: tháo ra)."
+  },
+  {
+    "id": "kata_p2_q18",
+    "stt": 57,
+    "part": 2,
+    "num": 18,
+    "word": "ガラス",
+    "meaning_vi": "Kính, thủy tinh",
+    "origin": "glas (Hà Lan)",
+    "native_jp": "硝子",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "ボールが 当たって、教室の 窓 <u class=\"q-target\">（　　　）</u> が 割れてしまった。",
+    "sentence_reverse_html": "ボールが 当たって、教室の 窓 <u class=\"q-target\">ガラス</u> が 割れてしまった。",
+    "sentence_tts": "ボールが当たって、教室の窓ガラスが割れてしまった。",
+    "options": [
+      "ガラス",
+      "プラスチック",
+      "ペンキ",
+      "ベランダ"
+    ],
+    "options_vi": [
+      "Kính, thủy tinh (ĐÚNG)",
+      "Nhựa (chất dẻo)",
+      "Sơn (sơn tường, gỗ, sắt)",
+      "Ban công"
+    ],
+    "answer": 0,
+    "sentence_vi": "Quả bóng đập trúng làm vỡ mất tấm kính cửa sổ lớp học.",
+    "wasei_note": "⚠️ Phân biệt: ガラス (chất liệu thủy tinh/cửa kính) khác グラス (cái cốc/ly uống nước)!"
+  },
+  {
+    "id": "kata_p2_q19",
+    "stt": 58,
+    "part": 2,
+    "num": 19,
+    "word": "プラスチック",
+    "meaning_vi": "Nhựa (chất dẻo)",
+    "origin": "plastic (Anh)",
+    "native_jp": "合成樹脂",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "この 容器は 軽くて 割れにくい <u class=\"q-target\">（　　　）</u> で できている。",
+    "sentence_reverse_html": "この 容器は 軽くて 割れにくい <u class=\"q-target\">プラスチック</u> で できている。",
+    "sentence_tts": "この容器は軽くて割れにくいプラスチックでできている。",
+    "options": [
+      "ガラス",
+      "ペンキ",
+      "リサイクル",
+      "プラスチック"
+    ],
+    "options_vi": [
+      "Kính, thủy tinh",
+      "Sơn (sơn tường, gỗ, sắt)",
+      "Tái chế",
+      "Nhựa (chất dẻo) (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Chiếc hộp đựng này được làm bằng nhựa nhẹ và khó vỡ.",
+    "wasei_note": "Lưu ý chính tả chuẩn: プラスチック (chữ チ chứ KHÔNG phải チェ!)."
+  },
+  {
+    "id": "kata_p2_q20",
+    "stt": 59,
+    "part": 2,
+    "num": 20,
+    "word": "ベランダ",
+    "meaning_vi": "Ban công",
+    "origin": "veranda (Bồ Đào Nha/Anh)",
+    "native_jp": "縁側・張り出し縁",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "天気の いい 日は、<u class=\"q-target\">（　　　）</u> に 布団を 干します。",
+    "sentence_reverse_html": "天気の いい 日は、<u class=\"q-target\">ベランダ</u> に 布団を 干します。",
+    "sentence_tts": "天気のいい日は、ベランダに布団を干します。",
+    "options": [
+      "オフィス",
+      "コンビニ",
+      "ベランダ",
+      "レジ"
+    ],
+    "options_vi": [
+      "Văn phòng, công sở",
+      "Cửa hàng tiện lợi",
+      "Ban công (ĐÚNG)",
+      "Quầy tính tiền, máy thu ngân"
+    ],
+    "answer": 2,
+    "sentence_vi": "Những ngày trời đẹp, tôi phơi chăn đệm ngoài ban công.",
+    "wasei_note": "Cụm hay gặp ở Đọc hiểu/Nghe hiểu đời sống Nhật: ベランダに洗濯物を干す (phơi đồ ngoài ban công)."
+  },
+  {
+    "id": "kata_p2_q21",
+    "stt": 60,
+    "part": 2,
+    "num": 21,
+    "word": "デザイン",
+    "meaning_vi": "Thiết kế, kiểu dáng",
+    "origin": "design (Anh)",
+    "native_jp": "設計・意匠",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "この 靴は <u class=\"q-target\">（　　　）</u> が おしゃれなので、すぐ 買ってしまった。",
+    "sentence_reverse_html": "この 靴は <u class=\"q-target\">デザイン</u> が おしゃれなので、すぐ 買ってしまった。",
+    "sentence_tts": "この靴はデザインがおしゃれなので、すぐ買ってしまった。",
+    "options": [
+      "ブランド",
+      "デザイン",
+      "サイズ",
+      "ラベル"
+    ],
+    "options_vi": [
+      "Thương hiệu, nhãn hiệu nổi tiếng",
+      "Thiết kế, kiểu dáng (ĐÚNG)",
+      "Kích cỡ, độ lớn",
+      "Nhãn dán, tem mác (trên chai/hàng)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Đôi giày này thiết kế sành điệu quá nên tôi đã mua ngay.",
+    "wasei_note": "Vừa là danh từ (thiết kế) vừa dùng デザインする (thiết kế ra)."
+  },
+  {
+    "id": "kata_p2_q22",
+    "stt": 61,
+    "part": 2,
+    "num": 22,
+    "word": "セール",
+    "meaning_vi": "Đợt giảm giá, xả hàng (sale)",
+    "origin": "sale (Anh)",
+    "native_jp": "特売・安売り",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "デパートで 夏物 バーゲン <u class=\"q-target\">（　　　）</u> が 始まった。",
+    "sentence_reverse_html": "デパートで 夏物 バーゲン <u class=\"q-target\">セール</u> が 始まった。",
+    "sentence_tts": "デパートで夏物バーゲンセールが始まった。",
+    "options": [
+      "セール",
+      "レンタル",
+      "レジ",
+      "レシート"
+    ],
+    "options_vi": [
+      "Đợt giảm giá, xả hàng (sale) (ĐÚNG)",
+      "Thuê, cho thuê (xe, đĩa, đồ)",
+      "Quầy tính tiền, máy thu ngân",
+      "Hóa đơn, biên lai thanh toán"
+    ],
+    "answer": 0,
+    "sentence_vi": "Đợt giảm giá đồ mùa hè ở trung tâm thương mại đã bắt đầu.",
+    "wasei_note": "Hay gặp: タイムセール (giảm giá theo khung giờ), 年中セール (giảm giá quanh năm)."
+  },
+  {
+    "id": "kata_p2_q23",
+    "stt": 62,
+    "part": 2,
+    "num": 23,
+    "word": "パート",
+    "meaning_vi": "Việc làm bán thời gian (part-time)",
+    "origin": "part-time (Wasei)",
+    "native_jp": "非常勤・アルバイト",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "子どもが 学校に 行っている 間、スーパーで <u class=\"q-target\">（　　　）</u> を している。",
+    "sentence_reverse_html": "子どもが 学校に 行っている 間、スーパーで <u class=\"q-target\">パート</u> を している。",
+    "sentence_tts": "子どもが学校に行っている間、スーパーでパートをしている。",
+    "options": [
+      "ボランティア",
+      "パートナー",
+      "オフィス",
+      "パート"
+    ],
+    "options_vi": [
+      "Tình nguyện viên, hoạt động tình nguyện",
+      "Đối tác, bạn đồng hành",
+      "Văn phòng, công sở",
+      "Việc làm bán thời gian (part-time) (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Trong lúc con đi học, tôi làm việc bán thời gian ở siêu thị.",
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: パート thường chỉ việc làm thêm của các bà nội trợ/người lớn; アルバイト hay dùng cho sinh viên."
+  },
+  {
+    "id": "kata_p2_q24",
+    "stt": 63,
+    "part": 2,
+    "num": 24,
+    "word": "コンビニ",
+    "meaning_vi": "Cửa hàng tiện lợi",
+    "origin": "convenience store (Wasei)",
+    "native_jp": "24時間営業店",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "夜中に おなかが すいたので、近くの <u class=\"q-target\">（　　　）</u> で お弁当を 買った。",
+    "sentence_reverse_html": "夜中に おなかが すいたので、近くの <u class=\"q-target\">コンビニ</u> で お弁当を 買った。",
+    "sentence_tts": "夜中におなかがすいたので、近くのコンビニでお弁当を買った。",
+    "options": [
+      "オフィス",
+      "レジ",
+      "コンビニ",
+      "ファストフード"
+    ],
+    "options_vi": [
+      "Văn phòng, công sở",
+      "Quầy tính tiền, máy thu ngân",
+      "Cửa hàng tiện lợi (ĐÚNG)",
+      "Thức ăn nhanh"
+    ],
+    "answer": 2,
+    "sentence_vi": "Nửa đêm thấy đói bụng nên tôi đã ra cửa hàng tiện lợi gần nhà mua cơm hộp.",
+    "wasei_note": "⚠️ Từ rút gọn siêu phổ biến: コンビニエンスストア -> コンビニ!"
+  },
+  {
+    "id": "kata_p2_q25",
+    "stt": 64,
+    "part": 2,
+    "num": 25,
+    "word": "レジ",
+    "meaning_vi": "Quầy tính tiền, máy thu ngân",
+    "origin": "cash register (Wasei)",
+    "native_jp": "会計場",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "昼休みは お客さんが 多くて、<u class=\"q-target\">（　　　）</u> の 前に 長い 列が できた。",
+    "sentence_reverse_html": "昼休みは お客さんが 多くて、<u class=\"q-target\">レジ</u> の 前に 長い 列が できた。",
+    "sentence_tts": "昼休みはお客さんが多くて、レジの前に長い列ができた。",
+    "options": [
+      "レシート",
+      "レジ",
+      "コンビニ",
+      "セール"
+    ],
+    "options_vi": [
+      "Hóa đơn, biên lai thanh toán",
+      "Quầy tính tiền, máy thu ngân (ĐÚNG)",
+      "Cửa hàng tiện lợi",
+      "Đợt giảm giá, xả hàng (sale)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Giờ nghỉ trưa đông khách nên trước quầy tính tiền xếp hàng dài.",
+    "wasei_note": "⚠️ Rút gọn từ register -> レジ! Đừng nhầm với レシート (hóa đơn)!"
+  },
+  {
+    "id": "kata_p2_q26",
+    "stt": 65,
+    "part": 2,
+    "num": 26,
+    "word": "レシート",
+    "meaning_vi": "Hóa đơn, biên lai thanh toán",
+    "origin": "receipt (Anh)",
+    "native_jp": "領収書",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "返品する ときに 必要なので、<u class=\"q-target\">（　　　）</u> を 捨てないでください。",
+    "sentence_reverse_html": "返品する ときに 必要なので、<u class=\"q-target\">レシート</u> を 捨てないでください。",
+    "sentence_tts": "返品するときに必要なので、レシートを捨てないでください。",
+    "options": [
+      "レシート",
+      "レジ",
+      "カード",
+      "ラベル"
+    ],
+    "options_vi": [
+      "Hóa đơn, biên lai thanh toán (ĐÚNG)",
+      "Quầy tính tiền, máy thu ngân",
+      "Thẻ (thẻ tín dụng, thẻ tích điểm, thiệp)",
+      "Nhãn dán, tem mác (trên chai/hàng)"
+    ],
+    "answer": 0,
+    "sentence_vi": "Vì cần thiết khi đổi trả hàng nên xin đừng vứt hóa đơn đi nhé.",
+    "wasei_note": "Phân biệt: レシート (biên lai in tự động ở máy tính tiền) vs 領収書 (hóa đơn đỏ có ghi tên công ty)."
+  },
+  {
+    "id": "kata_p2_q27",
+    "stt": 66,
+    "part": 2,
+    "num": 27,
+    "word": "インスタント",
+    "meaning_vi": "Ăn liền, pha liền, tức thì",
+    "origin": "instant (Anh)",
+    "native_jp": "即席",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "忙しくて 料理する 時間が ない ときは、<u class=\"q-target\">（　　　）</u> ラーメンを 食べる。",
+    "sentence_reverse_html": "忙しくて 料理する 時間が ない ときは、<u class=\"q-target\">インスタント</u> ラーメンを 食べる。",
+    "sentence_tts": "忙しくて料理する時間がないときは、インスタントラーメンを食べる。",
+    "options": [
+      "ファストフード",
+      "デザート",
+      "フルーツ",
+      "インスタント"
+    ],
+    "options_vi": [
+      "Thức ăn nhanh",
+      "Món tráng miệng",
+      "Hoa quả, trái cây",
+      "Ăn liền, pha liền, tức thì (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Những lúc bận không có thời gian nấu ăn, tôi hay ăn mì ăn liền.",
+    "wasei_note": "Hay ghép: インスタントコーヒー (cà phê hòa tan), インスタント食品 (thực phẩm ăn liền)."
+  },
+  {
+    "id": "kata_p2_q28",
+    "stt": 67,
+    "part": 2,
+    "num": 28,
+    "word": "フルーツ",
+    "meaning_vi": "Hoa quả, trái cây",
+    "origin": "fruits (Anh)",
+    "native_jp": "果物",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "朝ごはんには いつも 新鮮な <u class=\"q-target\">（　　　）</u> を 食べる ようにしている。",
+    "sentence_reverse_html": "朝ごはんには いつも 新鮮な <u class=\"q-target\">フルーツ</u> を 食べる ようにしている。",
+    "sentence_tts": "朝ごはんにはいつも新鮮なフルーツを食べるようにしている。",
+    "options": [
+      "デザート",
+      "ファストフード",
+      "フルーツ",
+      "インスタント"
+    ],
+    "options_vi": [
+      "Món tráng miệng",
+      "Thức ăn nhanh",
+      "Hoa quả, trái cây (ĐÚNG)",
+      "Ăn liền, pha liền, tức thì"
+    ],
+    "answer": 2,
+    "sentence_vi": "Bữa sáng tôi luôn cố gắng ăn trái cây tươi.",
+    "wasei_note": "フルーツ ＝ 果物(くだもの). Hay gặp ở thực đơn: フルーツジュース, フルーツケーキ."
+  },
+  {
+    "id": "kata_p2_q29",
+    "stt": 68,
+    "part": 2,
+    "num": 29,
+    "word": "ファストフード",
+    "meaning_vi": "Thức ăn nhanh",
+    "origin": "fast food (Anh)",
+    "native_jp": "手軽な軽食",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "ハンバーガーなどの <u class=\"q-target\">（　　　）</u> ばかり 食べていると、体に よくない。",
+    "sentence_reverse_html": "ハンバーガーなどの <u class=\"q-target\">ファストフード</u> ばかり 食べていると、体に よくない。",
+    "sentence_tts": "ハンバーガーなどのファストフードばかり食べていると、体によくない。",
+    "options": [
+      "インスタント",
+      "ファストフード",
+      "デザート",
+      "フルーツ"
+    ],
+    "options_vi": [
+      "Ăn liền, pha liền, tức thì",
+      "Thức ăn nhanh (ĐÚNG)",
+      "Món tráng miệng",
+      "Hoa quả, trái cây"
+    ],
+    "answer": 1,
+    "sentence_vi": "Nếu cứ chỉ toàn ăn thức ăn nhanh như hamburger thì không tốt cho cơ thể.",
+    "wasei_note": "Cũng hay viết là ファーストフード (đều hiểu là đồ ăn nhanh)."
+  },
+  {
+    "id": "kata_p2_q30",
+    "stt": 69,
+    "part": 2,
+    "num": 30,
+    "word": "デザート",
+    "meaning_vi": "Món tráng miệng",
+    "origin": "dessert (Pháp/Anh)",
+    "native_jp": "食後の菓子",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "食事の あとの <u class=\"q-target\">（　　　）</u> に、アイスクリームを 注文した。",
+    "sentence_reverse_html": "食事の あとの <u class=\"q-target\">デザート</u> に、アイスクリームを 注文した。",
+    "sentence_tts": "食事のあとのデザートに、アイスクリームを注文した。",
+    "options": [
+      "デザート",
+      "フルーツ",
+      "ファストフード",
+      "インスタント"
+    ],
+    "options_vi": [
+      "Món tráng miệng (ĐÚNG)",
+      "Hoa quả, trái cây",
+      "Thức ăn nhanh",
+      "Ăn liền, pha liền, tức thì"
+    ],
+    "answer": 0,
+    "sentence_vi": "Tôi đã gọi kem làm món tráng miệng sau bữa ăn.",
+    "wasei_note": "Cẩn thận cách viết: デザート (tráng miệng) — có âm đục ザ và trường âm ー!"
+  },
+  {
+    "id": "kata_p2_q31",
+    "stt": 70,
+    "part": 2,
+    "num": 31,
+    "word": "インターネット",
+    "meaning_vi": "Mạng Internet",
+    "origin": "Internet (Anh)",
+    "native_jp": "情報通信網",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "最近は <u class=\"q-target\">（　　　）</u> を 使って、家で 簡単に 買い物ができる。",
+    "sentence_reverse_html": "最近は <u class=\"q-target\">インターネット</u> を 使って、家で 簡単に 買い物ができる。",
+    "sentence_tts": "最近はインターネットを使って、家で簡単に買い物ができる。",
+    "options": [
+      "マスコミ",
+      "デジタル",
+      "ウイルス",
+      "インターネット"
+    ],
+    "options_vi": [
+      "Giới truyền thông đại chúng",
+      "Kỹ thuật số",
+      "Virus (bệnh tật hoặc máy tính)",
+      "Mạng Internet (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Gần đây nhờ có mạng Internet mà có thể mua sắm dễ dàng ngay tại nhà.",
+    "wasei_note": "Lưu ý có 2 trường âm ー: イン+ター+ネッ+ト (thường viết tắt là ネット)."
+  },
+  {
+    "id": "kata_p2_q32",
+    "stt": 71,
+    "part": 2,
+    "num": 32,
+    "word": "チャイム",
+    "meaning_vi": "Chuông (chuông cửa, chuông báo giờ học)",
+    "origin": "chime (Anh)",
+    "native_jp": "呼び鈴・鐘",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "授業 開始の <u class=\"q-target\">（　　　）</u> が 鳴ったので、急いで 教室に 入った。",
+    "sentence_reverse_html": "授業 開始の <u class=\"q-target\">チャイム</u> が 鳴ったので、急いで 教室に 入った。",
+    "sentence_tts": "授業開始のチャイムが鳴ったので、急いで教室に入った。",
+    "options": [
+      "アナウンス",
+      "マイク",
+      "チャイム",
+      "メッセージ"
+    ],
+    "options_vi": [
+      "Thông báo (qua loa phát thanh ở ga/sân bay)",
+      "Micro, ống nói",
+      "Chuông (chuông cửa, chuông báo giờ học) (ĐÚNG)",
+      "Tin nhắn, lời nhắn gửi"
+    ],
+    "answer": 2,
+    "sentence_vi": "Chuông báo bắt đầu tiết học đã reo nên tôi vội vàng bước vào lớp.",
+    "wasei_note": "Cụm cố định: チャイムが鳴る (chuông reo), チャイムを押す (bấm chuông cửa)."
+  },
+  {
+    "id": "kata_p2_q33",
+    "stt": 72,
+    "part": 2,
+    "num": 33,
+    "word": "アナウンス",
+    "meaning_vi": "Thông báo (qua loa phát thanh ở ga/sân bay)",
+    "origin": "announce (Anh)",
+    "native_jp": "場内放送・案内",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "電車が 遅れているという 駅の <u class=\"q-target\">（　　　）</u> が 聞こえた。",
+    "sentence_reverse_html": "電車が 遅れているという 駅の <u class=\"q-target\">アナウンス</u> が 聞こえた。",
+    "sentence_tts": "電車が遅れているという駅のアナウンスが聞こえた。",
+    "options": [
+      "チャイム",
+      "アナウンス",
+      "メッセージ",
+      "インタビュー"
+    ],
+    "options_vi": [
+      "Chuông (chuông cửa, chuông báo giờ học)",
+      "Thông báo (qua loa phát thanh ở ga/sân bay) (ĐÚNG)",
+      "Tin nhắn, lời nhắn gửi",
+      "Cuộc phỏng vấn (báo chí, truyền hình)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Tôi nghe thấy loa thông báo của nhà ga nói rằng tàu đang bị trễ.",
+    "wasei_note": "アナウンス ＝ 案内放送 (thông báo bằng giọng nói qua loa). Nghề phát thanh viên là アナウンサー."
+  },
+  {
+    "id": "kata_p2_q34",
+    "stt": 73,
+    "part": 2,
+    "num": 34,
+    "word": "メッセージ",
+    "meaning_vi": "Tin nhắn, lời nhắn gửi",
+    "origin": "message (Anh)",
+    "native_jp": "伝言",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "留守番 電話に <u class=\"q-target\">（　　　）</u> を 残して おきました。",
+    "sentence_reverse_html": "留守番 電話に <u class=\"q-target\">メッセージ</u> を 残して おきました。",
+    "sentence_tts": "留守番電話にメッセージを残しておきました。",
+    "options": [
+      "メッセージ",
+      "マッサージ",
+      "パンフレット",
+      "アナウンス"
+    ],
+    "options_vi": [
+      "Tin nhắn, lời nhắn gửi (ĐÚNG)",
+      "Xoa bóp, mát xa",
+      "Ấn phẩm quảng cáo, tờ rơi, sách giới thiệu",
+      "Thông báo (qua loa phát thanh ở ga/sân bay)"
+    ],
+    "answer": 0,
+    "sentence_vi": "Tôi đã để lại lời nhắn vào hộp thư thoại trả lời tự động rồi.",
+    "wasei_note": "⚠️ Cặp bẫy mặt chữ: メッセージ (tin nhắn ＝ 伝言) vs マッサージ (mát xa)!"
+  },
+  {
+    "id": "kata_p2_q35",
+    "stt": 74,
+    "part": 2,
+    "num": 35,
+    "word": "パンフレット",
+    "meaning_vi": "Ấn phẩm quảng cáo, tờ rơi, sách giới thiệu",
+    "origin": "pamphlet (Anh)",
+    "native_jp": "小冊子・案内書",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "旅行 会社で 京都 観光の <u class=\"q-target\">（　　　）</u> を もらってきた。",
+    "sentence_reverse_html": "旅行 会社で 京都 観光の <u class=\"q-target\">パンフレット</u> を もらってきた。",
+    "sentence_tts": "旅行会社で京都観光のパンフレットをもらってきた。",
+    "options": [
+      "アンケート",
+      "レシート",
+      "カード",
+      "パンフレット"
+    ],
+    "options_vi": [
+      "Bảng điều tra, phiếu khảo sát ý kiến",
+      "Hóa đơn, biên lai thanh toán",
+      "Thẻ (thẻ tín dụng, thẻ tích điểm, thiệp)",
+      "Ấn phẩm quảng cáo, tờ rơi, sách giới thiệu (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Tôi đã đến công ty du lịch lấy tờ rơi giới thiệu du lịch Kyoto về.",
+    "wasei_note": "Rất hay xuất hiện trong Đọc hiểu Mondai 4 (Thông tin du lịch/Trường học)!"
+  },
+  {
+    "id": "kata_p2_q36",
+    "stt": 75,
+    "part": 2,
+    "num": 36,
+    "word": "カード",
+    "meaning_vi": "Thẻ (thẻ tín dụng, thẻ tích điểm, thiệp)",
+    "origin": "card (Anh)",
+    "native_jp": "札・会員証",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "現金が 足りなかったので、クレジット <u class=\"q-target\">（　　　）</u> で 払った。",
+    "sentence_reverse_html": "現金が 足りなかったので、クレジット <u class=\"q-target\">カード</u> で 払った。",
+    "sentence_tts": "現金が足りなかったので、クレジットカードで払った。",
+    "options": [
+      "レシート",
+      "パンフレット",
+      "カード",
+      "ラベル"
+    ],
+    "options_vi": [
+      "Hóa đơn, biên lai thanh toán",
+      "Ấn phẩm quảng cáo, tờ rơi, sách giới thiệu",
+      "Thẻ (thẻ tín dụng, thẻ tích điểm, thiệp) (ĐÚNG)",
+      "Nhãn dán, tem mác (trên chai/hàng)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Vì không đủ tiền mặt nên tôi đã thanh toán bằng thẻ tín dụng.",
+    "wasei_note": "Hay gặp: クレジットカード (thẻ tín dụng), ポイントカード (thẻ tích điểm), キャッシュカード (thẻ ATM)."
+  },
+  {
+    "id": "kata_p2_q37",
+    "stt": 76,
+    "part": 2,
+    "num": 37,
+    "word": "インタビュー",
+    "meaning_vi": "Cuộc phỏng vấn (báo chí, truyền hình)",
+    "origin": "interview (Anh)",
+    "native_jp": "取材・会見",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "優勝した 選手が テレビの <u class=\"q-target\">（　　　）</u> に 答えている。",
+    "sentence_reverse_html": "優勝した 選手が テレビの <u class=\"q-target\">インタビュー</u> に 答えている。",
+    "sentence_tts": "優勝した選手がテレビのインタビューに答えている。",
+    "options": [
+      "アンケート",
+      "インタビュー",
+      "コンテスト",
+      "アナウンス"
+    ],
+    "options_vi": [
+      "Bảng điều tra, phiếu khảo sát ý kiến",
+      "Cuộc phỏng vấn (báo chí, truyền hình) (ĐÚNG)",
+      "Cuộc thi (hùng biện, ảnh, sắc đẹp...)",
+      "Thông báo (qua loa phát thanh ở ga/sân bay)"
+    ],
+    "answer": 1,
+    "sentence_vi": "Vận động viên giành chức vô địch đang trả lời phỏng vấn của đài truyền hình.",
+    "wasei_note": "Phân biệt: インタビュー (phỏng vấn báo chí/TV) vs 面接(めんせつ: phỏng vấn xin việc/nhập học)!"
+  },
+  {
+    "id": "kata_p2_q38",
+    "stt": 77,
+    "part": 2,
+    "num": 38,
+    "word": "アンケート",
+    "meaning_vi": "Bảng điều tra, phiếu khảo sát ý kiến",
+    "origin": "enquête (Pháp)",
+    "native_jp": "意識調査",
+    "category": "Truyền thông & Văn hóa",
+    "sentence_html": "サービスの 向上の ために、お客様に <u class=\"q-target\">（　　　）</u> に 協力して もらった。",
+    "sentence_reverse_html": "サービスの 向上の ために、お客様に <u class=\"q-target\">アンケート</u> に 協力して もらった。",
+    "sentence_tts": "サービスの向上のために、お客様にアンケートに協力してもらった。",
+    "options": [
+      "アンケート",
+      "パンフレット",
+      "インタビュー",
+      "アドバイス"
+    ],
+    "options_vi": [
+      "Bảng điều tra, phiếu khảo sát ý kiến (ĐÚNG)",
+      "Ấn phẩm quảng cáo, tờ rơi, sách giới thiệu",
+      "Cuộc phỏng vấn (báo chí, truyền hình)",
+      "Lời khuyên, sự tư vấn"
+    ],
+    "answer": 0,
+    "sentence_vi": "Để nâng cao dịch vụ, chúng tôi đã nhờ khách hàng hợp tác điền phiếu khảo sát.",
+    "wasei_note": "⚠️ Từ mượn tiếng PHÁP (enquête)! Cực kỳ hay thi JLPT N3: アンケートをとる / アンケートに答える."
+  },
+  {
+    "id": "kata_p2_q39",
+    "stt": 78,
+    "part": 2,
+    "num": 39,
+    "word": "パーセント",
+    "meaning_vi": "Phần trăm (%)",
+    "origin": "percent (Anh)",
+    "native_jp": "百分率・割",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "今日の 降水 確率は 80 <u class=\"q-target\">（　　　）</u> だから、傘を 持って 行こう。",
+    "sentence_reverse_html": "今日の 降水 確率は 80 <u class=\"q-target\">パーセント</u> だから、傘を 持って 行こう。",
+    "sentence_tts": "今日の降水確率は80パーセントだから、傘を持って行こう。",
+    "options": [
+      "マイナス",
+      "プラス",
+      "レベル",
+      "パーセント"
+    ],
+    "options_vi": [
+      "Trừ, âm, lỗ, mặt tiêu cực",
+      "Cộng, dương, mặt tích cực",
+      "Trình độ, cấp độ",
+      "Phần trăm (%) (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Xác suất mưa hôm nay là 80 phần trăm nên hãy mang ô theo nhé.",
+    "wasei_note": "Thường đi với tỷ lệ thời tiết (降水確率), giảm giá (20パーセント引き), thống kê biểu đồ Dokkai."
+  }
+];

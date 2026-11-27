@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luyện Đề JLPT N3 - 240 Câu Kanji & Kho Phục Thù Chống Học Vẹt</title>
+    <title>Luyện Đề JLPT N3 - Kanji 240 • Đồng Nghĩa 80 • Katakana 78</title>
 
     <!-- Google Fonts: Outfit & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -474,6 +474,11 @@
             padding: 28px 14px;
             letter-spacing: 2px;
         }
+        .q-sentence.only-meaning {
+            font-size: 24px;
+            padding: 22px 16px;
+            letter-spacing: 0;
+        }
         .q-target {
             text-decoration: none;
             border-bottom: 3px solid var(--primary);
@@ -517,6 +522,11 @@
             transition: all 0.16s;
             text-align: left;
             min-height: 62px;
+        }
+        .exam-opt-btn.opt-vi-mode {
+            font-size: 15.5px;
+            line-height: 1.4;
+            font-weight: 600;
         }
         .exam-opt-btn:hover:not(.locked-opt) {
             border-color: var(--primary);
@@ -776,6 +786,7 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
+            position: relative;
         }
         .pair-side.masked {
             background: var(--bg-btn-active);
@@ -788,9 +799,11 @@
         }
         .pair-side.masked::after {
             content: "👁️ Bấm mở";
-            display: block;
-            margin-top: -28px;
-            margin-bottom: 10px;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 12px;
             font-weight: 700;
             color: var(--primary);
@@ -823,8 +836,11 @@
             user-select: none;
             position: relative;
         }
+        .pair-meaning.masked > * {
+            visibility: hidden;
+        }
         .pair-meaning.masked::after {
-            content: "🙈 Đã ẩn nghĩa tiếng Việt (Bấm để mở)";
+            content: attr(data-mask-label);
             position: absolute;
             inset: 0;
             display: flex;
@@ -915,7 +931,7 @@
                         <i class="fa-solid fa-layer-group"></i> <span id="nav-lobby-lbl">Sảnh Bộ Đề</span>
                     </button>
                     <button class="tab-btn" id="nav-view-pairs-btn" style="display: none;" onclick="showMainView('pairs')">
-                        <i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng 80 Cặp A = B
+                        <i class="fa-solid fa-table-list" style="color: var(--primary);"></i> <span id="nav-pairs-lbl">Bảng 80 Cặp A = B</span>
                     </button>
                     <button class="tab-btn" id="nav-view-mistakes-btn" onclick="showMainView('mistakes')">
                         <i class="fa-solid fa-fire" style="color: var(--hub-danger-text);"></i> Kho Phục Thù (<span id="top-mistake-count">0</span>)
@@ -964,12 +980,12 @@
                             </div>
                             <span class="bank-chip-sub">95 câu Mondai 4 + Bảng dò 80 cặp</span>
                         </div>
-                        <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 3">
+                        <div class="bank-chip" id="bank-chip-kata78" onclick="switchBank('kata78')">
                             <div class="bank-chip-title">
-                                <span>🔤 Katakana & 330 Kanji</span>
-                                <span style="font-size: 11px; color: var(--hub-text-sub);">GĐ 3</span>
+                                <span>🔤 78 Từ Katakana N3</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
                             </div>
-                            <span class="bank-chip-sub">Từ mượn & Kanji tổng hợp N3</span>
+                            <span class="bank-chip-sub">78 câu Mondai 3 + Bảng dò 78 từ</span>
                         </div>
                         <div class="bank-chip locked" title="Sẽ mở ở Giai đoạn 4">
                             <div class="bank-chip-title">
@@ -1066,7 +1082,7 @@
                             <span id="sessions-panel-title"><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3</span>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 <button class="btn-pill primary" id="open-pairs-quick-btn" style="display: none;" onclick="showMainView('pairs')">
-                                    <i class="fa-solid fa-table-list"></i> Mở Bảng Dò 80 Cặp A = B
+                                    <i class="fa-solid fa-table-list"></i> <span id="open-pairs-quick-lbl">Mở Bảng Dò 80 Cặp A = B</span>
                                 </button>
                                 <button class="btn-pill danger" id="quick-revenge-btn">
                                     <i class="fa-solid fa-fire"></i> Phục Thù Toàn Bộ Câu Sai (<span id="btn-revenge-cnt">0</span>)
@@ -1242,14 +1258,14 @@
                                 <i class="fa-solid fa-shuffle"></i> Làm Lại Bộ Này (Xáo Mới 100%)
                             </button>
                             <button class="btn-pill" onclick="showMainView('lobby')">
-                                <i class="fa-solid fa-house"></i> Về Sảnh 4 Ca
+                                <i class="fa-solid fa-house"></i> Về Sảnh Bộ Đề
                             </button>
                         </div>
                     </div>
 
                     <div class="panel-card">
                         <h3>
-                            <span><i class="fa-solid fa-microscope" style="color: var(--primary);"></i> Chữa Bài Chi Tiết (Hán Việt • Dịch Câu • Bẫy Nhiễu)</span>
+                            <span><i class="fa-solid fa-microscope" style="color: var(--primary);"></i> Chữa Bài Chi Tiết & Phân Tích Đáp Án</span>
                             <div style="display: flex; gap: 8px;">
                                 <button class="btn-pill primary" id="filter-rev-wrong-btn">Chỉ câu Sai & Cờ 🚩</button>
                                 <button class="btn-pill" id="filter-rev-all-btn">Xem tất cả</button>
@@ -1286,12 +1302,12 @@
                     </div>
                 </div>
                 <!-- ==========================================
-                     VIEW 5: BẢNG DÒ NHANH 80 CẶP ĐỒNG NGHĨA A = B
+                     VIEW 5: BẢNG DÒ NHANH (80 CẶP ĐỒNG NGHĨA / 78 TỪ KATAKANA)
                      ========================================== -->
                 <div id="view-pairs" style="display: none;">
                     <div class="panel-card">
                         <h3>
-                            <span><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 80 Cặp Từ Đồng Nghĩa N3 (A ＝ B)</span>
+                            <span id="pairs-view-title"><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 80 Cặp Từ Đồng Nghĩa N3 (A ＝ B)</span>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 <button class="btn-pill primary" id="pairs-mask-none-btn" onclick="setPairsMaskMode('none')">👁️ Hiện tất cả</button>
                                 <button class="btn-pill" id="pairs-mask-right-btn" onclick="setPairsMaskMode('right')">🙈 Che vế phải & Nghĩa (A = ???)</button>
@@ -1302,17 +1318,11 @@
                             <input type="text" id="pairs-search-input" class="hub-select" style="flex: 1; min-width: 220px; cursor: text;" placeholder="Tìm nhanh Kanji, Hiragana, Katakana hoặc nghĩa tiếng Việt...">
                             <select id="pairs-cat-select" class="hub-select">
                                 <option value="all">Tất cả từ loại (80 cặp)</option>
-                                <option value="Động từ">Động từ</option>
-                                <option value="Tính từ">Tính từ</option>
-                                <option value="Danh từ">Danh từ</option>
-                                <option value="Phó từ">Phó từ</option>
-                                <option value="Katakana">Katakana</option>
-                                <option value="Cụm từ">Cụm từ</option>
                             </select>
                             <button class="btn-pill" id="pairs-shuffle-btn"><i class="fa-solid fa-shuffle"></i> Xáo bảng</button>
                         </div>
                         <div class="pairs-grid" id="pairs-grid-container">
-                            <!-- 80 Pair cards injected by JS -->
+                            <!-- Study cards injected by JS -->
                         </div>
                     </div>
                 </div>
@@ -1323,6 +1333,7 @@
     <!-- Load Databases + Logic -->
     <script src="data/kanji_240_data.js"></script>
     <script src="data/synonym_n3_data.js"></script>
+    <script src="data/katakana_n3_data.js"></script>
     <script src="assets/js/luyen_de_app.js"></script>
 </body>
 </html>

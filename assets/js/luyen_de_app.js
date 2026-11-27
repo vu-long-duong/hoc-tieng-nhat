@@ -1,6 +1,6 @@
 // ==========================================
 // LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE
-// Supports: [kanji240] 240 Câu Kanji N3 | [syn80] 80 Cặp Đồng Nghĩa N3
+// Supports: [kanji240] 240 Câu Kanji N3 | [syn80] 80 Cặp Đồng Nghĩa N3 | [kata78] 78 Từ Katakana N3
 // ==========================================
 
 const LS_HUB_SRS_KEY = 'n3_srs_mistakes';
@@ -40,18 +40,34 @@ const BANK_CONFIGS = {
             { session: 2, shift: 'Ca 2 • Đề Gốc', icon: 'fa-cloud-sun', title: 'Bài 2 — 40 Câu Đồng Nghĩa', desc: 'Mondai 4 chuẩn đề gốc (40 câu sau)', count: 40, timeLbl: '10p' },
             { session: 3, shift: 'Ca 3 • Phủ Kín', icon: 'fa-sparkles', title: 'Bài 3 Bổ Sung — 15 Câu Phủ Kín Bảng 80', desc: '15 cặp bảng 80 chưa hỏi ở Bài 1 & 2 (延期, 輝く, がっかり...)', count: 15, timeLbl: '4p' }
         ]
+    },
+    kata78: {
+        id: 'kata78',
+        name: '78 Từ Katakana N3',
+        keys: {
+            mistakes: 'n3_kata78_mistakes',
+            history: 'n3_kata78_history',
+            touched: 'n3_kata78_touched',
+            inprogress: 'n3_kata78_inprogress'
+        },
+        secPerQuestion: 15,
+        shifts: [
+            { session: 1, shift: 'Ca 1 • Bài 1', icon: 'fa-sun', title: 'Bài 1 — 39 Câu Katakana N3', desc: 'Mondai 3 điền từ Katakana vào câu (Từ #1–#39)', count: 39, timeLbl: '10p' },
+            { session: 2, shift: 'Ca 2 • Bài 2', icon: 'fa-cloud-sun', title: 'Bài 2 — 39 Câu Katakana N3', desc: 'Mondai 3 điền từ Katakana vào câu (Từ #40–#78)', count: 39, timeLbl: '10p' }
+        ]
     }
 };
 
 const ALL_BACKUP_KEYS = [
     'n3_kanji240_mistakes', 'n3_kanji240_history', 'n3_kanji240_touched', 'n3_kanji240_inprogress',
     'n3_syn80_mistakes', 'n3_syn80_history', 'n3_syn80_touched', 'n3_syn80_inprogress',
+    'n3_kata78_mistakes', 'n3_kata78_history', 'n3_kata78_touched', 'n3_kata78_inprogress',
     LS_HUB_SRS_KEY, LS_HUB_STATS_KEY,
     'n3_grammar_progress', 'kanji_progress', 'vocab_progress'
 ];
 
 // Active Bank State
-let activeBank = 'kanji240'; // 'kanji240' | 'syn80'
+let activeBank = 'kanji240'; // 'kanji240' | 'syn80' | 'kata78'
 let mistakesMap = {};
 let historyData = {
     sessions: {},
@@ -65,15 +81,17 @@ let touchedSet = new Set();
 let activeSession = null;
 let lastResultFilter = 'wrong';
 
-// 80 Synonym Pairs Quick-Study Table State
+// Quick-Study Table State (80 Synonyms & 78 Katakana)
 let pairsMaskMode = 'none'; // 'none' | 'right' | 'left'
 let currentPairsOrder = [];
+let currentKataOrder = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     activeBank = localStorage.getItem(LS_ACTIVE_BANK_KEY) || 'kanji240';
     if (!BANK_CONFIGS[activeBank]) activeBank = 'kanji240';
     if (typeof SYNONYM_80_PAIRS !== 'undefined') currentPairsOrder = [...SYNONYM_80_PAIRS];
+    if (typeof KATAKANA_78_LIST !== 'undefined') currentKataOrder = [...KATAKANA_78_LIST];
 
     loadBankState();
     setupMobileMenu();
@@ -93,11 +111,13 @@ function getBankCfg(bankId = activeBank) {
 }
 
 function getBankDataset(bankId = activeBank) {
-    return bankId === 'syn80' ? SYNONYM_N3_DATA : KANJI_240_DATA;
+    if (bankId === 'syn80') return SYNONYM_N3_DATA;
+    if (bankId === 'kata78') return KATAKANA_N3_DATA;
+    return KANJI_240_DATA;
 }
 
 function getItemSessionNum(qObj, bankId = activeBank) {
-    return bankId === 'syn80' ? qObj.part : qObj.session;
+    return (bankId === 'syn80' || bankId === 'kata78') ? qObj.part : qObj.session;
 }
 
 function switchBank(newBankId) {
@@ -107,6 +127,7 @@ function switchBank(newBankId) {
     }
     activeBank = newBankId;
     localStorage.setItem(LS_ACTIVE_BANK_KEY, activeBank);
+    pairsMaskMode = 'none';
     loadBankState();
     applyBankUI();
     showMainView('lobby');
@@ -114,43 +135,88 @@ function switchBank(newBankId) {
 
 function applyBankUI() {
     const isSyn = activeBank === 'syn80';
-    document.getElementById('bank-chip-kanji240').classList.toggle('active', !isSyn);
-    document.getElementById('bank-chip-syn80').classList.toggle('active', isSyn);
+    const isKata = activeBank === 'kata78';
+    const hasTable = isSyn || isKata;
 
-    document.getElementById('nav-view-pairs-btn').style.display = isSyn ? 'inline-flex' : 'none';
-    document.getElementById('open-pairs-quick-btn').style.display = isSyn ? 'inline-flex' : 'none';
-    document.getElementById('nav-lobby-lbl').textContent = isSyn ? 'Sảnh Đồng Nghĩa' : 'Sảnh Bộ Đề (4 Ca)';
-    document.getElementById('sidebar-sprint-heading').textContent = isSyn ? 'Lịch Cày 80 Cặp Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 240 Kanji';
+    document.getElementById('bank-chip-kanji240').classList.toggle('active', activeBank === 'kanji240');
+    document.getElementById('bank-chip-syn80').classList.toggle('active', isSyn);
+    const kataChip = document.getElementById('bank-chip-kata78');
+    if (kataChip) kataChip.classList.toggle('active', isKata);
+
+    document.getElementById('nav-view-pairs-btn').style.display = hasTable ? 'inline-flex' : 'none';
+    document.getElementById('open-pairs-quick-btn').style.display = hasTable ? 'inline-flex' : 'none';
+
+    const navPairsLbl = document.getElementById('nav-pairs-lbl');
+    const openPairsLbl = document.getElementById('open-pairs-quick-lbl');
+    if (navPairsLbl) navPairsLbl.textContent = isKata ? 'Bảng 78 Từ Katakana' : 'Bảng 80 Cặp A = B';
+    if (openPairsLbl) openPairsLbl.textContent = isKata ? 'Mở Bảng Dò 78 Từ Katakana' : 'Mở Bảng Dò 80 Cặp A = B';
+
+    document.getElementById('nav-lobby-lbl').textContent = isKata
+        ? 'Sảnh Katakana (2 Ca)'
+        : (isSyn ? 'Sảnh Đồng Nghĩa' : 'Sảnh Bộ Đề (4 Ca)');
+    document.getElementById('sidebar-sprint-heading').textContent = isKata
+        ? 'Lịch Cày 78 Từ Katakana N3'
+        : (isSyn ? 'Lịch Cày 80 Cặp Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 240 Kanji');
 
     // Update KPI labels
-    document.getElementById('kpi-m1-lbl').textContent = isSyn ? 'Đồng nghĩa Xuôi (A → B)' : 'Mondai 1 (Đọc Kanji)';
-    document.getElementById('kpi-m2-lbl').textContent = isSyn ? 'Đảo chiều Chống Vẹt (B → A)' : 'Mondai 2 (Chọn Kanji)';
+    document.getElementById('kpi-m1-lbl').textContent = isKata
+        ? 'Mondai 3 Xuôi (Câu → Katakana)'
+        : (isSyn ? 'Đồng nghĩa Xuôi (A → B)' : 'Mondai 1 (Đọc Kanji)');
+    document.getElementById('kpi-m2-lbl').textContent = isKata
+        ? 'Đảo chiều (Katakana → Nghĩa)'
+        : (isSyn ? 'Đảo chiều Chống Vẹt (B → A)' : 'Mondai 2 (Chọn Kanji)');
 
     // Update Anti-Rote toggle labels
-    document.getElementById('toggle-hide-sub').textContent = isSyn
-        ? 'Chỉ hiện từ A (hoặc B), ép nhớ nghĩa gốc'
-        : 'Chỉ hiện từ gạch chân, ép nhớ mặt chữ';
-    document.getElementById('toggle-rev-title').textContent = isSyn
-        ? '🔄 Đảo chiều (B → A)'
-        : '🔄 Đảo chiều (M1 ↔ M2)';
-    document.getElementById('toggle-rev-sub').textContent = isSyn
-        ? 'Cho nghĩa B trong câu, chọn ngược từ N3 A'
-        : 'Kanji↔Hiragana với 3 nhiễu tự sinh';
+    document.getElementById('toggle-hide-sub').textContent = isKata
+        ? 'Ẩn câu Nhật, hiện nghĩa Việt (hoặc từ đơn) ép nhớ từ'
+        : (isSyn ? 'Chỉ hiện từ A (hoặc B), ép nhớ nghĩa gốc' : 'Chỉ hiện từ gạch chân, ép nhớ mặt chữ');
+    document.getElementById('toggle-rev-title').textContent = isKata
+        ? '🔄 Đảo chiều (Katakana → Nghĩa)'
+        : (isSyn ? '🔄 Đảo chiều (B → A)' : '🔄 Đảo chiều (M1 ↔ M2)');
+    document.getElementById('toggle-rev-sub').textContent = isKata
+        ? 'Cho Katakana trong câu, chọn đúng nghĩa tiếng Việt'
+        : (isSyn ? 'Cho nghĩa B trong câu, chọn ngược từ N3 A' : 'Kanji↔Hiragana với 3 nhiễu tự sinh');
 
-    document.getElementById('sessions-panel-title').innerHTML = isSyn
-        ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 80 Cặp Đồng Nghĩa (95 Câu)'
-        : '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3';
+    document.getElementById('sessions-panel-title').innerHTML = isKata
+        ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 2 Ca Thực Chiến — 78 Từ Katakana N3 (Mondai 3)'
+        : (isSyn
+            ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 80 Cặp Đồng Nghĩa (95 Câu)'
+            : '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3');
 
-    document.getElementById('custom-panel-title').innerHTML = isSyn
-        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 95 Câu Đồng Nghĩa'
-        : '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 240 Câu';
+    document.getElementById('custom-panel-title').innerHTML = isKata
+        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 78 Câu Katakana'
+        : (isSyn
+            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 95 Câu Đồng Nghĩa'
+            : '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 240 Câu');
 
     // Populate custom selects per bank
     const sessSel = document.getElementById('custom-session-select');
     const monSel = document.getElementById('custom-mondai-select');
     const cntSel = document.getElementById('custom-count-select');
 
-    if (isSyn) {
+    if (isKata) {
+        sessSel.innerHTML = `
+            <option value="all">Trộn tổng cả 78 câu (Bài 1 + Bài 2)</option>
+            <option value="1">Chỉ Bài 1 (Câu 1–39)</option>
+            <option value="2">Chỉ Bài 2 (Câu 40–78)</option>
+        `;
+        monSel.style.display = 'inline-block';
+        monSel.innerHTML = `
+            <option value="all">Tất cả 6 chủ đề Katakana</option>
+            <option value="Công việc & Giao tiếp">Công việc & Giao tiếp</option>
+            <option value="Công nghệ & Đời sống">Công nghệ & Đời sống</option>
+            <option value="Mua sắm & Ẩm thực">Mua sắm & Ẩm thực</option>
+            <option value="Giao thông & Thể thao">Giao thông & Thể thao</option>
+            <option value="Truyền thông & Văn hóa">Truyền thông & Văn hóa</option>
+            <option value="Đánh giá & Trạng thái">Đánh giá & Trạng thái</option>
+        `;
+        cntSel.innerHTML = `
+            <option value="15">15 câu (Lượt nhanh 4 phút)</option>
+            <option value="30" selected>30 câu (8 phút)</option>
+            <option value="39">39 câu (Trọn 1 bài 10 phút)</option>
+            <option value="78">Tất cả 78 câu</option>
+        `;
+    } else if (isSyn) {
         sessSel.innerHTML = `
             <option value="all">Trộn tổng cả 95 câu (Bài 1 + 2 + 3)</option>
             <option value="1">Chỉ Bài 1 Gốc (40 câu)</option>
@@ -184,6 +250,53 @@ function applyBankUI() {
             <option value="60">60 câu (Trọn 1 buổi 15 phút)</option>
             <option value="240">Tất cả câu lọc được</option>
         `;
+    }
+
+    // Configure Quick-Study Table (#view-pairs) for Syn80 vs Kata78
+    const pairsTitle = document.getElementById('pairs-view-title');
+    const maskRightBtn = document.getElementById('pairs-mask-right-btn');
+    const maskLeftBtn = document.getElementById('pairs-mask-left-btn');
+    const maskNoneBtn = document.getElementById('pairs-mask-none-btn');
+    const pairsSearch = document.getElementById('pairs-search-input');
+    const pairsCat = document.getElementById('pairs-cat-select');
+
+    if (pairsSearch) pairsSearch.value = '';
+    if (maskNoneBtn) maskNoneBtn.classList.toggle('primary', pairsMaskMode === 'none');
+    if (maskRightBtn) maskRightBtn.classList.toggle('primary', pairsMaskMode === 'right');
+    if (maskLeftBtn) maskLeftBtn.classList.toggle('primary', pairsMaskMode === 'left');
+
+    if (isKata) {
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 78 Từ Katakana N3 (Từ mượn • Gốc ngoại lai)';
+        if (maskRightBtn) maskRightBtn.textContent = '🙈 Che Nghĩa & Gợi ý (Katakana → ???)';
+        if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che Katakana & Gợi ý (??? ← Nghĩa)';
+        if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh Katakana, từ gốc Anh/Pháp/Đức, thuần Nhật hoặc nghĩa Việt...';
+        if (pairsCat) {
+            pairsCat.innerHTML = `
+                <option value="all">Tất cả chủ đề (78 từ)</option>
+                <option value="Công việc & Giao tiếp">Công việc & Giao tiếp</option>
+                <option value="Công nghệ & Đời sống">Công nghệ & Đời sống</option>
+                <option value="Mua sắm & Ẩm thực">Mua sắm & Ẩm thực</option>
+                <option value="Giao thông & Thể thao">Giao thông & Thể thao</option>
+                <option value="Truyền thông & Văn hóa">Truyền thông & Văn hóa</option>
+                <option value="Đánh giá & Trạng thái">Đánh giá & Trạng thái</option>
+            `;
+        }
+    } else {
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 80 Cặp Từ Đồng Nghĩa N3 (A ＝ B)';
+        if (maskRightBtn) maskRightBtn.textContent = '🙈 Che vế phải & Nghĩa (A = ???)';
+        if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che vế trái & Nghĩa (??? = B)';
+        if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh Kanji, Hiragana, Katakana hoặc nghĩa tiếng Việt...';
+        if (pairsCat) {
+            pairsCat.innerHTML = `
+                <option value="all">Tất cả từ loại (80 cặp)</option>
+                <option value="Động từ">Động từ</option>
+                <option value="Tính từ">Tính từ</option>
+                <option value="Danh từ">Danh từ</option>
+                <option value="Phó từ">Phó từ</option>
+                <option value="Katakana">Katakana</option>
+                <option value="Cụm từ">Cụm từ</option>
+            `;
+        }
     }
 }
 
@@ -258,8 +371,9 @@ function syncMistakeToHubSrs(qObj, bankId = activeBank, remove = false) {
     if (remove) {
         if (idx !== -1) hubSrs.splice(idx, 1);
     } else {
-        const entry = bankId === 'syn80'
-            ? {
+        let entry;
+        if (bankId === 'syn80') {
+            entry = {
                 id: qObj.id,
                 type: `Đồng Nghĩa (B${qObj.part})`,
                 title: `${qObj.target_word} ＝ ${qObj.synonym_word} — ${qObj.meaning_vi}`,
@@ -267,8 +381,19 @@ function syncMistakeToHubSrs(qObj, bankId = activeBank, remove = false) {
                 level: 0,
                 nextReview: getTodayStr(),
                 addedAt: new Date().toLocaleDateString('vi-VN')
-            }
-            : {
+            };
+        } else if (bankId === 'kata78') {
+            entry = {
+                id: qObj.id,
+                type: `Katakana N3 (B${qObj.part})`,
+                title: `${qObj.word} (${qObj.origin}) — ${qObj.meaning_vi}`,
+                detail: `${qObj.sentence_vi} | Thuần Nhật: ${qObj.native_jp} | ${qObj.wasei_note}`,
+                level: 0,
+                nextReview: getTodayStr(),
+                addedAt: new Date().toLocaleDateString('vi-VN')
+            };
+        } else {
+            entry = {
                 id: qObj.id,
                 type: `240 Kanji (B${qObj.session})`,
                 title: `${qObj.kanji_form}（${qObj.reading}）• ${qObj.han_viet} — ${qObj.meaning_vi}`,
@@ -277,6 +402,7 @@ function syncMistakeToHubSrs(qObj, bankId = activeBank, remove = false) {
                 nextReview: getTodayStr(),
                 addedAt: new Date().toLocaleDateString('vi-VN')
             };
+        }
         if (idx !== -1) hubSrs[idx] = { ...hubSrs[idx], ...entry };
         else hubSrs.unshift(entry);
     }
@@ -403,6 +529,49 @@ function buildSynonymReverseOptions(qObj) {
 function buildPreparedQuestion(qObj, antiRote, bankId = activeBank) {
     const isReversed = !!antiRote.reverseMode;
 
+    if (bankId === 'kata78') {
+        const rawTuples = qObj.options.map((katTxt, i) => {
+            const rawVi = qObj.options_vi[i] || '';
+            const cleanVi = rawVi.replace(/\s*\(ĐÚNG\)\s*$/, '').trim();
+            return {
+                katTxt,
+                rawVi,
+                cleanVi,
+                isAns: i === qObj.answer
+            };
+        });
+        const finalTuples = antiRote.shuffleOpt ? fisherYatesShuffle(rawTuples) : rawTuples;
+        const correctIdx = finalTuples.findIndex(t => t.isAns);
+
+        if (!isReversed) {
+            return {
+                bankId: 'kata78',
+                orig: qObj,
+                effectiveMondai: 1, // 1 = Forward Mondai 3 (Sentence/Meaning -> Katakana)
+                isReversed: false,
+                displayHtml: qObj.sentence_html,
+                displayOnlyWord: qObj.meaning_vi,
+                options: finalTuples.map(t => t.katTxt),
+                optionsVi: finalTuples.map(t => t.rawVi),
+                optionsKata: finalTuples.map(t => t.katTxt),
+                correctIdx
+            };
+        } else {
+            return {
+                bankId: 'kata78',
+                orig: qObj,
+                effectiveMondai: 2, // 2 = Reverse (Katakana -> Vietnamese Meaning)
+                isReversed: true,
+                displayHtml: qObj.sentence_reverse_html,
+                displayOnlyWord: qObj.word,
+                options: finalTuples.map(t => t.cleanVi),
+                optionsVi: finalTuples.map(t => t.rawVi),
+                optionsKata: finalTuples.map(t => t.katTxt),
+                correctIdx
+            };
+        }
+    }
+
     if (bankId === 'syn80') {
         let pairedOptions; // [[text, viMeaning], ...]
         let correctText;
@@ -429,6 +598,7 @@ function buildPreparedQuestion(qObj, antiRote, bankId = activeBank) {
             displayOnlyWord: isReversed ? qObj.synonym_word : qObj.target_word,
             options: finalOptions,
             optionsVi: finalOptionsVi,
+            optionsKata: null,
             correctIdx
         };
     } else {
@@ -457,6 +627,7 @@ function buildPreparedQuestion(qObj, antiRote, bankId = activeBank) {
             displayOnlyWord: effectiveMondai === 1 ? qObj.kanji_form : qObj.reading,
             options: finalOptions,
             optionsVi: null,
+            optionsKata: null,
             correctIdx
         };
     }
@@ -576,6 +747,7 @@ function saveInProgressSession() {
                 displayOnlyWord: it.displayOnlyWord,
                 options: it.options,
                 optionsVi: it.optionsVi,
+                optionsKata: it.optionsKata || null,
                 correctIdx: it.correctIdx
             })),
             answers: activeSession.answers,
@@ -760,7 +932,7 @@ function setupLobbyEvents() {
                     });
                     loadBankState();
                     renderLobby();
-                    alert(`✅ Đã khôi phục thành công ${restored} nhóm dữ liệu (Kanji 240, Đồng Nghĩa 80, Kho Phục Thù, Ngữ pháp, Hán tự, Từ vựng)!`);
+                    alert(`✅ Đã khôi phục thành công ${restored} nhóm dữ liệu (Kanji 240, Đồng Nghĩa 80, Katakana 78, Kho Phục Thù, Ngữ pháp, Hán tự, Từ vựng)!`);
                 } catch (err) {
                     alert('❌ File sao lưu không hợp lệ!');
                 }
@@ -792,20 +964,30 @@ function launchSession(sessionNum, mode) {
 
 function launchCustom(mode) {
     const sVal = document.getElementById('custom-session-select').value;
-    const mVal = activeBank === 'kanji240' ? document.getElementById('custom-mondai-select').value : 'all';
+    const mVal = activeBank !== 'syn80' ? document.getElementById('custom-mondai-select').value : 'all';
     const cntVal = parseInt(document.getElementById('custom-count-select').value, 10);
 
     let pool = [...getBankDataset()];
     if (sVal !== 'all') pool = pool.filter(q => getItemSessionNum(q) === parseInt(sVal, 10));
-    if (mVal !== 'all') pool = pool.filter(q => q.mondai === parseInt(mVal, 10));
+    if (mVal !== 'all') {
+        if (activeBank === 'kanji240') pool = pool.filter(q => q.mondai === parseInt(mVal, 10));
+        else if (activeBank === 'kata78') pool = pool.filter(q => q.category === mVal);
+    }
+
+    if (pool.length === 0) {
+        alert('Không tìm thấy câu hỏi phù hợp bộ lọc này. Hãy chọn lại nhé!');
+        return;
+    }
 
     const antiRote = getAntiRoteSettings();
     if (antiRote.shuffleQ) pool = fisherYatesShuffle(pool);
     pool = pool.slice(0, Math.min(cntVal, pool.length));
 
-    const prefix = activeBank === 'syn80'
-        ? (sVal === 'all' ? 'Tổng hợp Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`)
-        : (sVal === 'all' ? 'Tổng hợp 240 Kanji' : `Buổi ${sVal}`);
+    const prefix = activeBank === 'kata78'
+        ? (sVal === 'all' ? 'Tổng hợp Katakana N3' : `Bài ${sVal} Katakana`)
+        : (activeBank === 'syn80'
+            ? (sVal === 'all' ? 'Tổng hợp Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`)
+            : (sVal === 'all' ? 'Tổng hợp 240 Kanji' : `Buổi ${sVal}`));
     startQuizEngine({
         bankId: activeBank,
         title: `${prefix} • ${pool.length} câu`,
@@ -827,9 +1009,10 @@ function launchRevengeSession(mode, forceAntiRote = {}, subsetIds = null) {
         return;
     }
     const antiRote = getAntiRoteSettings({ shuffleQ: true, shuffleOpt: true, ...forceAntiRote });
+    const revLabel = activeBank === 'kata78' ? 'Katakana N3' : (activeBank === 'syn80' ? 'Đồng Nghĩa' : 'Kanji');
     startQuizEngine({
         bankId: activeBank,
-        title: `🔥 Phục Thù ${activeBank === 'syn80' ? 'Đồng Nghĩa' : 'Kanji'} (${pool.length} câu)`,
+        title: `🔥 Phục Thù ${revLabel} (${pool.length} câu)`,
         sessionNum: null,
         expectedFullCount: -1,
         pool,
@@ -885,7 +1068,13 @@ function setupActiveExamHeader() {
     if (activeSession.antiRote.shuffleQ) tags.push('🔀 Xáo câu');
     if (activeSession.antiRote.shuffleOpt) tags.push('🎲 Xáo 1–4');
     if (activeSession.antiRote.hideCtx) tags.push('🙈 Ẩn câu');
-    if (activeSession.antiRote.reverseMode) tags.push(activeSession.bankId === 'syn80' ? '🔄 Đảo B→A' : '🔄 Đảo M1↔M2');
+    if (activeSession.antiRote.reverseMode) {
+        tags.push(
+            activeSession.bankId === 'kata78'
+                ? '🔄 Đảo Kata→Nghĩa'
+                : (activeSession.bankId === 'syn80' ? '🔄 Đảo B→A' : '🔄 Đảo M1↔M2')
+        );
+    }
     badgesEl.innerHTML = tags.map(t => `<span class="q-tag" style="background: var(--hub-surface-2); color: var(--hub-text-body); font-size: 11px;">${t}</span>`).join('');
 
     const timerBox = document.getElementById('exam-timer-box');
@@ -942,14 +1131,25 @@ function renderQuestionStage() {
     const item = activeSession.items[idx];
     const orig = item.orig;
     const isSyn = item.bankId === 'syn80';
+    const isKata = item.bankId === 'kata78';
     const chosen = activeSession.answers[idx];
     const isAnswered = chosen !== null;
     const isDrill = activeSession.mode === 'drill';
+    const hideCtxNow = activeSession.antiRote.hideCtx && !activeSession.revealedCtx[idx] && !(isDrill && isAnswered);
 
     document.getElementById('exam-progress-txt').textContent = `${idx + 1}/${activeSession.items.length}`;
     document.getElementById('q-num-badge').textContent = `Câu ${idx + 1} / ${activeSession.items.length} (Gốc B${getItemSessionNum(orig, item.bankId)}-#${orig.num})`;
 
-    if (isSyn) {
+    if (isKata) {
+        document.getElementById('q-mondai-badge').textContent = item.isReversed
+            ? 'Katakana N3 • Đảo chiều (Kata → Nghĩa)'
+            : `Mondai 3 • ${orig.category}`;
+        document.getElementById('q-instruction-text').textContent = item.isReversed
+            ? '🔄 Đảo chiều (Chống vẹt): Chọn NGHĨA TIẾNG VIỆT chính xác nhất cho từ Katakana được gạch chân.'
+            : (hideCtxNow
+                ? '🙈 Chế độ Ẩn câu: Đọc nghĩa tiếng Việt bên dưới và chọn đúng TỪ KATAKANA tương ứng.'
+                : '問題3：Chọn từ Katakana thích hợp nhất để điền vào chỗ trống （　　　）.');
+    } else if (isSyn) {
         document.getElementById('q-mondai-badge').textContent = item.isReversed
             ? 'Mondai 4 • Đảo chiều (B → A)'
             : 'Mondai 4 • Từ Đồng Nghĩa (A → B)';
@@ -983,11 +1183,15 @@ function renderQuestionStage() {
 
     const sentBox = document.getElementById('q-sentence-display');
     const revealBtn = document.getElementById('q-reveal-ctx-btn');
-    const hideCtxNow = activeSession.antiRote.hideCtx && !activeSession.revealedCtx[idx] && !(isDrill && isAnswered);
 
     if (hideCtxNow) {
-        sentBox.className = 'q-sentence only-word';
-        sentBox.innerHTML = `<u class="q-target">${item.displayOnlyWord}</u>`;
+        if (isKata && !item.isReversed) {
+            sentBox.className = 'q-sentence only-meaning';
+            sentBox.innerHTML = `<div style="font-size: 13px; color: var(--hub-text-sub); font-weight: 600; margin-bottom: 8px;">Chọn từ Katakana tương ứng với nghĩa:</div><span class="q-target">${item.displayOnlyWord}</span>`;
+        } else {
+            sentBox.className = 'q-sentence only-word';
+            sentBox.innerHTML = `<u class="q-target">${item.displayOnlyWord}</u>`;
+        }
         revealBtn.style.display = 'inline-flex';
     } else {
         sentBox.className = 'q-sentence';
@@ -1007,7 +1211,7 @@ function renderQuestionStage() {
     optContainer.innerHTML = '';
     item.options.forEach((optTxt, optIdx) => {
         const btn = document.createElement('button');
-        btn.className = 'exam-opt-btn';
+        btn.className = 'exam-opt-btn' + (isKata && item.isReversed ? ' opt-vi-mode' : '');
 
         if (isDrill && isAnswered) {
             btn.classList.add('locked-opt');
@@ -1097,6 +1301,50 @@ function renderExplanationHTML(item, chosenIdx) {
     }
 
     const safeTts = q.sentence_tts.replace(/'/g, "\\'");
+
+    if (item.bankId === 'kata78') {
+        const safeWord = q.word.replace(/'/g, "\\'");
+        const optsBreakdown = item.options.map((optTxt, oi) => {
+            const isAns = oi === item.correctIdx;
+            if (item.isReversed && item.optionsKata) {
+                return `<div class="opt-vi-card ${isAns ? 'is-ans' : ''}"><strong>${oi + 1}. ${item.optionsKata[oi]}</strong>: ${optTxt}${isAns ? ' (ĐÚNG)' : ''}</div>`;
+            }
+            const vi = item.optionsVi ? item.optionsVi[oi] : '';
+            return `<div class="opt-vi-card ${isAns ? 'is-ans' : ''}"><strong>${oi + 1}. ${optTxt}</strong>: ${vi}</div>`;
+        }).join('');
+
+        return `
+            <div class="exp-box ${isCorrect ? 'is-correct' : 'is-wrong'}">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-weight: 700; font-size: 15px;">
+                    <div>${statusTitle}</div>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <button class="btn-pill" style="padding: 5px 10px; font-size: 12px;" onclick="speakJapanese('${safeWord}')">
+                            <i class="fa-solid fa-volume-low"></i> Nghe từ
+                        </button>
+                        <button class="btn-pill" style="padding: 5px 11px; font-size: 12px;" onclick="speakJapanese('${safeTts}')">
+                            <i class="fa-solid fa-volume-high"></i> Nghe câu
+                        </button>
+                    </div>
+                </div>
+                <div class="exp-word-row">
+                    <strong style="font-size: 20px; color: var(--primary);">${q.word}</strong>
+                    <span class="hanviet-pill">Gốc: ${q.origin}</span>
+                    <span class="q-tag" style="background: var(--hub-surface-2); color: var(--hub-text-body);">Thuần Nhật: ${q.native_jp}</span>
+                    <span style="font-size: 14.5px; font-weight: 600; color: var(--hub-text);">→ ${q.meaning_vi}</span>
+                </div>
+                <div style="font-size: 14px; color: var(--hub-text-body); line-height: 1.5;">
+                    <strong>📖 Dịch câu:</strong> ${q.sentence_vi}
+                </div>
+                <div>
+                    <div style="font-size: 12px; font-weight: 700; color: var(--hub-text-sub); margin-bottom: 6px; text-transform: uppercase;">💡 Giải nghĩa cả 4 từ Katakana (1 câu ăn luôn 4 từ):</div>
+                    <div class="opts-vi-grid">${optsBreakdown}</div>
+                </div>
+                <div class="trap-pill">
+                    <strong style="color: var(--hub-warn-text);"><i class="fa-solid fa-triangle-exclamation"></i> Wasei-eigo & Mẹo nhớ:</strong> ${q.wasei_note}
+                </div>
+            </div>
+        `;
+    }
 
     if (item.bankId === 'syn80') {
         // 5-word breakdown for ALL 4 shuffled options!
@@ -1293,6 +1541,7 @@ function finishExamSession(timedOut = false) {
 
     const bankId = activeSession.bankId;
     const isSyn = bankId === 'syn80';
+    const isKata = bankId === 'kata78';
     const elapsedSec = Math.max(1, Math.round((Date.now() - activeSession.startedAt) / 1000));
     let totalCorrect = 0, m1Ok = 0, m1Tot = 0, m2Ok = 0, m2Tot = 0, wrongCnt = 0, flagCnt = 0;
 
@@ -1343,9 +1592,11 @@ function finishExamSession(timedOut = false) {
     const minStr = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
     const secStr = String(elapsedSec % 60).padStart(2, '0');
     const nowTime = new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
-    const breakdownStr = isSyn
-        ? (m2Tot > 0 ? `Đảo B→A: ${m2Ok}/${m2Tot}` : `Xuôi A→B: ${m1Ok}/${m1Tot}`)
-        : `M1: ${m1Ok}/${m1Tot} • M2: ${m2Ok}/${m2Tot}`;
+    const breakdownStr = isKata
+        ? (m2Tot > 0 ? `Đảo Kata→Nghĩa: ${m2Ok}/${m2Tot}` : `Mondai 3: ${m1Ok}/${m1Tot}`)
+        : (isSyn
+            ? (m2Tot > 0 ? `Đảo B→A: ${m2Ok}/${m2Tot}` : `Xuôi A→B: ${m1Ok}/${m1Tot}`)
+            : `M1: ${m1Ok}/${m1Tot} • M2: ${m2Ok}/${m2Tot}`);
 
     if (!Array.isArray(historyData.attemptsLog)) historyData.attemptsLog = [];
     historyData.attemptsLog.unshift({
@@ -1367,8 +1618,9 @@ function finishExamSession(timedOut = false) {
     saveBankState();
 
     document.getElementById('res-mode-lbl').textContent = timedOut ? '⏰ Hết giờ — Tự động nộp bài' : `Kết quả • ${activeSession.title}`;
+    const bankShort = isKata ? 'Katakana N3' : (isSyn ? 'Đồng nghĩa N3' : 'Kanji N3');
     document.getElementById('res-headline').textContent = pct >= 90
-        ? `🏆 Quá đỉnh! ${isSyn ? 'Đồng nghĩa N3' : 'Kanji N3'} chắc như đinh đóng cột!`
+        ? `🏆 Quá đỉnh! ${bankShort} chắc như đinh đóng cột!`
         : (pct >= 75 ? '🔥 Rất tốt! Chỉ cần vá nốt vài lỗ hổng bên dưới.' : '⚡ Đã bắt sống được nhiều lỗ hổng quan trọng — Phục thù ngay!');
     document.getElementById('res-subtext').textContent = `Sai ${wrongCnt} câu • Gắn cờ đoán bừa ${flagCnt} câu (Tất cả đã lưu vào Kho Phục Thù [0/2] và đồng bộ sang Chiến Dịch N3).`;
 
@@ -1407,7 +1659,27 @@ function renderResultReviewList() {
         const safeTts = q.sentence_tts.replace(/'/g, "\\'");
 
         let bodyHtml = '';
-        if (item.bankId === 'syn80') {
+        if (item.bankId === 'kata78') {
+            const optsBreakdown = item.options.map((optTxt, oi) => {
+                const isAns = oi === item.correctIdx;
+                if (item.isReversed && item.optionsKata) {
+                    return `<div class="opt-vi-card ${isAns ? 'is-ans' : ''}"><strong>${oi + 1}. ${item.optionsKata[oi]}</strong>: ${optTxt}${isAns ? ' (ĐÚNG)' : ''}</div>`;
+                }
+                const vi = item.optionsVi ? item.optionsVi[oi] : '';
+                return `<div class="opt-vi-card ${isAns ? 'is-ans' : ''}"><strong>${oi + 1}. ${optTxt}</strong>: ${vi}</div>`;
+            }).join('');
+            bodyHtml = `
+                <div class="exp-word-row" style="margin-bottom: 8px;">
+                    <strong style="font-size: 17px; color: var(--primary);">${q.word}</strong>
+                    <span class="hanviet-pill">Gốc: ${q.origin}</span>
+                    <span class="q-tag" style="background: var(--hub-surface-2); color: var(--hub-text-body);">Thuần Nhật: ${q.native_jp}</span>
+                    <span style="font-size: 13.5px; color: var(--hub-text); font-weight: 600;">→ ${q.meaning_vi}</span>
+                </div>
+                <div style="font-size: 13.5px; color: var(--hub-text-body); margin-bottom: 8px;"><strong>📖 Dịch:</strong> ${q.sentence_vi}</div>
+                <div class="opts-vi-grid" style="margin-bottom: 8px;">${optsBreakdown}</div>
+                <div style="font-size: 13px; color: var(--hub-text-sub);"><strong style="color: var(--hub-warn-text);">⚠️ Wasei-eigo & Mẹo nhớ:</strong> ${q.wasei_note}</div>
+            `;
+        } else if (item.bankId === 'syn80') {
             const optsBreakdown = item.options.map((optTxt, oi) => {
                 const isAns = oi === item.correctIdx;
                 const vi = item.optionsVi ? item.optionsVi[oi] : '';
@@ -1464,12 +1736,13 @@ function renderResultReviewList() {
 }
 
 // ==========================================
-// 8. MISTAKE BANK & 80 SYNONYM PAIRS TABLE
+// 8. MISTAKE BANK & QUICK-STUDY TABLES (80 SYNONYMS / 78 KATAKANA)
 // ==========================================
 function renderMistakesView() {
     const container = document.getElementById('mistakes-bank-list');
     const dataset = getBankDataset();
     const isSyn = activeBank === 'syn80';
+    const isKata = activeBank === 'kata78';
     const ids = Object.keys(mistakesMap);
     document.getElementById('top-mistake-count').textContent = ids.length;
 
@@ -1478,7 +1751,7 @@ function renderMistakesView() {
             <div style="text-align: center; padding: 36px; background: var(--hub-surface-2); border-radius: 14px; color: var(--hub-text-sub);">
                 <i class="fa-solid fa-trophy" style="font-size: 36px; color: var(--hub-ok-text); margin-bottom: 10px;"></i>
                 <p style="font-size: 15px; font-weight: 600; color: var(--hub-text);">Kho Phục Thù (${getBankCfg().name}) đang sạch bóng!</p>
-                <p style="font-size: 13.5px; margin-top: 4px;">Làm bài ở Sảnh hoặc gắn cờ 🚩 / đẩy cặp khó nhớ từ Bảng 80 Cặp để luyện phục thù tại đây.</p>
+                <p style="font-size: 13.5px; margin-top: 4px;">Làm bài ở Sảnh hoặc gắn cờ 🚩 / đẩy từ khó nhớ từ Bảng Dò Nhanh để luyện phục thù tại đây.</p>
             </div>
         `;
         return;
@@ -1491,17 +1764,22 @@ function renderMistakesView() {
         const m = mistakesMap[qid];
         const safeTts = q.sentence_tts.replace(/'/g, "\\'");
 
-        const headline = isSyn
-            ? `<strong style="font-size: 16.5px; color: var(--hub-text);">${q.target_word} ＝ ${q.synonym_word}</strong> <span class="hanviet-pill">${q.meaning_vi}</span>`
-            : `<strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}（${q.reading}）</strong> <span class="hanviet-pill">${q.han_viet}</span>`;
-        const subNote = isSyn ? q.nuance_note : q.trap_note;
+        const tagText = isKata
+            ? `Bài ${q.part} • ${q.category}`
+            : (isSyn ? `Bài ${q.part}` : `Buổi ${q.session} • M${q.mondai}`);
+        const headline = isKata
+            ? `<strong style="font-size: 17px; color: var(--primary);">${q.word}</strong> <span class="hanviet-pill">Gốc: ${q.origin}</span> <span style="font-size: 12.5px; color: var(--hub-text-sub);">(${q.native_jp})</span>`
+            : (isSyn
+                ? `<strong style="font-size: 16.5px; color: var(--hub-text);">${q.target_word} ＝ ${q.synonym_word}</strong> <span class="hanviet-pill">${q.meaning_vi}</span>`
+                : `<strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}（${q.reading}）</strong> <span class="hanviet-pill">${q.han_viet}</span>`);
+        const subNote = isKata ? q.wasei_note : (isSyn ? q.nuance_note : q.trap_note);
 
         const div = document.createElement('div');
         div.className = 'mistake-item';
         div.innerHTML = `
             <div style="flex: 1; min-width: 240px;">
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 5px;">
-                    <span class="q-tag">${isSyn ? 'Bài ' + q.part : 'Buổi ' + q.session + ' • M' + q.mondai}</span>
+                    <span class="q-tag">${tagText}</span>
                     <span class="streak-pill">Tiến độ: [${m.streak || 0}/2]</span>
                     ${m.flagged ? '<span class="streak-pill">🚩 Cờ đoán bừa</span>' : ''}
                     ${headline}
@@ -1532,7 +1810,11 @@ function setupPairsEvents() {
     if (searchEl) searchEl.addEventListener('input', () => renderPairsTable());
     if (catEl) catEl.addEventListener('change', () => renderPairsTable());
     if (shufBtn) shufBtn.addEventListener('click', () => {
-        currentPairsOrder = fisherYatesShuffle(currentPairsOrder);
+        if (activeBank === 'kata78') {
+            currentKataOrder = fisherYatesShuffle(currentKataOrder);
+        } else {
+            currentPairsOrder = fisherYatesShuffle(currentPairsOrder);
+        }
         renderPairsTable();
     });
 }
@@ -1555,7 +1837,23 @@ function findQuizForPair(pair) {
     );
 }
 
+function findQuizForKata(kataEntry) {
+    return KATAKANA_N3_DATA.find(q => q.id === kataEntry.quiz_id);
+}
+
 function pushPairToRevenge(pairStt) {
+    if (activeBank === 'kata78') {
+        const entry = KATAKANA_78_LIST.find(p => p.stt === pairStt);
+        if (!entry) return;
+        const match = findQuizForKata(entry);
+        if (match) {
+            recordMistakeOrFlag(match, true, 'kata78');
+            document.getElementById('top-mistake-count').textContent = Object.keys(mistakesMap).length;
+            renderPairsTable();
+        }
+        return;
+    }
+
     const pair = SYNONYM_80_PAIRS.find(p => p.stt === pairStt);
     if (!pair) return;
     const match = findQuizForPair(pair);
@@ -1568,11 +1866,66 @@ function pushPairToRevenge(pairStt) {
 
 function renderPairsTable() {
     const container = document.getElementById('pairs-grid-container');
-    if (!container || typeof SYNONYM_80_PAIRS === 'undefined') return;
+    if (!container) return;
 
     const q = (document.getElementById('pairs-search-input').value || '').trim().toLowerCase();
     const cat = document.getElementById('pairs-cat-select').value;
+    const isMaskedInit = pairsMaskMode !== 'none';
 
+    if (activeBank === 'kata78') {
+        if (typeof KATAKANA_78_LIST === 'undefined') return;
+        const list = currentKataOrder.filter(p => {
+            const catOk = cat === 'all' || p.category === cat;
+            const qOk = !q ||
+                p.word.toLowerCase().includes(q) ||
+                p.origin.toLowerCase().includes(q) ||
+                p.native_jp.toLowerCase().includes(q) ||
+                p.meaning_vi.toLowerCase().includes(q) ||
+                p.wasei_note.toLowerCase().includes(q);
+            return catOk && qOk;
+        });
+
+        container.innerHTML = '';
+        list.forEach(p => {
+            const safeWord = p.word.replace(/'/g, "\\'");
+            const inRevenge = !!mistakesMap[p.quiz_id];
+
+            const card = document.createElement('div');
+            card.className = 'pair-card';
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px;">
+                    <span class="q-tag">#${p.stt} • ${p.category}</span>
+                    <div style="display: flex; gap: 6px;">
+                        <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="speakJapanese('${safeWord}')" title="Nghe phát âm Katakana chuẩn Nhật">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                        <button class="btn-pill ${inRevenge ? 'warn' : 'danger'}" style="padding: 4px 9px; font-size: 11.5px;" onclick="pushPairToRevenge(${p.stt})" title="Đẩy vào Kho Phục Thù [2/2]">
+                            <i class="fa-solid fa-fire"></i> ${inRevenge ? 'Trong kho' : 'Ôn lại'}
+                        </button>
+                    </div>
+                </div>
+                <div class="pair-eq-row">
+                    <div class="pair-side pair-side-left ${pairsMaskMode === 'left' ? 'masked' : ''}" onclick="togglePairCardMask(this)">
+                        <div class="pair-word-main" style="color: var(--primary);">${p.word}</div>
+                        <div class="pair-word-read">Katakana N3 • #${p.stt}</div>
+                    </div>
+                    <strong style="color: var(--primary); font-size: 16px;">→</strong>
+                    <div class="pair-side pair-side-right ${pairsMaskMode === 'right' ? 'masked' : ''}" onclick="togglePairCardMask(this)">
+                        <div class="pair-word-main" style="font-size: 14.5px;">${p.meaning_vi}</div>
+                        <div class="pair-word-read">${p.category}</div>
+                    </div>
+                </div>
+                <div class="pair-meaning ${isMaskedInit ? 'masked' : ''}" data-mask-label="🙈 Đã ẩn Từ gốc, Thuần Nhật & Mẹo (Bấm để mở)" onclick="togglePairCardMask(this)" style="text-align: left; font-weight: 500; font-size: 12.5px; line-height: 1.45;">
+                    <div><strong>🌐 Gốc:</strong> ${p.origin} &nbsp;|&nbsp; <strong>🇯🇵 Thuần Nhật:</strong> ${p.native_jp}</div>
+                    <div style="color: var(--hub-text-sub); margin-top: 2px;">💡 ${p.wasei_note}</div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        return;
+    }
+
+    if (typeof SYNONYM_80_PAIRS === 'undefined') return;
     const list = currentPairsOrder.filter(p => {
         const catOk = cat === 'all' || p.category === cat;
         const qOk = !q ||
@@ -1591,7 +1944,8 @@ function renderPairsTable() {
         const safeKanaTts = `${p.read_a}。${cleanReadB}`.replace(/'/g, "\\'");
         const safeReadA = p.read_a.replace(/'/g, "\\'");
         const safeReadB = cleanReadB.replace(/'/g, "\\'");
-        const isMaskedInit = pairsMaskMode !== 'none';
+        const matchQ = findQuizForPair(p);
+        const inRevenge = matchQ && !!mistakesMap[matchQ.id];
 
         const card = document.createElement('div');
         card.className = 'pair-card';
@@ -1602,8 +1956,8 @@ function renderPairsTable() {
                     <button class="btn-pill" style="padding: 4px 9px; font-size: 12px;" onclick="speakPairAudio(this, '${safeKanaTts}', '${safeReadA}', '${safeReadB}')" title="Nghe phát âm chuẩn tiếng Nhật">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
-                    <button class="btn-pill danger" style="padding: 4px 9px; font-size: 11.5px;" onclick="pushPairToRevenge(${p.stt})" title="Đẩy vào Kho Phục Thù [2/2]">
-                        <i class="fa-solid fa-fire"></i> Ôn lại
+                    <button class="btn-pill ${inRevenge ? 'warn' : 'danger'}" style="padding: 4px 9px; font-size: 11.5px;" onclick="pushPairToRevenge(${p.stt})" title="Đẩy vào Kho Phục Thù [2/2]">
+                        <i class="fa-solid fa-fire"></i> ${inRevenge ? 'Trong kho' : 'Ôn lại'}
                     </button>
                 </div>
             </div>
@@ -1618,7 +1972,7 @@ function renderPairsTable() {
                     <div class="pair-word-read">${p.read_b}</div>
                 </div>
             </div>
-            <div class="pair-meaning ${isMaskedInit ? 'masked' : ''}" onclick="togglePairCardMask(this)">
+            <div class="pair-meaning ${isMaskedInit ? 'masked' : ''}" data-mask-label="🙈 Đã ẩn nghĩa tiếng Việt (Bấm để mở)" onclick="togglePairCardMask(this)">
                 ${p.meaning_vi}
             </div>
         `;
@@ -1762,6 +2116,7 @@ function speakJapanese(text, rate = 0.95) {
 function buildAntigravityReport() {
     const dataset = getBankDataset();
     const isSyn = activeBank === 'syn80';
+    const isKata = activeBank === 'kata78';
     const ids = Object.keys(mistakesMap);
     const m1Acc = historyData.m1Total > 0 ? `${Math.round((historyData.m1Correct / historyData.m1Total) * 100)}%` : '--';
     const m2Acc = historyData.m2Total > 0 ? `${Math.round((historyData.m2Correct / historyData.m2Total) * 100)}%` : '--';
@@ -1769,14 +2124,21 @@ function buildAntigravityReport() {
         const q = dataset.find(x => x.id === id);
         if (!q) return '';
         const m = mistakesMap[id];
+        if (isKata) {
+            return `${idx + 1}. [Bài ${q.part} | ${m.streak}/2] ${q.word} (${q.origin} • ${q.native_jp}) — ${q.meaning_vi} | ${q.wasei_note}`;
+        }
         return isSyn
             ? `${idx + 1}. [Bài ${q.part} | ${m.streak}/2] ${q.target_word} ＝ ${q.synonym_word} (${q.meaning_vi}) | ${q.nuance_note}`
             : `${idx + 1}. [B${q.session}-M${q.mondai} | ${m.streak}/2] ${q.kanji_form}（${q.reading}）[${q.han_viet}] — ${q.meaning_vi} | Bẫy: ${q.trap_note}`;
     }).filter(Boolean).join('\n');
 
+    const accLine = isKata
+        ? `Mondai 3 Xuôi ${m1Acc} | Đảo Kata→Nghĩa ${m2Acc}`
+        : (isSyn ? `Xuôi A→B ${m1Acc} | Đảo B→A ${m2Acc}` : `Mondai 1 ${m1Acc} | Mondai 2 ${m2Acc}`);
+
     return `📊 BÁO CÁO ${getBankCfg().name.toUpperCase()} (${getTodayStr()})
 - Đã quét: ${touchedSet.size}/${dataset.length} câu
-- Tỷ lệ đúng: ${isSyn ? `Xuôi A→B ${m1Acc} | Đảo B→A ${m2Acc}` : `Mondai 1 ${m1Acc} | Mondai 2 ${m2Acc}`}
+- Tỷ lệ đúng: ${accLine}
 - Đang chờ Phục Thù [2/2]: ${ids.length} câu
 - Danh sách câu sai/gắn cờ cần Sensei phân tích & ra mẹo nhớ:
 ${topItems || '(Chưa có câu sai nào!)'}`;
