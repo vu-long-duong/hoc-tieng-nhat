@@ -1,6 +1,6 @@
 // ==========================================
-// LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE (7 BANKS • 1,161 Qs)
-// Supports: [kanji240: 352] | [m3_191: 191] | [syn80: 95] | [kata78: 90] | [hira35: 35] | [m5_107: 107] | [pastN3: 291]
+// LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE (10 BANKS • 1,674 Qs)
+// Supports: [kanji240: 352] | [m3_191: 191] | [syn80: 95] | [kata78: 90] | [hira35: 35] | [m5_107: 107] | [gp_m1: 273] | [gp_star: 99] | [gp_m3: 141] | [pastN3: 291]
 // ==========================================
 
 const LS_HUB_SRS_KEY = 'n3_srs_mistakes';
@@ -115,6 +115,57 @@ const BANK_CONFIGS = {
             { session: 3, shift: '🛡️ Phủ Kín • Bài 3 (2010–2019)', icon: 'fa-shield-halved', title: 'Bài 3 — 42 Từ Phủ Kín 100% Đề Thật', desc: 'Tầng 2 Phủ kín: 42 từ còn lại 2010–2019 để ăn trọn 5/5 câu M5 (満員, 沸騰, 翻訳, ゆるい...)', count: 42, timeLbl: '17p' }
         ]
     },
+    gp_m1: {
+        id: 'gp_m1',
+        name: 'Ngữ Pháp M1 Thực Chiến (Taisaku)',
+        keys: {
+            mistakes: 'n3_gp_m1_mistakes',
+            history: 'n3_gp_m1_history',
+            touched: 'n3_gp_m1_touched',
+            inprogress: 'n3_gp_m1_inprogress'
+        },
+        secPerQuestion: 35,
+        shifts: [
+            { session: 1, shift: 'Ca 1 • Ngữ Pháp Nền', icon: 'fa-layer-group', title: 'Ca 1 — 43 Câu Ngữ Pháp Cơ Bản Hay Ra N3', desc: 'Đề thật 2010–2020: 55 mẫu nền N4–N3 hay bẫy (可能形, ておく/てある, ば/たら/なら, ずに...)', count: 43, timeLbl: '25p' },
+            { session: 2, shift: 'Ca 2 • Tử Huyệt N3', icon: 'fa-crown', title: 'Ca 2 — 57 Câu Kính Ngữ • Sai Khiến • Cho Nhận', desc: '38 đề thật + 19 hội thoại Kính ngữ 2 chỗ trống (尊敬語/謙譲語, 受身/使役, さしあげる/いただく)', count: 57, timeLbl: '33p' },
+            { session: 3, shift: 'Ca 3 • Chuyên Đề Trợ Từ', icon: 'fa-link', title: 'Ca 3 — 48 Câu Bẫy Trợ Từ Đề Thật', desc: '21 nhóm trợ từ (で/に/まで/までに/も/のを・のが・のは/より/しか/なんか/ほど...)', count: 48, timeLbl: '28p' },
+            { session: 4, shift: 'Ca 4 • Trợ Từ+X & 4 Group', icon: 'fa-cubes', title: 'Ca 4 — 47 Câu Trợ Từ+X & 4 Họ Dễ Nhầm', desc: '14 câu Trợ từ+X (にとって/に対して/によって/において) + 33 câu 4 Group よう/こと/ばかり/ところ', count: 47, timeLbl: '27p' },
+            { session: 5, shift: 'Ca 5 • Ngữ Pháp N3 Đơn Lẻ', icon: 'fa-star', title: 'Ca 5 — 61 Câu Ngữ Pháp N3 Đơn Lẻ Đề Thật', desc: '22 mẫu đơn lẻ cốt lõi & hậu tố Vます (らしい/はずがない/たびに/うちに/せいで/だす/直す...)', count: 61, timeLbl: '35p' },
+            { session: 6, shift: 'Ca 6 • Phó Từ Hô Ứng', icon: 'fa-bolt', title: 'Ca 6 — 17 Câu Phó Từ Đi Cặp Ngữ Pháp', desc: 'Phó từ bắt cặp đuôi câu (いつの間にか, たしかに, 次第に, ついに, 少しも～ない, 必ずしも...)', count: 17, timeLbl: '10p' }
+        ]
+    },
+    gp_star: {
+        id: 'gp_star',
+        name: 'Sắp Xếp Dấu Sao ★ (Taisaku M2)',
+        keys: {
+            mistakes: 'n3_gp_star_mistakes',
+            history: 'n3_gp_star_history',
+            touched: 'n3_gp_star_touched',
+            inprogress: 'n3_gp_star_inprogress'
+        },
+        secPerQuestion: 48,
+        shifts: [
+            { session: 1, shift: 'Ca 1 • Công Thức N/V/A', icon: 'fa-diagram-project', title: 'Ca 1 — 31 Câu ★ Kết Hợp Danh–Động–Tính', desc: 'Áp dụng bảng [Trợ từ+X]+の+N, [Trợ từ+X辞書形]+N, V普通形+N, AというB (Đề thật 2010–2020)', count: 31, timeLbl: '25p' },
+            { session: 2, shift: 'Ca 2 • Công Thức Trợ Từ', icon: 'fa-link', title: 'Ca 2 — 22 Câu ★ Kết Hợp Với Trợ Từ', desc: 'Áp dụng Trợ từ+の+N (に→への), のは/のが/のを/のに, 2 trợ từ liền nhau (Đề thật 2010–2020)', count: 22, timeLbl: '18p' },
+            { session: 3, shift: 'Ca 3 • Tổng Hợp Thực Chiến', icon: 'fa-trophy', title: 'Ca 3 — 46 Câu ★ Tổng Hợp Đề Thật N3', desc: 'Phối hợp đa cấu trúc dấu sao ★ đề thi thật JLPT N3 2010–2020 (đủ 4 mảnh ghép & công thức)', count: 46, timeLbl: '37p' }
+        ]
+    },
+    gp_m3: {
+        id: 'gp_m3',
+        name: 'Ngữ Pháp Đoạn Văn M3 (Taisaku)',
+        keys: {
+            mistakes: 'n3_gp_m3_mistakes',
+            history: 'n3_gp_m3_history',
+            touched: 'n3_gp_m3_touched',
+            inprogress: 'n3_gp_m3_inprogress'
+        },
+        secPerQuestion: 60,
+        shifts: [
+            { session: 1, shift: 'Ca 1 • Liên Từ & Chỉ Thị Từ', icon: 'fa-arrows-left-right', title: 'Ca 1 — 27 Đoạn Ngắn Liên Từ & Chỉ Thị Từ (47 Câu)', desc: 'Split-Screen rèn phản xạ 45 Liên từ (ところが/そこで/つまり...) & Chỉ thị từ こ・そ・あ (39 LT + 8 CTT)', count: 47, timeLbl: '40p' },
+            { session: 2, shift: 'Ca 2 • Đục Lỗ Đề Thật P1', icon: 'fa-file-lines', title: 'Ca 2 — 10 Bài Văn Mondai 3 Đề Thật #1–#10 (50 Câu)', desc: 'Đọc mạch văn bên trái & điền 5 chỗ trống/bài — đề thi thật 2010–2015 có tóm tắt dịch Việt', count: 50, timeLbl: '45p' },
+            { session: 3, shift: 'Ca 3 • Đục Lỗ Đề Thật P2', icon: 'fa-file-lines', title: 'Ca 3 — 9 Bài Văn Mondai 3 Đề Thật #11–#19 (44 Câu)', desc: 'Đọc mạch văn bên trái & điền 4–5 chỗ trống/bài — đề thi thật 2015–2020 có tóm tắt dịch Việt', count: 44, timeLbl: '40p' }
+        ]
+    },
     pastN3: {
         id: 'pastN3',
         name: 'Đề Thi Thật JLPT N3 (2021–2023)',
@@ -136,13 +187,16 @@ const ALL_BACKUP_KEYS = [
     'n3_kata78_mistakes', 'n3_kata78_history', 'n3_kata78_touched', 'n3_kata78_inprogress',
     'n3_hira35_mistakes', 'n3_hira35_history', 'n3_hira35_touched', 'n3_hira35_inprogress',
     'n3_m5_107_mistakes', 'n3_m5_107_history', 'n3_m5_107_touched', 'n3_m5_107_inprogress',
+    'n3_gp_m1_mistakes', 'n3_gp_m1_history', 'n3_gp_m1_touched', 'n3_gp_m1_inprogress',
+    'n3_gp_star_mistakes', 'n3_gp_star_history', 'n3_gp_star_touched', 'n3_gp_star_inprogress',
+    'n3_gp_m3_mistakes', 'n3_gp_m3_history', 'n3_gp_m3_touched', 'n3_gp_m3_inprogress',
     'n3_pastN3_mistakes', 'n3_pastN3_history', 'n3_pastN3_touched', 'n3_pastN3_inprogress',
     LS_HUB_SRS_KEY, LS_HUB_STATS_KEY,
     'n3_grammar_progress', 'kanji_progress', 'vocab_progress'
 ];
 
 // Active Bank State
-let activeBank = 'kanji240'; // 'kanji240' | 'm3_191' | 'syn80' | 'kata78' | 'hira35' | 'm5_107' | 'pastN3'
+let activeBank = 'kanji240'; // 'kanji240' | 'm3_191' | 'syn80' | 'kata78' | 'hira35' | 'm5_107' | 'gp_m1' | 'gp_star' | 'gp_m3' | 'pastN3'
 let mistakesMap = {};
 let historyData = {
     sessions: {},
@@ -160,7 +214,7 @@ let pastLaunchMode = 'drill'; // Default to 'drill' (Học Chữa Ngay) so learn
 let lastRenderedPassageId = null;
 let passageFontSize = 16;
 
-// Quick-Study Table State (311 Kanji, 191 M3, 80 Synonyms, 90 Katakana, 35 Hiragana, 107 Mondai 5)
+// Quick-Study Table State (Vocab Lists + 3 Grammar Formula Cheat-Sheets)
 let pairsMaskMode = 'none'; // 'none' | 'right' | 'left'
 let currentKanjiOrder = [];
 let currentM3Order = [];
@@ -168,6 +222,9 @@ let currentPairsOrder = [];
 let currentKataOrder = [];
 let currentHiraOrder = [];
 let currentM5Order = [];
+let currentGpM1SheetOrder = [];
+let currentGpStarSheetOrder = [];
+let currentGpM3SheetOrder = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -179,6 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof KATAKANA_78_LIST !== 'undefined') currentKataOrder = [...KATAKANA_78_LIST];
     if (typeof HIRAGANA_35_LIST !== 'undefined') currentHiraOrder = [...HIRAGANA_35_LIST];
     if (typeof MONDAI5_107_LIST !== 'undefined') currentM5Order = [...MONDAI5_107_LIST];
+    if (typeof GP_M1_CHEATSHEET !== 'undefined') currentGpM1SheetOrder = [...GP_M1_CHEATSHEET];
+    if (typeof GP_STAR_CHEATSHEET !== 'undefined') currentGpStarSheetOrder = [...GP_STAR_CHEATSHEET];
+    if (typeof GP_M3_CHEATSHEET !== 'undefined') currentGpM3SheetOrder = [...GP_M3_CHEATSHEET];
     const savedFs = parseInt(localStorage.getItem(LS_PASSAGE_FS_KEY), 10);
     if (!isNaN(savedFs) && savedFs >= 13 && savedFs <= 22) passageFontSize = savedFs;
 
@@ -212,10 +272,20 @@ function getPastAllQuestions() {
     return getPastExamsList().flatMap(ex => ex.questions || []);
 }
 
+function isGrammarBank(bankId = activeBank) {
+    return bankId === 'gp_m1' || bankId === 'gp_star' || bankId === 'gp_m3';
+}
+
 function getPassageForQuestion(qObj) {
     if (!qObj || !qObj.passage_id) return null;
-    const exam = getPastExamById(qObj.exam_id);
-    return exam && exam.passages ? (exam.passages[qObj.passage_id] || null) : null;
+    if (qObj.exam_id) {
+        const exam = getPastExamById(qObj.exam_id);
+        if (exam && exam.passages && exam.passages[qObj.passage_id]) return exam.passages[qObj.passage_id];
+    }
+    if (typeof GP_M3_PASSAGES !== 'undefined' && GP_M3_PASSAGES[qObj.passage_id]) {
+        return GP_M3_PASSAGES[qObj.passage_id];
+    }
+    return null;
 }
 
 function getBankDataset(bankId = activeBank) {
@@ -224,13 +294,16 @@ function getBankDataset(bankId = activeBank) {
     if (bankId === 'kata78') return KATAKANA_N3_DATA;
     if (bankId === 'hira35') return HIRAGANA_35_DATA;
     if (bankId === 'm5_107') return MONDAI5_107_DATA;
+    if (bankId === 'gp_m1') return typeof GP_M1_DATA !== 'undefined' ? GP_M1_DATA : [];
+    if (bankId === 'gp_star') return typeof GP_STAR_DATA !== 'undefined' ? GP_STAR_DATA : [];
+    if (bankId === 'gp_m3') return typeof GP_M3_DATA !== 'undefined' ? GP_M3_DATA : [];
     if (bankId === 'pastN3') return getPastAllQuestions();
     return KANJI_240_DATA;
 }
 
 function getItemSessionNum(qObj, bankId = activeBank) {
     if (bankId === 'pastN3') return qObj.exam_id;
-    return (bankId === 'm3_191' || bankId === 'syn80' || bankId === 'kata78' || bankId === 'hira35' || bankId === 'm5_107') ? qObj.part : qObj.session;
+    return (bankId === 'm3_191' || bankId === 'syn80' || bankId === 'kata78' || bankId === 'hira35' || bankId === 'm5_107' || bankId === 'gp_m1' || bankId === 'gp_star' || bankId === 'gp_m3') ? qObj.part : qObj.session;
 }
 
 function getPastExamShortLabel(examId) {
@@ -286,8 +359,12 @@ function applyBankUI() {
     const isKata = activeBank === 'kata78';
     const isHira = activeBank === 'hira35';
     const isM5 = activeBank === 'm5_107';
+    const isGpM1 = activeBank === 'gp_m1';
+    const isGpStar = activeBank === 'gp_star';
+    const isGpM3 = activeBank === 'gp_m3';
+    const isGp = isGpM1 || isGpStar || isGpM3;
     const isPast = activeBank === 'pastN3';
-    const hasTable = isKanji || isM3 || isSyn || isKata || isHira || isM5;
+    const hasTable = isKanji || isM3 || isSyn || isKata || isHira || isM5 || isGp;
 
     document.getElementById('bank-chip-kanji240').classList.toggle('active', isKanji);
     const m3Chip = document.getElementById('bank-chip-m3_191');
@@ -299,6 +376,12 @@ function applyBankUI() {
     if (hiraChip) hiraChip.classList.toggle('active', isHira);
     const m5Chip = document.getElementById('bank-chip-m5_107');
     if (m5Chip) m5Chip.classList.toggle('active', isM5);
+    const gpM1Chip = document.getElementById('bank-chip-gp_m1');
+    if (gpM1Chip) gpM1Chip.classList.toggle('active', isGpM1);
+    const gpStarChip = document.getElementById('bank-chip-gp_star');
+    if (gpStarChip) gpStarChip.classList.toggle('active', isGpStar);
+    const gpM3Chip = document.getElementById('bank-chip-gp_m3');
+    if (gpM3Chip) gpM3Chip.classList.toggle('active', isGpM3);
     const pastChip = document.getElementById('bank-chip-pastN3');
     if (pastChip) pastChip.classList.toggle('active', isPast);
 
@@ -311,18 +394,28 @@ function applyBankUI() {
     }
 
     const hardRevBtn = document.getElementById('start-revenge-hard-btn');
-    if (hardRevBtn) hardRevBtn.style.display = isPast ? 'none' : 'inline-flex';
+    if (hardRevBtn) hardRevBtn.style.display = (isPast || isGp) ? 'none' : 'inline-flex';
 
-    // Anti-Rote toggle visibility & smart defaults for Past JLPT Exams vs Drill Banks
+    // Anti-Rote toggle visibility & smart defaults
     const chkShufQ = document.getElementById('opt-shuffle-questions');
     const chkShufOpt = document.getElementById('opt-shuffle-answers');
     const chkHide = document.getElementById('opt-hide-context');
     const chkRev = document.getElementById('opt-reverse-mode');
-    if (chkHide && chkHide.closest('.toggle-chip')) chkHide.closest('.toggle-chip').style.display = isPast ? 'none' : 'flex';
-    if (chkRev && chkRev.closest('.toggle-chip')) chkRev.closest('.toggle-chip').style.display = isPast ? 'none' : 'flex';
+    if (chkHide && chkHide.closest('.toggle-chip')) chkHide.closest('.toggle-chip').style.display = (isPast || isGp) ? 'none' : 'flex';
+    if (chkRev && chkRev.closest('.toggle-chip')) chkRev.closest('.toggle-chip').style.display = (isPast || isGp) ? 'none' : 'flex';
     if (isPast) {
         if (chkShufQ) chkShufQ.checked = false;
         if (chkShufOpt) chkShufOpt.checked = false;
+        if (chkHide) chkHide.checked = false;
+        if (chkRev) chkRev.checked = false;
+    } else if (isGpM3) {
+        if (chkShufQ) chkShufQ.checked = false; // Keep passage order clean by default (shuffling groups by passage!)
+        if (chkShufOpt) chkShufOpt.checked = true;
+        if (chkHide) chkHide.checked = false;
+        if (chkRev) chkRev.checked = false;
+    } else if (isGp) {
+        if (chkShufQ) chkShufQ.checked = true;
+        if (chkShufOpt) chkShufOpt.checked = true;
         if (chkHide) chkHide.checked = false;
         if (chkRev) chkRev.checked = false;
     } else {
@@ -333,30 +426,34 @@ function applyBankUI() {
     const navPairsLbl = document.getElementById('nav-pairs-lbl');
     const openPairsLbl = document.getElementById('open-pairs-quick-lbl');
     if (navPairsLbl) {
-        navPairsLbl.textContent = isKanji
-            ? 'Bảng 311 Kanji Đề Thật'
-            : (isM3 ? 'Bảng 191 Từ Mondai 3' : (isM5 ? 'Bảng 107 Từ Mondai 5' : (isKata ? 'Bảng 90 Từ Katakana' : (isHira ? 'Bảng 35 Hiragana & Từ Láy' : 'Bảng 80 Cặp A = B'))));
+        navPairsLbl.textContent = isGpM1
+            ? 'Bảng Công Thức NP M1'
+            : (isGpStar ? 'Bảng Công Thức Dấu Sao ★' : (isGpM3 ? 'Bảng 45 Liên Từ & こ・そ・あ' : (isKanji
+                ? 'Bảng 311 Kanji Đề Thật'
+                : (isM3 ? 'Bảng 191 Từ Mondai 3' : (isM5 ? 'Bảng 107 Từ Mondai 5' : (isKata ? 'Bảng 90 Từ Katakana' : (isHira ? 'Bảng 35 Hiragana & Từ Láy' : 'Bảng 80 Cặp A = B')))))));
     }
     if (openPairsLbl) {
-        openPairsLbl.textContent = isKanji
-            ? 'Mở Bảng Tra Cứu 311 Kanji'
-            : (isM3 ? 'Mở Bảng Tra Cứu 191 Từ M3' : (isM5 ? 'Mở Bảng Tra Cứu 107 Từ M5' : (isKata ? 'Mở Bảng Dò 90 Từ Katakana' : (isHira ? 'Mở Bảng Dò 35 Hiragana' : 'Mở Bảng Dò 80 Cặp A = B'))));
+        openPairsLbl.textContent = isGpM1
+            ? 'Mở Bảng Công Thức NP M1'
+            : (isGpStar ? 'Mở Bảng Công Thức Ghép ★' : (isGpM3 ? 'Mở Bảng Liên Từ & Chỉ Thị Từ' : (isKanji
+                ? 'Mở Bảng Tra Cứu 311 Kanji'
+                : (isM3 ? 'Mở Bảng Tra Cứu 191 Từ M3' : (isM5 ? 'Mở Bảng Tra Cứu 107 Từ M5' : (isKata ? 'Mở Bảng Dò 90 Từ Katakana' : (isHira ? 'Mở Bảng Dò 35 Hiragana' : 'Mở Bảng Dò 80 Cặp A = B')))))));
     }
 
     document.getElementById('nav-lobby-lbl').textContent = isPast
         ? 'Sảnh Đề Thi Thật'
-        : (isM3 ? 'Sảnh Ngữ Cảnh M3 (4 Ca)' : (isM5 ? 'Sảnh Cách Dùng M5 (3 Ca)' : (isHira ? 'Sảnh Hiragana (2 Ca)' : (isKata ? 'Sảnh Katakana (3 Ca)' : (isSyn ? 'Sảnh Đồng Nghĩa' : 'Sảnh Kanji (6 Ca)')))));
+        : (isGpM1 ? 'Sảnh Ngữ Pháp M1 (6 Ca)' : (isGpStar ? 'Sảnh Dấu Sao ★ (3 Ca)' : (isGpM3 ? 'Sảnh Đoạn Văn M3 (3 Ca)' : (isM3 ? 'Sảnh Ngữ Cảnh M3 (4 Ca)' : (isM5 ? 'Sảnh Cách Dùng M5 (3 Ca)' : (isHira ? 'Sảnh Hiragana (2 Ca)' : (isKata ? 'Sảnh Katakana (3 Ca)' : (isSyn ? 'Sảnh Đồng Nghĩa' : 'Sảnh Kanji (6 Ca)'))))))));
     document.getElementById('sidebar-sprint-heading').textContent = isPast
         ? 'Lịch Thực Chiến 4 Đề Thật N3'
-        : (isM3 ? 'Lịch Cày 191 Từ Mondai 3' : (isM5 ? 'Lịch Cày 107 Từ Mondai 5' : (isHira ? 'Lịch Cày 35 Hiragana & Từ Láy' : (isKata ? 'Lịch Cày 90 Từ Katakana N3' : (isSyn ? 'Lịch Cày 80 Cặp Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 352 Kanji')))));
+        : (isGpM1 ? 'Lộ Trình 6 Ca Ngữ Pháp M1' : (isGpStar ? 'Lộ Trình 3 Ca Dấu Sao ★' : (isGpM3 ? 'Lộ Trình 3 Ca Đoạn Văn M3' : (isM3 ? 'Lịch Cày 191 Từ Mondai 3' : (isM5 ? 'Lịch Cày 107 Từ Mondai 5' : (isHira ? 'Lịch Cày 35 Hiragana & Từ Láy' : (isKata ? 'Lịch Cày 90 Từ Katakana N3' : (isSyn ? 'Lịch Cày 80 Cặp Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 352 Kanji'))))))));
 
     // Update KPI labels
     document.getElementById('kpi-m1-lbl').textContent = isPast
         ? 'Kiến thức ngôn ngữ (TV + NP)'
-        : (isM3 ? 'Mondai 3 Xuôi (Câu → Điền từ)' : (isM5 ? 'Mondai 5 Chuẩn (Chọn câu đúng)' : (isHira ? 'Mondai 3 Xuôi (Câu → Hiragana)' : (isKata ? 'Mondai 3 Xuôi (Câu → Katakana)' : (isSyn ? 'Đồng nghĩa Xuôi (A → B)' : 'Mondai 1 (Đọc Kanji)')))));
+        : (isGp ? 'Câu Cơ bản (☆)' : (isM3 ? 'Mondai 3 Xuôi (Câu → Điền từ)' : (isM5 ? 'Mondai 5 Chuẩn (Chọn câu đúng)' : (isHira ? 'Mondai 3 Xuôi (Câu → Hiragana)' : (isKata ? 'Mondai 3 Xuôi (Câu → Katakana)' : (isSyn ? 'Đồng nghĩa Xuôi (A → B)' : 'Mondai 1 (Đọc Kanji)'))))));
     document.getElementById('kpi-m2-lbl').textContent = isPast
         ? 'Đọc hiểu — 読解 (M4–M7)'
-        : (isM3 ? 'Đảo chiều (Từ M3 → Nghĩa)' : (isM5 ? 'Đảo chiều (Câu chuẩn → Nghĩa)' : (isHira ? 'Đảo chiều (Hiragana → Nghĩa)' : (isKata ? 'Đảo chiều (Katakana → Nghĩa)' : (isSyn ? 'Đảo chiều Chống Vẹt (B → A)' : 'Mondai 2 (Chọn Kanji)')))));
+        : (isGp ? 'Câu Nâng cao / Bẫy (☆☆)' : (isM3 ? 'Đảo chiều (Từ M3 → Nghĩa)' : (isM5 ? 'Đảo chiều (Câu chuẩn → Nghĩa)' : (isHira ? 'Đảo chiều (Hiragana → Nghĩa)' : (isKata ? 'Đảo chiều (Katakana → Nghĩa)' : (isSyn ? 'Đảo chiều Chống Vẹt (B → A)' : 'Mondai 2 (Chọn Kanji)'))))));
 
     // Update Anti-Rote toggle labels
     document.getElementById('toggle-hide-sub').textContent = isM5
@@ -373,38 +470,111 @@ function applyBankUI() {
 
     document.getElementById('sessions-panel-title').innerHTML = isPast
         ? '<i class="fa-solid fa-scroll" style="color: var(--primary);"></i> Kho Đề Thi Chính Thức JLPT N3 (Bỏ Nghe • Học Chữa Ngay & Thi Thử)'
-        : (isM3
-            ? '<i class="fa-solid fa-puzzle-piece" style="color: var(--primary);"></i> Lộ Trình 2 Tầng — 191 Từ Ngữ Cảnh Mondai 3 (⭐ Trọng Tâm 97 + 🛡️ Phủ Kín 94)'
-            : (isM5
-                ? '<i class="fa-solid fa-bullseye" style="color: var(--primary);"></i> Lộ Trình 2 Tầng — 107 Cách Dùng Từ Mondai 5 (⭐ Trọng Tâm 65 + 🛡️ Phủ Kín 42)'
-                : (isHira
-                    ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 2 Ca Thực Chiến — 35 Hiragana & Từ Láy Tủ (Ra ≥2x)'
-                    : (isKata
-                        ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 90 Từ Katakana N3 (78 Gốc + 12 Đề Thật)'
-                        : (isSyn
-                            ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 80 Cặp Đồng Nghĩa (95 Câu)'
-                            : '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 6 Ca Siêu Tốc — 352 Câu Kanji N3 (240 Gốc + 112 Mới)')))));
+        : (isGpM1
+            ? '<i class="fa-solid fa-book-open" style="color: var(--primary);"></i> Lộ Trình 6 Chuyên Đề — 273 Câu Ngữ Pháp M1 (Taisaku Đề Thật + Kính Ngữ)'
+            : (isGpStar
+                ? '<i class="fa-solid fa-star" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Chuyên Đề — 99 Câu Sắp Xếp Dấu Sao ★ Theo Công Thức (Taisaku M2)'
+                : (isGpM3
+                    ? '<i class="fa-solid fa-file-lines" style="color: var(--primary);"></i> Lộ Trình 3 Ca Split-Screen — 46 Bài Văn / 141 Câu Ngữ Pháp Đoạn Văn M3'
+                    : (isM3
+                        ? '<i class="fa-solid fa-puzzle-piece" style="color: var(--primary);"></i> Lộ Trình 2 Tầng — 191 Từ Ngữ Cảnh Mondai 3 (⭐ Trọng Tâm 97 + 🛡️ Phủ Kín 94)'
+                        : (isM5
+                            ? '<i class="fa-solid fa-bullseye" style="color: var(--primary);"></i> Lộ Trình 2 Tầng — 107 Cách Dùng Từ Mondai 5 (⭐ Trọng Tâm 65 + 🛡️ Phủ Kín 42)'
+                            : (isHira
+                                ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 2 Ca Thực Chiến — 35 Hiragana & Từ Láy Tủ (Ra ≥2x)'
+                                : (isKata
+                                    ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 90 Từ Katakana N3 (78 Gốc + 12 Đề Thật)'
+                                    : (isSyn
+                                        ? '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Ca Thực Chiến — 80 Cặp Đồng Nghĩa (95 Câu)'
+                                        : '<i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 6 Ca Siêu Tốc — 352 Câu Kanji N3 (240 Gốc + 112 Mới)'))))))));
 
     document.getElementById('custom-panel-title').innerHTML = isPast
         ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Luyện Chuyên Sâu Theo Dạng Bài (Dấu ★ • Cách dùng từ • Đọc hiểu)'
-        : (isM3
-            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 191 Từ Mondai 3'
-            : (isM5
-                ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 107 Câu Mondai 5'
-                : (isHira
-                    ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 35 Hiragana & Từ Láy'
-                    : (isKata
-                        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 90 Câu Katakana'
-                        : (isSyn
-                            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 95 Câu Đồng Nghĩa'
-                            : '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 352 Câu Kanji')))));
+        : (isGpM1
+            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Lọc Theo Độ Khó (273 Câu NP M1)'
+            : (isGpStar
+                ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 99 Câu Dấu Sao ★'
+                : (isGpM3
+                    ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh Theo Chuyên Đề M3 (Liên Từ • Chỉ Thị Từ • Đục Lỗ)'
+                    : (isM3
+                        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 191 Từ Mondai 3'
+                        : (isM5
+                            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 107 Câu Mondai 5'
+                            : (isHira
+                                ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 35 Hiragana & Từ Láy'
+                                : (isKata
+                                    ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 90 Câu Katakana'
+                                    : (isSyn
+                                        ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 95 Câu Đồng Nghĩa'
+                                        : '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 352 Câu Kanji'))))))));
 
     // Populate custom selects per bank
     const sessSel = document.getElementById('custom-session-select');
     const monSel = document.getElementById('custom-mondai-select');
     const cntSel = document.getElementById('custom-count-select');
 
-    if (isPast) {
+    if (isGpM1) {
+        sessSel.innerHTML = `
+            <option value="all">Trộn tổng cả 273 câu Ngữ Pháp M1 (6 Ca)</option>
+            <option value="1">Ca 1 — Ngữ pháp Nền N4–N3 (43 câu)</option>
+            <option value="2">👑 Ca 2 — Kính ngữ • Sai khiến • Cho nhận (57 câu)</option>
+            <option value="3">🔗 Ca 3 — Chuyên đề Trợ từ N3 (48 câu)</option>
+            <option value="4">🧩 Ca 4 — Trợ từ+X & 4 Group dễ nhầm (47 câu)</option>
+            <option value="5">⭐ Ca 5 — Ngữ pháp N3 Đơn lẻ (61 câu)</option>
+            <option value="6">⚡ Ca 6 — Phó từ hô ứng ngữ pháp (17 câu)</option>
+        `;
+        monSel.style.display = 'inline-block';
+        monSel.innerHTML = `
+            <option value="all">Tất cả mức độ (☆ + ☆☆)</option>
+            <option value="hard">🔥 Chỉ câu Bẫy nâng cao (☆☆)</option>
+            <option value="base">⭐ Chỉ câu Cơ bản (☆)</option>
+        `;
+        cntSel.innerHTML = `
+            <option value="15">15 câu (Lượt nhanh 8 phút)</option>
+            <option value="25" selected>25 câu (15 phút)</option>
+            <option value="45">45 câu (Trọn 1 chuyên đề)</option>
+            <option value="273">Tất cả câu lọc được</option>
+        `;
+    } else if (isGpStar) {
+        sessSel.innerHTML = `
+            <option value="all">Trộn tổng cả 99 câu Dấu Sao ★ (3 Ca)</option>
+            <option value="1">Ca 1 — Kết hợp Danh–Động–Tính từ (31 câu ★)</option>
+            <option value="2">Ca 2 — Kết hợp với Trợ từ (22 câu ★)</option>
+            <option value="3">Ca 3 — Tổng hợp Thực chiến Đề thật (46 câu ★)</option>
+        `;
+        monSel.style.display = 'inline-block';
+        monSel.innerHTML = `
+            <option value="all">Tất cả mức độ (☆ + ☆☆)</option>
+            <option value="hard">🔥 Chỉ câu ★ Bẫy nâng cao (☆☆)</option>
+            <option value="base">⭐ Chỉ câu ★ Cơ bản (☆)</option>
+        `;
+        cntSel.innerHTML = `
+            <option value="10">10 câu ★ (Lượt nhanh 8 phút)</option>
+            <option value="20" selected>20 câu ★ (16 phút)</option>
+            <option value="31">31 câu ★ (Trọn Ca 1)</option>
+            <option value="99">Tất cả 99 câu ★</option>
+        `;
+    } else if (isGpM3) {
+        sessSel.innerHTML = `
+            <option value="all">Tất cả 46 bài / 141 câu Mondai 3 (3 Ca)</option>
+            <option value="1">Ca 1 — Chuyên đề Liên từ & Chỉ thị từ (47 câu)</option>
+            <option value="2">Ca 2 — Đọc Đục Lỗ Đề Thật #1–#10 (50 câu)</option>
+            <option value="3">Ca 3 — Đọc Đục Lỗ Đề Thật #11–#19 (44 câu)</option>
+        `;
+        monSel.style.display = 'inline-block';
+        monSel.innerHTML = `
+            <option value="all">Tất cả chuyên đề M3</option>
+            <option value="lientu">Chỉ Liên từ (39 câu)</option>
+            <option value="chithitu">Chỉ Chỉ thị từ こ・そ・あ (8 câu)</option>
+            <option value="tonghop">Chỉ Bài đục lỗ Tổng hợp (94 câu)</option>
+        `;
+        cntSel.innerHTML = `
+            <option value="15">15 câu (~3 bài văn)</option>
+            <option value="25" selected>25 câu (~5 bài văn)</option>
+            <option value="50">50 câu (Trọn Ca 2)</option>
+            <option value="141">Tất cả câu lọc được</option>
+        `;
+    } else if (isPast) {
         const loadedExams = getPastExamsList();
         const examOpts = loadedExams.map(ex => `<option value="${ex.exam_id}">Chỉ đề ${ex.short_label} (${ex.questions.length} câu)</option>`).join('');
         sessSel.innerHTML = `<option value="all">Gom tất cả các đề đã nạp (${getPastAllQuestions().length} câu)</option>${examOpts}`;
@@ -573,7 +743,58 @@ function applyBankUI() {
     if (maskRightBtn) maskRightBtn.classList.toggle('primary', pairsMaskMode === 'right');
     if (maskLeftBtn) maskLeftBtn.classList.toggle('primary', pairsMaskMode === 'left');
 
-    if (isM3) {
+    if (isGpM1) {
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Công Thức & Bẫy Ngữ Pháp M1 (Kính ngữ • Sai khiến • Cho nhận • Trợ từ • 4 Group • Phó từ)';
+        if (maskRightBtn) maskRightBtn.textContent = '🙈 Che Quy Tắc & Ví Dụ (Mẫu → ???)';
+        if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che Tên Mẫu (??? ← Quy tắc)';
+        if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh Kính ngữ, Trợ từ, よう, こと, ばかり, ところ, わざわざ, お/ご...';
+        if (pairsCat) {
+            pairsCat.innerHTML = `
+                <option value="all">Tất cả 7 chuyên đề lý thuyết M1</option>
+                <option value="Kính ngữ">👑 Kính ngữ (Tôn kính • Khiêm nhường • お/ご/×)</option>
+                <option value="Sai khiến • Bị động">⚡ Sai khiến – Bị động – Bị động sai khiến</option>
+                <option value="Cho nhận">🤝 Cho nhận & Kính ngữ cho nhận</option>
+                <option value="Trợ từ">🔗 21 Trợ từ trọng tâm</option>
+                <option value="Trợ từ + X">🧩 24 Mẫu Trợ từ + X</option>
+                <option value="4 Group dễ nhầm">📦 4 Group dễ nhầm (よう/こと/ばかり/ところ)</option>
+                <option value="Đơn lẻ & Hậu tố Vます">⭐ Đơn lẻ & Hậu tố Vます</option>
+                <option value="Phó từ hô ứng">🎯 Phó từ hô ứng & Cặp dễ nhầm</option>
+            `;
+        }
+    } else if (isGpStar) {
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-star" style="color: var(--hub-warn-text);"></i> Bảng 16 Công Thức Ghép Xương Câu Dấu Sao ★ (Chương 3 Taisaku)';
+        if (maskRightBtn) maskRightBtn.textContent = '🙈 Che Công Thức & Ví Dụ (Tên → ???)';
+        if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che Tên Quy Tắc (??? ← Công thức)';
+        if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh công thức ★: に対する, への, のは, だけしか, という, ほど...';
+        if (pairsCat) {
+            pairsCat.innerHTML = `
+                <option value="all">Tất cả 16 công thức ghép ★</option>
+                <option value="Mẹo đọc khung câu ★">Mẹo đọc khung câu ★</option>
+                <option value="Kết hợp Danh từ">Kết hợp Danh từ ([Trợ từ+X]+の+N / 辞書形+N)</option>
+                <option value="Kết hợp Động từ">Kết hợp Động từ</option>
+                <option value="Kết hợp Trợ từ">Kết hợp Trợ từ (に→への / のは・のが / 2 trợ từ)</option>
+                <option value="Mẫu cặp hô ứng ★">Mẫu cặp hô ứng & Câu hỏi lồng ★</option>
+            `;
+        }
+    } else if (isGpM3) {
+        if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-arrows-left-right" style="color: var(--primary);"></i> Bảng Tra Cứu 45 Liên Từ & 8 Quy Tắc Chỉ Thị Từ こ・そ・あ (Chương 4 Taisaku)';
+        if (maskRightBtn) maskRightBtn.textContent = '🙈 Che Quy Tắc & Mẹo (Từ nối → ???)';
+        if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che Từ Nối / こ・そ・あ (??? ← Quy tắc)';
+        if (pairsSearch) pairsSearch.placeholder = 'Tìm nhanh liên từ (ところが, そこで, つまり, すると...) hoặc こ・そ・あ...';
+        if (pairsCat) {
+            pairsCat.innerHTML = `
+                <option value="all">Tất cả Liên từ & Chỉ thị từ (22 thẻ tổng hợp)</option>
+                <option value="Liên từ: Đối lập">Liên từ: Đối lập / Nghịch ý (ところが, 一方, ただし...)</option>
+                <option value="Liên từ: Nguyên nhân–KQ">Liên từ: Nguyên nhân – Kết quả (そこで, すると, そのため...)</option>
+                <option value="Liên từ: Lý giải">Liên từ: Lý giải ngược (なぜなら, というのは)</option>
+                <option value="Liên từ: Bổ sung">Liên từ: Bổ sung / Trình tự (そのうえ, それに, まず...)</option>
+                <option value="Liên từ: Tóm tắt & Ví dụ">Liên từ: Tóm tắt & Ví dụ (つまり, 結局, たとえば)</option>
+                <option value="Liên từ: Lựa chọn">Liên từ: Lựa chọn (または, それとも)</option>
+                <option value="Liên từ: Chuyển ý">Liên từ: Chuyển chủ đề (ところで, そういえば, さて)</option>
+                <option value="Chỉ thị từ こ・そ・あ">🎯 8 Quy tắc vàng Chỉ thị từ こ・そ・あ</option>
+            `;
+        }
+    } else if (isM3) {
         if (pairsTitle) pairsTitle.innerHTML = '<i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Tra Cứu 191 Từ Ngữ Cảnh Mondai 3 (⭐ Trọng Tâm 97 • 🛡️ Phủ Kín 94)';
         if (maskRightBtn) maskRightBtn.textContent = '🙈 Che Nghĩa & Cụm Kết Hợp (Từ → ???)';
         if (maskLeftBtn) maskLeftBtn.textContent = '🙈 Che Từ & Đọc (??? ← Nghĩa)';
@@ -808,6 +1029,18 @@ function syncMistakeToHubSrs(qObj, bankId = activeBank, remove = false) {
                 nextReview: getTodayStr(),
                 addedAt: new Date().toLocaleDateString('vi-VN')
             };
+        } else if (bankId === 'gp_m1' || bankId === 'gp_star' || bankId === 'gp_m3') {
+            const gpTag = bankId === 'gp_m1' ? `NP M1 (Ca ${qObj.part})` : (bankId === 'gp_star' ? `Dấu Sao ★ (Ca ${qObj.part})` : `NP Đoạn Văn M3 (Ca ${qObj.part})`);
+            const keyLbl = qObj.pattern_key || qObj.rule_tag || qObj.topic || 'Ngữ pháp N3';
+            entry = {
+                id: qObj.id,
+                type: gpTag,
+                title: `[${keyLbl}] Đáp án: ${qObj.options[qObj.answer]}`,
+                detail: `${qObj.star_order ? `Thứ tự ★: ${qObj.star_order} | ` : ''}${qObj.sentence_vi} | ${qObj.explain_vi}`,
+                level: 0,
+                nextReview: getTodayStr(),
+                addedAt: new Date().toLocaleDateString('vi-VN')
+            };
         } else {
             entry = {
                 id: qObj.id,
@@ -999,6 +1232,28 @@ function buildPreparedQuestion(qObj, antiRote, bankId = activeBank) {
                 correctIdx
             };
         }
+    }
+
+    if (bankId === 'gp_m1' || bankId === 'gp_star' || bankId === 'gp_m3') {
+        const rawTuples = qObj.options.map((txt, i) => ({
+            txt,
+            isAns: i === qObj.answer
+        }));
+        const finalTuples = antiRote.shuffleOpt ? fisherYatesShuffle(rawTuples) : rawTuples;
+        const correctIdx = finalTuples.findIndex(t => t.isAns);
+        const isHard = (qObj.level_star || '').length >= 2;
+        return {
+            bankId,
+            orig: qObj,
+            effectiveMondai: isHard ? 2 : 1, // 1 = Cơ bản ☆, 2 = Nâng cao / Bẫy ☆☆
+            isReversed: false,
+            displayHtml: qObj.sentence_html,
+            displayOnlyWord: qObj.pattern_key || qObj.rule_tag || qObj.topic || '',
+            options: finalTuples.map(t => t.txt),
+            optionsVi: null,
+            optionsKata: null,
+            correctIdx
+        };
     }
 
     if (bankId === 'pastN3') {
@@ -1231,9 +1486,9 @@ const PAST_MONDAI_META = {
     moji_goi_3: { label: 'M3 Ngữ cảnh', short: 'M3', suggestBank: 'm3_191', suggestLabel: '🧩 191 Từ Ngữ Cảnh M3' },
     moji_goi_4: { label: 'M4 Đồng nghĩa', short: 'M4', suggestBank: 'syn80', suggestLabel: '🔁 80 Cặp Đồng Nghĩa' },
     moji_goi_5: { label: 'M5 Cách dùng', short: 'M5', suggestBank: 'm5_107', suggestLabel: '🎯 107 Cách Dùng Từ M5' },
-    bunpou_1: { label: 'NP M1 Ngữ pháp', short: 'NP1', suggestBank: null, suggestLabel: 'Trang Chiến Dịch (150 Mẫu Ngữ Pháp)' },
-    bunpou_2: { label: 'NP M2 Dấu sao ★', short: 'NP★', suggestBank: null, suggestLabel: 'Luyện chuyên sâu Dấu sao ★' },
-    bunpou_3: { label: 'NP M3 Đoạn văn', short: 'NP3', suggestBank: null, suggestLabel: 'Luyện chuyên sâu NP Đoạn văn' },
+    bunpou_1: { label: 'NP M1 Ngữ pháp', short: 'NP1', suggestBank: 'gp_m1', suggestLabel: '📘 Ngữ Pháp M1 (273 câu)' },
+    bunpou_2: { label: 'NP M2 Dấu sao ★', short: 'NP★', suggestBank: 'gp_star', suggestLabel: '⭐ Dấu Sao ★ (99 câu)' },
+    bunpou_3: { label: 'NP M3 Đoạn văn', short: 'NP3', suggestBank: 'gp_m3', suggestLabel: '📄 Đoạn Văn M3 (141 câu)' },
     dokkai_4: { label: 'ĐH M4 Đoạn ngắn', short: 'ĐH4', suggestBank: null, suggestLabel: 'Luyện chuyên sâu Đọc ngắn' },
     dokkai_5: { label: 'ĐH M5 Đoạn trung', short: 'ĐH5', suggestBank: null, suggestLabel: 'Luyện chuyên sâu Đọc trung' },
     dokkai_6: { label: 'ĐH M6 Đoạn dài', short: 'ĐH6', suggestBank: null, suggestLabel: 'Luyện chuyên sâu Đọc dài' },
@@ -1688,7 +1943,7 @@ function setupLobbyEvents() {
                     });
                     loadBankState();
                     renderLobby();
-                    alert(`✅ Đã khôi phục thành công ${restored} nhóm dữ liệu (Kanji 352, Ngữ Cảnh M3 191, Đồng Nghĩa 80, Katakana 90, Hiragana 35, Cách Dùng M5 107, Đề Thi N3 2021–2023, Kho Phục Thù, Ngữ pháp, Hán tự, Từ vựng)!`);
+                    alert(`✅ Đã khôi phục thành công ${restored} nhóm dữ liệu (6 Bộ Từ Vựng–Kanji, 3 Bộ Ngữ Pháp Thực Chiến Taisaku, Đề Thi N3 2021–2023, Kho Phục Thù, Ngữ pháp, Hán tự, Từ vựng)!`);
                 } catch (err) {
                     alert('❌ File sao lưu không hợp lệ!');
                 }
@@ -1739,6 +1994,13 @@ function launchCustom(mode) {
             pool = pool.filter(q => (q.pos || '').startsWith(mVal));
         } else if (activeBank === 'kata78' || activeBank === 'hira35' || activeBank === 'm3_191') {
             pool = pool.filter(q => q.category === mVal);
+        } else if (activeBank === 'gp_m1' || activeBank === 'gp_star') {
+            if (mVal === 'hard') pool = pool.filter(q => (q.level_star || '').length >= 2);
+            else if (mVal === 'base') pool = pool.filter(q => (q.level_star || '').length < 2);
+        } else if (activeBank === 'gp_m3') {
+            if (mVal === 'lientu') pool = pool.filter(q => (q.topic || '').includes('Liên từ'));
+            else if (mVal === 'chithitu') pool = pool.filter(q => (q.topic || '').includes('Chỉ thị từ'));
+            else if (mVal === 'tonghop') pool = pool.filter(q => q.part >= 2);
         } else if (activeBank === 'pastN3') {
             if (mVal === 'moji_goi') pool = pool.filter(q => q.section === 'moji_goi');
             else if (mVal === 'moji_m5') pool = pool.filter(q => q.section === 'moji_goi' && q.mondai === 5);
@@ -1757,23 +2019,31 @@ function launchCustom(mode) {
         return;
     }
 
-    const antiRote = getAntiRoteSettings(activeBank === 'pastN3' ? { hideCtx: false, reverseMode: false } : {});
-    if (antiRote.shuffleQ) pool = fisherYatesShuffle(pool);
+    const antiRote = getAntiRoteSettings((activeBank === 'pastN3' || isGrammarBank(activeBank)) ? { hideCtx: false, reverseMode: false } : {});
+    if (antiRote.shuffleQ) {
+        pool = activeBank === 'gp_m3' ? shuffleByPassageGroup(pool) : fisherYatesShuffle(pool);
+    }
     pool = pool.slice(0, Math.min(cntVal, pool.length));
 
     const prefix = activeBank === 'pastN3'
         ? (sVal === 'all' ? 'Chuyên sâu Đề Thi N3' : `${getPastExamShortLabel(sVal)} Chuyên sâu`)
-        : (activeBank === 'm3_191'
-            ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 3' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 3' : (sVal === 'all' ? 'Tổng hợp 191 Mondai 3' : `Bài ${sVal} Mondai 3`)))
-            : (activeBank === 'm5_107'
-                ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 5' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 5' : (sVal === 'all' ? 'Tổng hợp 107 Mondai 5' : `Bài ${sVal} Mondai 5`)))
-                : (activeBank === 'hira35'
-                    ? (sVal === 'all' ? 'Tổng hợp Hiragana & Từ Láy' : `Bài ${sVal} Hiragana`)
-                    : (activeBank === 'kata78'
-                        ? (sVal === 'all' ? 'Tổng hợp Katakana N3' : `Bài ${sVal} Katakana`)
-                        : (activeBank === 'syn80'
-                            ? (sVal === 'all' ? 'Tổng hợp Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`)
-                            : (sVal === 'extra' ? '112 Kanji Mới (B5–B6)' : (sVal === 'all' ? 'Tổng hợp 352 Kanji' : `Buổi ${sVal}`)))))));
+        : (activeBank === 'gp_m1'
+            ? (sVal === 'all' ? 'Tổng hợp Ngữ Pháp M1' : `Ca ${sVal} Ngữ Pháp M1`)
+            : (activeBank === 'gp_star'
+                ? (sVal === 'all' ? 'Tổng hợp Dấu Sao ★' : `Ca ${sVal} Dấu Sao ★`)
+                : (activeBank === 'gp_m3'
+                    ? (sVal === 'all' ? 'Tổng hợp Đoạn Văn M3' : `Ca ${sVal} Đoạn Văn M3`)
+                    : (activeBank === 'm3_191'
+                        ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 3' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 3' : (sVal === 'all' ? 'Tổng hợp 191 Mondai 3' : `Bài ${sVal} Mondai 3`)))
+                        : (activeBank === 'm5_107'
+                            ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 5' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 5' : (sVal === 'all' ? 'Tổng hợp 107 Mondai 5' : `Bài ${sVal} Mondai 5`)))
+                            : (activeBank === 'hira35'
+                                ? (sVal === 'all' ? 'Tổng hợp Hiragana & Từ Láy' : `Bài ${sVal} Hiragana`)
+                                : (activeBank === 'kata78'
+                                    ? (sVal === 'all' ? 'Tổng hợp Katakana N3' : `Bài ${sVal} Katakana`)
+                                    : (activeBank === 'syn80'
+                                        ? (sVal === 'all' ? 'Tổng hợp Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`)
+                                        : (sVal === 'extra' ? '112 Kanji Mới (B5–B6)' : (sVal === 'all' ? 'Tổng hợp 352 Kanji' : `Buổi ${sVal}`))))))))));
     const specialVals = ['all', 'extra', 'core', 'full'];
     startQuizEngine({
         bankId: activeBank,
@@ -1788,6 +2058,17 @@ function launchCustom(mode) {
     });
 }
 
+function shuffleByPassageGroup(pool) {
+    const groups = new Map();
+    pool.forEach(q => {
+        const key = q.passage_id || q.id;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(q);
+    });
+    const keys = fisherYatesShuffle(Array.from(groups.keys()));
+    return keys.flatMap(k => groups.get(k));
+}
+
 function launchRevengeSession(mode, forceAntiRote = {}, subsetIds = null) {
     const targetIds = subsetIds || Object.keys(mistakesMap);
     const pool = getBankDataset().filter(q => targetIds.includes(q.id));
@@ -1796,11 +2077,14 @@ function launchRevengeSession(mode, forceAntiRote = {}, subsetIds = null) {
         return;
     }
     const isPast = activeBank === 'pastN3';
-    const antiRote = getAntiRoteSettings(isPast
-        ? { shuffleQ: false, shuffleOpt: true, hideCtx: false, reverseMode: false }
+    const isGp = isGrammarBank(activeBank);
+    const antiRote = getAntiRoteSettings((isPast || isGp)
+        ? { shuffleQ: activeBank === 'gp_m1' || activeBank === 'gp_star', shuffleOpt: true, hideCtx: false, reverseMode: false }
         : { shuffleQ: true, shuffleOpt: true, ...forceAntiRote }
     );
-    const revLabel = isPast ? 'Đề Thi N3' : (activeBank === 'm3_191' ? 'Mondai 3' : (activeBank === 'm5_107' ? 'Mondai 5' : (activeBank === 'hira35' ? 'Hiragana & Từ Láy' : (activeBank === 'kata78' ? 'Katakana N3' : (activeBank === 'syn80' ? 'Đồng Nghĩa' : 'Kanji')))));
+    const revLabel = isPast
+        ? 'Đề Thi N3'
+        : (activeBank === 'gp_m1' ? 'Ngữ Pháp M1' : (activeBank === 'gp_star' ? 'Dấu Sao ★' : (activeBank === 'gp_m3' ? 'Đoạn Văn M3' : (activeBank === 'm3_191' ? 'Mondai 3' : (activeBank === 'm5_107' ? 'Mondai 5' : (activeBank === 'hira35' ? 'Hiragana & Từ Láy' : (activeBank === 'kata78' ? 'Katakana N3' : (activeBank === 'syn80' ? 'Đồng Nghĩa' : 'Kanji'))))))));
     startQuizEngine({
         bankId: activeBank,
         title: `🔥 Phục Thù ${revLabel} (${pool.length} câu)`,
@@ -1815,7 +2099,11 @@ function launchRevengeSession(mode, forceAntiRote = {}, subsetIds = null) {
 
 function startQuizEngine(cfg) {
     const bankId = cfg.bankId || activeBank;
-    let orderedPool = cfg.alreadyShuffled ? [...cfg.pool] : (cfg.antiRote.shuffleQ ? fisherYatesShuffle(cfg.pool) : [...cfg.pool]);
+    let orderedPool = cfg.alreadyShuffled
+        ? [...cfg.pool]
+        : (cfg.antiRote.shuffleQ
+            ? (bankId === 'gp_m3' ? shuffleByPassageGroup(cfg.pool) : fisherYatesShuffle(cfg.pool))
+            : [...cfg.pool]);
     const items = orderedPool.map(q => buildPreparedQuestion(q, cfg.antiRote, bankId));
     const totalSeconds = cfg.customSeconds || Math.max(120, items.length * getBankCfg(bankId).secPerQuestion);
     lastRenderedPassageId = null;
@@ -1932,7 +2220,7 @@ function renderPassagePane(item, isDrill, isAnswered) {
     if (!ws || !pane) return;
 
     const orig = item.orig;
-    const passage = item.bankId === 'pastN3' ? getPassageForQuestion(orig) : null;
+    const passage = (item.bankId === 'pastN3' || item.bankId === 'gp_m3') ? getPassageForQuestion(orig) : null;
 
     if (!passage) {
         ws.classList.remove('has-passage');
@@ -1984,20 +2272,35 @@ function renderQuestionStage() {
     const isHira = item.bankId === 'hira35';
     const isM3 = item.bankId === 'm3_191';
     const isM5 = item.bankId === 'm5_107';
+    const isGpM1 = item.bankId === 'gp_m1';
+    const isGpStar = item.bankId === 'gp_star';
+    const isGpM3 = item.bankId === 'gp_m3';
+    const isGp = isGpM1 || isGpStar || isGpM3;
     const isPast = item.bankId === 'pastN3';
     const chosen = activeSession.answers[idx];
     const isAnswered = chosen !== null;
     const isDrill = activeSession.mode === 'drill';
-    const hideCtxNow = !isPast && activeSession.antiRote.hideCtx && !activeSession.revealedCtx[idx] && !(isDrill && isAnswered);
+    const hideCtxNow = !isPast && !isGp && activeSession.antiRote.hideCtx && !activeSession.revealedCtx[idx] && !(isDrill && isAnswered);
 
     renderPassagePane(item, isDrill, isAnswered);
 
     document.getElementById('exam-progress-txt').textContent = `${idx + 1}/${activeSession.items.length}`;
     document.getElementById('q-num-badge').textContent = isPast
         ? `Câu ${idx + 1} / ${activeSession.items.length} (${getPastExamShortLabel(orig.exam_id)} • #${orig.num})`
-        : `Câu ${idx + 1} / ${activeSession.items.length} (Gốc B${getItemSessionNum(orig, item.bankId)}-#${orig.num})`;
+        : (isGp
+            ? `Câu ${idx + 1} / ${activeSession.items.length} (Ca ${orig.part} • #${orig.num}${orig.exam_tag ? ` • ${orig.exam_tag}` : ''})`
+            : `Câu ${idx + 1} / ${activeSession.items.length} (Gốc B${getItemSessionNum(orig, item.bankId)}-#${orig.num})`);
 
-    if (isPast) {
+    if (isGpM1) {
+        document.getElementById('q-mondai-badge').textContent = `NP M1 • ${orig.subtopic || orig.topic}${orig.level_star ? ` • ${orig.level_star}` : ''}`;
+        document.getElementById('q-instruction-text').textContent = '文法 問題1：Chọn ngữ pháp / trợ từ / kính ngữ phù hợp nhất điền vào chỗ trống （　　　）.';
+    } else if (isGpStar) {
+        document.getElementById('q-mondai-badge').textContent = `NP M2 (★) • ${orig.topic}${orig.level_star ? ` • ${orig.level_star}` : ''}`;
+        document.getElementById('q-instruction-text').textContent = '文法 問題2 (★)：Áp dụng công thức ghép câu để sắp xếp 4 mảnh và chọn mảnh rơi đúng vị trí dấu sao ★.';
+    } else if (isGpM3) {
+        document.getElementById('q-mondai-badge').textContent = `NP M3 • ${orig.topic}${orig.level_star ? ` • ${orig.level_star}` : ''}`;
+        document.getElementById('q-instruction-text').textContent = '文法 問題3：Đọc mạch bài văn bên trái (chú ý chỗ trống tô sáng) và chọn liên từ / chỉ thị từ / ngữ pháp phù hợp nhất.';
+    } else if (isPast) {
         document.getElementById('q-mondai-badge').textContent = orig.mondai_label;
         let inst = 'Chọn đáp án chính xác nhất từ 1・2・3・4.';
         if (orig.section === 'moji_goi') {
@@ -2097,7 +2400,7 @@ function renderQuestionStage() {
         revealBtn.style.display = 'inline-flex';
     } else {
         sentBox.className = 'q-sentence';
-        if ((isPast && (orig.passage_id || orig.sentence_html.length > 65)) || (isM5 && item.isReversed)) {
+        if (((isPast || isGp) && (orig.passage_id || (orig.sentence_html || '').length > 65)) || (isM5 && item.isReversed)) {
             sentBox.style.fontSize = '19px';
             sentBox.style.textAlign = 'left';
             sentBox.style.padding = '16px 18px';
@@ -2120,7 +2423,7 @@ function renderQuestionStage() {
 
     const optContainer = document.getElementById('exam-options-container');
     optContainer.innerHTML = '';
-    const hasLongOpt = (isM5 && !item.isReversed) || (isPast && item.options.some(o => o.length > 14));
+    const hasLongOpt = (isM5 && !item.isReversed) || ((isPast || isGp) && item.options.some(o => o.length > 14));
     optContainer.style.gridTemplateColumns = hasLongOpt ? '1fr' : '';
 
     item.options.forEach((optTxt, optIdx) => {
@@ -2226,6 +2529,36 @@ function renderExplanationHTML(item, chosenIdx) {
 
     const safeTts = (q.sentence_tts || '').replace(/'/g, "\\'");
     const freqBlock = renderFreqBadgeHTML(q);
+
+    if (item.bankId === 'gp_m1' || item.bankId === 'gp_star' || item.bankId === 'gp_m3') {
+        const keyBadge = q.pattern_key || q.rule_tag
+            ? `<span class="gp-rule-pill"><i class="fa-solid fa-key"></i> ${q.pattern_key || q.rule_tag}</span>`
+            : '';
+        const metaBadge = (q.exam_tag || q.level_star)
+            ? `<span class="gp-star-pill">${q.exam_tag ? `📅 ${q.exam_tag}` : ''}${q.exam_tag && q.level_star ? ' • ' : ''}${q.level_star || ''}</span>`
+            : '';
+        const starBlock = item.bankId === 'gp_star' && q.star_order
+            ? `<div class="star-ans-box">⭐ Thứ tự ghép câu chuẩn (4 mảnh): ${q.star_order}<div style="font-weight: 500; margin-top: 4px; color: var(--hub-text-body);">→ ${q.sentence_tts}</div></div>`
+            : '';
+        return `
+            <div class="exp-box ${isCorrect ? 'is-correct' : 'is-wrong'}">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-weight: 700; font-size: 15px;">
+                    <div>${statusTitle}</div>
+                    ${safeTts ? `<button class="btn-pill" style="padding: 5px 11px; font-size: 12px;" onclick="speakJapanese('${safeTts}')"><i class="fa-solid fa-volume-high"></i> Nghe câu chuẩn</button>` : ''}
+                </div>
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 7px;">
+                    ${keyBadge}${metaBadge}
+                </div>
+                ${starBlock}
+                <div style="font-size: 14px; color: var(--hub-text-body); line-height: 1.55;">
+                    <strong>📖 Dịch câu:</strong> ${q.sentence_vi}
+                </div>
+                <div class="trap-pill">
+                    <strong style="color: var(--hub-warn-text);"><i class="fa-solid fa-lightbulb"></i> Phân tích công thức & Loại bẫy:</strong> ${q.explain_vi}
+                </div>
+            </div>
+        `;
+    }
 
     if (item.bankId === 'pastN3') {
         const starBlock = q.is_star && q.star_order
@@ -2600,11 +2933,12 @@ function setupExamEvents() {
     document.getElementById('res-retry-shuffled-btn').addEventListener('click', () => {
         if (!activeSession) return;
         const isPast = activeSession.bankId === 'pastN3';
+        const isGp = isGrammarBank(activeSession.bankId);
         const cfg = {
             ...activeSession.sourceConfig,
             alreadyShuffled: false,
-            antiRote: isPast
-                ? { shuffleQ: false, shuffleOpt: true, hideCtx: false, reverseMode: false }
+            antiRote: (isPast || isGp)
+                ? { shuffleQ: activeSession.bankId === 'gp_m1' || activeSession.bankId === 'gp_star', shuffleOpt: true, hideCtx: false, reverseMode: false }
                 : { ...activeSession.antiRote, shuffleQ: true, shuffleOpt: true }
         };
         startQuizEngine(cfg);
@@ -2651,6 +2985,7 @@ function finishExamSession(timedOut = false) {
     const isHira = bankId === 'hira35';
     const isM3 = bankId === 'm3_191';
     const isM5 = bankId === 'm5_107';
+    const isGp = isGrammarBank(bankId);
     const isPast = bankId === 'pastN3';
     const elapsedSec = Math.max(1, Math.round((Date.now() - activeSession.startedAt) / 1000));
     let totalCorrect = 0, m1Ok = 0, m1Tot = 0, m2Ok = 0, m2Tot = 0, wrongCnt = 0, flagCnt = 0;
@@ -2742,6 +3077,8 @@ function finishExamSession(timedOut = false) {
         if (jlptEst.dokTot > 0) parts.push(`ĐH: ${jlptEst.dokOk}/${jlptEst.dokTot}`);
         const subMondai = (jlptEst.mondaiBreakdown || []).map(x => `${x.short}:${x.ok}/${x.tot}`).join(' • ');
         breakdownStr = parts.join(' • ') + (subMondai ? ` (${subMondai})` : '');
+    } else if (isGp) {
+        breakdownStr = `Cơ bản ☆: ${m1Ok}/${m1Tot} • Nâng cao ☆☆: ${m2Ok}/${m2Tot}`;
     } else if (isM3) {
         breakdownStr = m2Tot > 0 ? `Đảo M3→Nghĩa: ${m2Ok}/${m2Tot}` : `Mondai 3: ${m1Ok}/${m1Tot}`;
     } else if (isM5) {
@@ -2774,7 +3111,9 @@ function finishExamSession(timedOut = false) {
     saveBankState();
 
     document.getElementById('res-mode-lbl').textContent = timedOut ? '⏰ Hết giờ — Tự động nộp bài' : `Kết quả • ${activeSession.title}`;
-    const bankShort = isPast ? 'Đề Thi Thật N3' : (isM3 ? 'Mondai 3 N3' : (isM5 ? 'Mondai 5 N3' : (isHira ? 'Hiragana N3' : (isKata ? 'Katakana N3' : (isSyn ? 'Đồng nghĩa N3' : 'Kanji N3')))));
+    const bankShort = isPast
+        ? 'Đề Thi Thật N3'
+        : (bankId === 'gp_m1' ? 'Ngữ Pháp M1' : (bankId === 'gp_star' ? 'Dấu Sao ★ N3' : (bankId === 'gp_m3' ? 'Đoạn Văn M3' : (isM3 ? 'Mondai 3 N3' : (isM5 ? 'Mondai 5 N3' : (isHira ? 'Hiragana N3' : (isKata ? 'Katakana N3' : (isSyn ? 'Đồng nghĩa N3' : 'Kanji N3'))))))));
     document.getElementById('res-headline').textContent = pct >= 85
         ? `🏆 Quá đỉnh! ${bankShort} đạt phong độ đỗ rất chắc!`
         : (pct >= 65 ? '🔥 Khá ổn! Vá kỹ các câu sai bên dưới là tăng vọt điểm ngay.' : '⚡ Đã bắt sống được nhiều lỗ hổng quan trọng — Chữa sâu & Phục thù ngay!');
@@ -2906,7 +3245,28 @@ function renderResultReviewList() {
         const safeTts = (q.sentence_tts || '').replace(/'/g, "\\'");
 
         let bodyHtml = '';
-        if (item.bankId === 'pastN3') {
+        if (item.bankId === 'gp_m1' || item.bankId === 'gp_star' || item.bankId === 'gp_m3') {
+            const pObj = item.bankId === 'gp_m3' ? getPassageForQuestion(q) : null;
+            const keyBadge = (q.pattern_key || q.rule_tag)
+                ? `<span class="gp-rule-pill" style="margin-bottom: 6px;"><i class="fa-solid fa-key"></i> ${q.pattern_key || q.rule_tag}</span>`
+                : '';
+            const metaBadge = (q.exam_tag || q.level_star)
+                ? `<span class="gp-star-pill" style="margin-bottom: 6px;">${q.exam_tag ? `📅 ${q.exam_tag}` : ''}${q.exam_tag && q.level_star ? ' • ' : ''}${q.level_star || ''}</span>`
+                : '';
+            const starHtml = item.bankId === 'gp_star' && q.star_order
+                ? `<div class="star-ans-box" style="margin-bottom: 8px;">⭐ Thứ tự ghép đúng: ${q.star_order}<div style="font-weight: 500; margin-top: 3px; color: var(--hub-text-body);">→ ${q.sentence_tts}</div></div>`
+                : '';
+            const passDetails = pObj
+                ? `<details style="margin-bottom: 8px; padding: 8px 12px; border-radius: 9px; background: var(--hub-surface-2); border: 1px solid var(--hub-border);"><summary style="cursor: pointer; font-weight: 700; font-size: 13px; color: var(--primary);">📄 Xem lại bài đọc gốc: ${pObj.title}</summary><div class="passage-body" style="font-size: 14px; margin-top: 8px;">${pObj.html}</div>${pObj.summary_vi ? `<div class="passage-summary-box"><strong>📖 Tóm tắt:</strong> ${pObj.summary_vi}</div>` : ''}</details>`
+                : '';
+            bodyHtml = `
+                <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px;">${keyBadge}${metaBadge}</div>
+                ${passDetails}
+                ${starHtml}
+                <div style="font-size: 13.5px; color: var(--hub-text-body); margin-bottom: 6px;"><strong>📖 Dịch:</strong> ${q.sentence_vi}</div>
+                <div style="font-size: 13px; color: var(--hub-text-sub);"><strong style="color: var(--hub-warn-text);">💡 Phân tích công thức & Loại bẫy:</strong> ${q.explain_vi}</div>
+            `;
+        } else if (item.bankId === 'pastN3') {
             const pObj = getPassageForQuestion(q);
             const starHtml = q.is_star && q.star_order
                 ? `<div class="star-ans-box" style="margin-bottom: 8px;">⭐ Thứ tự ghép đúng: ${q.star_order}</div>`
@@ -3086,6 +3446,7 @@ function renderMistakesView() {
     const isHira = activeBank === 'hira35';
     const isM3 = activeBank === 'm3_191';
     const isM5 = activeBank === 'm5_107';
+    const isGp = isGrammarBank(activeBank);
     const isPast = activeBank === 'pastN3';
     const ids = Object.keys(mistakesMap);
     document.getElementById('top-mistake-count').textContent = ids.length;
@@ -3110,20 +3471,24 @@ function renderMistakesView() {
 
         const tagText = isPast
             ? `${getPastExamShortLabel(q.exam_id)} • ${q.mondai_label} #${q.num}`
-            : ((isM3 || isM5) ? `Bài ${q.part} • ${q.tier_label}` : (isHira ? `Bài ${q.part} • ${q.category}` : (isKata ? `Bài ${q.part} • ${q.category}` : (isSyn ? `Bài ${q.part}` : `Buổi ${q.session} • M${q.mondai}`))));
+            : (isGp
+                ? `Ca ${q.part} • ${q.topic}${q.exam_tag ? ` (${q.exam_tag})` : ''}`
+                : ((isM3 || isM5) ? `Bài ${q.part} • ${q.tier_label}` : (isHira ? `Bài ${q.part} • ${q.category}` : (isKata ? `Bài ${q.part} • ${q.category}` : (isSyn ? `Bài ${q.part}` : `Buổi ${q.session} • M${q.mondai}`)))));
         const headline = isPast
             ? `<strong style="font-size: 15.5px; color: var(--primary);">Đáp án: ${q.options[q.answer]}</strong>`
-            : ((isM3 || isM5)
-                ? `<strong style="font-size: 17px; color: var(--primary);">${q.word_disp}</strong> <span class="hanviet-pill">${q.collocation.split('/')[0].trim()}</span>`
-                : (isHira
-                    ? `<strong style="font-size: 17px; color: var(--primary);">${q.word}</strong> <span class="hanviet-pill">Đồng nghĩa: ${q.syn_jp}</span>`
-                    : (isKata
-                        ? `<strong style="font-size: 17px; color: var(--primary);">${q.word}</strong> <span class="hanviet-pill">Gốc: ${q.origin}</span> <span style="font-size: 12.5px; color: var(--hub-text-sub);">(${q.native_jp})</span>`
-                        : (isSyn
-                            ? `<strong style="font-size: 16.5px; color: var(--hub-text);">${q.target_word} ＝ ${q.synonym_word}</strong> <span class="hanviet-pill">${q.meaning_vi}</span>`
-                            : `<strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}（${q.reading}）</strong> <span class="hanviet-pill">${q.han_viet}</span>`))));
-        const subNote = isPast ? q.explain_vi : (isM3 ? q.note_vi : (isM5 ? q.trap_rule : (isHira ? q.nuance_note : (isKata ? q.wasei_note : (isSyn ? q.nuance_note : q.trap_note)))));
-        const midLine = isPast
+            : (isGp
+                ? `<strong style="font-size: 15.5px; color: var(--primary);">Đáp án: ${q.options[q.answer]}</strong> <span class="gp-rule-pill">${q.pattern_key || q.rule_tag || ''}</span>`
+                : ((isM3 || isM5)
+                    ? `<strong style="font-size: 17px; color: var(--primary);">${q.word_disp}</strong> <span class="hanviet-pill">${q.collocation.split('/')[0].trim()}</span>`
+                    : (isHira
+                        ? `<strong style="font-size: 17px; color: var(--primary);">${q.word}</strong> <span class="hanviet-pill">Đồng nghĩa: ${q.syn_jp}</span>`
+                        : (isKata
+                            ? `<strong style="font-size: 17px; color: var(--primary);">${q.word}</strong> <span class="hanviet-pill">Gốc: ${q.origin}</span> <span style="font-size: 12.5px; color: var(--hub-text-sub);">(${q.native_jp})</span>`
+                            : (isSyn
+                                ? `<strong style="font-size: 16.5px; color: var(--hub-text);">${q.target_word} ＝ ${q.synonym_word}</strong> <span class="hanviet-pill">${q.meaning_vi}</span>`
+                                : `<strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}（${q.reading}）</strong> <span class="hanviet-pill">${q.han_viet}</span>`)))));
+        const subNote = (isPast || isGp) ? `${q.star_order ? `⭐ ${q.star_order} — ` : ''}${q.explain_vi}` : (isM3 ? q.note_vi : (isM5 ? q.trap_rule : (isHira ? q.nuance_note : (isKata ? q.wasei_note : (isSyn ? q.nuance_note : q.trap_note)))));
+        const midLine = (isPast || isGp)
             ? `<em>${q.sentence_vi}</em>`
             : `${isSyn ? '' : q.meaning_vi + ' — '}<em>${q.sentence_vi}</em>`;
         const freqMini = q.freq_badge ? `<span class="freq-pill ${q.freq_badge.startsWith('🔥') ? '' : 'subtle'}">${q.freq_badge}</span>` : '';
@@ -3175,6 +3540,12 @@ function setupPairsEvents() {
             currentKataOrder = fisherYatesShuffle(currentKataOrder);
         } else if (activeBank === 'hira35') {
             currentHiraOrder = fisherYatesShuffle(currentHiraOrder);
+        } else if (activeBank === 'gp_m1') {
+            currentGpM1SheetOrder = fisherYatesShuffle(currentGpM1SheetOrder);
+        } else if (activeBank === 'gp_star') {
+            currentGpStarSheetOrder = fisherYatesShuffle(currentGpStarSheetOrder);
+        } else if (activeBank === 'gp_m3') {
+            currentGpM3SheetOrder = fisherYatesShuffle(currentGpM3SheetOrder);
         } else {
             currentPairsOrder = fisherYatesShuffle(currentPairsOrder);
         }
@@ -3305,8 +3676,68 @@ function renderPairsTable() {
     const isMaskedInit = pairsMaskMode !== 'none';
 
     const renderEmpty = () => {
-        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 28px; color: var(--hub-text-sub); background: var(--hub-surface-2); border-radius: 12px;">Không tìm thấy từ nào khớp bộ lọc / từ khóa này.</div>`;
+        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 28px; color: var(--hub-text-sub); background: var(--hub-surface-2); border-radius: 12px;">Không tìm thấy mục nào khớp bộ lọc / từ khóa này.</div>`;
     };
+
+    if (isGrammarBank(activeBank)) {
+        const srcOrder = activeBank === 'gp_m1'
+            ? currentGpM1SheetOrder
+            : (activeBank === 'gp_star' ? currentGpStarSheetOrder : currentGpM3SheetOrder);
+        const totalSrc = activeBank === 'gp_m1'
+            ? (typeof GP_M1_CHEATSHEET !== 'undefined' ? GP_M1_CHEATSHEET.length : 0)
+            : (activeBank === 'gp_star'
+                ? (typeof GP_STAR_CHEATSHEET !== 'undefined' ? GP_STAR_CHEATSHEET.length : 0)
+                : (typeof GP_M3_CHEATSHEET !== 'undefined' ? GP_M3_CHEATSHEET.length : 0));
+        const list = srcOrder.filter(p => {
+            const catOk = cat === 'all' || p.category === cat;
+            const qOk = !q ||
+                (p.left_main || '').toLowerCase().includes(q) ||
+                (p.left_sub || '').toLowerCase().includes(q) ||
+                (p.right_main || '').toLowerCase().includes(q) ||
+                (p.right_sub || '').toLowerCase().includes(q) ||
+                (p.example_jp || '').toLowerCase().includes(q) ||
+                (p.example_vi || '').toLowerCase().includes(q) ||
+                (p.trap_note || '').toLowerCase().includes(q) ||
+                (p.category || '').toLowerCase().includes(q);
+            return catOk && qOk;
+        });
+
+        const sheetLbl = activeBank === 'gp_m1'
+            ? 'thẻ công thức & bẫy Ngữ Pháp M1 (Taisaku Ch2)'
+            : (activeBank === 'gp_star' ? 'công thức ghép xương câu Dấu Sao ★ (Taisaku Ch3)' : 'thẻ Liên từ & Quy tắc Chỉ thị từ こ・そ・あ (Taisaku Ch4)');
+        if (countBar) countBar.textContent = `Đang hiển thị ${list.length} / ${totalSrc} ${sheetLbl} — Bấm thẻ bị che để tự dò bài!`;
+        if (list.length === 0) { renderEmpty(); return; }
+
+        container.innerHTML = '';
+        list.forEach(p => {
+            const safeTts = (p.tts || p.example_jp || '').replace(/'/g, "\\'");
+            const card = document.createElement('div');
+            card.className = 'pair-card';
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <span class="q-tag">#${p.stt} • ${p.category}</span>
+                    ${safeTts ? `<button class="btn-pill" style="padding: 4px 9px; font-size: 11.5px;" onclick="speakJapanese('${safeTts}')" title="Nghe câu ví dụ tiếng Nhật"><i class="fa-solid fa-volume-high"></i> Nghe ví dụ</button>` : ''}
+                </div>
+                <div class="pair-eq-row">
+                    <div class="pair-side pair-side-left ${pairsMaskMode === 'left' ? 'masked' : ''}" onclick="togglePairCardMask(this)" style="text-align: left;">
+                        <div class="pair-word-main" style="color: var(--primary); font-size: 15px; line-height: 1.4;">${p.left_main}</div>
+                        <div class="pair-word-read" style="margin-top: 3px;">${p.left_sub}</div>
+                    </div>
+                    <strong style="color: var(--primary); font-size: 15px;">🔑</strong>
+                    <div class="pair-side pair-side-right ${pairsMaskMode === 'right' ? 'masked' : ''}" onclick="togglePairCardMask(this)" style="text-align: left;">
+                        <div class="pair-word-main" style="font-size: 13.5px; line-height: 1.42;">${p.right_main}</div>
+                        ${p.right_sub ? `<div class="pair-word-read" style="margin-top: 3px;">${p.right_sub}</div>` : ''}
+                    </div>
+                </div>
+                <div class="pair-meaning ${isMaskedInit ? 'masked' : ''}" data-mask-label="🙈 Đã ẩn Ví dụ & Mẹo tránh bẫy (Bấm để mở)" onclick="togglePairCardMask(this)" style="text-align: left; font-weight: 500; font-size: 12.3px; line-height: 1.48;">
+                    <div style="color: var(--hub-text); margin-bottom: 4px;"><strong>📖 Ví dụ:</strong> ${p.example_jp} <span style="color: var(--hub-text-sub);">(${p.example_vi})</span></div>
+                    <div style="color: var(--hub-warn-text);">${p.trap_note}</div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        return;
+    }
 
     if (activeBank === 'm3_191') {
         if (typeof MONDAI3_191_LIST === 'undefined') return;
@@ -3845,6 +4276,7 @@ function buildAntigravityReport() {
     const isHira = activeBank === 'hira35';
     const isM3 = activeBank === 'm3_191';
     const isM5 = activeBank === 'm5_107';
+    const isGp = isGrammarBank(activeBank);
     const isPast = activeBank === 'pastN3';
     const ids = Object.keys(mistakesMap);
     const m1Acc = historyData.m1Total > 0 ? `${Math.round((historyData.m1Correct / historyData.m1Total) * 100)}%` : '--';
@@ -3855,6 +4287,9 @@ function buildAntigravityReport() {
         const m = mistakesMap[id];
         if (isPast) {
             return `${idx + 1}. [${getPastExamShortLabel(q.exam_id)} • ${q.mondai_label} #${q.num} | ${m.streak}/2] Đáp án: ${q.options[q.answer]} — ${q.sentence_vi} | ${q.explain_vi}`;
+        }
+        if (isGp) {
+            return `${idx + 1}. [Ca ${q.part} • ${q.topic} #${q.num} | ${m.streak}/2] [${q.pattern_key || q.rule_tag || ''}] Đáp án: ${q.options[q.answer]}${q.star_order ? ` | ★ ${q.star_order}` : ''} — ${q.sentence_vi} | ${q.explain_vi}`;
         }
         if (isM3) {
             return `${idx + 1}. [Bài ${q.part} | ${m.streak}/2] ${q.word_disp} — ${q.meaning_vi} | Cụm: ${q.collocation} | ${q.note_vi}`;
@@ -3875,13 +4310,15 @@ function buildAntigravityReport() {
 
     const accLine = isPast
         ? `Kiến thức ngôn ngữ (TV+NP) ${m1Acc} | Đọc hiểu (Dokkai) ${m2Acc}`
-        : (isM3
-            ? `Mondai 3 Xuôi ${m1Acc} | Đảo M3→Nghĩa ${m2Acc}`
-            : (isM5
-                ? `Mondai 5 Chuẩn ${m1Acc} | Đảo M5→Nghĩa ${m2Acc}`
-                : (isHira
-                    ? `Mondai 3 Xuôi ${m1Acc} | Đảo Hira→Nghĩa ${m2Acc}`
-                    : (isKata ? `Mondai 3 Xuôi ${m1Acc} | Đảo Kata→Nghĩa ${m2Acc}` : (isSyn ? `Xuôi A→B ${m1Acc} | Đảo B→A ${m2Acc}` : `Mondai 1 ${m1Acc} | Mondai 2 ${m2Acc}`)))));
+        : (isGp
+            ? `Câu Cơ bản (☆) ${m1Acc} | Câu Nâng cao/Bẫy (☆☆) ${m2Acc}`
+            : (isM3
+                ? `Mondai 3 Xuôi ${m1Acc} | Đảo M3→Nghĩa ${m2Acc}`
+                : (isM5
+                    ? `Mondai 5 Chuẩn ${m1Acc} | Đảo M5→Nghĩa ${m2Acc}`
+                    : (isHira
+                        ? `Mondai 3 Xuôi ${m1Acc} | Đảo Hira→Nghĩa ${m2Acc}`
+                        : (isKata ? `Mondai 3 Xuôi ${m1Acc} | Đảo Kata→Nghĩa ${m2Acc}` : (isSyn ? `Xuôi A→B ${m1Acc} | Đảo B→A ${m2Acc}` : `Mondai 1 ${m1Acc} | Mondai 2 ${m2Acc}`))))));
 
     return `📊 BÁO CÁO ${getBankCfg().name.toUpperCase()} (${getTodayStr()})
 - Đã quét: ${touchedSet.size}/${dataset.length} câu

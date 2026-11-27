@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luyện Đề JLPT N3 - Trọn Bộ M1–M5 (7 Ngân Hàng • 1.161 Câu) & Đề Thi Thật</title>
+    <title>Luyện Đề JLPT N3 - 10 Ngân Hàng • 1.674 Câu (Từ Vựng + Ngữ Pháp Thực Chiến + Đề Thật)</title>
 
     <!-- Google Fonts: Outfit & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -167,12 +167,61 @@
             gap: 10px;
         }
 
-        /* Exam Bank Selector Strip */
+        /* Exam Bank Selector Strip (3 Visual Groups: Moji-Goi / Bunpou Taisaku / Past Exams) */
+        .bank-groups-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .bank-group-section {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .bank-group-label {
+            font-size: 11.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: var(--hub-text-sub);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding-left: 2px;
+        }
         .bank-strip {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 0;
+        }
+        .bank-chip.gp-accent {
+            border-color: rgba(139, 92, 246, 0.35);
+        }
+        .gp-rule-pill {
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 6px;
+            background: var(--bg-btn-active);
+            color: var(--primary);
+            border: 1px solid var(--hub-border-strong);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .gp-star-pill {
+            font-size: 11.5px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: var(--hub-warn-bg);
+            color: var(--hub-warn-text);
+            border: 1px solid var(--hub-warn-border);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
         .freq-pill {
             font-size: 11.5px;
@@ -1342,56 +1391,88 @@
                         </div>
                     </div>
 
-                    <!-- Extensible Exam Library Selector (7 Banks) -->
-                    <div class="bank-strip">
-                        <div class="bank-chip active" id="bank-chip-kanji240" onclick="switchBank('kanji240')">
-                            <div class="bank-chip-title">
-                                <span>🈴 352 Câu Kanji N3</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                    <!-- Extensible Exam Library Selector (10 Banks grouped cleanly into 3 Clusters) -->
+                    <div class="bank-groups-wrap">
+                        <div class="bank-group-section">
+                            <div class="bank-group-label">🅰️ Nhóm Từ Vựng – Chữ Hán (6 bộ • 870 câu)</div>
+                            <div class="bank-strip">
+                                <div class="bank-chip active" id="bank-chip-kanji240" onclick="switchBank('kanji240')">
+                                    <div class="bank-chip-title">
+                                        <span>🈴 352 Câu Kanji N3</span>
+                                        <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                                    </div>
+                                    <span class="bank-chip-sub">6 Buổi (M1 & M2) + Bảng 311 từ</span>
+                                </div>
+                                <div class="bank-chip" id="bank-chip-m3_191" onclick="switchBank('m3_191')">
+                                    <div class="bank-chip-title">
+                                        <span>🧩 191 Từ Ngữ Cảnh M3</span>
+                                        <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                                    </div>
+                                    <span class="bank-chip-sub">Trọng tâm 97 + Phủ kín 94 • Bảng 191 từ</span>
+                                </div>
+                                <div class="bank-chip" id="bank-chip-syn80" onclick="switchBank('syn80')">
+                                    <div class="bank-chip-title">
+                                        <span>🔁 80 Cặp Đồng Nghĩa</span>
+                                        <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                                    </div>
+                                    <span class="bank-chip-sub">95 câu Mondai 4 + Bảng dò 80 cặp</span>
+                                </div>
+                                <div class="bank-chip" id="bank-chip-kata78" onclick="switchBank('kata78')">
+                                    <div class="bank-chip-title">
+                                        <span>🔤 90 Từ Katakana N3</span>
+                                        <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                                    </div>
+                                    <span class="bank-chip-sub">78 Gốc + 12 Đề Thật + Bảng dò 90 từ</span>
+                                </div>
+                                <div class="bank-chip" id="bank-chip-hira35" onclick="switchBank('hira35')">
+                                    <div class="bank-chip-title">
+                                        <span>✨ 35 Hiragana & Từ Láy</span>
+                                        <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                                    </div>
+                                    <span class="bank-chip-sub">Top lặp ≥2x (2010–2026) + Bảng dò 35 từ</span>
+                                </div>
+                                <div class="bank-chip" id="bank-chip-m5_107" onclick="switchBank('m5_107')">
+                                    <div class="bank-chip-title">
+                                        <span>🎯 107 Cách Dùng Từ M5</span>
+                                        <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                                    </div>
+                                    <span class="bank-chip-sub">Trọng tâm 65 + Phủ kín 42 • Bảng 107 từ</span>
+                                </div>
                             </div>
-                            <span class="bank-chip-sub">6 Buổi (M1 & M2) + Bảng 311 từ</span>
                         </div>
-                        <div class="bank-chip" id="bank-chip-m3_191" onclick="switchBank('m3_191')">
-                            <div class="bank-chip-title">
-                                <span>🧩 191 Từ Ngữ Cảnh M3</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Mới</span>
+
+                        <div class="bank-group-section">
+                            <div class="bank-group-label">📘 Nhóm Ngữ Pháp Thực Chiến Taisaku (3 bộ • 513 câu + Bảng Công Thức) &nbsp;•&nbsp; 📜 Đề Thi Thật (1 bộ • 291 câu)</div>
+                            <div class="bank-strip">
+                                <div class="bank-chip gp-accent" id="bank-chip-gp_m1" onclick="switchBank('gp_m1')">
+                                    <div class="bank-chip-title">
+                                        <span>📘 Ngữ Pháp M1 (273 Câu)</span>
+                                        <span style="font-size: 11px; color: var(--primary);">● Mới</span>
+                                    </div>
+                                    <span class="bank-chip-sub">6 Chuyên đề: Nền • Kính ngữ • Trợ từ • Group • Phó từ</span>
+                                </div>
+                                <div class="bank-chip gp-accent" id="bank-chip-gp_star" onclick="switchBank('gp_star')">
+                                    <div class="bank-chip-title">
+                                        <span>⭐ Dấu Sao ★ Công Thức (99)</span>
+                                        <span style="font-size: 11px; color: var(--primary);">● Mới</span>
+                                    </div>
+                                    <span class="bank-chip-sub">3 Chuyên đề ghép Danh–Động–Tính • Trợ từ • Tổng hợp</span>
+                                </div>
+                                <div class="bank-chip gp-accent" id="bank-chip-gp_m3" onclick="switchBank('gp_m3')">
+                                    <div class="bank-chip-title">
+                                        <span>📄 Đoạn Văn M3 (141 Câu)</span>
+                                        <span style="font-size: 11px; color: var(--primary);">● Mới</span>
+                                    </div>
+                                    <span class="bank-chip-sub">46 Bài Split-Screen: Liên từ • Chỉ thị từ • Đục lỗ</span>
+                                </div>
+                                <div class="bank-chip" id="bank-chip-pastN3" onclick="switchBank('pastN3')">
+                                    <div class="bank-chip-title">
+                                        <span>📜 Đề Thi N3 (2021–2023)</span>
+                                        <span style="font-size: 11px; color: var(--hub-ok-text);">● Đề thật</span>
+                                    </div>
+                                    <span class="bank-chip-sub">Học Chữa Ngay / Thi Thử • Điểm lẻ M1–M5 & NP1–3</span>
+                                </div>
                             </div>
-                            <span class="bank-chip-sub">Trọng tâm 97 + Phủ kín 94 • Bảng 191 từ</span>
-                        </div>
-                        <div class="bank-chip" id="bank-chip-syn80" onclick="switchBank('syn80')">
-                            <div class="bank-chip-title">
-                                <span>🔁 80 Cặp Đồng Nghĩa</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
-                            </div>
-                            <span class="bank-chip-sub">95 câu Mondai 4 + Bảng dò 80 cặp</span>
-                        </div>
-                        <div class="bank-chip" id="bank-chip-kata78" onclick="switchBank('kata78')">
-                            <div class="bank-chip-title">
-                                <span>🔤 90 Từ Katakana N3</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
-                            </div>
-                            <span class="bank-chip-sub">78 Gốc + 12 Đề Thật + Bảng dò 90 từ</span>
-                        </div>
-                        <div class="bank-chip" id="bank-chip-hira35" onclick="switchBank('hira35')">
-                            <div class="bank-chip-title">
-                                <span>✨ 35 Hiragana & Từ Láy</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
-                            </div>
-                            <span class="bank-chip-sub">Top lặp ≥2x (2010–2026) + Bảng dò 35 từ</span>
-                        </div>
-                        <div class="bank-chip" id="bank-chip-m5_107" onclick="switchBank('m5_107')">
-                            <div class="bank-chip-title">
-                                <span>🎯 107 Cách Dùng Từ M5</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
-                            </div>
-                            <span class="bank-chip-sub">Trọng tâm 65 + Phủ kín 42 • Bảng 107 từ</span>
-                        </div>
-                        <div class="bank-chip" id="bank-chip-pastN3" onclick="switchBank('pastN3')">
-                            <div class="bank-chip-title">
-                                <span>📜 Đề Thi N3 (2021–2023)</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Đề thật</span>
-                            </div>
-                            <span class="bank-chip-sub">Học Chữa Ngay / Thi Thử • Điểm lẻ M1–M5</span>
                         </div>
                     </div>
 
@@ -1771,6 +1852,9 @@
     <script src="data/hiragana_35_data.js"></script>
     <script src="data/mondai3_191_data.js"></script>
     <script src="data/mondai5_107_data.js"></script>
+    <script src="data/gp_m1_data.js"></script>
+    <script src="data/gp_star_data.js"></script>
+    <script src="data/gp_m3_data.js"></script>
     <script src="data/jlpt_n3_2021_12.js"></script>
     <script src="data/jlpt_n3_2022_07.js"></script>
     <script src="data/jlpt_n3_2022_12.js"></script>
