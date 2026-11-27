@@ -9,10 +9,10 @@ const LS_ACTIVE_BANK_KEY = 'n3_luyende_active_bank';
 const LS_PASSAGE_FS_KEY = 'n3_passage_font_size';
 
 const PAST_EXAM_CATALOG = [
-    { exam_id: '2023_07', label: 'JLPT N3 — Tháng 07/2023', short_label: 'T7/2023', wave: 2, note: 'Đề mới nhất 2023 (Đợt 2)' },
+    { exam_id: '2023_07', label: 'JLPT N3 — Tháng 07/2023', short_label: 'T7/2023', wave: 2, note: '73 câu thật (35 Từ vựng • 22 Ngữ pháp • 16 Đọc hiểu)' },
     { exam_id: '2022_12', label: 'JLPT N3 — Tháng 12/2022', short_label: 'T12/2022', wave: 1, note: '73 câu thật (35 Từ vựng • 22 Ngữ pháp • 16 Đọc hiểu)' },
     { exam_id: '2022_07', label: 'JLPT N3 — Tháng 07/2022', short_label: 'T7/2022', wave: 1, note: '72 câu thật (34 Từ vựng • 22 Ngữ pháp • 16 Đọc hiểu)' },
-    { exam_id: '2021_12', label: 'JLPT N3 — Tháng 12/2021', short_label: 'T12/2021', wave: 2, note: 'Đề kỳ 12/2021 (Đợt 2)' }
+    { exam_id: '2021_12', label: 'JLPT N3 — Tháng 12/2021', short_label: 'T12/2021', wave: 2, note: '73 câu thật (35 Từ vựng • 22 Ngữ pháp • 16 Đọc hiểu)' }
 ];
 
 const BANK_CONFIGS = {
