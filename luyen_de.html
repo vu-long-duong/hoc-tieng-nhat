@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luyện Đề JLPT N3 - Kanji 352 • Đồng Nghĩa 80 • Katakana 90 • Hiragana 35 • Đề Thi N3</title>
+    <title>Luyện Đề JLPT N3 - Kanji 352 • Đồng Nghĩa 80 • Katakana 90 • Hiragana 35 • Cách Dùng M5 107 • Đề Thi N3</title>
 
     <!-- Google Fonts: Outfit & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -191,6 +191,91 @@
             color: var(--primary);
             border-color: var(--hub-border-strong);
         }
+        .tier-pill {
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .tier-pill.core {
+            background: var(--hub-warn-bg);
+            color: var(--hub-warn-text);
+            border: 1px solid var(--hub-warn-border);
+        }
+        .tier-pill.full {
+            background: var(--bg-btn-active);
+            color: var(--primary);
+            border: 1px solid var(--hub-border-strong);
+        }
+        .m5-exp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .past-mode-banner {
+            background: var(--hub-surface-2);
+            border: 1.5px solid var(--hub-border-strong);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+        }
+        .past-mode-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 8px;
+        }
+        @media (max-width: 680px) {
+            .past-mode-grid { grid-template-columns: 1fr; }
+        }
+        .past-mode-card-btn {
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 2px solid var(--hub-border-strong);
+            background: var(--hub-surface);
+            color: var(--hub-text);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.18s;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .past-mode-card-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+        .past-mode-card-btn.active-drill {
+            background: var(--hub-ok-bg);
+            border-color: var(--hub-ok-text);
+            box-shadow: 0 0 0 2px var(--hub-ok-border);
+        }
+        .past-mode-card-btn.active-exam {
+            background: var(--hub-warn-bg);
+            border-color: var(--hub-warn-text);
+            box-shadow: 0 0 0 2px var(--hub-warn-border);
+        }
+        .mondai-breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+            gap: 9px;
+            margin-top: 10px;
+        }
+        .mondai-chip {
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: var(--hub-surface-2);
+            border: 1px solid var(--hub-border-strong);
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .mondai-chip.m-ok { background: var(--hub-ok-bg); border-color: var(--hub-ok-border); }
+        .mondai-chip.m-warn { background: var(--hub-warn-bg); border-color: var(--hub-warn-border); }
+        .mondai-chip.m-bad { background: var(--hub-danger-bg); border-color: var(--hub-danger-border); }
         .bank-chip {
             padding: 12px 14px;
             border-radius: 12px;
@@ -1257,7 +1342,7 @@
                         </div>
                     </div>
 
-                    <!-- Extensible Exam Library Selector (5 Banks) -->
+                    <!-- Extensible Exam Library Selector (6 Banks) -->
                     <div class="bank-strip">
                         <div class="bank-chip active" id="bank-chip-kanji240" onclick="switchBank('kanji240')">
                             <div class="bank-chip-title">
@@ -1283,16 +1368,23 @@
                         <div class="bank-chip" id="bank-chip-hira35" onclick="switchBank('hira35')">
                             <div class="bank-chip-title">
                                 <span>✨ 35 Hiragana & Từ Láy</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Mới</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
                             </div>
                             <span class="bank-chip-sub">Top lặp ≥2x (2010–2026) + Bảng dò 35 từ</span>
+                        </div>
+                        <div class="bank-chip" id="bank-chip-m5_107" onclick="switchBank('m5_107')">
+                            <div class="bank-chip-title">
+                                <span>🎯 107 Cách Dùng Từ M5</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Mới</span>
+                            </div>
+                            <span class="bank-chip-sub">Trọng tâm 65 + Phủ kín 42 • Bảng 107 từ</span>
                         </div>
                         <div class="bank-chip" id="bank-chip-pastN3" onclick="switchBank('pastN3')">
                             <div class="bank-chip-title">
                                 <span>📜 Đề Thi N3 (2021–2023)</span>
-                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Nâng cấp</span>
                             </div>
-                            <span class="bank-chip-sub">Đề thật (Bỏ Nghe) • Split-Screen Dokkai</span>
+                            <span class="bank-chip-sub">Học Chữa Ngay / Thi Thử • Điểm lẻ M1–M5</span>
                         </div>
                     </div>
 
@@ -1381,10 +1473,6 @@
                         <h3>
                             <span id="sessions-panel-title"><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 6 Ca Siêu Tốc — 352 Câu Kanji N3</span>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                                <div class="past-mode-switch" id="past-mode-switch" style="display: none;">
-                                    <button type="button" id="past-mode-exam-btn" class="active" onclick="setPastLaunchMode('exam')">⏱️ Thi Thử</button>
-                                    <button type="button" id="past-mode-drill-btn" onclick="setPastLaunchMode('drill')">⚡ Chữa Ngay</button>
-                                </div>
                                 <button class="btn-pill primary" id="open-pairs-quick-btn" style="display: none;" onclick="showMainView('pairs')">
                                     <i class="fa-solid fa-table-list"></i> <span id="open-pairs-quick-lbl">Mở Bảng Dò 80 Cặp A = B</span>
                                 </button>
@@ -1393,6 +1481,23 @@
                                 </button>
                             </div>
                         </h3>
+                        <!-- Prominent Past-Exam Mode Banner (visible only on pastN3) -->
+                        <div class="past-mode-banner" id="past-mode-banner" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                                <strong style="font-size: 14px; color: var(--hub-text);"><i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Chọn chế độ làm 4 đề thi thật bên dưới:</strong>
+                                <span id="past-mode-helper-txt" style="font-size: 12px; color: var(--hub-ok-text); font-weight: 700;">⚡ Đang bật Chế độ Học Chữa Ngay — làm từng câu là xem ngay đáp án & giải thích!</span>
+                            </div>
+                            <div class="past-mode-grid">
+                                <button type="button" id="past-mode-drill-btn" class="past-mode-card-btn active-drill" onclick="setPastLaunchMode('drill')">
+                                    <strong style="font-size: 14.5px; color: var(--hub-ok-text);">⚡ Học Chữa Ngay Từng Câu (Khuyên dùng)</strong>
+                                    <span style="font-size: 12px; color: var(--hub-text-body);">Không bấm giờ áp lực • Chọn xong hiện ngay dịch câu, mẹo tránh bẫy & căn cứ bài đọc</span>
+                                </button>
+                                <button type="button" id="past-mode-exam-btn" class="past-mode-card-btn" onclick="setPastLaunchMode('exam')">
+                                    <strong style="font-size: 14.5px; color: var(--hub-warn-text);">⏱️ Thi Thử Bấm Giờ Chuẩn JLPT</strong>
+                                    <span style="font-size: 12px; color: var(--hub-text-body);">Đếm ngược 30p / 70p như phòng thi thật • Nộp bài mới chấm điểm /120 & tách điểm M1–M5</span>
+                                </button>
+                            </div>
+                        </div>
                         <div class="sessions-grid" id="sessions-cards-container">
                             <!-- Session cards injected by JS -->
                         </div>
@@ -1657,6 +1762,7 @@
     <script src="data/synonym_n3_data.js"></script>
     <script src="data/katakana_n3_data.js"></script>
     <script src="data/hiragana_35_data.js"></script>
+    <script src="data/mondai5_107_data.js"></script>
     <script src="data/jlpt_n3_2021_12.js"></script>
     <script src="data/jlpt_n3_2022_07.js"></script>
     <script src="data/jlpt_n3_2022_12.js"></script>
