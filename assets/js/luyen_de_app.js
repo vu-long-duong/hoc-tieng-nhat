@@ -2414,7 +2414,8 @@ function renderQuestionStage() {
     }
 
     const hintBox = document.getElementById('q-hint-display');
-    if (orig.hint && !hideCtxNow) {
+    // Only display genuine non-target JLPT footnotes (prefixed with '＊') before answering — NEVER spoil the tested word!
+    if (orig.hint && orig.hint.trim().startsWith('＊') && !hideCtxNow) {
         hintBox.style.display = 'block';
         hintBox.textContent = orig.hint;
     } else {
@@ -2814,6 +2815,9 @@ function renderExplanationHTML(item, chosenIdx) {
 
     // Kanji 352 explanation
     const safeReading = (q.reading || '').replace(/'/g, "\\'");
+    const hvDetailBlock = q.han_viet_detail
+        ? `<div class="evidence-box"><strong>🧩 Chiết tự âm đọc:</strong> ${q.han_viet_detail}</div>`
+        : '';
     return `
         <div class="exp-box ${isCorrect ? 'is-correct' : 'is-wrong'}">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-weight: 700; font-size: 15px;">
@@ -2830,6 +2834,7 @@ function renderExplanationHTML(item, chosenIdx) {
                 <span style="font-size: 14.5px; font-weight: 600; color: var(--hub-text-body);">→ ${q.meaning_vi}</span>
             </div>
             ${freqBlock}
+            ${hvDetailBlock}
             <div style="font-size: 14px; color: var(--hub-text-body); line-height: 1.5;">
                 <strong>📖 Dịch câu:</strong> ${q.sentence_vi}
             </div>
@@ -3393,6 +3398,9 @@ function renderResultReviewList() {
             `;
         } else {
             const freqHtml = renderFreqBadgeHTML(q);
+            const hvDetailHtml = q.han_viet_detail
+                ? `<div class="evidence-box" style="margin-bottom: 6px;"><strong>🧩 Chiết tự âm đọc:</strong> ${q.han_viet_detail}</div>`
+                : '';
             bodyHtml = `
                 <div class="exp-word-row" style="margin-bottom: 8px;">
                     <strong style="font-size: 17px; color: var(--hub-text);">${q.kanji_form}</strong>
@@ -3401,6 +3409,7 @@ function renderResultReviewList() {
                     <span style="font-size: 13.5px; color: var(--hub-text-body);">→ ${q.meaning_vi}</span>
                 </div>
                 ${freqHtml ? `<div style="margin-bottom: 8px;">${freqHtml}</div>` : ''}
+                ${hvDetailHtml}
                 <div style="font-size: 13.5px; color: var(--hub-text-body); margin-bottom: 6px;"><strong>📖 Dịch:</strong> ${q.sentence_vi}</div>
                 <div style="font-size: 13px; color: var(--hub-text-sub);"><strong style="color: var(--hub-warn-text);">⚡ Bẫy nhiễu:</strong> ${q.trap_note}</div>
             `;
