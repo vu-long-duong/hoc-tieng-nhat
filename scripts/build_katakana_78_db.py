@@ -483,20 +483,125 @@ KATAKANA_78 = [
      ["マイナス", "プラス", "レベル"],
      "Xác suất mưa hôm nay là 80 phần trăm nên hãy mang ô theo nhé.",
      "Thường đi với tỷ lệ thời tiết (降水確率), giảm giá (20パーセント引き), thống kê biểu đồ Dokkai."),
+
+    # ================= BÀI 3 BỔ SUNG ĐỀ THẬT 2010–2026: CÂU 79–90 =================
+    (79, "キッチン", "Nhà bếp, gian bếp", "kitchen (Anh)", "台所", "Mua sắm & Ẩm thực",
+     "この 新しい アパートは ___ が 広くて、料理が しやすい。",
+     ["ベランダ", "オフィス", "フロント"],
+     "Căn hộ mới này có nhà bếp rộng nên rất dễ nấu ăn.",
+     "🔥 TRÙM 3 LẦN ĐỀ THẬT (M4: T12/2013, T12/2019, T12/2025)! Đồng nghĩa kinh điển JLPT N3: キッチン ＝ 台所(だいどころ)."),
+
+    (80, "サイズ", "Kích cỡ, độ lớn (quần áo, giày, đồ)", "size (Anh)", "大きさ・寸法", "Mua sắm & Ẩm thực",
+     "すみません、この 靴の もう 一つ 大きい ___ は ありますか。",
+     ["タイプ", "スタイル", "デザイン"],
+     "Xin lỗi, đôi giày này có kích cỡ lớn hơn một số không ạ?",
+     "🔥 TRÙM 3 LẦN ĐỀ THẬT (M4: T7/2013, T7/2023, T7/2026)! Đồng nghĩa kinh điển JLPT N3: サイズ ＝ 大きさ(おおきさ)."),
+
+    (81, "チャレンジ", "Thử thách, thử sức (một lĩnh vực mới)", "challenge (Anh)", "挑戦", "Công việc & Giao tiếp",
+     "苦手だった 外国語の 勉強に 今年こそ ___ しようと 思っている。",
+     ["キャンセル", "アクセス", "セット"],
+     "Năm nay tôi quyết tâm thử sức với việc học ngoại ngữ mà trước đây mình kém.",
+     "🔥 Ra 2 lần M3 (T7/2016, T12/2021)! Cụm cố định JLPT N3: 〜にチャレンジする (thử thách / thử sức với ~)."),
+
+    (82, "ヒント", "Gợi ý, manh mối", "hint (Anh)", "手がかり・助言", "Công việc & Giao tiếp",
+     "この 問題が 難しくて 解けないので、少し ___ を ください。",
+     ["アドバイス", "タイトル", "メッセージ"],
+     "Câu hỏi này khó quá không giải được nên hãy cho tôi chút gợi ý đi.",
+     "🔥 Ra 2 lần M3 (T12/2012, T12/2023)! Phân biệt: ヒント (gợi ý giải đố/ý tưởng) vs アドバイス (lời khuyên cuộc sống/công việc)."),
+
+    (83, "カタログ", "Danh mục sản phẩm, quyển catalog", "catalog (Anh)", "商品目録", "Mua sắm & Ẩm thực",
+     "新しい 車を 買う ために、店で ___ を もらってきた。",
+     ["レシート", "メモ", "ラベル"],
+     "Để mua xe mới, tôi đã ra cửa hàng lấy quyển danh mục sản phẩm về.",
+     "📌 Ra đề thật T7/2010 M3! Phân biệt: カタログ (danh mục giới thiệu sản phẩm để chọn mua) vs パンフレット (tờ gấp giới thiệu sự kiện/du lịch)."),
+
+    (84, "カバー", "Vỏ bọc, bìa bọc; bù đắp, hỗ trợ", "cover (Anh)", "覆い・補うこと", "Công nghệ & Đời sống",
+     "本が 汚れないように、紙の ___ を つけて 読んでいる。",
+     ["ケース", "ラベル", "シート"],
+     "Để sách không bị bẩn, tôi bọc bìa giấy vào rồi mới đọc.",
+     "📌 Ra đề thật T7/2012 M3! Nghĩa hay thi N3: 本のカバー (bìa bọc sách), 失敗をカバーする (bù đắp/đỡ đần lỗi sai)."),
+
+    (85, "グラウンド", "Sân vận động, bãi tập thể thao", "ground (Anh)", "運動場", "Giao thông & Thể thao",
+     "雨で ___ が ぬれているので、今日の サッカーの 練習は 中止になった。",
+     ["コース", "コート", "ホーム"],
+     "Vì mưa làm sân tập bị ướt nên buổi tập bóng đá hôm nay bị hủy.",
+     "📌 Ra đề thật T7/2022 M4! Đồng nghĩa chuẩn N3: グラウンド ＝ 運動場(うんどうじょう). Đừng nhầm với ブランド (thương hiệu)!"),
+
+    (86, "セット", "Bộ, combo; thiết lập, cài đặt (đồng hồ/máy)", "set (Anh)", "一組・設定", "Mua sắm & Ẩm thực",
+     "この 店では、コーヒーと ケーキを ___ で 注文すると 安くなる。",
+     ["コース", "オーダー", "セール"],
+     "Ở quán này, nếu gọi cà phê và bánh ngọt theo bộ (combo) sẽ rẻ hơn.",
+     "📌 Ra đề thật T7/2012 M3! Dùng rất rộng: ランチセット (suất trưa combo), 目覚ましをセットする (đặt báo thức)."),
+
+    (87, "ノック", "Gõ cửa", "knock (Anh)", "戸をたたくこと", "Công việc & Giao tiếp",
+     "社長室に 入る 前に、ドアを 3回 ___ した。",
+     ["ストップ", "チェック", "クリック"],
+     "Trước khi bước vào phòng giám đốc, tôi đã gõ cửa 3 lần.",
+     "📌 Ra đề thật T7/2019 M3! Cụm cố định: ドアをノックする (gõ cửa)."),
+
+    (88, "バケツ", "Cái xô, thùng đựng nước", "bucket (Anh)", "手おけ・水桶", "Công nghệ & Đời sống",
+     "掃除を する ために、___ に 水を たくさん 入れた。",
+     ["ケース", "カップ", "ポケット"],
+     "Để dọn dẹp, tôi đã đổ nhiều nước vào xô.",
+     "📌 Ra đề thật T12/2018 M3! Lưu ý cách đọc kiểu Nhật từ bucket → バケツ (đuôi ツ, không có ッ)."),
+
+    (89, "ベスト", "Tốt nhất, tối ưu nhất; áo ghi-lê", "best (Anh)", "最もよい・最善", "Đánh giá & Trạng thái",
+     "いろいろ 考えた 結果、この 方法が ___ だと 思います。",
+     ["トップ", "プラス", "ベテラン"],
+     "Sau khi suy nghĩ nhiều, tôi thấy phương pháp này là tốt nhất.",
+     "📌 Ra đề thật T12/2023 M4! Đồng nghĩa chuẩn N3: ベスト ＝ 最もよい(もっともよい). Cụm hay gặp: ベストを尽くす (cố hết sức)."),
+
+    (90, "レシピ", "Công thức nấu ăn", "recipe (Anh)", "料理の作り方", "Mua sắm & Ẩm thực",
+     "インターネットで 見つけた ___ を 見ながら、カレーを 作った。",
+     ["メニュー", "リスト", "マニュアル"],
+     "Tôi vừa nhìn công thức tìm trên mạng vừa nấu món cà ri.",
+     "📌 Ra đề thật T12/2022 M3! Phân biệt: レシピ (công thức cách nấu ăn) vs メニュー (thực đơn gọi món ở quán)."),
 ]
 
 
 def main():
-    assert len(KATAKANA_78) == 78, f"Expected 78 items, got {len(KATAKANA_78)}"
+    assert len(KATAKANA_78) == 90, f"Expected 90 items, got {len(KATAKANA_78)}"
 
-    # Build lookup map for meaning_vi of all 78 words (plus fallback for any external word)
+    # Load 26 real exams frequency stats for Katakana badges
+    merged_path = r"C:\Users\duong\.gemini\antigravity\brain\1d1c2086-9e3f-4b92-b196-5e7109baee86\scratch\past_mojigoi\merged_26_exams.json"
+    kata_freq = {}
+    if os.path.exists(merged_path):
+        all_ex = json.load(open(merged_path, encoding="utf-8"))["exams"]
+        for ex in sorted(all_ex.keys()):
+            yr, mo = ex.split("_")
+            short = f"T{int(mo)}/{yr}"
+            for q in all_ex[ex]:
+                if q["script"] == "katakana":
+                    w = q["lemma"].strip()
+                    kata_freq.setdefault(w, []).append(f"{short}(M{q['m']})")
+
+    # Build lookup map for meaning_vi of all 90 words (plus fallback for any external distractor)
     meaning_by_word = {row[1]: row[2] for row in KATAKANA_78}
-    meaning_by_word["センス"] = "Gu thẩm mỹ, khiếu tinh tế"
-    meaning_by_word["サイズ"] = "Kích cỡ, độ lớn"
+    meaning_by_word.update({
+        "センス": "Gu thẩm mỹ, khiếu tinh tế",
+        "クリック": "Nhấp chuột (click)",
+        "マニュアル": "Sách hướng dẫn sử dụng, quy trình mẫu",
+        "カップ": "Cái cốc, tách",
+        "フロント": "Quầy lễ tân (khách sạn)",
+        "アクセス": "Truy cập, đường đi tới",
+        "メモ": "Ghi chú, tờ giấy note",
+        "ケース": "Hộp đựng, trường hợp (case)",
+        "シート": "Tấm trải, ghế ngồi, bảng tính",
+        "コース": "Khóa học, lộ trình, suất ăn theo trình tự",
+        "コート": "Sân (tennis/bóng rổ), áo khoác dài",
+        "ホーム": "Sân ga tàu điện",
+        "オーダー": "Đặt hàng, gọi món",
+        "ストップ": "Dừng lại, ngưng",
+        "チェック": "Kiểm tra, rà soát",
+        "ポケット": "Túi áo, túi quần",
+        "ベテラン": "Người lão luyện, kỳ cựu",
+        "メニュー": "Thực đơn, bảng chọn",
+        "リスト": "Danh sách",
+    })
 
-    # Check all 78 words are unique!
+    # Check all 90 words are unique!
     words = [row[1] for row in KATAKANA_78]
-    assert len(set(words)) == 78, f"Duplicate Katakana words found: {[w for w in words if words.count(w) > 1]}"
+    assert len(set(words)) == 90, f"Duplicate Katakana words found: {[w for w in words if words.count(w) > 1]}"
 
     pairs_js = []
     quizzes_js = []
@@ -504,8 +609,12 @@ def main():
 
     for idx, row in enumerate(KATAKANA_78):
         stt, word, meaning_vi, origin, native_jp, cat, tpl, dist3, sentence_vi, wasei_note = row
-        part = 1 if stt <= 39 else 2
-        num_in_part = stt if stt <= 39 else (stt - 39)
+        if stt <= 39:
+            part, num_in_part = 1, stt
+        elif stt <= 78:
+            part, num_in_part = 2, stt - 39
+        else:
+            part, num_in_part = 3, stt - 78
 
         if "___" not in tpl:
             errors.append(f"#{stt} {word}: missing ___ blank")
@@ -528,11 +637,20 @@ def main():
             options_vi.append(f"{m_vi} (ĐÚNG)" if oi == ans_idx else m_vi)
 
         # Build HTML representations
-        # Normal Mondai 3: fill in the blank （　　　）
         sentence_html = tpl.replace("___", '<u class="q-target">（　　　）</u>')
-        # Reverse Mode: Katakana word underlined inside sentence -> pick Vietnamese meaning!
         sentence_reverse_html = tpl.replace("___", f'<u class="q-target">{word}</u>')
         sentence_tts = tpl.replace("___", word).replace(" ", "")
+
+        occ = kata_freq.get(word, [])
+        freq_count = len(occ)
+        freq_exams = ", ".join(occ) if occ else ""
+        is_extra = stt > 78
+        if freq_count >= 2:
+            freq_badge = f"🔥 Đề thật {freq_count}x ({freq_exams})"
+        elif freq_count == 1:
+            freq_badge = f"📌 Đề thật {freq_exams}"
+        else:
+            freq_badge = ""
 
         qid = f"kata_p{part}_q{num_in_part}"
         pairs_js.append({
@@ -544,7 +662,11 @@ def main():
             "origin": origin,
             "native_jp": native_jp,
             "category": cat,
-            "wasei_note": wasei_note
+            "wasei_note": wasei_note,
+            "is_extra": is_extra,
+            "freq_count": freq_count,
+            "freq_badge": freq_badge,
+            "freq_exams": freq_exams
         })
 
         quizzes_js.append({
@@ -564,7 +686,11 @@ def main():
             "options_vi": options_vi,
             "answer": ans_idx,
             "sentence_vi": sentence_vi,
-            "wasei_note": wasei_note
+            "wasei_note": wasei_note,
+            "is_extra": is_extra,
+            "freq_count": freq_count,
+            "freq_badge": freq_badge,
+            "freq_exams": freq_exams
         })
 
     if errors:
@@ -574,15 +700,16 @@ def main():
         sys.exit(1)
 
     with open(OUT_JS, "w", encoding="utf-8") as f:
-        f.write("// Verified JLPT N3 78 Katakana Words & Mondai 3 Practice Database\n")
+        f.write("// Verified JLPT N3 90 Katakana Words (78 Base + 12 Real-Exam 2010-2026 Extra) & Mondai 3 Practice Database\n")
         f.write("const KATAKANA_78_LIST = " + json.dumps(pairs_js, ensure_ascii=False, indent=2) + ";\n\n")
         f.write("const KATAKANA_N3_DATA = " + json.dumps(quizzes_js, ensure_ascii=False, indent=2) + ";\n")
 
     p1 = sum(1 for q in quizzes_js if q["part"] == 1)
     p2 = sum(1 for q in quizzes_js if q["part"] == 2)
+    p3 = sum(1 for q in quizzes_js if q["part"] == 3)
     cats = sorted(set(x["category"] for x in pairs_js))
     print(f"SUCCESS! Built {OUT_JS}")
-    print(f"Unique Words: {len(pairs_js)} | Quizzes: {len(quizzes_js)} (Part 1: {p1}, Part 2: {p2}) | Categories: {cats}")
+    print(f"Unique Words: {len(pairs_js)} | Quizzes: {len(quizzes_js)} (Part 1: {p1}, Part 2: {p2}, Part 3 Extra: {p3}) | Categories: {cats}")
 
 
 if __name__ == "__main__":

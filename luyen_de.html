@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luyện Đề JLPT N3 - Kanji • Đồng Nghĩa • Katakana • Đề Thi Thật 2021–2023</title>
+    <title>Luyện Đề JLPT N3 - Kanji 352 • Đồng Nghĩa 80 • Katakana 90 • Hiragana 35 • Đề Thi N3</title>
 
     <!-- Google Fonts: Outfit & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -170,9 +170,26 @@
         /* Exam Bank Selector Strip */
         .bank-strip {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
             gap: 10px;
             margin-bottom: 20px;
+        }
+        .freq-pill {
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 6px;
+            background: var(--hub-danger-bg);
+            color: var(--hub-danger-text);
+            border: 1px solid var(--hub-danger-border);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .freq-pill.subtle {
+            background: var(--bg-btn-active);
+            color: var(--primary);
+            border-color: var(--hub-border-strong);
         }
         .bank-chip {
             padding: 12px 14px;
@@ -1152,7 +1169,7 @@
 
             <div class="sidebar-content">
                 <div class="filter-section">
-                    <h3 id="sidebar-sprint-heading">Lịch Cày Siêu Tốc 240 Kanji</h3>
+                    <h3 id="sidebar-sprint-heading">Lịch Cày Siêu Tốc 352 Kanji</h3>
                     <div id="sidebar-sprint-checklist" style="font-size: 12.5px; color: var(--hub-text-body); display: flex; flex-direction: column; gap: 8px; line-height: 1.45;">
                         <!-- Injected by JS -->
                     </div>
@@ -1240,14 +1257,14 @@
                         </div>
                     </div>
 
-                    <!-- Extensible Exam Library Selector -->
+                    <!-- Extensible Exam Library Selector (5 Banks) -->
                     <div class="bank-strip">
                         <div class="bank-chip active" id="bank-chip-kanji240" onclick="switchBank('kanji240')">
                             <div class="bank-chip-title">
-                                <span>🈴 240 Câu Kanji N3</span>
+                                <span>🈴 352 Câu Kanji N3</span>
                                 <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
                             </div>
-                            <span class="bank-chip-sub">4 Buổi × 60 câu (Mondai 1 & 2)</span>
+                            <span class="bank-chip-sub">6 Buổi (240 Gốc + 112 Mới) + Bảng 311 từ</span>
                         </div>
                         <div class="bank-chip" id="bank-chip-syn80" onclick="switchBank('syn80')">
                             <div class="bank-chip-title">
@@ -1258,10 +1275,17 @@
                         </div>
                         <div class="bank-chip" id="bank-chip-kata78" onclick="switchBank('kata78')">
                             <div class="bank-chip-title">
-                                <span>🔤 78 Từ Katakana N3</span>
+                                <span>🔤 90 Từ Katakana N3</span>
                                 <span style="font-size: 11px; color: var(--hub-ok-text);">● Sẵn sàng</span>
                             </div>
-                            <span class="bank-chip-sub">78 câu Mondai 3 + Bảng dò 78 từ</span>
+                            <span class="bank-chip-sub">78 Gốc + 12 Đề Thật + Bảng dò 90 từ</span>
+                        </div>
+                        <div class="bank-chip" id="bank-chip-hira35" onclick="switchBank('hira35')">
+                            <div class="bank-chip-title">
+                                <span>✨ 35 Hiragana & Từ Láy</span>
+                                <span style="font-size: 11px; color: var(--hub-ok-text);">● Mới</span>
+                            </div>
+                            <span class="bank-chip-sub">Top lặp ≥2x (2010–2026) + Bảng dò 35 từ</span>
                         </div>
                         <div class="bank-chip" id="bank-chip-pastN3" onclick="switchBank('pastN3')">
                             <div class="bank-chip-title">
@@ -1279,7 +1303,7 @@
                                 <i class="fa-solid fa-check-double"></i>
                             </div>
                             <div>
-                                <div class="kpi-val" id="kpi-touched">0 / 240</div>
+                                <div class="kpi-val" id="kpi-touched">0 / 352</div>
                                 <div class="kpi-lbl" id="kpi-touched-lbl">Tiến độ đã quét</div>
                             </div>
                         </div>
@@ -1355,7 +1379,7 @@
                     <!-- Sessions Sprint Cards -->
                     <div class="panel-card">
                         <h3>
-                            <span id="sessions-panel-title"><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 4 Ca Siêu Tốc — 240 Câu Kanji N3</span>
+                            <span id="sessions-panel-title"><i class="fa-solid fa-bolt" style="color: var(--hub-warn-text);"></i> Lộ Trình 6 Ca Siêu Tốc — 352 Câu Kanji N3</span>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                                 <div class="past-mode-switch" id="past-mode-switch" style="display: none;">
                                     <button type="button" id="past-mode-exam-btn" class="active" onclick="setPastLaunchMode('exam')">⏱️ Thi Thử</button>
@@ -1598,25 +1622,26 @@
                     </div>
                 </div>
                 <!-- ==========================================
-                     VIEW 5: BẢNG DÒ NHANH (80 CẶP ĐỒNG NGHĨA / 78 TỪ KATAKANA)
+                     VIEW 5: BẢNG DÒ NHANH (311 KANJI / 80 ĐỒNG NGHĨA / 90 KATAKANA / 35 HIRAGANA)
                      ========================================== -->
                 <div id="view-pairs" style="display: none;">
                     <div class="panel-card">
                         <h3>
-                            <span id="pairs-view-title"><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Dò Nhanh 80 Cặp Từ Đồng Nghĩa N3 (A ＝ B)</span>
+                            <span id="pairs-view-title"><i class="fa-solid fa-table-list" style="color: var(--primary);"></i> Bảng Tra Cứu Nhanh</span>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                                 <button class="btn-pill primary" id="pairs-mask-none-btn" onclick="setPairsMaskMode('none')">👁️ Hiện tất cả</button>
-                                <button class="btn-pill" id="pairs-mask-right-btn" onclick="setPairsMaskMode('right')">🙈 Che vế phải & Nghĩa (A = ???)</button>
-                                <button class="btn-pill" id="pairs-mask-left-btn" onclick="setPairsMaskMode('left')">🙈 Che vế trái & Nghĩa (??? = B)</button>
+                                <button class="btn-pill" id="pairs-mask-right-btn" onclick="setPairsMaskMode('right')">🙈 Che vế phải & Nghĩa</button>
+                                <button class="btn-pill" id="pairs-mask-left-btn" onclick="setPairsMaskMode('left')">🙈 Che vế trái & Nghĩa</button>
                             </div>
                         </h3>
-                        <div class="custom-row" style="margin-bottom: 16px;">
+                        <div class="custom-row" style="margin-bottom: 12px;">
                             <input type="text" id="pairs-search-input" class="hub-select" style="flex: 1; min-width: 220px; cursor: text;" placeholder="Tìm nhanh Kanji, Hiragana, Katakana hoặc nghĩa tiếng Việt...">
                             <select id="pairs-cat-select" class="hub-select">
-                                <option value="all">Tất cả từ loại (80 cặp)</option>
+                                <option value="all">Tất cả</option>
                             </select>
                             <button class="btn-pill" id="pairs-shuffle-btn"><i class="fa-solid fa-shuffle"></i> Xáo bảng</button>
                         </div>
+                        <div id="pairs-count-bar" style="font-size: 12.5px; color: var(--hub-text-sub); margin-bottom: 12px; font-weight: 600;"></div>
                         <div class="pairs-grid" id="pairs-grid-container">
                             <!-- Study cards injected by JS -->
                         </div>
@@ -1628,8 +1653,10 @@
 
     <!-- Load Databases + Logic -->
     <script src="data/kanji_240_data.js"></script>
+    <script src="data/kanji_extra_112_data.js"></script>
     <script src="data/synonym_n3_data.js"></script>
     <script src="data/katakana_n3_data.js"></script>
+    <script src="data/hiragana_35_data.js"></script>
     <script src="data/jlpt_n3_2021_12.js"></script>
     <script src="data/jlpt_n3_2022_07.js"></script>
     <script src="data/jlpt_n3_2022_12.js"></script>

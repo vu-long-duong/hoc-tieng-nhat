@@ -1,4 +1,4 @@
-// Verified JLPT N3 78 Katakana Words & Mondai 3 Practice Database
+// Verified JLPT N3 90 Katakana Words (78 Base + 12 Real-Exam 2010-2026 Extra) & Mondai 3 Practice Database
 const KATAKANA_78_LIST = [
   {
     "id": "kpair_1",
@@ -9,7 +9,11 @@ const KATAKANA_78_LIST = [
     "origin": "partner (Anh)",
     "native_jp": "相手・協力者",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "パートナー vừa dùng trong kinh doanh (đối tác), vừa dùng cho bạn nhảy/bạn đời."
+    "wasei_note": "パートナー vừa dùng trong kinh doanh (đối tác), vừa dùng cho bạn nhảy/bạn đời.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_2",
@@ -20,7 +24,11 @@ const KATAKANA_78_LIST = [
     "origin": "leader (Anh)",
     "native_jp": "指導者・代表",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Chú ý có 2 trường âm ー: リー + ダー. Phân biệt với クラスメート (bạn cùng lớp)."
+    "wasei_note": "Chú ý có 2 trường âm ー: リー + ダー. Phân biệt với クラスメート (bạn cùng lớp).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_3",
@@ -31,7 +39,11 @@ const KATAKANA_78_LIST = [
     "origin": "volunteer (Anh)",
     "native_jp": "奉仕活動",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Cụm hay thi JLPT N3: ボランティアに参加する / ボランティア活動 (hoạt động tình nguyện)."
+    "wasei_note": "Cụm hay thi JLPT N3: ボランティアに参加する / ボランティア活動 (hoạt động tình nguyện).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_4",
@@ -42,7 +54,11 @@ const KATAKANA_78_LIST = [
     "origin": "communication (Anh)",
     "native_jp": "意思疎通",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Cụm cố định: コミュニケーションをとる (giao tiếp, giữ liên lạc trao đổi)."
+    "wasei_note": "Cụm cố định: コミュニケーションをとる (giao tiếp, giữ liên lạc trao đổi).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_5",
@@ -53,7 +69,11 @@ const KATAKANA_78_LIST = [
     "origin": "humor (Anh)",
     "native_jp": "おもしろみ",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Cụm hay gặp: ユーモアがある (có khiếu hài hước). Lưu ý cách viết ユーモア (không có âm h)."
+    "wasei_note": "Cụm hay gặp: ユーモアがある (có khiếu hài hước). Lưu ý cách viết ユーモア (không có âm h).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2010(M5)",
+    "freq_exams": "T7/2010(M5)"
   },
   {
     "id": "kpair_6",
@@ -64,7 +84,11 @@ const KATAKANA_78_LIST = [
     "origin": "shock (Anh)",
     "native_jp": "衝撃",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Cụm cố định JLPT N3: ショックを受ける (bị sốc). Đừng nhầm với ストレスがたまる (tích tụ stress)."
+    "wasei_note": "Cụm cố định JLPT N3: ショックを受ける (bị sốc). Đừng nhầm với ストレスがたまる (tích tụ stress).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_7",
@@ -75,7 +99,11 @@ const KATAKANA_78_LIST = [
     "origin": "stress (Anh)",
     "native_jp": "精神的負担",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Cụm tủ JLPT N3: ストレスがたまる (tích tụ stress) / ストレスを解消する (giải tỏa stress)."
+    "wasei_note": "Cụm tủ JLPT N3: ストレスがたまる (tích tụ stress) / ストレスを解消する (giải tỏa stress).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_8",
@@ -86,7 +114,11 @@ const KATAKANA_78_LIST = [
     "origin": "balance (Anh)",
     "native_jp": "つり合い",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Cụm tủ: バランスがいい (cân bằng tốt) / バランスをとる (giữ cân bằng)."
+    "wasei_note": "Cụm tủ: バランスがいい (cân bằng tốt) / バランスをとる (giữ cân bằng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_9",
@@ -97,7 +129,11 @@ const KATAKANA_78_LIST = [
     "origin": "level (Anh)",
     "native_jp": "水準・程度",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "⚠️ Bẫy nhìn nhầm 1 chữ Katakana: レベル (level: trình độ) khác với ラベル (label: nhãn dán)!"
+    "wasei_note": "⚠️ Bẫy nhìn nhầm 1 chữ Katakana: レベル (level: trình độ) khác với ラベル (label: nhãn dán)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_10",
@@ -108,7 +144,11 @@ const KATAKANA_78_LIST = [
     "origin": "up (Anh)",
     "native_jp": "上昇・向上",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Dùng rất nhiều trong ghép từ kiểu Nhật: スピードアップ (tăng tốc), レベルアップ (lên trình)."
+    "wasei_note": "Dùng rất nhiều trong ghép từ kiểu Nhật: スピードアップ (tăng tốc), レベルアップ (lên trình).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_11",
@@ -119,7 +159,11 @@ const KATAKANA_78_LIST = [
     "origin": "down (Anh)",
     "native_jp": "低下・減少",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "⚠️ Sắc thái kiểu Nhật: ダウンする ngoài 'giảm xuống' còn nghĩa 'ngã bệnh/gục vì quá mệt' (kèm ダウンロード = tải xuống)."
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: ダウンする ngoài 'giảm xuống' còn nghĩa 'ngã bệnh/gục vì quá mệt' (kèm ダウンロード = tải xuống).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_12",
@@ -130,7 +174,11 @@ const KATAKANA_78_LIST = [
     "origin": "contest (Anh)",
     "native_jp": "競技会・大会",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "Hay ghép: スピーチコンテスト (thi hùng biện), 写真コンテスト (thi nhiếp ảnh)."
+    "wasei_note": "Hay ghép: スピーチコンテスト (thi hùng biện), 写真コンテスト (thi nhiếp ảnh).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_13",
@@ -141,7 +189,11 @@ const KATAKANA_78_LIST = [
     "origin": "plus (Anh)",
     "native_jp": "足し算・有利",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Cặp đối lập: プラスになる (có lợi/tích cực) <-> マイナスになる (gây bất lợi/tiêu cực)."
+    "wasei_note": "Cặp đối lập: プラスになる (có lợi/tích cực) <-> マイナスになる (gây bất lợi/tiêu cực).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_14",
@@ -152,7 +204,11 @@ const KATAKANA_78_LIST = [
     "origin": "minus (Anh)",
     "native_jp": "引き算・不利",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Vừa dùng cho số âm (マイナス3度) vừa dùng cho mặt bất lợi (マイナスになる)."
+    "wasei_note": "Vừa dùng cho số âm (マイナス3度) vừa dùng cho mặt bất lợi (マイナスになる).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_15",
@@ -163,7 +219,11 @@ const KATAKANA_78_LIST = [
     "origin": "image (Anh)",
     "native_jp": "印象・心象",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "イメージ = 印象 (ấn tượng/hình ảnh trong đầu). Cụm hay gặp: イメージチェンジ (thay đổi hình tượng)."
+    "wasei_note": "イメージ = 印象 (ấn tượng/hình ảnh trong đầu). Cụm hay gặp: イメージチェンジ (thay đổi hình tượng).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2016(M3)",
+    "freq_exams": "T12/2016(M3)"
   },
   {
     "id": "kpair_16",
@@ -174,7 +234,11 @@ const KATAKANA_78_LIST = [
     "origin": "privacy (Anh)",
     "native_jp": "私生活の秘密",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Cụm cố định: プライバシーを守る (bảo vệ đời tư) / プライバシーを侵害する (xâm phạm đời tư)."
+    "wasei_note": "Cụm cố định: プライバシーを守る (bảo vệ đời tư) / プライバシーを侵害する (xâm phạm đời tư).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_17",
@@ -185,7 +249,11 @@ const KATAKANA_78_LIST = [
     "origin": "office (Anh)",
     "native_jp": "事務所・会社",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "オフィス = 事務所(じむしょ). Ghép từ: オフィスビル (tòa nhà văn phòng)."
+    "wasei_note": "オフィス = 事務所(じむしょ). Ghép từ: オフィスビル (tòa nhà văn phòng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_18",
@@ -196,7 +264,11 @@ const KATAKANA_78_LIST = [
     "origin": "rule (Anh)",
     "native_jp": "規則・決まり",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Phân biệt: ルール (quy tắc bắt buộc ＝ 規則) vs マナー (phép lịch sự, tác phong cư xử)."
+    "wasei_note": "Phân biệt: ルール (quy tắc bắt buộc ＝ 規則) vs マナー (phép lịch sự, tác phong cư xử).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_19",
@@ -207,7 +279,11 @@ const KATAKANA_78_LIST = [
     "origin": "mass communication (Wasei)",
     "native_jp": "報道機関",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật (Wasei-eigo): マス・コミュニケーション -> rút ngắn còn マスコミ!"
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật (Wasei-eigo): マス・コミュニケーション -> rút ngắn còn マスコミ!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_20",
@@ -218,7 +294,11 @@ const KATAKANA_78_LIST = [
     "origin": "manner (Anh)",
     "native_jp": "礼儀作法",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Hay gặp ở Đọc hiểu N3: 食事のマナー (phép lịch sự bàn ăn), マナーを守る (giữ phép lịch sự)."
+    "wasei_note": "Hay gặp ở Đọc hiểu N3: 食事のマナー (phép lịch sự bàn ăn), マナーを守る (giữ phép lịch sự).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2017(M3)",
+    "freq_exams": "T7/2017(M3)"
   },
   {
     "id": "kpair_21",
@@ -229,7 +309,11 @@ const KATAKANA_78_LIST = [
     "origin": "mistake (Wasei)",
     "native_jp": "間違い・失敗",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: mistake -> rút còn ミス! Hay dùng: ミスをする (mắc lỗi), ケアレスミス (lỗi bất cẩn)."
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: mistake -> rút còn ミス! Hay dùng: ミスをする (mắc lỗi), ケアレスミス (lỗi bất cẩn).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_22",
@@ -240,7 +324,11 @@ const KATAKANA_78_LIST = [
     "origin": "schedule (Anh)",
     "native_jp": "予定・日程",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Đồng nghĩa chuẩn N3: スケジュール ＝ 予定(よてい)."
+    "wasei_note": "Đồng nghĩa chuẩn N3: スケジュール ＝ 予定(よてい).",
+    "is_extra": false,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T12/2011(M4), T12/2017(M4), T12/2022(M4))",
+    "freq_exams": "T12/2011(M4), T12/2017(M4), T12/2022(M4)"
   },
   {
     "id": "kpair_23",
@@ -251,7 +339,11 @@ const KATAKANA_78_LIST = [
     "origin": "title (Anh)",
     "native_jp": "題名・表題",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "Phân biệt bộ 3 phim/sách: タイトル (tựa đề), テーマ (chủ đề cốt lõi), ストーリー (cốt truyện)."
+    "wasei_note": "Phân biệt bộ 3 phim/sách: タイトル (tựa đề), テーマ (chủ đề cốt lõi), ストーリー (cốt truyện).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2026(M3)",
+    "freq_exams": "T7/2026(M3)"
   },
   {
     "id": "kpair_24",
@@ -262,7 +354,11 @@ const KATAKANA_78_LIST = [
     "origin": "Thema (Đức)",
     "native_jp": "主題・話題",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Thema) nên đọc là テーマ chứ không đọc theo tiếng Anh (theme)!"
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Thema) nên đọc là テーマ chứ không đọc theo tiếng Anh (theme)!",
+    "is_extra": false,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T12/2014(M3), T7/2023(M3))",
+    "freq_exams": "T12/2014(M3), T7/2023(M3)"
   },
   {
     "id": "kpair_25",
@@ -273,7 +369,11 @@ const KATAKANA_78_LIST = [
     "origin": "story (Anh)",
     "native_jp": "物語・あらすじ",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "ストーリー ＝ 物語(ものがたり) / あらすじ (cốt truyện)."
+    "wasei_note": "ストーリー ＝ 物語(ものがたり) / あらすじ (cốt truyện).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_26",
@@ -284,7 +384,11 @@ const KATAKANA_78_LIST = [
     "origin": "hit (Anh)",
     "native_jp": "大成功・大流行",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "Cụm hay gặp: 大ヒットする (trở thành cú hit lớn), ヒット商品 (sản phẩm bán chạy đình đám)."
+    "wasei_note": "Cụm hay gặp: 大ヒットする (trở thành cú hit lớn), ヒット商品 (sản phẩm bán chạy đình đám).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_27",
@@ -295,7 +399,11 @@ const KATAKANA_78_LIST = [
     "origin": "brand (Anh)",
     "native_jp": "商標・銘柄",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "ブランド品 (hàng hiệu). Đừng nhầm với グラウンド (sân vận động)!"
+    "wasei_note": "ブランド品 (hàng hiệu). Đừng nhầm với グラウンド (sân vận động)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_28",
@@ -306,7 +414,11 @@ const KATAKANA_78_LIST = [
     "origin": "rental (Anh)",
     "native_jp": "貸し出し",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "Ghép từ phổ biến: レンタカー (xe thuê), レンタルショップ (tiệm cho thuê)."
+    "wasei_note": "Ghép từ phổ biến: レンタカー (xe thuê), レンタルショップ (tiệm cho thuê).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_29",
@@ -317,7 +429,11 @@ const KATAKANA_78_LIST = [
     "origin": "recycle (Anh)",
     "native_jp": "再利用",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Rất hay xuất hiện trong bài đọc hiểu phân loại rác ở Nhật: リサイクルショップ (tiệm đồ cũ tái sử dụng)."
+    "wasei_note": "Rất hay xuất hiện trong bài đọc hiểu phân loại rác ở Nhật: リサイクルショップ (tiệm đồ cũ tái sử dụng).",
+    "is_extra": false,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T7/2013(M3), T12/2015(M3))",
+    "freq_exams": "T7/2013(M3), T12/2015(M3)"
   },
   {
     "id": "kpair_30",
@@ -328,7 +444,11 @@ const KATAKANA_78_LIST = [
     "origin": "label (Anh)",
     "native_jp": "荷札・表示",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "⚠️ Rất hay lừa với レベル (trình độ)! Nhớ: ラ(la)ベル = nhãn dán, レ(le)ベル = trình độ."
+    "wasei_note": "⚠️ Rất hay lừa với レベル (trình độ)! Nhớ: ラ(la)ベル = nhãn dán, レ(le)ベル = trình độ.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_31",
@@ -339,7 +459,11 @@ const KATAKANA_78_LIST = [
     "origin": "type (Anh)",
     "native_jp": "型・種類",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Vừa chỉ chủng loại máy móc, vừa chỉ 'gu / kiểu người' (好きなタイプ)."
+    "wasei_note": "Vừa chỉ chủng loại máy móc, vừa chỉ 'gu / kiểu người' (好きなタイプ).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_32",
@@ -350,7 +474,11 @@ const KATAKANA_78_LIST = [
     "origin": "style (Anh)",
     "native_jp": "姿・様式",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "⚠️ Sắc thái kiểu Nhật: スタイルがいい thường dùng để khen 'vóc dáng/body chuẩn đẹp'!"
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: スタイルがいい thường dùng để khen 'vóc dáng/body chuẩn đẹp'!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_33",
@@ -361,7 +489,11 @@ const KATAKANA_78_LIST = [
     "origin": "cancel (Anh)",
     "native_jp": "取り消し・中止",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Từ Katakana cực hay thi N3! キャンセルする ＝ 取り消す / 中止する (bổ sung thay thế cho từ trùng #26)."
+    "wasei_note": "Từ Katakana cực hay thi N3! キャンセルする ＝ 取り消す / 中止する (bổ sung thay thế cho từ trùng #26).",
+    "is_extra": false,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T7/2010(M3), T7/2015(M3), T7/2022(M3))",
+    "freq_exams": "T7/2010(M3), T7/2015(M3), T7/2022(M3)"
   },
   {
     "id": "kpair_34",
@@ -372,7 +504,11 @@ const KATAKANA_78_LIST = [
     "origin": "virus (Latinh/Anh)",
     "native_jp": "病原体",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Chú ý cách đọc tiếng Nhật là ウイルス (u-i-ru-su), không đọc 'vai-rớt'!"
+    "wasei_note": "Chú ý cách đọc tiếng Nhật là ウイルス (u-i-ru-su), không đọc 'vai-rớt'!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_35",
@@ -383,7 +519,11 @@ const KATAKANA_78_LIST = [
     "origin": "robot (Séc/Anh)",
     "native_jp": "自動機械",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Lưu ý có âm ngắt ッ: ロボット."
+    "wasei_note": "Lưu ý có âm ngắt ッ: ロボット.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_36",
@@ -394,7 +534,11 @@ const KATAKANA_78_LIST = [
     "origin": "Energie (Đức)",
     "native_jp": "動力・活力",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Energie) nên đọc エネルギー (không đọc theo tiếng Anh 'energy')!"
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Energie) nên đọc エネルギー (không đọc theo tiếng Anh 'energy')!",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2018(M3)",
+    "freq_exams": "T7/2018(M3)"
   },
   {
     "id": "kpair_37",
@@ -405,7 +549,11 @@ const KATAKANA_78_LIST = [
     "origin": "digital (Anh)",
     "native_jp": "数値化",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Trái nghĩa với アナログ (analog: thủ công/tương tự). Rút gọn hay gặp: デジカメ (máy ảnh KTS)."
+    "wasei_note": "Trái nghĩa với アナログ (analog: thủ công/tương tự). Rút gọn hay gặp: デジカメ (máy ảnh KTS).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_38",
@@ -416,7 +564,11 @@ const KATAKANA_78_LIST = [
     "origin": "microphone (Wasei)",
     "native_jp": "拡声器",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: microphone -> マイク! Đừng nhìn nhầm với バイク (xe máy)!"
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: microphone -> マイク! Đừng nhìn nhầm với バイク (xe máy)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_39",
@@ -427,7 +579,11 @@ const KATAKANA_78_LIST = [
     "origin": "brake (Anh)",
     "native_jp": "制動装置",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "Cụm cố định JLPT: ブレーキを踏む (đạp phanh ô tô) / ブレーキをかける (bóp/phanh lại)."
+    "wasei_note": "Cụm cố định JLPT: ブレーキを踏む (đạp phanh ô tô) / ブレーキをかける (bóp/phanh lại).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_40",
@@ -438,7 +594,11 @@ const KATAKANA_78_LIST = [
     "origin": "pek (Hà Lan)",
     "native_jp": "塗料",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "⚠️ Từ mượn tiếng HÀ LAN (pek)! Cực dễ bị lừa nếu chỉ đoán theo tiếng Anh. Cụm: ペンキを塗る (quét sơn)."
+    "wasei_note": "⚠️ Từ mượn tiếng HÀ LAN (pek)! Cực dễ bị lừa nếu chỉ đoán theo tiếng Anh. Cụm: ペンキを塗る (quét sơn).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_41",
@@ -449,7 +609,11 @@ const KATAKANA_78_LIST = [
     "origin": "curve (Anh)",
     "native_jp": "曲がり角・曲線",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "Đồng nghĩa N3 đã học: カーブしている ＝ 曲がっている."
+    "wasei_note": "Đồng nghĩa N3 đã học: カーブしている ＝ 曲がっている.",
+    "is_extra": false,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T12/2011(M3), T7/2014(M4))",
+    "freq_exams": "T12/2011(M3), T7/2014(M4)"
   },
   {
     "id": "kpair_42",
@@ -460,7 +624,11 @@ const KATAKANA_78_LIST = [
     "origin": "classmate (Anh)",
     "native_jp": "同級生",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "クラス (lớp) + メート (bạn) ＝ 同級生(どうきゅうせい)."
+    "wasei_note": "クラス (lớp) + メート (bạn) ＝ 同級生(どうきゅうせい).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_43",
@@ -471,7 +639,11 @@ const KATAKANA_78_LIST = [
     "origin": "group (Anh)",
     "native_jp": "集団・組",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Phân biệt: グループ (nhóm nói chung, thảo luận/du lịch) vs チーム (đội cùng thi đấu/phối hợp mục tiêu)."
+    "wasei_note": "Phân biệt: グループ (nhóm nói chung, thảo luận/du lịch) vs チーム (đội cùng thi đấu/phối hợp mục tiêu).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_44",
@@ -482,7 +654,11 @@ const KATAKANA_78_LIST = [
     "origin": "team (Anh)",
     "native_jp": "組・団",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "Hay dùng: チームワーク (tinh thần đồng đội)."
+    "wasei_note": "Hay dùng: チームワーク (tinh thần đồng đội).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_45",
@@ -493,7 +669,11 @@ const KATAKANA_78_LIST = [
     "origin": "professional (Anh)",
     "native_jp": "専門家・本職",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "Thường viết rút gọn là プロ (プロ野球: bóng chày chuyên nghiệp). Trái nghĩa hoàn toàn với アマチュア!"
+    "wasei_note": "Thường viết rút gọn là プロ (プロ野球: bóng chày chuyên nghiệp). Trái nghĩa hoàn toàn với アマチュア!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_46",
@@ -504,7 +684,11 @@ const KATAKANA_78_LIST = [
     "origin": "amateur (Pháp/Anh)",
     "native_jp": "素人・愛好家",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "Cặp trái nghĩa hay thi: プロ(フェッショナル) <-> アマチュア (hay viết tắt là アマ)."
+    "wasei_note": "Cặp trái nghĩa hay thi: プロ(フェッショナル) <-> アマチュア (hay viết tắt là アマ).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_47",
@@ -515,7 +699,11 @@ const KATAKANA_78_LIST = [
     "origin": "training (Anh)",
     "native_jp": "訓練・練習",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "トレーニング ＝ 練習・訓練 (thường nhấn mạnh rèn luyện thể lực, cơ bắp)."
+    "wasei_note": "トレーニング ＝ 練習・訓練 (thường nhấn mạnh rèn luyện thể lực, cơ bắp).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2018(M4)",
+    "freq_exams": "T12/2018(M4)"
   },
   {
     "id": "kpair_48",
@@ -526,7 +714,11 @@ const KATAKANA_78_LIST = [
     "origin": "massage (Pháp/Anh)",
     "native_jp": "あんま・揉みほぐし",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "⚠️ Cẩn thận nhìn nhầm với メッセージ (tin nhắn)! マッサージ (mát xa) vs メッセージ (tin nhắn)."
+    "wasei_note": "⚠️ Cẩn thận nhìn nhầm với メッセージ (tin nhắn)! マッサージ (mát xa) vs メッセージ (tin nhắn).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_49",
@@ -537,7 +729,11 @@ const KATAKANA_78_LIST = [
     "origin": "advice (Anh)",
     "native_jp": "助言・忠告",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Cụm cố định: アドバイスをする (khuyên) / アドバイスをもらう (nhận lời khuyên)."
+    "wasei_note": "Cụm cố định: アドバイスをする (khuyên) / アドバイスをもらう (nhận lời khuyên).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2016(M3)",
+    "freq_exams": "T7/2016(M3)"
   },
   {
     "id": "kpair_50",
@@ -548,7 +744,11 @@ const KATAKANA_78_LIST = [
     "origin": "idea (Anh)",
     "native_jp": "考え・案",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "Đồng nghĩa chuẩn N3: アイディア (hoặc アイデア) ＝ 案(あん)."
+    "wasei_note": "Đồng nghĩa chuẩn N3: アイディア (hoặc アイデア) ＝ 案(あん).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_51",
@@ -559,7 +759,11 @@ const KATAKANA_78_LIST = [
     "origin": "top (Anh)",
     "native_jp": "首位・一番上",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "トップ ＝ 一番 / 首位 (đứng nhất bảng)."
+    "wasei_note": "トップ ＝ 一番 / 首位 (đứng nhất bảng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_52",
@@ -570,7 +774,11 @@ const KATAKANA_78_LIST = [
     "origin": "speed (Anh)",
     "native_jp": "速度・速さ",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "Cụm tủ JLPT: スピードを出す (tăng tốc) / スピードを落とす (giảm tốc)."
+    "wasei_note": "Cụm tủ JLPT: スピードを出す (tăng tốc) / スピードを落とす (giảm tốc).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_53",
@@ -581,7 +789,11 @@ const KATAKANA_78_LIST = [
     "origin": "rush hour (Wasei)",
     "native_jp": "混雑時",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: rush hour -> ラッシュ (hoặc ラッシュアワー: giờ cao điểm kẹt cứng)."
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: rush hour -> ラッシュ (hoặc ラッシュアワー: giờ cao điểm kẹt cứng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_54",
@@ -592,7 +804,11 @@ const KATAKANA_78_LIST = [
     "origin": "bike (Wasei)",
     "native_jp": "オートバイ",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "⚠️ CẢNH BÁO WASEI-EIGO KINH ĐIỂN: Trong tiếng Nhật, バイク là XE MÁY (không phải xe đạp 自転車)!"
+    "wasei_note": "⚠️ CẢNH BÁO WASEI-EIGO KINH ĐIỂN: Trong tiếng Nhật, バイク là XE MÁY (không phải xe đạp 自転車)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_55",
@@ -603,7 +819,11 @@ const KATAKANA_78_LIST = [
     "origin": "helmet (Anh)",
     "native_jp": "安全帽",
     "category": "Giao thông & Thể thao",
-    "wasei_note": "Động từ đi kèm đồ đội đầu: ヘルメットをかぶる (đội mũ bảo hiểm)."
+    "wasei_note": "Động từ đi kèm đồ đội đầu: ヘルメットをかぶる (đội mũ bảo hiểm).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_56",
@@ -614,7 +834,11 @@ const KATAKANA_78_LIST = [
     "origin": "contact lens (Anh)",
     "native_jp": "接触眼鏡",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Thường gọi ngắn là コンタクト. Động từ: つける (đeo vào) / 外す(はずす: tháo ra)."
+    "wasei_note": "Thường gọi ngắn là コンタクト. Động từ: つける (đeo vào) / 外す(はずす: tháo ra).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_57",
@@ -625,7 +849,11 @@ const KATAKANA_78_LIST = [
     "origin": "glas (Hà Lan)",
     "native_jp": "硝子",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "⚠️ Phân biệt: ガラス (chất liệu thủy tinh/cửa kính) khác グラス (cái cốc/ly uống nước)!"
+    "wasei_note": "⚠️ Phân biệt: ガラス (chất liệu thủy tinh/cửa kính) khác グラス (cái cốc/ly uống nước)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_58",
@@ -636,7 +864,11 @@ const KATAKANA_78_LIST = [
     "origin": "plastic (Anh)",
     "native_jp": "合成樹脂",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Lưu ý chính tả chuẩn: プラスチック (chữ チ chứ KHÔNG phải チェ!)."
+    "wasei_note": "Lưu ý chính tả chuẩn: プラスチック (chữ チ chứ KHÔNG phải チェ!).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_59",
@@ -647,7 +879,11 @@ const KATAKANA_78_LIST = [
     "origin": "veranda (Bồ Đào Nha/Anh)",
     "native_jp": "縁側・張り出し縁",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Cụm hay gặp ở Đọc hiểu/Nghe hiểu đời sống Nhật: ベランダに洗濯物を干す (phơi đồ ngoài ban công)."
+    "wasei_note": "Cụm hay gặp ở Đọc hiểu/Nghe hiểu đời sống Nhật: ベランダに洗濯物を干す (phơi đồ ngoài ban công).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_60",
@@ -658,7 +894,11 @@ const KATAKANA_78_LIST = [
     "origin": "design (Anh)",
     "native_jp": "設計・意匠",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "Vừa là danh từ (thiết kế) vừa dùng デザインする (thiết kế ra)."
+    "wasei_note": "Vừa là danh từ (thiết kế) vừa dùng デザインする (thiết kế ra).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2019(M3)",
+    "freq_exams": "T12/2019(M3)"
   },
   {
     "id": "kpair_61",
@@ -669,7 +909,11 @@ const KATAKANA_78_LIST = [
     "origin": "sale (Anh)",
     "native_jp": "特売・安売り",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "Hay gặp: タイムセール (giảm giá theo khung giờ), 年中セール (giảm giá quanh năm)."
+    "wasei_note": "Hay gặp: タイムセール (giảm giá theo khung giờ), 年中セール (giảm giá quanh năm).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_62",
@@ -680,7 +924,11 @@ const KATAKANA_78_LIST = [
     "origin": "part-time (Wasei)",
     "native_jp": "非常勤・アルバイト",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "⚠️ Sắc thái kiểu Nhật: パート thường chỉ việc làm thêm của các bà nội trợ/người lớn; アルバイト hay dùng cho sinh viên."
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: パート thường chỉ việc làm thêm của các bà nội trợ/người lớn; アルバイト hay dùng cho sinh viên.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_63",
@@ -691,7 +939,11 @@ const KATAKANA_78_LIST = [
     "origin": "convenience store (Wasei)",
     "native_jp": "24時間営業店",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "⚠️ Từ rút gọn siêu phổ biến: コンビニエンスストア -> コンビニ!"
+    "wasei_note": "⚠️ Từ rút gọn siêu phổ biến: コンビニエンスストア -> コンビニ!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_64",
@@ -702,7 +954,11 @@ const KATAKANA_78_LIST = [
     "origin": "cash register (Wasei)",
     "native_jp": "会計場",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "⚠️ Rút gọn từ register -> レジ! Đừng nhầm với レシート (hóa đơn)!"
+    "wasei_note": "⚠️ Rút gọn từ register -> レジ! Đừng nhầm với レシート (hóa đơn)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_65",
@@ -713,7 +969,11 @@ const KATAKANA_78_LIST = [
     "origin": "receipt (Anh)",
     "native_jp": "領収書",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "Phân biệt: レシート (biên lai in tự động ở máy tính tiền) vs 領収書 (hóa đơn đỏ có ghi tên công ty)."
+    "wasei_note": "Phân biệt: レシート (biên lai in tự động ở máy tính tiền) vs 領収書 (hóa đơn đỏ có ghi tên công ty).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_66",
@@ -724,7 +984,11 @@ const KATAKANA_78_LIST = [
     "origin": "instant (Anh)",
     "native_jp": "即席",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "Hay ghép: インスタントコーヒー (cà phê hòa tan), インスタント食品 (thực phẩm ăn liền)."
+    "wasei_note": "Hay ghép: インスタントコーヒー (cà phê hòa tan), インスタント食品 (thực phẩm ăn liền).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_67",
@@ -735,7 +999,11 @@ const KATAKANA_78_LIST = [
     "origin": "fruits (Anh)",
     "native_jp": "果物",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "フルーツ ＝ 果物(くだもの). Hay gặp ở thực đơn: フルーツジュース, フルーツケーキ."
+    "wasei_note": "フルーツ ＝ 果物(くだもの). Hay gặp ở thực đơn: フルーツジュース, フルーツケーキ.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_68",
@@ -746,7 +1014,11 @@ const KATAKANA_78_LIST = [
     "origin": "fast food (Anh)",
     "native_jp": "手軽な軽食",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "Cũng hay viết là ファーストフード (đều hiểu là đồ ăn nhanh)."
+    "wasei_note": "Cũng hay viết là ファーストフード (đều hiểu là đồ ăn nhanh).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_69",
@@ -757,7 +1029,11 @@ const KATAKANA_78_LIST = [
     "origin": "dessert (Pháp/Anh)",
     "native_jp": "食後の菓子",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "Cẩn thận cách viết: デザート (tráng miệng) — có âm đục ザ và trường âm ー!"
+    "wasei_note": "Cẩn thận cách viết: デザート (tráng miệng) — có âm đục ザ và trường âm ー!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_70",
@@ -768,7 +1044,11 @@ const KATAKANA_78_LIST = [
     "origin": "Internet (Anh)",
     "native_jp": "情報通信網",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Lưu ý có 2 trường âm ー: イン+ター+ネッ+ト (thường viết tắt là ネット)."
+    "wasei_note": "Lưu ý có 2 trường âm ー: イン+ター+ネッ+ト (thường viết tắt là ネット).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_71",
@@ -779,7 +1059,11 @@ const KATAKANA_78_LIST = [
     "origin": "chime (Anh)",
     "native_jp": "呼び鈴・鐘",
     "category": "Công nghệ & Đời sống",
-    "wasei_note": "Cụm cố định: チャイムが鳴る (chuông reo), チャイムを押す (bấm chuông cửa)."
+    "wasei_note": "Cụm cố định: チャイムが鳴る (chuông reo), チャイムを押す (bấm chuông cửa).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_72",
@@ -790,7 +1074,11 @@ const KATAKANA_78_LIST = [
     "origin": "announce (Anh)",
     "native_jp": "場内放送・案内",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "アナウンス ＝ 案内放送 (thông báo bằng giọng nói qua loa). Nghề phát thanh viên là アナウンサー."
+    "wasei_note": "アナウンス ＝ 案内放送 (thông báo bằng giọng nói qua loa). Nghề phát thanh viên là アナウンサー.",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2025(M3)",
+    "freq_exams": "T12/2025(M3)"
   },
   {
     "id": "kpair_73",
@@ -801,7 +1089,11 @@ const KATAKANA_78_LIST = [
     "origin": "message (Anh)",
     "native_jp": "伝言",
     "category": "Công việc & Giao tiếp",
-    "wasei_note": "⚠️ Cặp bẫy mặt chữ: メッセージ (tin nhắn ＝ 伝言) vs マッサージ (mát xa)!"
+    "wasei_note": "⚠️ Cặp bẫy mặt chữ: メッセージ (tin nhắn ＝ 伝言) vs マッサージ (mát xa)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_74",
@@ -812,7 +1104,11 @@ const KATAKANA_78_LIST = [
     "origin": "pamphlet (Anh)",
     "native_jp": "小冊子・案内書",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "Rất hay xuất hiện trong Đọc hiểu Mondai 4 (Thông tin du lịch/Trường học)!"
+    "wasei_note": "Rất hay xuất hiện trong Đọc hiểu Mondai 4 (Thông tin du lịch/Trường học)!",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2014(M3)",
+    "freq_exams": "T7/2014(M3)"
   },
   {
     "id": "kpair_75",
@@ -823,7 +1119,11 @@ const KATAKANA_78_LIST = [
     "origin": "card (Anh)",
     "native_jp": "札・会員証",
     "category": "Mua sắm & Ẩm thực",
-    "wasei_note": "Hay gặp: クレジットカード (thẻ tín dụng), ポイントカード (thẻ tích điểm), キャッシュカード (thẻ ATM)."
+    "wasei_note": "Hay gặp: クレジットカード (thẻ tín dụng), ポイントカード (thẻ tích điểm), キャッシュカード (thẻ ATM).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_76",
@@ -834,7 +1134,11 @@ const KATAKANA_78_LIST = [
     "origin": "interview (Anh)",
     "native_jp": "取材・会見",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "Phân biệt: インタビュー (phỏng vấn báo chí/TV) vs 面接(めんせつ: phỏng vấn xin việc/nhập học)!"
+    "wasei_note": "Phân biệt: インタビュー (phỏng vấn báo chí/TV) vs 面接(めんせつ: phỏng vấn xin việc/nhập học)!",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2011(M3)",
+    "freq_exams": "T7/2011(M3)"
   },
   {
     "id": "kpair_77",
@@ -845,7 +1149,11 @@ const KATAKANA_78_LIST = [
     "origin": "enquête (Pháp)",
     "native_jp": "意識調査",
     "category": "Truyền thông & Văn hóa",
-    "wasei_note": "⚠️ Từ mượn tiếng PHÁP (enquête)! Cực kỳ hay thi JLPT N3: アンケートをとる / アンケートに答える."
+    "wasei_note": "⚠️ Từ mượn tiếng PHÁP (enquête)! Cực kỳ hay thi JLPT N3: アンケートをとる / アンケートに答える.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kpair_78",
@@ -856,7 +1164,191 @@ const KATAKANA_78_LIST = [
     "origin": "percent (Anh)",
     "native_jp": "百分率・割",
     "category": "Đánh giá & Trạng thái",
-    "wasei_note": "Thường đi với tỷ lệ thời tiết (降水確率), giảm giá (20パーセント引き), thống kê biểu đồ Dokkai."
+    "wasei_note": "Thường đi với tỷ lệ thời tiết (降水確率), giảm giá (20パーセント引き), thống kê biểu đồ Dokkai.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
+  },
+  {
+    "id": "kpair_79",
+    "quiz_id": "kata_p3_q1",
+    "stt": 79,
+    "word": "キッチン",
+    "meaning_vi": "Nhà bếp, gian bếp",
+    "origin": "kitchen (Anh)",
+    "native_jp": "台所",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "🔥 TRÙM 3 LẦN ĐỀ THẬT (M4: T12/2013, T12/2019, T12/2025)! Đồng nghĩa kinh điển JLPT N3: キッチン ＝ 台所(だいどころ).",
+    "is_extra": true,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T12/2013(M4), T12/2019(M4), T12/2025(M4))",
+    "freq_exams": "T12/2013(M4), T12/2019(M4), T12/2025(M4)"
+  },
+  {
+    "id": "kpair_80",
+    "quiz_id": "kata_p3_q2",
+    "stt": 80,
+    "word": "サイズ",
+    "meaning_vi": "Kích cỡ, độ lớn (quần áo, giày, đồ)",
+    "origin": "size (Anh)",
+    "native_jp": "大きさ・寸法",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "🔥 TRÙM 3 LẦN ĐỀ THẬT (M4: T7/2013, T7/2023, T7/2026)! Đồng nghĩa kinh điển JLPT N3: サイズ ＝ 大きさ(おおきさ).",
+    "is_extra": true,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T7/2013(M4), T7/2023(M4), T7/2026(M4))",
+    "freq_exams": "T7/2013(M4), T7/2023(M4), T7/2026(M4)"
+  },
+  {
+    "id": "kpair_81",
+    "quiz_id": "kata_p3_q3",
+    "stt": 81,
+    "word": "チャレンジ",
+    "meaning_vi": "Thử thách, thử sức (một lĩnh vực mới)",
+    "origin": "challenge (Anh)",
+    "native_jp": "挑戦",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "🔥 Ra 2 lần M3 (T7/2016, T12/2021)! Cụm cố định JLPT N3: 〜にチャレンジする (thử thách / thử sức với ~).",
+    "is_extra": true,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T7/2016(M3), T12/2021(M3))",
+    "freq_exams": "T7/2016(M3), T12/2021(M3)"
+  },
+  {
+    "id": "kpair_82",
+    "quiz_id": "kata_p3_q4",
+    "stt": 82,
+    "word": "ヒント",
+    "meaning_vi": "Gợi ý, manh mối",
+    "origin": "hint (Anh)",
+    "native_jp": "手がかり・助言",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "🔥 Ra 2 lần M3 (T12/2012, T12/2023)! Phân biệt: ヒント (gợi ý giải đố/ý tưởng) vs アドバイス (lời khuyên cuộc sống/công việc).",
+    "is_extra": true,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T12/2012(M3), T12/2023(M3))",
+    "freq_exams": "T12/2012(M3), T12/2023(M3)"
+  },
+  {
+    "id": "kpair_83",
+    "quiz_id": "kata_p3_q5",
+    "stt": 83,
+    "word": "カタログ",
+    "meaning_vi": "Danh mục sản phẩm, quyển catalog",
+    "origin": "catalog (Anh)",
+    "native_jp": "商品目録",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "📌 Ra đề thật T7/2010 M3! Phân biệt: カタログ (danh mục giới thiệu sản phẩm để chọn mua) vs パンフレット (tờ gấp giới thiệu sự kiện/du lịch).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2010(M3)",
+    "freq_exams": "T7/2010(M3)"
+  },
+  {
+    "id": "kpair_84",
+    "quiz_id": "kata_p3_q6",
+    "stt": 84,
+    "word": "カバー",
+    "meaning_vi": "Vỏ bọc, bìa bọc; bù đắp, hỗ trợ",
+    "origin": "cover (Anh)",
+    "native_jp": "覆い・補うこと",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "📌 Ra đề thật T7/2012 M3! Nghĩa hay thi N3: 本のカバー (bìa bọc sách), 失敗をカバーする (bù đắp/đỡ đần lỗi sai).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2012(M3)",
+    "freq_exams": "T7/2012(M3)"
+  },
+  {
+    "id": "kpair_85",
+    "quiz_id": "kata_p3_q7",
+    "stt": 85,
+    "word": "グラウンド",
+    "meaning_vi": "Sân vận động, bãi tập thể thao",
+    "origin": "ground (Anh)",
+    "native_jp": "運動場",
+    "category": "Giao thông & Thể thao",
+    "wasei_note": "📌 Ra đề thật T7/2022 M4! Đồng nghĩa chuẩn N3: グラウンド ＝ 運動場(うんどうじょう). Đừng nhầm với ブランド (thương hiệu)!",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2022(M4)",
+    "freq_exams": "T7/2022(M4)"
+  },
+  {
+    "id": "kpair_86",
+    "quiz_id": "kata_p3_q8",
+    "stt": 86,
+    "word": "セット",
+    "meaning_vi": "Bộ, combo; thiết lập, cài đặt (đồng hồ/máy)",
+    "origin": "set (Anh)",
+    "native_jp": "一組・設定",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "📌 Ra đề thật T7/2012 M3! Dùng rất rộng: ランチセット (suất trưa combo), 目覚ましをセットする (đặt báo thức).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2012(M3)",
+    "freq_exams": "T7/2012(M3)"
+  },
+  {
+    "id": "kpair_87",
+    "quiz_id": "kata_p3_q9",
+    "stt": 87,
+    "word": "ノック",
+    "meaning_vi": "Gõ cửa",
+    "origin": "knock (Anh)",
+    "native_jp": "戸をたたくこと",
+    "category": "Công việc & Giao tiếp",
+    "wasei_note": "📌 Ra đề thật T7/2019 M3! Cụm cố định: ドアをノックする (gõ cửa).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2019(M3)",
+    "freq_exams": "T7/2019(M3)"
+  },
+  {
+    "id": "kpair_88",
+    "quiz_id": "kata_p3_q10",
+    "stt": 88,
+    "word": "バケツ",
+    "meaning_vi": "Cái xô, thùng đựng nước",
+    "origin": "bucket (Anh)",
+    "native_jp": "手おけ・水桶",
+    "category": "Công nghệ & Đời sống",
+    "wasei_note": "📌 Ra đề thật T12/2018 M3! Lưu ý cách đọc kiểu Nhật từ bucket → バケツ (đuôi ツ, không có ッ).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2018(M3)",
+    "freq_exams": "T12/2018(M3)"
+  },
+  {
+    "id": "kpair_89",
+    "quiz_id": "kata_p3_q11",
+    "stt": 89,
+    "word": "ベスト",
+    "meaning_vi": "Tốt nhất, tối ưu nhất; áo ghi-lê",
+    "origin": "best (Anh)",
+    "native_jp": "最もよい・最善",
+    "category": "Đánh giá & Trạng thái",
+    "wasei_note": "📌 Ra đề thật T12/2023 M4! Đồng nghĩa chuẩn N3: ベスト ＝ 最もよい(もっともよい). Cụm hay gặp: ベストを尽くす (cố hết sức).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2023(M4)",
+    "freq_exams": "T12/2023(M4)"
+  },
+  {
+    "id": "kpair_90",
+    "quiz_id": "kata_p3_q12",
+    "stt": 90,
+    "word": "レシピ",
+    "meaning_vi": "Công thức nấu ăn",
+    "origin": "recipe (Anh)",
+    "native_jp": "料理の作り方",
+    "category": "Mua sắm & Ẩm thực",
+    "wasei_note": "📌 Ra đề thật T12/2022 M3! Phân biệt: レシピ (công thức cách nấu ăn) vs メニュー (thực đơn gọi món ở quán).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2022(M3)",
+    "freq_exams": "T12/2022(M3)"
   }
 ];
 
@@ -888,7 +1380,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Dự án này tôi muốn cùng tiến hành với một đối tác đáng tin cậy.",
-    "wasei_note": "パートナー vừa dùng trong kinh doanh (đối tác), vừa dùng cho bạn nhảy/bạn đời."
+    "wasei_note": "パートナー vừa dùng trong kinh doanh (đối tác), vừa dùng cho bạn nhảy/bạn đời.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q2",
@@ -917,7 +1413,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Anh Tanaka đã được chọn làm trưởng nhóm của đội lần này.",
-    "wasei_note": "Chú ý có 2 trường âm ー: リー + ダー. Phân biệt với クラスメート (bạn cùng lớp)."
+    "wasei_note": "Chú ý có 2 trường âm ー: リー + ダー. Phân biệt với クラスメート (bạn cùng lớp).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q3",
@@ -946,7 +1446,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Vào ngày nghỉ, tôi tham gia hoạt động tình nguyện dọn dẹp vệ sinh ở địa phương.",
-    "wasei_note": "Cụm hay thi JLPT N3: ボランティアに参加する / ボランティア活動 (hoạt động tình nguyện)."
+    "wasei_note": "Cụm hay thi JLPT N3: ボランティアに参加する / ボランティア活動 (hoạt động tình nguyện).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q4",
@@ -975,7 +1479,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Ở nơi làm việc, việc giao tiếp với đồng nghiệp rất quan trọng.",
-    "wasei_note": "Cụm cố định: コミュニケーションをとる (giao tiếp, giữ liên lạc trao đổi)."
+    "wasei_note": "Cụm cố định: コミュニケーションをとる (giao tiếp, giữ liên lạc trao đổi).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q5",
@@ -1004,7 +1512,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Thầy Yamada có óc hài hước nên giờ học lúc nào cũng vui.",
-    "wasei_note": "Cụm hay gặp: ユーモアがある (có khiếu hài hước). Lưu ý cách viết ユーモア (không có âm h)."
+    "wasei_note": "Cụm hay gặp: ユーモアがある (có khiếu hài hước). Lưu ý cách viết ユーモア (không có âm h).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2010(M5)",
+    "freq_exams": "T7/2010(M5)"
   },
   {
     "id": "kata_p1_q6",
@@ -1033,7 +1545,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Trượt kỳ thi khiến tôi chịu một cú sốc lớn.",
-    "wasei_note": "Cụm cố định JLPT N3: ショックを受ける (bị sốc). Đừng nhầm với ストレスがたまる (tích tụ stress)."
+    "wasei_note": "Cụm cố định JLPT N3: ショックを受ける (bị sốc). Đừng nhầm với ストレスがたまる (tích tụ stress).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q7",
@@ -1062,7 +1578,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Công việc bận rộn nên gần đây tôi bị tích tụ căng thẳng.",
-    "wasei_note": "Cụm tủ JLPT N3: ストレスがたまる (tích tụ stress) / ストレスを解消する (giải tỏa stress)."
+    "wasei_note": "Cụm tủ JLPT N3: ストレスがたまる (tích tụ stress) / ストレスを解消する (giải tỏa stress).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q8",
@@ -1091,7 +1611,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Vì sức khỏe nên tôi chú ý cân bằng dinh dưỡng khi ăn uống.",
-    "wasei_note": "Cụm tủ: バランスがいい (cân bằng tốt) / バランスをとる (giữ cân bằng)."
+    "wasei_note": "Cụm tủ: バランスがいい (cân bằng tốt) / バランスをとる (giữ cân bằng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q9",
@@ -1120,7 +1644,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Nhờ luyện tập mỗi ngày mà trình độ tiếng Nhật của tôi đã tăng lên.",
-    "wasei_note": "⚠️ Bẫy nhìn nhầm 1 chữ Katakana: レベル (level: trình độ) khác với ラベル (label: nhãn dán)!"
+    "wasei_note": "⚠️ Bẫy nhìn nhầm 1 chữ Katakana: レベル (level: trình độ) khác với ラベル (label: nhãn dán)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q10",
@@ -1149,7 +1677,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Từ mùa xuân năm nay, giá sản phẩm đã tăng lên 10%.",
-    "wasei_note": "Dùng rất nhiều trong ghép từ kiểu Nhật: スピードアップ (tăng tốc), レベルアップ (lên trình)."
+    "wasei_note": "Dùng rất nhiều trong ghép từ kiểu Nhật: スピードアップ (tăng tốc), レベルアップ (lên trình).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q11",
@@ -1178,7 +1710,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Vì trời nóng quá sức nên giữa chừng tôi đã bị gục ngã/kiệt sức.",
-    "wasei_note": "⚠️ Sắc thái kiểu Nhật: ダウンする ngoài 'giảm xuống' còn nghĩa 'ngã bệnh/gục vì quá mệt' (kèm ダウンロード = tải xuống)."
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: ダウンする ngoài 'giảm xuống' còn nghĩa 'ngã bệnh/gục vì quá mệt' (kèm ダウンロード = tải xuống).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q12",
@@ -1207,7 +1743,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Tháng sau tôi dự định tham gia cuộc thi hùng biện được tổ chức.",
-    "wasei_note": "Hay ghép: スピーチコンテスト (thi hùng biện), 写真コンテスト (thi nhiếp ảnh)."
+    "wasei_note": "Hay ghép: スピーチコンテスト (thi hùng biện), 写真コンテスト (thi nhiếp ảnh).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q13",
@@ -1236,7 +1776,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Kinh nghiệm ở nước ngoài chắc hẳn sẽ mang lại lợi ích tích cực cho công việc tương lai.",
-    "wasei_note": "Cặp đối lập: プラスになる (có lợi/tích cực) <-> マイナスになる (gây bất lợi/tiêu cực)."
+    "wasei_note": "Cặp đối lập: プラスになる (có lợi/tích cực) <-> マイナスになる (gây bất lợi/tiêu cực).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q14",
@@ -1265,7 +1809,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Nhiệt độ sáng nay đã giảm xuống tới âm 3 độ.",
-    "wasei_note": "Vừa dùng cho số âm (マイナス3度) vừa dùng cho mặt bất lợi (マイナスになる)."
+    "wasei_note": "Vừa dùng cho số âm (マイナス3度) vừa dùng cho mặt bất lợi (マイナスになる).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q15",
@@ -1294,7 +1842,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Khi gặp mặt trực tiếp thì thấy khác hẳn với hình dung ban đầu của tôi.",
-    "wasei_note": "イメージ = 印象 (ấn tượng/hình ảnh trong đầu). Cụm hay gặp: イメージチェンジ (thay đổi hình tượng)."
+    "wasei_note": "イメージ = 印象 (ấn tượng/hình ảnh trong đầu). Cụm hay gặp: イメージチェンジ (thay đổi hình tượng).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2016(M3)",
+    "freq_exams": "T12/2016(M3)"
   },
   {
     "id": "kata_p1_q16",
@@ -1323,7 +1875,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Việc bảo vệ sự riêng tư của người khác là phép lịch sự quan trọng.",
-    "wasei_note": "Cụm cố định: プライバシーを守る (bảo vệ đời tư) / プライバシーを侵害する (xâm phạm đời tư)."
+    "wasei_note": "Cụm cố định: プライバシーを守る (bảo vệ đời tư) / プライバシーを侵害する (xâm phạm đời tư).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q17",
@@ -1352,7 +1908,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Văn phòng công ty chúng tôi nằm ngay gần nhà ga.",
-    "wasei_note": "オフィス = 事務所(じむしょ). Ghép từ: オフィスビル (tòa nhà văn phòng)."
+    "wasei_note": "オフィス = 事務所(じむしょ). Ghép từ: オフィスビル (tòa nhà văn phòng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q18",
@@ -1381,7 +1941,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Môn thể thao này luật chơi đơn giản nên có thể nhớ ngay.",
-    "wasei_note": "Phân biệt: ルール (quy tắc bắt buộc ＝ 規則) vs マナー (phép lịch sự, tác phong cư xử)."
+    "wasei_note": "Phân biệt: ルール (quy tắc bắt buộc ＝ 規則) vs マナー (phép lịch sự, tác phong cư xử).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q19",
@@ -1410,7 +1974,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Vụ việc đó đã được các phương tiện truyền thông như tivi, báo chí đưa tin rầm rộ.",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật (Wasei-eigo): マス・コミュニケーション -> rút ngắn còn マスコミ!"
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật (Wasei-eigo): マス・コミュニケーション -> rút ngắn còn マスコミ!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q20",
@@ -1439,7 +2007,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Không gọi điện thoại trên tàu điện là phép lịch sự ở Nhật Bản.",
-    "wasei_note": "Hay gặp ở Đọc hiểu N3: 食事のマナー (phép lịch sự bàn ăn), マナーを守る (giữ phép lịch sự)."
+    "wasei_note": "Hay gặp ở Đọc hiểu N3: 食事のマナー (phép lịch sự bàn ăn), マナーを守る (giữ phép lịch sự).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2017(M3)",
+    "freq_exams": "T7/2017(M3)"
   },
   {
     "id": "kata_p1_q21",
@@ -1468,7 +2040,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Vì viết vội nên tôi đã làm nhầm lỗi tính toán.",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: mistake -> rút còn ミス! Hay dùng: ミスをする (mắc lỗi), ケアレスミス (lỗi bất cẩn)."
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: mistake -> rút còn ミス! Hay dùng: ミスをする (mắc lỗi), ケアレスミス (lỗi bất cẩn).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q22",
@@ -1497,7 +2073,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Hãy gửi lịch trình chuyến công tác tuần sau qua email cho tôi.",
-    "wasei_note": "Đồng nghĩa chuẩn N3: スケジュール ＝ 予定(よてい)."
+    "wasei_note": "Đồng nghĩa chuẩn N3: スケジュール ＝ 予定(よてい).",
+    "is_extra": false,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T12/2011(M4), T12/2017(M4), T12/2022(M4))",
+    "freq_exams": "T12/2011(M4), T12/2017(M4), T12/2022(M4)"
   },
   {
     "id": "kata_p1_q23",
@@ -1526,7 +2106,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Tôi không thể nhớ ra tiêu đề bộ phim đã xem hôm qua.",
-    "wasei_note": "Phân biệt bộ 3 phim/sách: タイトル (tựa đề), テーマ (chủ đề cốt lõi), ストーリー (cốt truyện)."
+    "wasei_note": "Phân biệt bộ 3 phim/sách: タイトル (tựa đề), テーマ (chủ đề cốt lõi), ストーリー (cốt truyện).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2026(M3)",
+    "freq_exams": "T7/2026(M3)"
   },
   {
     "id": "kata_p1_q24",
@@ -1555,7 +2139,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Chủ đề của cuộc họp hôm nay là 'Vấn đề môi trường'.",
-    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Thema) nên đọc là テーマ chứ không đọc theo tiếng Anh (theme)!"
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Thema) nên đọc là テーマ chứ không đọc theo tiếng Anh (theme)!",
+    "is_extra": false,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T12/2014(M3), T7/2023(M3))",
+    "freq_exams": "T12/2014(M3), T7/2023(M3)"
   },
   {
     "id": "kata_p1_q25",
@@ -1584,7 +2172,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Cuốn tiểu thuyết này cốt truyện hấp dẫn nên tôi đã đọc một mạch hết luôn.",
-    "wasei_note": "ストーリー ＝ 物語(ものがたり) / あらすじ (cốt truyện)."
+    "wasei_note": "ストーリー ＝ 物語(ものがたり) / あらすじ (cốt truyện).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q26",
@@ -1613,7 +2205,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Ca khúc mới của ca sĩ đó đang cực kỳ nổi tiếng trong giới trẻ.",
-    "wasei_note": "Cụm hay gặp: 大ヒットする (trở thành cú hit lớn), ヒット商品 (sản phẩm bán chạy đình đám)."
+    "wasei_note": "Cụm hay gặp: 大ヒットする (trở thành cú hit lớn), ヒット商品 (sản phẩm bán chạy đình đám).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q27",
@@ -1642,7 +2238,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Cô ấy đang mang một chiếc túi của thương hiệu nổi tiếng.",
-    "wasei_note": "ブランド品 (hàng hiệu). Đừng nhầm với グラウンド (sân vận động)!"
+    "wasei_note": "ブランド品 (hàng hiệu). Đừng nhầm với グラウンド (sân vận động)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q28",
@@ -1671,7 +2271,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Tôi đã thuê xe ở điểm du lịch và đi tham quan các danh thắng.",
-    "wasei_note": "Ghép từ phổ biến: レンタカー (xe thuê), レンタルショップ (tiệm cho thuê)."
+    "wasei_note": "Ghép từ phổ biến: レンタカー (xe thuê), レンタルショップ (tiệm cho thuê).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q29",
@@ -1700,7 +2304,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Chai nhựa hãy rửa sạch trước rồi mới đem đi tái chế nhé.",
-    "wasei_note": "Rất hay xuất hiện trong bài đọc hiểu phân loại rác ở Nhật: リサイクルショップ (tiệm đồ cũ tái sử dụng)."
+    "wasei_note": "Rất hay xuất hiện trong bài đọc hiểu phân loại rác ở Nhật: リサイクルショップ (tiệm đồ cũ tái sử dụng).",
+    "is_extra": false,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T7/2013(M3), T12/2015(M3))",
+    "freq_exams": "T7/2013(M3), T12/2015(M3)"
   },
   {
     "id": "kata_p1_q30",
@@ -1729,7 +2337,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Khi vứt chai nhựa, xin hãy bóc nhãn dán ra.",
-    "wasei_note": "⚠️ Rất hay lừa với レベル (trình độ)! Nhớ: ラ(la)ベル = nhãn dán, レ(le)ベル = trình độ."
+    "wasei_note": "⚠️ Rất hay lừa với レベル (trình độ)! Nhớ: ラ(la)ベル = nhãn dán, レ(le)ベル = trình độ.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q31",
@@ -1758,7 +2370,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Chị gái và tôi là hai kiểu người có tính cách hoàn toàn khác nhau.",
-    "wasei_note": "Vừa chỉ chủng loại máy móc, vừa chỉ 'gu / kiểu người' (好きなタイプ)."
+    "wasei_note": "Vừa chỉ chủng loại máy móc, vừa chỉ 'gu / kiểu người' (好きなタイプ).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q32",
@@ -1787,7 +2403,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Cô ấy cao ráo và có vóc dáng rất đẹp.",
-    "wasei_note": "⚠️ Sắc thái kiểu Nhật: スタイルがいい thường dùng để khen 'vóc dáng/body chuẩn đẹp'!"
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: スタイルがいい thường dùng để khen 'vóc dáng/body chuẩn đẹp'!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q33",
@@ -1816,7 +2436,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Vì đột nhiên có việc nên tôi đã hủy đặt phòng khách sạn.",
-    "wasei_note": "Từ Katakana cực hay thi N3! キャンセルする ＝ 取り消す / 中止する (bổ sung thay thế cho từ trùng #26)."
+    "wasei_note": "Từ Katakana cực hay thi N3! キャンセルする ＝ 取り消す / 中止する (bổ sung thay thế cho từ trùng #26).",
+    "is_extra": false,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T7/2010(M3), T7/2015(M3), T7/2022(M3))",
+    "freq_exams": "T7/2010(M3), T7/2015(M3), T7/2022(M3)"
   },
   {
     "id": "kata_p1_q34",
@@ -1845,7 +2469,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Máy tính bị nhiễm virus nên không chạy được nữa.",
-    "wasei_note": "Chú ý cách đọc tiếng Nhật là ウイルス (u-i-ru-su), không đọc 'vai-rớt'!"
+    "wasei_note": "Chú ý cách đọc tiếng Nhật là ウイルス (u-i-ru-su), không đọc 'vai-rớt'!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q35",
@@ -1874,7 +2502,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Ở nhà máy này, rô-bốt đang lắp ráp ô tô.",
-    "wasei_note": "Lưu ý có âm ngắt ッ: ロボット."
+    "wasei_note": "Lưu ý có âm ngắt ッ: ロボット.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q36",
@@ -1903,7 +2535,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Nghiên cứu sử dụng các nguồn năng lượng tự nhiên như mặt trời, gió đang tiến triển.",
-    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Energie) nên đọc エネルギー (không đọc theo tiếng Anh 'energy')!"
+    "wasei_note": "⚠️ Từ mượn tiếng ĐỨC (Energie) nên đọc エネルギー (không đọc theo tiếng Anh 'energy')!",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2018(M3)",
+    "freq_exams": "T7/2018(M3)"
   },
   {
     "id": "kata_p1_q37",
@@ -1932,7 +2568,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Gần đây nhiều người chụp ảnh bằng smartphone thay vì máy ảnh kỹ thuật số.",
-    "wasei_note": "Trái nghĩa với アナログ (analog: thủ công/tương tự). Rút gọn hay gặp: デジカメ (máy ảnh KTS)."
+    "wasei_note": "Trái nghĩa với アナログ (analog: thủ công/tương tự). Rút gọn hay gặp: デジカメ (máy ảnh KTS).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q38",
@@ -1961,7 +2601,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Để người ngồi phía sau cũng nghe được, xin hãy dùng micro khi nói.",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: microphone -> マイク! Đừng nhìn nhầm với バイク (xe máy)!"
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: microphone -> マイク! Đừng nhìn nhầm với バイク (xe máy)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p1_q39",
@@ -1990,7 +2634,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Vì đứa trẻ bất ngờ lao ra đường nên tôi cuống cuồng đạp phanh.",
-    "wasei_note": "Cụm cố định JLPT: ブレーキを踏む (đạp phanh ô tô) / ブレーキをかける (bóp/phanh lại)."
+    "wasei_note": "Cụm cố định JLPT: ブレーキを踏む (đạp phanh ô tô) / ブレーキをかける (bóp/phanh lại).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q1",
@@ -2019,7 +2667,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Sơn mới quét lên tường vẫn chưa khô nên xin đừng chạm vào.",
-    "wasei_note": "⚠️ Từ mượn tiếng HÀ LAN (pek)! Cực dễ bị lừa nếu chỉ đoán theo tiếng Anh. Cụm: ペンキを塗る (quét sơn)."
+    "wasei_note": "⚠️ Từ mượn tiếng HÀ LAN (pek)! Cực dễ bị lừa nếu chỉ đoán theo tiếng Anh. Cụm: ペンキを塗る (quét sơn).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q2",
@@ -2048,7 +2700,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Phía trước có khúc cua gấp nên hãy giảm tốc độ xuống.",
-    "wasei_note": "Đồng nghĩa N3 đã học: カーブしている ＝ 曲がっている."
+    "wasei_note": "Đồng nghĩa N3 đã học: カーブしている ＝ 曲がっている.",
+    "is_extra": false,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T12/2011(M3), T7/2014(M4))",
+    "freq_exams": "T12/2011(M3), T7/2014(M4)"
   },
   {
     "id": "kata_p2_q3",
@@ -2077,7 +2733,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Tôi đã gặp lại bạn cùng lớp thời cấp 3 sau 10 năm.",
-    "wasei_note": "クラス (lớp) + メート (bạn) ＝ 同級生(どうきゅうせい)."
+    "wasei_note": "クラス (lớp) + メート (bạn) ＝ 同級生(どうきゅうせい).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q4",
@@ -2106,7 +2766,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Hãy chia thành từng nhóm 4 người rồi cùng thảo luận nhé.",
-    "wasei_note": "Phân biệt: グループ (nhóm nói chung, thảo luận/du lịch) vs チーム (đội cùng thi đấu/phối hợp mục tiêu)."
+    "wasei_note": "Phân biệt: グループ (nhóm nói chung, thảo luận/du lịch) vs チーム (đội cùng thi đấu/phối hợp mục tiêu).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q5",
@@ -2135,7 +2799,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Đội bóng đá của chúng tôi đã vô địch giải đấu năm nay.",
-    "wasei_note": "Hay dùng: チームワーク (tinh thần đồng đội)."
+    "wasei_note": "Hay dùng: チームワーク (tinh thần đồng đội).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q6",
@@ -2164,7 +2832,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Anh ấy là một người chuyên nghiệp, xử lý hoàn hảo mọi công việc.",
-    "wasei_note": "Thường viết rút gọn là プロ (プロ野球: bóng chày chuyên nghiệp). Trái nghĩa hoàn toàn với アマチュア!"
+    "wasei_note": "Thường viết rút gọn là プロ (プロ野球: bóng chày chuyên nghiệp). Trái nghĩa hoàn toàn với アマチュア!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q7",
@@ -2193,7 +2865,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Cô ấy chỉ là người nghiệp dư nhưng chơi piano giỏi không kém gì dân chuyên nghiệp.",
-    "wasei_note": "Cặp trái nghĩa hay thi: プロ(フェッショナル) <-> アマチュア (hay viết tắt là アマ)."
+    "wasei_note": "Cặp trái nghĩa hay thi: プロ(フェッショナル) <-> アマチュア (hay viết tắt là アマ).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q8",
@@ -2222,7 +2898,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Để chuẩn bị cho giải chạy marathon, ngày nào tôi cũng tập luyện ở phòng gym.",
-    "wasei_note": "トレーニング ＝ 練習・訓練 (thường nhấn mạnh rèn luyện thể lực, cơ bắp)."
+    "wasei_note": "トレーニング ＝ 練習・訓練 (thường nhấn mạnh rèn luyện thể lực, cơ bắp).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2018(M4)",
+    "freq_exams": "T12/2018(M4)"
   },
   {
     "id": "kata_p2_q9",
@@ -2251,7 +2931,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Vì bị mỏi vai nên tôi đã đi nhờ chuyên viên mát xa cho.",
-    "wasei_note": "⚠️ Cẩn thận nhìn nhầm với メッセージ (tin nhắn)! マッサージ (mát xa) vs メッセージ (tin nhắn)."
+    "wasei_note": "⚠️ Cẩn thận nhìn nhầm với メッセージ (tin nhắn)! マッサージ (mát xa) vs メッセージ (tin nhắn).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q10",
@@ -2280,7 +2964,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Về chuyện xin việc, tôi đã nhận được lời khuyên tận tình từ tiền bối.",
-    "wasei_note": "Cụm cố định: アドバイスをする (khuyên) / アドバイスをもらう (nhận lời khuyên)."
+    "wasei_note": "Cụm cố định: アドバイスをする (khuyên) / アドバイスをもらう (nhận lời khuyên).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2016(M3)",
+    "freq_exams": "T7/2016(M3)"
   },
   {
     "id": "kata_p2_q11",
@@ -2309,7 +2997,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Về việc phát triển sản phẩm mới, có ý tưởng nào hay không?",
-    "wasei_note": "Đồng nghĩa chuẩn N3: アイディア (hoặc アイデア) ＝ 案(あん)."
+    "wasei_note": "Đồng nghĩa chuẩn N3: アイディア (hoặc アイデア) ＝ 案(あん).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q12",
@@ -2338,7 +3030,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Cô ấy luôn giữ vững thành tích đứng đầu lớp.",
-    "wasei_note": "トップ ＝ 一番 / 首位 (đứng nhất bảng)."
+    "wasei_note": "トップ ＝ 一番 / 首位 (đứng nhất bảng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q13",
@@ -2367,7 +3063,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Kể cả trên đường cao tốc, xin hãy chú ý đừng chạy quá tốc độ.",
-    "wasei_note": "Cụm tủ JLPT: スピードを出す (tăng tốc) / スピードを落とす (giảm tốc)."
+    "wasei_note": "Cụm tủ JLPT: スピードを出す (tăng tốc) / スピードを落とす (giảm tốc).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q14",
@@ -2396,7 +3096,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Tàu điện vào giờ cao điểm đi làm buổi sáng rất đông đúc.",
-    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: rush hour -> ラッシュ (hoặc ラッシュアワー: giờ cao điểm kẹt cứng)."
+    "wasei_note": "⚠️ Từ rút gọn kiểu Nhật: rush hour -> ラッシュ (hoặc ラッシュアワー: giờ cao điểm kẹt cứng).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q15",
@@ -2425,7 +3129,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Vì từ ga đến nhà xa nên tôi đi làm bằng xe máy.",
-    "wasei_note": "⚠️ CẢNH BÁO WASEI-EIGO KINH ĐIỂN: Trong tiếng Nhật, バイク là XE MÁY (không phải xe đạp 自転車)!"
+    "wasei_note": "⚠️ CẢNH BÁO WASEI-EIGO KINH ĐIỂN: Trong tiếng Nhật, バイク là XE MÁY (không phải xe đạp 自転車)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q16",
@@ -2454,7 +3162,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Khi đi xe máy nhất định phải đội mũ bảo hiểm nhé.",
-    "wasei_note": "Động từ đi kèm đồ đội đầu: ヘルメットをかぶる (đội mũ bảo hiểm)."
+    "wasei_note": "Động từ đi kèm đồ đội đầu: ヘルメットをかぶる (đội mũ bảo hiểm).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q17",
@@ -2483,7 +3195,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Trước khi đi ngủ đừng quên tháo kính áp tròng ra nhé.",
-    "wasei_note": "Thường gọi ngắn là コンタクト. Động từ: つける (đeo vào) / 外す(はずす: tháo ra)."
+    "wasei_note": "Thường gọi ngắn là コンタクト. Động từ: つける (đeo vào) / 外す(はずす: tháo ra).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q18",
@@ -2512,7 +3228,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Quả bóng đập trúng làm vỡ mất tấm kính cửa sổ lớp học.",
-    "wasei_note": "⚠️ Phân biệt: ガラス (chất liệu thủy tinh/cửa kính) khác グラス (cái cốc/ly uống nước)!"
+    "wasei_note": "⚠️ Phân biệt: ガラス (chất liệu thủy tinh/cửa kính) khác グラス (cái cốc/ly uống nước)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q19",
@@ -2541,7 +3261,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Chiếc hộp đựng này được làm bằng nhựa nhẹ và khó vỡ.",
-    "wasei_note": "Lưu ý chính tả chuẩn: プラスチック (chữ チ chứ KHÔNG phải チェ!)."
+    "wasei_note": "Lưu ý chính tả chuẩn: プラスチック (chữ チ chứ KHÔNG phải チェ!).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q20",
@@ -2570,7 +3294,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Những ngày trời đẹp, tôi phơi chăn đệm ngoài ban công.",
-    "wasei_note": "Cụm hay gặp ở Đọc hiểu/Nghe hiểu đời sống Nhật: ベランダに洗濯物を干す (phơi đồ ngoài ban công)."
+    "wasei_note": "Cụm hay gặp ở Đọc hiểu/Nghe hiểu đời sống Nhật: ベランダに洗濯物を干す (phơi đồ ngoài ban công).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q21",
@@ -2594,12 +3322,16 @@ const KATAKANA_N3_DATA = [
     "options_vi": [
       "Thương hiệu, nhãn hiệu nổi tiếng",
       "Thiết kế, kiểu dáng (ĐÚNG)",
-      "Kích cỡ, độ lớn",
+      "Kích cỡ, độ lớn (quần áo, giày, đồ)",
       "Nhãn dán, tem mác (trên chai/hàng)"
     ],
     "answer": 1,
     "sentence_vi": "Đôi giày này thiết kế sành điệu quá nên tôi đã mua ngay.",
-    "wasei_note": "Vừa là danh từ (thiết kế) vừa dùng デザインする (thiết kế ra)."
+    "wasei_note": "Vừa là danh từ (thiết kế) vừa dùng デザインする (thiết kế ra).",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2019(M3)",
+    "freq_exams": "T12/2019(M3)"
   },
   {
     "id": "kata_p2_q22",
@@ -2628,7 +3360,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Đợt giảm giá đồ mùa hè ở trung tâm thương mại đã bắt đầu.",
-    "wasei_note": "Hay gặp: タイムセール (giảm giá theo khung giờ), 年中セール (giảm giá quanh năm)."
+    "wasei_note": "Hay gặp: タイムセール (giảm giá theo khung giờ), 年中セール (giảm giá quanh năm).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q23",
@@ -2657,7 +3393,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Trong lúc con đi học, tôi làm việc bán thời gian ở siêu thị.",
-    "wasei_note": "⚠️ Sắc thái kiểu Nhật: パート thường chỉ việc làm thêm của các bà nội trợ/người lớn; アルバイト hay dùng cho sinh viên."
+    "wasei_note": "⚠️ Sắc thái kiểu Nhật: パート thường chỉ việc làm thêm của các bà nội trợ/người lớn; アルバイト hay dùng cho sinh viên.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q24",
@@ -2686,7 +3426,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Nửa đêm thấy đói bụng nên tôi đã ra cửa hàng tiện lợi gần nhà mua cơm hộp.",
-    "wasei_note": "⚠️ Từ rút gọn siêu phổ biến: コンビニエンスストア -> コンビニ!"
+    "wasei_note": "⚠️ Từ rút gọn siêu phổ biến: コンビニエンスストア -> コンビニ!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q25",
@@ -2715,7 +3459,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Giờ nghỉ trưa đông khách nên trước quầy tính tiền xếp hàng dài.",
-    "wasei_note": "⚠️ Rút gọn từ register -> レジ! Đừng nhầm với レシート (hóa đơn)!"
+    "wasei_note": "⚠️ Rút gọn từ register -> レジ! Đừng nhầm với レシート (hóa đơn)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q26",
@@ -2744,7 +3492,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Vì cần thiết khi đổi trả hàng nên xin đừng vứt hóa đơn đi nhé.",
-    "wasei_note": "Phân biệt: レシート (biên lai in tự động ở máy tính tiền) vs 領収書 (hóa đơn đỏ có ghi tên công ty)."
+    "wasei_note": "Phân biệt: レシート (biên lai in tự động ở máy tính tiền) vs 領収書 (hóa đơn đỏ có ghi tên công ty).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q27",
@@ -2773,7 +3525,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Những lúc bận không có thời gian nấu ăn, tôi hay ăn mì ăn liền.",
-    "wasei_note": "Hay ghép: インスタントコーヒー (cà phê hòa tan), インスタント食品 (thực phẩm ăn liền)."
+    "wasei_note": "Hay ghép: インスタントコーヒー (cà phê hòa tan), インスタント食品 (thực phẩm ăn liền).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q28",
@@ -2802,7 +3558,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Bữa sáng tôi luôn cố gắng ăn trái cây tươi.",
-    "wasei_note": "フルーツ ＝ 果物(くだもの). Hay gặp ở thực đơn: フルーツジュース, フルーツケーキ."
+    "wasei_note": "フルーツ ＝ 果物(くだもの). Hay gặp ở thực đơn: フルーツジュース, フルーツケーキ.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q29",
@@ -2831,7 +3591,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Nếu cứ chỉ toàn ăn thức ăn nhanh như hamburger thì không tốt cho cơ thể.",
-    "wasei_note": "Cũng hay viết là ファーストフード (đều hiểu là đồ ăn nhanh)."
+    "wasei_note": "Cũng hay viết là ファーストフード (đều hiểu là đồ ăn nhanh).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q30",
@@ -2860,7 +3624,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Tôi đã gọi kem làm món tráng miệng sau bữa ăn.",
-    "wasei_note": "Cẩn thận cách viết: デザート (tráng miệng) — có âm đục ザ và trường âm ー!"
+    "wasei_note": "Cẩn thận cách viết: デザート (tráng miệng) — có âm đục ザ và trường âm ー!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q31",
@@ -2889,7 +3657,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Gần đây nhờ có mạng Internet mà có thể mua sắm dễ dàng ngay tại nhà.",
-    "wasei_note": "Lưu ý có 2 trường âm ー: イン+ター+ネッ+ト (thường viết tắt là ネット)."
+    "wasei_note": "Lưu ý có 2 trường âm ー: イン+ター+ネッ+ト (thường viết tắt là ネット).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q32",
@@ -2918,7 +3690,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Chuông báo bắt đầu tiết học đã reo nên tôi vội vàng bước vào lớp.",
-    "wasei_note": "Cụm cố định: チャイムが鳴る (chuông reo), チャイムを押す (bấm chuông cửa)."
+    "wasei_note": "Cụm cố định: チャイムが鳴る (chuông reo), チャイムを押す (bấm chuông cửa).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q33",
@@ -2947,7 +3723,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Tôi nghe thấy loa thông báo của nhà ga nói rằng tàu đang bị trễ.",
-    "wasei_note": "アナウンス ＝ 案内放送 (thông báo bằng giọng nói qua loa). Nghề phát thanh viên là アナウンサー."
+    "wasei_note": "アナウンス ＝ 案内放送 (thông báo bằng giọng nói qua loa). Nghề phát thanh viên là アナウンサー.",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2025(M3)",
+    "freq_exams": "T12/2025(M3)"
   },
   {
     "id": "kata_p2_q34",
@@ -2976,7 +3756,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Tôi đã để lại lời nhắn vào hộp thư thoại trả lời tự động rồi.",
-    "wasei_note": "⚠️ Cặp bẫy mặt chữ: メッセージ (tin nhắn ＝ 伝言) vs マッサージ (mát xa)!"
+    "wasei_note": "⚠️ Cặp bẫy mặt chữ: メッセージ (tin nhắn ＝ 伝言) vs マッサージ (mát xa)!",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q35",
@@ -3005,7 +3789,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Tôi đã đến công ty du lịch lấy tờ rơi giới thiệu du lịch Kyoto về.",
-    "wasei_note": "Rất hay xuất hiện trong Đọc hiểu Mondai 4 (Thông tin du lịch/Trường học)!"
+    "wasei_note": "Rất hay xuất hiện trong Đọc hiểu Mondai 4 (Thông tin du lịch/Trường học)!",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2014(M3)",
+    "freq_exams": "T7/2014(M3)"
   },
   {
     "id": "kata_p2_q36",
@@ -3034,7 +3822,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 2,
     "sentence_vi": "Vì không đủ tiền mặt nên tôi đã thanh toán bằng thẻ tín dụng.",
-    "wasei_note": "Hay gặp: クレジットカード (thẻ tín dụng), ポイントカード (thẻ tích điểm), キャッシュカード (thẻ ATM)."
+    "wasei_note": "Hay gặp: クレジットカード (thẻ tín dụng), ポイントカード (thẻ tích điểm), キャッシュカード (thẻ ATM).",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q37",
@@ -3063,7 +3855,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 1,
     "sentence_vi": "Vận động viên giành chức vô địch đang trả lời phỏng vấn của đài truyền hình.",
-    "wasei_note": "Phân biệt: インタビュー (phỏng vấn báo chí/TV) vs 面接(めんせつ: phỏng vấn xin việc/nhập học)!"
+    "wasei_note": "Phân biệt: インタビュー (phỏng vấn báo chí/TV) vs 面接(めんせつ: phỏng vấn xin việc/nhập học)!",
+    "is_extra": false,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2011(M3)",
+    "freq_exams": "T7/2011(M3)"
   },
   {
     "id": "kata_p2_q38",
@@ -3092,7 +3888,11 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 0,
     "sentence_vi": "Để nâng cao dịch vụ, chúng tôi đã nhờ khách hàng hợp tác điền phiếu khảo sát.",
-    "wasei_note": "⚠️ Từ mượn tiếng PHÁP (enquête)! Cực kỳ hay thi JLPT N3: アンケートをとる / アンケートに答える."
+    "wasei_note": "⚠️ Từ mượn tiếng PHÁP (enquête)! Cực kỳ hay thi JLPT N3: アンケートをとる / アンケートに答える.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
   },
   {
     "id": "kata_p2_q39",
@@ -3121,6 +3921,406 @@ const KATAKANA_N3_DATA = [
     ],
     "answer": 3,
     "sentence_vi": "Xác suất mưa hôm nay là 80 phần trăm nên hãy mang ô theo nhé.",
-    "wasei_note": "Thường đi với tỷ lệ thời tiết (降水確率), giảm giá (20パーセント引き), thống kê biểu đồ Dokkai."
+    "wasei_note": "Thường đi với tỷ lệ thời tiết (降水確率), giảm giá (20パーセント引き), thống kê biểu đồ Dokkai.",
+    "is_extra": false,
+    "freq_count": 0,
+    "freq_badge": "",
+    "freq_exams": ""
+  },
+  {
+    "id": "kata_p3_q1",
+    "stt": 79,
+    "part": 3,
+    "num": 1,
+    "word": "キッチン",
+    "meaning_vi": "Nhà bếp, gian bếp",
+    "origin": "kitchen (Anh)",
+    "native_jp": "台所",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "この 新しい アパートは <u class=\"q-target\">（　　　）</u> が 広くて、料理が しやすい。",
+    "sentence_reverse_html": "この 新しい アパートは <u class=\"q-target\">キッチン</u> が 広くて、料理が しやすい。",
+    "sentence_tts": "この新しいアパートはキッチンが広くて、料理がしやすい。",
+    "options": [
+      "ベランダ",
+      "オフィス",
+      "キッチン",
+      "フロント"
+    ],
+    "options_vi": [
+      "Ban công",
+      "Văn phòng, công sở",
+      "Nhà bếp, gian bếp (ĐÚNG)",
+      "Quầy lễ tân (khách sạn)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Căn hộ mới này có nhà bếp rộng nên rất dễ nấu ăn.",
+    "wasei_note": "🔥 TRÙM 3 LẦN ĐỀ THẬT (M4: T12/2013, T12/2019, T12/2025)! Đồng nghĩa kinh điển JLPT N3: キッチン ＝ 台所(だいどころ).",
+    "is_extra": true,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T12/2013(M4), T12/2019(M4), T12/2025(M4))",
+    "freq_exams": "T12/2013(M4), T12/2019(M4), T12/2025(M4)"
+  },
+  {
+    "id": "kata_p3_q2",
+    "stt": 80,
+    "part": 3,
+    "num": 2,
+    "word": "サイズ",
+    "meaning_vi": "Kích cỡ, độ lớn (quần áo, giày, đồ)",
+    "origin": "size (Anh)",
+    "native_jp": "大きさ・寸法",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "すみません、この 靴の もう 一つ 大きい <u class=\"q-target\">（　　　）</u> は ありますか。",
+    "sentence_reverse_html": "すみません、この 靴の もう 一つ 大きい <u class=\"q-target\">サイズ</u> は ありますか。",
+    "sentence_tts": "すみません、この靴のもう一つ大きいサイズはありますか。",
+    "options": [
+      "タイプ",
+      "サイズ",
+      "スタイル",
+      "デザイン"
+    ],
+    "options_vi": [
+      "Kiểu, loại, mẫu (người/sản phẩm)",
+      "Kích cỡ, độ lớn (quần áo, giày, đồ) (ĐÚNG)",
+      "Dáng người, phong cách, kiểu dáng",
+      "Thiết kế, kiểu dáng"
+    ],
+    "answer": 1,
+    "sentence_vi": "Xin lỗi, đôi giày này có kích cỡ lớn hơn một số không ạ?",
+    "wasei_note": "🔥 TRÙM 3 LẦN ĐỀ THẬT (M4: T7/2013, T7/2023, T7/2026)! Đồng nghĩa kinh điển JLPT N3: サイズ ＝ 大きさ(おおきさ).",
+    "is_extra": true,
+    "freq_count": 3,
+    "freq_badge": "🔥 Đề thật 3x (T7/2013(M4), T7/2023(M4), T7/2026(M4))",
+    "freq_exams": "T7/2013(M4), T7/2023(M4), T7/2026(M4)"
+  },
+  {
+    "id": "kata_p3_q3",
+    "stt": 81,
+    "part": 3,
+    "num": 3,
+    "word": "チャレンジ",
+    "meaning_vi": "Thử thách, thử sức (một lĩnh vực mới)",
+    "origin": "challenge (Anh)",
+    "native_jp": "挑戦",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "苦手だった 外国語の 勉強に 今年こそ <u class=\"q-target\">（　　　）</u> しようと 思っている。",
+    "sentence_reverse_html": "苦手だった 外国語の 勉強に 今年こそ <u class=\"q-target\">チャレンジ</u> しようと 思っている。",
+    "sentence_tts": "苦手だった外国語の勉強に今年こそチャレンジしようと思っている。",
+    "options": [
+      "チャレンジ",
+      "キャンセル",
+      "アクセス",
+      "セット"
+    ],
+    "options_vi": [
+      "Thử thách, thử sức (một lĩnh vực mới) (ĐÚNG)",
+      "Hủy bỏ (đặt chỗ, lịch hẹn, đơn hàng)",
+      "Truy cập, đường đi tới",
+      "Bộ, combo; thiết lập, cài đặt (đồng hồ/máy)"
+    ],
+    "answer": 0,
+    "sentence_vi": "Năm nay tôi quyết tâm thử sức với việc học ngoại ngữ mà trước đây mình kém.",
+    "wasei_note": "🔥 Ra 2 lần M3 (T7/2016, T12/2021)! Cụm cố định JLPT N3: 〜にチャレンジする (thử thách / thử sức với ~).",
+    "is_extra": true,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T7/2016(M3), T12/2021(M3))",
+    "freq_exams": "T7/2016(M3), T12/2021(M3)"
+  },
+  {
+    "id": "kata_p3_q4",
+    "stt": 82,
+    "part": 3,
+    "num": 4,
+    "word": "ヒント",
+    "meaning_vi": "Gợi ý, manh mối",
+    "origin": "hint (Anh)",
+    "native_jp": "手がかり・助言",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "この 問題が 難しくて 解けないので、少し <u class=\"q-target\">（　　　）</u> を ください。",
+    "sentence_reverse_html": "この 問題が 難しくて 解けないので、少し <u class=\"q-target\">ヒント</u> を ください。",
+    "sentence_tts": "この問題が難しくて解けないので、少しヒントをください。",
+    "options": [
+      "アドバイス",
+      "タイトル",
+      "メッセージ",
+      "ヒント"
+    ],
+    "options_vi": [
+      "Lời khuyên, sự tư vấn",
+      "Tiêu đề, nhan đề (sách, phim, bài hát)",
+      "Tin nhắn, lời nhắn gửi",
+      "Gợi ý, manh mối (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Câu hỏi này khó quá không giải được nên hãy cho tôi chút gợi ý đi.",
+    "wasei_note": "🔥 Ra 2 lần M3 (T12/2012, T12/2023)! Phân biệt: ヒント (gợi ý giải đố/ý tưởng) vs アドバイス (lời khuyên cuộc sống/công việc).",
+    "is_extra": true,
+    "freq_count": 2,
+    "freq_badge": "🔥 Đề thật 2x (T12/2012(M3), T12/2023(M3))",
+    "freq_exams": "T12/2012(M3), T12/2023(M3)"
+  },
+  {
+    "id": "kata_p3_q5",
+    "stt": 83,
+    "part": 3,
+    "num": 5,
+    "word": "カタログ",
+    "meaning_vi": "Danh mục sản phẩm, quyển catalog",
+    "origin": "catalog (Anh)",
+    "native_jp": "商品目録",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "新しい 車を 買う ために、店で <u class=\"q-target\">（　　　）</u> を もらってきた。",
+    "sentence_reverse_html": "新しい 車を 買う ために、店で <u class=\"q-target\">カタログ</u> を もらってきた。",
+    "sentence_tts": "新しい車を買うために、店でカタログをもらってきた。",
+    "options": [
+      "レシート",
+      "メモ",
+      "カタログ",
+      "ラベル"
+    ],
+    "options_vi": [
+      "Hóa đơn, biên lai thanh toán",
+      "Ghi chú, tờ giấy note",
+      "Danh mục sản phẩm, quyển catalog (ĐÚNG)",
+      "Nhãn dán, tem mác (trên chai/hàng)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Để mua xe mới, tôi đã ra cửa hàng lấy quyển danh mục sản phẩm về.",
+    "wasei_note": "📌 Ra đề thật T7/2010 M3! Phân biệt: カタログ (danh mục giới thiệu sản phẩm để chọn mua) vs パンフレット (tờ gấp giới thiệu sự kiện/du lịch).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2010(M3)",
+    "freq_exams": "T7/2010(M3)"
+  },
+  {
+    "id": "kata_p3_q6",
+    "stt": 84,
+    "part": 3,
+    "num": 6,
+    "word": "カバー",
+    "meaning_vi": "Vỏ bọc, bìa bọc; bù đắp, hỗ trợ",
+    "origin": "cover (Anh)",
+    "native_jp": "覆い・補うこと",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "本が 汚れないように、紙の <u class=\"q-target\">（　　　）</u> を つけて 読んでいる。",
+    "sentence_reverse_html": "本が 汚れないように、紙の <u class=\"q-target\">カバー</u> を つけて 読んでいる。",
+    "sentence_tts": "本が汚れないように、紙のカバーをつけて読んでいる。",
+    "options": [
+      "ケース",
+      "カバー",
+      "ラベル",
+      "シート"
+    ],
+    "options_vi": [
+      "Hộp đựng, trường hợp (case)",
+      "Vỏ bọc, bìa bọc; bù đắp, hỗ trợ (ĐÚNG)",
+      "Nhãn dán, tem mác (trên chai/hàng)",
+      "Tấm trải, ghế ngồi, bảng tính"
+    ],
+    "answer": 1,
+    "sentence_vi": "Để sách không bị bẩn, tôi bọc bìa giấy vào rồi mới đọc.",
+    "wasei_note": "📌 Ra đề thật T7/2012 M3! Nghĩa hay thi N3: 本のカバー (bìa bọc sách), 失敗をカバーする (bù đắp/đỡ đần lỗi sai).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2012(M3)",
+    "freq_exams": "T7/2012(M3)"
+  },
+  {
+    "id": "kata_p3_q7",
+    "stt": 85,
+    "part": 3,
+    "num": 7,
+    "word": "グラウンド",
+    "meaning_vi": "Sân vận động, bãi tập thể thao",
+    "origin": "ground (Anh)",
+    "native_jp": "運動場",
+    "category": "Giao thông & Thể thao",
+    "sentence_html": "雨で <u class=\"q-target\">（　　　）</u> が ぬれているので、今日の サッカーの 練習は 中止になった。",
+    "sentence_reverse_html": "雨で <u class=\"q-target\">グラウンド</u> が ぬれているので、今日の サッカーの 練習は 中止になった。",
+    "sentence_tts": "雨でグラウンドがぬれているので、今日のサッカーの練習は中止になった。",
+    "options": [
+      "グラウンド",
+      "コース",
+      "コート",
+      "ホーム"
+    ],
+    "options_vi": [
+      "Sân vận động, bãi tập thể thao (ĐÚNG)",
+      "Khóa học, lộ trình, suất ăn theo trình tự",
+      "Sân (tennis/bóng rổ), áo khoác dài",
+      "Sân ga tàu điện"
+    ],
+    "answer": 0,
+    "sentence_vi": "Vì mưa làm sân tập bị ướt nên buổi tập bóng đá hôm nay bị hủy.",
+    "wasei_note": "📌 Ra đề thật T7/2022 M4! Đồng nghĩa chuẩn N3: グラウンド ＝ 運動場(うんどうじょう). Đừng nhầm với ブランド (thương hiệu)!",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2022(M4)",
+    "freq_exams": "T7/2022(M4)"
+  },
+  {
+    "id": "kata_p3_q8",
+    "stt": 86,
+    "part": 3,
+    "num": 8,
+    "word": "セット",
+    "meaning_vi": "Bộ, combo; thiết lập, cài đặt (đồng hồ/máy)",
+    "origin": "set (Anh)",
+    "native_jp": "一組・設定",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "この 店では、コーヒーと ケーキを <u class=\"q-target\">（　　　）</u> で 注文すると 安くなる。",
+    "sentence_reverse_html": "この 店では、コーヒーと ケーキを <u class=\"q-target\">セット</u> で 注文すると 安くなる。",
+    "sentence_tts": "この店では、コーヒーとケーキをセットで注文すると安くなる。",
+    "options": [
+      "コース",
+      "オーダー",
+      "セール",
+      "セット"
+    ],
+    "options_vi": [
+      "Khóa học, lộ trình, suất ăn theo trình tự",
+      "Đặt hàng, gọi món",
+      "Đợt giảm giá, xả hàng (sale)",
+      "Bộ, combo; thiết lập, cài đặt (đồng hồ/máy) (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Ở quán này, nếu gọi cà phê và bánh ngọt theo bộ (combo) sẽ rẻ hơn.",
+    "wasei_note": "📌 Ra đề thật T7/2012 M3! Dùng rất rộng: ランチセット (suất trưa combo), 目覚ましをセットする (đặt báo thức).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2012(M3)",
+    "freq_exams": "T7/2012(M3)"
+  },
+  {
+    "id": "kata_p3_q9",
+    "stt": 87,
+    "part": 3,
+    "num": 9,
+    "word": "ノック",
+    "meaning_vi": "Gõ cửa",
+    "origin": "knock (Anh)",
+    "native_jp": "戸をたたくこと",
+    "category": "Công việc & Giao tiếp",
+    "sentence_html": "社長室に 入る 前に、ドアを 3回 <u class=\"q-target\">（　　　）</u> した。",
+    "sentence_reverse_html": "社長室に 入る 前に、ドアを 3回 <u class=\"q-target\">ノック</u> した。",
+    "sentence_tts": "社長室に入る前に、ドアを3回ノックした。",
+    "options": [
+      "ストップ",
+      "チェック",
+      "ノック",
+      "クリック"
+    ],
+    "options_vi": [
+      "Dừng lại, ngưng",
+      "Kiểm tra, rà soát",
+      "Gõ cửa (ĐÚNG)",
+      "Nhấp chuột (click)"
+    ],
+    "answer": 2,
+    "sentence_vi": "Trước khi bước vào phòng giám đốc, tôi đã gõ cửa 3 lần.",
+    "wasei_note": "📌 Ra đề thật T7/2019 M3! Cụm cố định: ドアをノックする (gõ cửa).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T7/2019(M3)",
+    "freq_exams": "T7/2019(M3)"
+  },
+  {
+    "id": "kata_p3_q10",
+    "stt": 88,
+    "part": 3,
+    "num": 10,
+    "word": "バケツ",
+    "meaning_vi": "Cái xô, thùng đựng nước",
+    "origin": "bucket (Anh)",
+    "native_jp": "手おけ・水桶",
+    "category": "Công nghệ & Đời sống",
+    "sentence_html": "掃除を する ために、<u class=\"q-target\">（　　　）</u> に 水を たくさん 入れた。",
+    "sentence_reverse_html": "掃除を する ために、<u class=\"q-target\">バケツ</u> に 水を たくさん 入れた。",
+    "sentence_tts": "掃除をするために、バケツに水をたくさん入れた。",
+    "options": [
+      "ケース",
+      "バケツ",
+      "カップ",
+      "ポケット"
+    ],
+    "options_vi": [
+      "Hộp đựng, trường hợp (case)",
+      "Cái xô, thùng đựng nước (ĐÚNG)",
+      "Cái cốc, tách",
+      "Túi áo, túi quần"
+    ],
+    "answer": 1,
+    "sentence_vi": "Để dọn dẹp, tôi đã đổ nhiều nước vào xô.",
+    "wasei_note": "📌 Ra đề thật T12/2018 M3! Lưu ý cách đọc kiểu Nhật từ bucket → バケツ (đuôi ツ, không có ッ).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2018(M3)",
+    "freq_exams": "T12/2018(M3)"
+  },
+  {
+    "id": "kata_p3_q11",
+    "stt": 89,
+    "part": 3,
+    "num": 11,
+    "word": "ベスト",
+    "meaning_vi": "Tốt nhất, tối ưu nhất; áo ghi-lê",
+    "origin": "best (Anh)",
+    "native_jp": "最もよい・最善",
+    "category": "Đánh giá & Trạng thái",
+    "sentence_html": "いろいろ 考えた 結果、この 方法が <u class=\"q-target\">（　　　）</u> だと 思います。",
+    "sentence_reverse_html": "いろいろ 考えた 結果、この 方法が <u class=\"q-target\">ベスト</u> だと 思います。",
+    "sentence_tts": "いろいろ考えた結果、この方法がベストだと思います。",
+    "options": [
+      "ベスト",
+      "トップ",
+      "プラス",
+      "ベテラン"
+    ],
+    "options_vi": [
+      "Tốt nhất, tối ưu nhất; áo ghi-lê (ĐÚNG)",
+      "Đứng đầu, vị trí số 1, đỉnh",
+      "Cộng, dương, mặt tích cực",
+      "Người lão luyện, kỳ cựu"
+    ],
+    "answer": 0,
+    "sentence_vi": "Sau khi suy nghĩ nhiều, tôi thấy phương pháp này là tốt nhất.",
+    "wasei_note": "📌 Ra đề thật T12/2023 M4! Đồng nghĩa chuẩn N3: ベスト ＝ 最もよい(もっともよい). Cụm hay gặp: ベストを尽くす (cố hết sức).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2023(M4)",
+    "freq_exams": "T12/2023(M4)"
+  },
+  {
+    "id": "kata_p3_q12",
+    "stt": 90,
+    "part": 3,
+    "num": 12,
+    "word": "レシピ",
+    "meaning_vi": "Công thức nấu ăn",
+    "origin": "recipe (Anh)",
+    "native_jp": "料理の作り方",
+    "category": "Mua sắm & Ẩm thực",
+    "sentence_html": "インターネットで 見つけた <u class=\"q-target\">（　　　）</u> を 見ながら、カレーを 作った。",
+    "sentence_reverse_html": "インターネットで 見つけた <u class=\"q-target\">レシピ</u> を 見ながら、カレーを 作った。",
+    "sentence_tts": "インターネットで見つけたレシピを見ながら、カレーを作った。",
+    "options": [
+      "メニュー",
+      "リスト",
+      "マニュアル",
+      "レシピ"
+    ],
+    "options_vi": [
+      "Thực đơn, bảng chọn",
+      "Danh sách",
+      "Sách hướng dẫn sử dụng, quy trình mẫu",
+      "Công thức nấu ăn (ĐÚNG)"
+    ],
+    "answer": 3,
+    "sentence_vi": "Tôi vừa nhìn công thức tìm trên mạng vừa nấu món cà ri.",
+    "wasei_note": "📌 Ra đề thật T12/2022 M3! Phân biệt: レシピ (công thức cách nấu ăn) vs メニュー (thực đơn gọi món ở quán).",
+    "is_extra": true,
+    "freq_count": 1,
+    "freq_badge": "📌 Đề thật T12/2022(M3)",
+    "freq_exams": "T12/2022(M3)"
   }
 ];
