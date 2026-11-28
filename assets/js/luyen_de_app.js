@@ -1,6 +1,6 @@
 // ==========================================
-// LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE (10 BANKS • 2,086 Qs)
-// Supports: [kanji240: 352 + 3 M2 Trap Tables] | [m3_191: 191] | [syn80: 270] | [kata78: 90] | [hira35: 35] | [m5_107: 239] | [gp_m1: 273] | [gp_star: 99] | [gp_m3: 141] | [pastN3: 291 + 105 Mock]
+// LUYỆN ĐỀ N3 — MULTI-BANK & ANTI-ROTE ENGINE (10 BANKS • 2,693 Qs)
+// Supports: [kanji240: 352 + 3 M2 Trap Tables] | [m3_191: 191] | [syn80: 270] | [kata78: 90] | [hira35: 35] | [m5_107: 239] | [gp_m1: 552] | [gp_star: 346] | [gp_m3: 222] | [pastN3: 291 + 105 Mock]
 // ==========================================
 
 const LS_HUB_SRS_KEY = 'n3_srs_mistakes';
@@ -130,7 +130,7 @@ const BANK_CONFIGS = {
     },
     gp_m1: {
         id: 'gp_m1',
-        name: 'Ngữ Pháp M1 Thực Chiến (Taisaku)',
+        name: 'Ngữ Pháp M1 Thực Chiến (552 Câu Taisaku)',
         keys: {
             mistakes: 'n3_gp_m1_mistakes',
             history: 'n3_gp_m1_history',
@@ -144,12 +144,18 @@ const BANK_CONFIGS = {
             { session: 3, shift: 'Ca 3 • Chuyên Đề Trợ Từ', icon: 'fa-link', title: 'Ca 3 — 48 Câu Bẫy Trợ Từ Đề Thật', desc: '21 nhóm trợ từ (で/に/まで/までに/も/のを・のが・のは/より/しか/なんか/ほど...)', count: 48, timeLbl: '28p' },
             { session: 4, shift: 'Ca 4 • Trợ Từ+X & 4 Group', icon: 'fa-cubes', title: 'Ca 4 — 47 Câu Trợ Từ+X & 4 Họ Dễ Nhầm', desc: '14 câu Trợ từ+X (にとって/に対して/によって/において) + 33 câu 4 Group よう/こと/ばかり/ところ', count: 47, timeLbl: '27p' },
             { session: 5, shift: 'Ca 5 • Ngữ Pháp N3 Đơn Lẻ', icon: 'fa-star', title: 'Ca 5 — 61 Câu Ngữ Pháp N3 Đơn Lẻ Đề Thật', desc: '22 mẫu đơn lẻ cốt lõi & hậu tố Vます (らしい/はずがない/たびに/うちに/せいで/だす/直す...)', count: 61, timeLbl: '35p' },
-            { session: 6, shift: 'Ca 6 • Phó Từ Hô Ứng', icon: 'fa-bolt', title: 'Ca 6 — 17 Câu Phó Từ Đi Cặp Ngữ Pháp', desc: 'Phó từ bắt cặp đuôi câu (いつの間にか, たしかに, 次第に, ついに, 少しも～ない, 必ずしも...)', count: 17, timeLbl: '10p' }
+            { session: 6, shift: 'Ca 6 • Phó Từ Hô Ứng', icon: 'fa-bolt', title: 'Ca 6 — 17 Câu Phó Từ Đi Cặp Ngữ Pháp', desc: 'Phó từ bắt cặp đuôi câu (いつの間にか, たしかに, 次第に, ついに, 少しも～ない, 必ずしも...)', count: 17, timeLbl: '10p' },
+            { session: 7, shift: '🔮 Ca 7 • Dự Đoán NP Nền', icon: 'fa-wand-magic-sparkles', title: 'Ca 7 Mới — 48 Câu Dự Đoán Ngữ Pháp Nền', desc: 'Taisaku 予想問題 (Ch2-I.1): Phản xạ 55 mẫu nền hay bẫy thể điều kiện, bị động, khả năng, ずに...', count: 48, timeLbl: '28p', isPred: true },
+            { session: 8, shift: '🔮 Ca 8 • Dự Đoán Kính Ngữ', icon: 'fa-crown', title: 'Ca 8 Mới — 42 Câu Dự Đoán Kính Ngữ • Sai Khiến • Cho Nhận', desc: 'Taisaku 予想問題 (Ch2-I.2): Chuyên sâu phân biệt 尊敬語/謙譲語, させられる & ていただく/てくださる', count: 42, timeLbl: '25p', isPred: true },
+            { session: 9, shift: '🔮 Ca 9 • Dự Đoán Trợ Từ & +X', icon: 'fa-link', title: 'Ca 9 Mới — 59 Câu Dự Đoán Trợ Từ & Trợ Từ+X', desc: 'Taisaku 予想問題 (Ch2-I.3 & II.1): 14 câu Trợ từ + 45 câu Trợ từ+X (にもとづいて/にわたって/にとって...)', count: 59, timeLbl: '34p', isPred: true },
+            { session: 10, shift: '🔮 Ca 10 • Dự Đoán 4 Group', icon: 'fa-cubes', title: 'Ca 10 Mới — 52 Câu Dự Đoán 4 Group Dễ Nhầm', desc: 'Taisaku 予想問題 (Ch2-II.2): Ép phản xạ chọn chuẩn よう / こと / ばかり / ところ trong ngữ cảnh thật', count: 52, timeLbl: '30p', isPred: true },
+            { session: 11, shift: '🔮 Ca 11 • Dự Đoán Đơn Lẻ', icon: 'fa-star', title: 'Ca 11 Mới — 68 Câu Dự Đoán Ngữ Pháp N3 Đơn Lẻ', desc: 'Taisaku 予想問題 (Ch2-II.3): 68 câu dự đoán trọng tâm 22 mẫu N3 & hậu tố Vます hay gặp nhất', count: 68, timeLbl: '40p', isPred: true },
+            { session: 12, shift: '🔮 Ca 12 • Dự Đoán Phó Từ', icon: 'fa-bolt', title: 'Ca 12 Mới — 10 Câu Dự Đoán Phó Từ Hô Ứng', desc: 'Taisaku 予想問題 (Ch2-II.4): Chốt hạ 10 câu bẫy phó từ bắt cặp đuôi câu (まるで/せっかく/決して...)', count: 10, timeLbl: '6p', isPred: true }
         ]
     },
     gp_star: {
         id: 'gp_star',
-        name: 'Sắp Xếp Dấu Sao ★ (Taisaku M2)',
+        name: 'Sắp Xếp Dấu Sao ★ (346 Câu Taisaku M2)',
         keys: {
             mistakes: 'n3_gp_star_mistakes',
             history: 'n3_gp_star_history',
@@ -160,12 +166,17 @@ const BANK_CONFIGS = {
         shifts: [
             { session: 1, shift: 'Ca 1 • Công Thức N/V/A', icon: 'fa-diagram-project', title: 'Ca 1 — 31 Câu ★ Kết Hợp Danh–Động–Tính', desc: 'Áp dụng bảng [Trợ từ+X]+の+N, [Trợ từ+X辞書形]+N, V普通形+N, AというB (Đề thật 2010–2020)', count: 31, timeLbl: '25p' },
             { session: 2, shift: 'Ca 2 • Công Thức Trợ Từ', icon: 'fa-link', title: 'Ca 2 — 22 Câu ★ Kết Hợp Với Trợ Từ', desc: 'Áp dụng Trợ từ+の+N (に→への), のは/のが/のを/のに, 2 trợ từ liền nhau (Đề thật 2010–2020)', count: 22, timeLbl: '18p' },
-            { session: 3, shift: 'Ca 3 • Tổng Hợp Thực Chiến', icon: 'fa-trophy', title: 'Ca 3 — 46 Câu ★ Tổng Hợp Đề Thật N3', desc: 'Phối hợp đa cấu trúc dấu sao ★ đề thi thật JLPT N3 2010–2020 (đủ 4 mảnh ghép & công thức)', count: 46, timeLbl: '37p' }
+            { session: 3, shift: 'Ca 3 • Tổng Hợp Đề Thật', icon: 'fa-trophy', title: 'Ca 3 — 46 Câu ★ Tổng Hợp Đề Thật N3', desc: 'Phối hợp đa cấu trúc dấu sao ★ đề thi thật JLPT N3 2010–2020 (đủ 4 mảnh ghép & công thức)', count: 46, timeLbl: '37p' },
+            { session: 4, shift: '🔮 Ca 4 • Dự Đoán N/V/A & Trợ Từ', icon: 'fa-wand-magic-sparkles', title: 'Ca 4 Mới — 53 Câu ★ Dự Đoán Theo Công Thức', desc: 'Taisaku 予想問題 (Ch3-I): 41 câu ★ Kết hợp N/V/A + 12 câu ★ Kết hợp Trợ từ (khóa cặp siêu tốc)', count: 53, timeLbl: '42p', isPred: true },
+            { session: 5, shift: '🔮 Ca 5 • Dự Đoán Tổng Hợp P1', icon: 'fa-star', title: 'Ca 5 Mới — 49 Câu ★ Dự Đoán Tổng Hợp #1–#49', desc: 'Taisaku 予想問題 (Ch3-II phần 1/4): Thực chiến ghép 4 mảnh có giải thích chiến thuật khóa cặp', count: 49, timeLbl: '39p', isPred: true },
+            { session: 6, shift: '🔮 Ca 6 • Dự Đoán Tổng Hợp P2', icon: 'fa-star', title: 'Ca 6 Mới — 49 Câu ★ Dự Đoán Tổng Hợp #50–#98', desc: 'Taisaku 予想問題 (Ch3-II phần 2/4): Nâng phản xạ xếp xương câu N3 chuẩn tốc độ phòng thi', count: 49, timeLbl: '39p', isPred: true },
+            { session: 7, shift: '🔮 Ca 7 • Dự Đoán Tổng Hợp P3', icon: 'fa-star', title: 'Ca 7 Mới — 48 Câu ★ Dự Đoán Tổng Hợp #99–#146', desc: 'Taisaku 予想問題 (Ch3-II phần 3/4): Xử lý gọn các mẫu kính ngữ, sai khiến & mệnh đề quan hệ dài', count: 48, timeLbl: '38p', isPred: true },
+            { session: 8, shift: '🔮 Ca 8 • Dự Đoán Tổng Hợp P4', icon: 'fa-trophy', title: 'Ca 8 Mới — 48 Câu ★ Dự Đoán Tổng Hợp #147–#194', desc: 'Taisaku 予想問題 (Ch3-II phần 4/4): Chốt hạ trọn bộ 247 câu ★ dự đoán Taisaku', count: 48, timeLbl: '38p', isPred: true }
         ]
     },
     gp_m3: {
         id: 'gp_m3',
-        name: 'Ngữ Pháp Đoạn Văn M3 (Taisaku)',
+        name: 'Ngữ Pháp Đoạn Văn M3 (222 Câu • 63 Bài)',
         keys: {
             mistakes: 'n3_gp_m3_mistakes',
             history: 'n3_gp_m3_history',
@@ -176,7 +187,9 @@ const BANK_CONFIGS = {
         shifts: [
             { session: 1, shift: 'Ca 1 • Liên Từ & Chỉ Thị Từ', icon: 'fa-arrows-left-right', title: 'Ca 1 — 27 Đoạn Ngắn Liên Từ & Chỉ Thị Từ (47 Câu)', desc: 'Split-Screen rèn phản xạ 45 Liên từ (ところが/そこで/つまり...) & Chỉ thị từ こ・そ・あ (39 LT + 8 CTT)', count: 47, timeLbl: '40p' },
             { session: 2, shift: 'Ca 2 • Đục Lỗ Đề Thật P1', icon: 'fa-file-lines', title: 'Ca 2 — 10 Bài Văn Mondai 3 Đề Thật #1–#10 (50 Câu)', desc: 'Đọc mạch văn bên trái & điền 5 chỗ trống/bài — đề thi thật 2010–2015 có tóm tắt dịch Việt', count: 50, timeLbl: '45p' },
-            { session: 3, shift: 'Ca 3 • Đục Lỗ Đề Thật P2', icon: 'fa-file-lines', title: 'Ca 3 — 9 Bài Văn Mondai 3 Đề Thật #11–#19 (44 Câu)', desc: 'Đọc mạch văn bên trái & điền 4–5 chỗ trống/bài — đề thi thật 2015–2020 có tóm tắt dịch Việt', count: 44, timeLbl: '40p' }
+            { session: 3, shift: 'Ca 3 • Đục Lỗ Đề Thật P2', icon: 'fa-file-lines', title: 'Ca 3 — 9 Bài Văn Mondai 3 Đề Thật #11–#19 (44 Câu)', desc: 'Đọc mạch văn bên trái & điền 4–5 chỗ trống/bài — đề thi thật 2015–2020 có tóm tắt dịch Việt', count: 44, timeLbl: '40p' },
+            { session: 4, shift: '🔮 Ca 4 • Dự Đoán Đục Lỗ P1', icon: 'fa-wand-magic-sparkles', title: 'Ca 4 Mới — 9 Bài Văn Dự Đoán #1–#9 (41 Câu)', desc: 'Taisaku 予想問題 (Ch4-III phần 1/2): 9 bài đọc đục lỗ Split-Screen tự tô sáng chỗ trống + tóm tắt Việt', count: 41, timeLbl: '38p', isPred: true },
+            { session: 5, shift: '🔮 Ca 5 • Dự Đoán Đục Lỗ P2', icon: 'fa-trophy', title: 'Ca 5 Mới — 8 Bài Văn Dự Đoán #10–#17 (40 Câu)', desc: 'Taisaku 予想問題 (Ch4-III phần 2/2): Chốt hạ 8 bài đục lỗ dự đoán cuối sách Taisaku (5 câu/bài)', count: 40, timeLbl: '38p', isPred: true }
         ]
     },
     pastN3: {
@@ -459,10 +472,10 @@ function applyBankUI() {
 
     document.getElementById('nav-lobby-lbl').textContent = isPast
         ? 'Sảnh 7 Đề Thi & Thi Thử'
-        : (isGpM1 ? 'Sảnh Ngữ Pháp M1 (6 Ca)' : (isGpStar ? 'Sảnh Dấu Sao ★ (3 Ca)' : (isGpM3 ? 'Sảnh Đoạn Văn M3 (3 Ca)' : (isM3 ? 'Sảnh Ngữ Cảnh M3 (4 Ca)' : (isM5 ? 'Sảnh Cách Dùng M5 (6 Ca)' : (isHira ? 'Sảnh Hiragana (2 Ca)' : (isKata ? 'Sảnh Katakana (3 Ca)' : (isSyn ? 'Sảnh Đồng Nghĩa (7 Ca)' : 'Sảnh Kanji (6 Ca)'))))))));
+        : (isGpM1 ? 'Sảnh Ngữ Pháp M1 (12 Ca)' : (isGpStar ? 'Sảnh Dấu Sao ★ (8 Ca)' : (isGpM3 ? 'Sảnh Đoạn Văn M3 (5 Ca)' : (isM3 ? 'Sảnh Ngữ Cảnh M3 (4 Ca)' : (isM5 ? 'Sảnh Cách Dùng M5 (6 Ca)' : (isHira ? 'Sảnh Hiragana (2 Ca)' : (isKata ? 'Sảnh Katakana (3 Ca)' : (isSyn ? 'Sảnh Đồng Nghĩa (7 Ca)' : 'Sảnh Kanji (6 Ca)'))))))));
     document.getElementById('sidebar-sprint-heading').textContent = isPast
         ? 'Lịch Thực Chiến 4 Đề Thật + 3 Đề 20p'
-        : (isGpM1 ? 'Lộ Trình 6 Ca Ngữ Pháp M1' : (isGpStar ? 'Lộ Trình 3 Ca Dấu Sao ★' : (isGpM3 ? 'Lộ Trình 3 Ca Đoạn Văn M3' : (isM3 ? 'Lịch Cày 191 Từ Mondai 3' : (isM5 ? 'Lịch Cày 239 Từ Mondai 5' : (isHira ? 'Lịch Cày 35 Hiragana & Từ Láy' : (isKata ? 'Lịch Cày 90 Từ Katakana N3' : (isSyn ? 'Lịch Cày 270 Câu Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 352 Kanji'))))))));
+        : (isGpM1 ? 'Lộ Trình 12 Ca Ngữ Pháp M1 (552c)' : (isGpStar ? 'Lộ Trình 8 Ca Dấu Sao ★ (346c)' : (isGpM3 ? 'Lộ Trình 5 Ca Đoạn Văn M3 (63 bài)' : (isM3 ? 'Lịch Cày 191 Từ Mondai 3' : (isM5 ? 'Lịch Cày 239 Từ Mondai 5' : (isHira ? 'Lịch Cày 35 Hiragana & Từ Láy' : (isKata ? 'Lịch Cày 90 Từ Katakana N3' : (isSyn ? 'Lịch Cày 270 Câu Đồng Nghĩa' : 'Lịch Cày Siêu Tốc 352 Kanji'))))))));
 
     // Update KPI labels
     document.getElementById('kpi-m1-lbl').textContent = isPast
@@ -488,11 +501,11 @@ function applyBankUI() {
     document.getElementById('sessions-panel-title').innerHTML = isPast
         ? '<i class="fa-solid fa-scroll" style="color: var(--primary);"></i> Kho 4 Đề Thi Thật JLPT N3 & 3 Đề Thi Thử Tốc Độ Từ Vựng Taisaku (20p)'
         : (isGpM1
-            ? '<i class="fa-solid fa-book-open" style="color: var(--primary);"></i> Lộ Trình 6 Chuyên Đề — 273 Câu Ngữ Pháp M1 (Taisaku Đề Thật + Kính Ngữ)'
+            ? '<i class="fa-solid fa-book-open" style="color: var(--primary);"></i> Lộ Trình 12 Ca — 552 Câu Ngữ Pháp M1 (273 Đề Thật + 279 Dự Đoán Taisaku)'
             : (isGpStar
-                ? '<i class="fa-solid fa-star" style="color: var(--hub-warn-text);"></i> Lộ Trình 3 Chuyên Đề — 99 Câu Sắp Xếp Dấu Sao ★ Theo Công Thức (Taisaku M2)'
+                ? '<i class="fa-solid fa-star" style="color: var(--hub-warn-text);"></i> Lộ Trình 8 Ca — 346 Câu Sắp Xếp Dấu Sao ★ (99 Đề Thật + 247 Dự Đoán Taisaku)'
                 : (isGpM3
-                    ? '<i class="fa-solid fa-file-lines" style="color: var(--primary);"></i> Lộ Trình 3 Ca Split-Screen — 46 Bài Văn / 141 Câu Ngữ Pháp Đoạn Văn M3'
+                    ? '<i class="fa-solid fa-file-lines" style="color: var(--primary);"></i> Lộ Trình 5 Ca Split-Screen — 63 Bài Văn / 222 Câu Đoạn Văn M3 (46 Đề Thật + 17 Dự Đoán)'
                     : (isM3
                         ? '<i class="fa-solid fa-puzzle-piece" style="color: var(--primary);"></i> Lộ Trình 2 Tầng — 191 Từ Ngữ Cảnh Mondai 3 (⭐ Trọng Tâm 97 + 🛡️ Phủ Kín 94)'
                         : (isM5
@@ -508,11 +521,11 @@ function applyBankUI() {
     document.getElementById('custom-panel-title').innerHTML = isPast
         ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Luyện Chuyên Sâu Theo Dạng Bài (Dấu ★ • Cách dùng từ • Đọc hiểu)'
         : (isGpM1
-            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Lọc Theo Độ Khó (273 Câu NP M1)'
+            ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Lọc Đề Thật & Dự Đoán (552 Câu NP M1)'
             : (isGpStar
-                ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 99 Câu Dấu Sao ★'
+                ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 346 Câu Dấu Sao ★'
                 : (isGpM3
-                    ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh Theo Chuyên Đề M3 (Liên Từ • Chỉ Thị Từ • Đục Lỗ)'
+                    ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh Theo Chuyên Đề M3 (222 Câu • 63 Bài Văn)'
                     : (isM3
                         ? '<i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Tùy Chọn Luyện Nhanh / Trộn Tổng 191 Từ Mondai 3'
                         : (isM5
@@ -532,64 +545,84 @@ function applyBankUI() {
 
     if (isGpM1) {
         sessSel.innerHTML = `
-            <option value="all">Trộn tổng cả 273 câu Ngữ Pháp M1 (6 Ca)</option>
-            <option value="1">Ca 1 — Ngữ pháp Nền N4–N3 (43 câu)</option>
-            <option value="2">👑 Ca 2 — Kính ngữ • Sai khiến • Cho nhận (57 câu)</option>
-            <option value="3">🔗 Ca 3 — Chuyên đề Trợ từ N3 (48 câu)</option>
-            <option value="4">🧩 Ca 4 — Trợ từ+X & 4 Group dễ nhầm (47 câu)</option>
-            <option value="5">⭐ Ca 5 — Ngữ pháp N3 Đơn lẻ (61 câu)</option>
-            <option value="6">⚡ Ca 6 — Phó từ hô ứng ngữ pháp (17 câu)</option>
+            <option value="all">Trộn tổng cả 552 câu Ngữ Pháp M1 (12 Ca)</option>
+            <option value="prac_only">⭐ Chỉ 273 Câu Đề Thật (Ca 1–6)</option>
+            <option value="pred_only">🔮 Chỉ 279 Câu Dự Đoán Taisaku (Ca 7–12)</option>
+            <option value="1">Ca 1 — Đề thật: Ngữ pháp Nền N4–N3 (43c)</option>
+            <option value="2">👑 Ca 2 — Đề thật: Kính ngữ • Sai khiến • Cho nhận (57c)</option>
+            <option value="3">🔗 Ca 3 — Đề thật: Chuyên đề Trợ từ N3 (48c)</option>
+            <option value="4">🧩 Ca 4 — Đề thật: Trợ từ+X & 4 Group (47c)</option>
+            <option value="5">⭐ Ca 5 — Đề thật: Ngữ pháp N3 Đơn lẻ (61c)</option>
+            <option value="6">⚡ Ca 6 — Đề thật: Phó từ hô ứng (17c)</option>
+            <option value="7">🔮 Ca 7 — Dự đoán: Ngữ pháp Nền (48c)</option>
+            <option value="8">🔮 Ca 8 — Dự đoán: Kính ngữ • Sai khiến • Cho nhận (42c)</option>
+            <option value="9">🔮 Ca 9 — Dự đoán: Trợ từ & Trợ từ+X (59c)</option>
+            <option value="10">🔮 Ca 10 — Dự đoán: 4 Group dễ nhầm (52c)</option>
+            <option value="11">🔮 Ca 11 — Dự đoán: Ngữ pháp N3 Đơn lẻ (68c)</option>
+            <option value="12">🔮 Ca 12 — Dự đoán: Phó từ hô ứng (10c)</option>
         `;
         monSel.style.display = 'inline-block';
         monSel.innerHTML = `
-            <option value="all">Tất cả mức độ (☆ + ☆☆)</option>
+            <option value="all">Tất cả mức độ (☆ + ☆☆ + Dự đoán)</option>
             <option value="hard">🔥 Chỉ câu Bẫy nâng cao (☆☆)</option>
-            <option value="base">⭐ Chỉ câu Cơ bản (☆)</option>
+            <option value="base">⭐ Chỉ câu Cơ bản / Dự đoán</option>
         `;
         cntSel.innerHTML = `
             <option value="15">15 câu (Lượt nhanh 8 phút)</option>
             <option value="25" selected>25 câu (15 phút)</option>
-            <option value="45">45 câu (Trọn 1 chuyên đề)</option>
-            <option value="273">Tất cả câu lọc được</option>
+            <option value="50">50 câu (Trọn 1 chuyên đề)</option>
+            <option value="552">Tất cả câu lọc được</option>
         `;
     } else if (isGpStar) {
         sessSel.innerHTML = `
-            <option value="all">Trộn tổng cả 99 câu Dấu Sao ★ (3 Ca)</option>
-            <option value="1">Ca 1 — Kết hợp Danh–Động–Tính từ (31 câu ★)</option>
-            <option value="2">Ca 2 — Kết hợp với Trợ từ (22 câu ★)</option>
-            <option value="3">Ca 3 — Tổng hợp Thực chiến Đề thật (46 câu ★)</option>
+            <option value="all">Trộn tổng cả 346 câu Dấu Sao ★ (8 Ca)</option>
+            <option value="prac_only">⭐ Chỉ 99 Câu ★ Đề Thật (Ca 1–3)</option>
+            <option value="pred_only">🔮 Chỉ 247 Câu ★ Dự Đoán Taisaku (Ca 4–8)</option>
+            <option value="1">Ca 1 — Đề thật: Kết hợp Danh–Động–Tính (31c ★)</option>
+            <option value="2">Ca 2 — Đề thật: Kết hợp Trợ từ (22c ★)</option>
+            <option value="3">Ca 3 — Đề thật: Tổng hợp Thực chiến (46c ★)</option>
+            <option value="4">🔮 Ca 4 — Dự đoán: Kết hợp N/V/A & Trợ từ (53c ★)</option>
+            <option value="5">🔮 Ca 5 — Dự đoán: Tổng hợp #1–#49 (49c ★)</option>
+            <option value="6">🔮 Ca 6 — Dự đoán: Tổng hợp #50–#98 (49c ★)</option>
+            <option value="7">🔮 Ca 7 — Dự đoán: Tổng hợp #99–#146 (48c ★)</option>
+            <option value="8">🔮 Ca 8 — Dự đoán: Tổng hợp #147–#194 (48c ★)</option>
         `;
         monSel.style.display = 'inline-block';
         monSel.innerHTML = `
-            <option value="all">Tất cả mức độ (☆ + ☆☆)</option>
+            <option value="all">Tất cả mức độ (☆ + ☆☆ + Dự đoán)</option>
             <option value="hard">🔥 Chỉ câu ★ Bẫy nâng cao (☆☆)</option>
-            <option value="base">⭐ Chỉ câu ★ Cơ bản (☆)</option>
+            <option value="base">⭐ Chỉ câu ★ Cơ bản / Dự đoán</option>
         `;
         cntSel.innerHTML = `
             <option value="10">10 câu ★ (Lượt nhanh 8 phút)</option>
             <option value="20" selected>20 câu ★ (16 phút)</option>
-            <option value="31">31 câu ★ (Trọn Ca 1)</option>
-            <option value="99">Tất cả 99 câu ★</option>
+            <option value="49">49 câu ★ (Trọn 1 ca dự đoán)</option>
+            <option value="346">Tất cả câu lọc được</option>
         `;
     } else if (isGpM3) {
         sessSel.innerHTML = `
-            <option value="all">Tất cả 46 bài / 141 câu Mondai 3 (3 Ca)</option>
-            <option value="1">Ca 1 — Chuyên đề Liên từ & Chỉ thị từ (47 câu)</option>
-            <option value="2">Ca 2 — Đọc Đục Lỗ Đề Thật #1–#10 (50 câu)</option>
-            <option value="3">Ca 3 — Đọc Đục Lỗ Đề Thật #11–#19 (44 câu)</option>
+            <option value="all">Tất cả 63 bài / 222 câu Mondai 3 (5 Ca)</option>
+            <option value="prac_only">⭐ Chỉ 46 Bài Đề Thật & Liên Từ (Ca 1–3 • 141c)</option>
+            <option value="pred_only">🔮 Chỉ 17 Bài Dự Đoán Taisaku (Ca 4–5 • 81c)</option>
+            <option value="1">Ca 1 — Chuyên đề Liên từ & Chỉ thị từ (47c)</option>
+            <option value="2">Ca 2 — Đọc Đục Lỗ Đề Thật #1–#10 (50c)</option>
+            <option value="3">Ca 3 — Đọc Đục Lỗ Đề Thật #11–#19 (44c)</option>
+            <option value="4">🔮 Ca 4 — Dự Đoán Đục Lỗ #1–#9 (41c)</option>
+            <option value="5">🔮 Ca 5 — Dự Đoán Đục Lỗ #10–#17 (40c)</option>
         `;
         monSel.style.display = 'inline-block';
         monSel.innerHTML = `
             <option value="all">Tất cả chuyên đề M3</option>
             <option value="lientu">Chỉ Liên từ (39 câu)</option>
             <option value="chithitu">Chỉ Chỉ thị từ こ・そ・あ (8 câu)</option>
-            <option value="tonghop">Chỉ Bài đục lỗ Tổng hợp (94 câu)</option>
+            <option value="tonghop">Chỉ Bài đục lỗ Đề thật (19 bài • 94 câu)</option>
+            <option value="tonghop_pred">🔮 Chỉ Bài đục lỗ Dự đoán (17 bài • 81 câu)</option>
         `;
         cntSel.innerHTML = `
             <option value="15">15 câu (~3 bài văn)</option>
             <option value="25" selected>25 câu (~5 bài văn)</option>
-            <option value="50">50 câu (Trọn Ca 2)</option>
-            <option value="141">Tất cả câu lọc được</option>
+            <option value="45">45 câu (Trọn 1 ca)</option>
+            <option value="222">Tất cả câu lọc được</option>
         `;
     } else if (isPast) {
         const loadedExams = getPastExamsList();
@@ -1474,7 +1507,27 @@ function renderLobby() {
         return;
     }
 
+    let insertedPredDivider = false;
     cfg.shifts.forEach(meta => {
+        if (meta.isPred && !insertedPredDivider && isGrammarBank(activeBank)) {
+            insertedPredDivider = true;
+            const predDiv = document.createElement('div');
+            predDiv.className = 'past-section-divider';
+            const predMetaTxt = activeBank === 'gp_m1'
+                ? '279 Câu Dự Đoán Ngữ Pháp M1 (Ca 7–Ca 12 • Đủ 6 chuyên đề)'
+                : (activeBank === 'gp_star'
+                    ? '247 Câu Dự Đoán Dấu Sao ★ (Ca 4–Ca 8 • Khóa cặp 4 mảnh)'
+                    : '81 Câu / 17 Bài Văn Dự Đoán Mondai 3 (Ca 4–Ca 5 • Split-Screen)');
+            predDiv.innerHTML = `
+                <div>
+                    <strong style="font-size: 15px; color: var(--hub-text);"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary);"></i> Đợt 2: Kho Câu Hỏi Dự Đoán Taisaku (予想問題)</strong>
+                    <div style="font-size: 12px; color: var(--hub-text-sub); margin-top: 2px;">${predMetaTxt} — tách riêng khỏi bộ Đề Thật phía trên để luyện tăng tốc sau khi nắm chắc nền!</div>
+                </div>
+                <span class="tier-pill pred">🔮 Dự Đoán Taisaku</span>
+            `;
+            container.appendChild(predDiv);
+        }
+
         const rec = historyData.sessions[meta.session];
         const bestStr = rec ? `Cao nhất: ${rec.best}/${rec.total} (${Math.round((rec.best / rec.total) * 100)}%)` : 'Chưa làm';
         const passed = rec && (rec.best / rec.total) >= 0.85;
@@ -1527,9 +1580,9 @@ const PAST_MONDAI_META = {
     moji_goi_3: { label: 'M3 Ngữ cảnh', short: 'M3', suggestBank: 'm3_191', suggestLabel: '🧩 191 Từ Ngữ Cảnh M3' },
     moji_goi_4: { label: 'M4 Đồng nghĩa', short: 'M4', suggestBank: 'syn80', suggestLabel: '🔁 270 Đồng Nghĩa M4' },
     moji_goi_5: { label: 'M5 Cách dùng', short: 'M5', suggestBank: 'm5_107', suggestLabel: '🎯 239 Cách Dùng Từ M5' },
-    bunpou_1: { label: 'NP M1 Ngữ pháp', short: 'NP1', suggestBank: 'gp_m1', suggestLabel: '📘 Ngữ Pháp M1 (273 câu)' },
-    bunpou_2: { label: 'NP M2 Dấu sao ★', short: 'NP★', suggestBank: 'gp_star', suggestLabel: '⭐ Dấu Sao ★ (99 câu)' },
-    bunpou_3: { label: 'NP M3 Đoạn văn', short: 'NP3', suggestBank: 'gp_m3', suggestLabel: '📄 Đoạn Văn M3 (141 câu)' },
+    bunpou_1: { label: 'NP M1 Ngữ pháp', short: 'NP1', suggestBank: 'gp_m1', suggestLabel: '📘 Ngữ Pháp M1 (552 câu)' },
+    bunpou_2: { label: 'NP M2 Dấu sao ★', short: 'NP★', suggestBank: 'gp_star', suggestLabel: '⭐ Dấu Sao ★ (346 câu)' },
+    bunpou_3: { label: 'NP M3 Đoạn văn', short: 'NP3', suggestBank: 'gp_m3', suggestLabel: '📄 Đoạn Văn M3 (222 câu)' },
     dokkai_4: { label: 'ĐH M4 Đoạn ngắn', short: 'ĐH4', suggestBank: null, suggestLabel: 'Luyện chuyên sâu Đọc ngắn' },
     dokkai_5: { label: 'ĐH M5 Đoạn trung', short: 'ĐH5', suggestBank: null, suggestLabel: 'Luyện chuyên sâu Đọc trung' },
     dokkai_6: { label: 'ĐH M6 Đoạn dài', short: 'ĐH6', suggestBank: null, suggestLabel: 'Luyện chuyên sâu Đọc dài' },
@@ -2092,6 +2145,8 @@ function launchCustom(mode) {
     if (sVal !== 'all') {
         if (activeBank === 'pastN3') pool = pool.filter(q => q.exam_id === sVal);
         else if (activeBank === 'kanji240' && sVal === 'extra') pool = pool.filter(q => q.session >= 5);
+        else if (isGrammarBank(activeBank) && sVal === 'prac_only') pool = pool.filter(q => q.source_tier !== 'pred');
+        else if (isGrammarBank(activeBank) && sVal === 'pred_only') pool = pool.filter(q => q.source_tier === 'pred');
         else if ((activeBank === 'm5_107' || activeBank === 'm3_191') && (sVal === 'core' || sVal === 'full' || sVal === 'pred')) pool = pool.filter(q => q.tier === sVal);
         else if (activeBank === 'syn80' && sVal === 'orig95') pool = pool.filter(q => q.part <= 3);
         else if (activeBank === 'syn80' && sVal === 'prac_new') pool = pool.filter(q => q.part === 4);
@@ -2113,7 +2168,8 @@ function launchCustom(mode) {
         } else if (activeBank === 'gp_m3') {
             if (mVal === 'lientu') pool = pool.filter(q => (q.topic || '').includes('Liên từ'));
             else if (mVal === 'chithitu') pool = pool.filter(q => (q.topic || '').includes('Chỉ thị từ'));
-            else if (mVal === 'tonghop') pool = pool.filter(q => q.part >= 2);
+            else if (mVal === 'tonghop') pool = pool.filter(q => q.part === 2 || q.part === 3);
+            else if (mVal === 'tonghop_pred') pool = pool.filter(q => q.part >= 4);
         } else if (activeBank === 'pastN3') {
             if (mVal === 'moji_goi') pool = pool.filter(q => q.section === 'moji_goi');
             else if (mVal === 'moji_m5') pool = pool.filter(q => q.section === 'moji_goi' && q.mondai === 5);
@@ -2141,11 +2197,11 @@ function launchCustom(mode) {
     const prefix = activeBank === 'pastN3'
         ? (sVal === 'all' ? 'Chuyên sâu Đề Thi N3' : `${getPastExamShortLabel(sVal)} Chuyên sâu`)
         : (activeBank === 'gp_m1'
-            ? (sVal === 'all' ? 'Tổng hợp Ngữ Pháp M1' : `Ca ${sVal} Ngữ Pháp M1`)
+            ? (sVal === 'prac_only' ? '⭐ Đề Thật NP M1' : (sVal === 'pred_only' ? '🔮 Dự Đoán NP M1' : (sVal === 'all' ? 'Tổng hợp 552 NP M1' : `Ca ${sVal} Ngữ Pháp M1`)))
             : (activeBank === 'gp_star'
-                ? (sVal === 'all' ? 'Tổng hợp Dấu Sao ★' : `Ca ${sVal} Dấu Sao ★`)
+                ? (sVal === 'prac_only' ? '⭐ Đề Thật Dấu Sao ★' : (sVal === 'pred_only' ? '🔮 Dự Đoán Dấu Sao ★' : (sVal === 'all' ? 'Tổng hợp 346 Dấu Sao ★' : `Ca ${sVal} Dấu Sao ★`)))
                 : (activeBank === 'gp_m3'
-                    ? (sVal === 'all' ? 'Tổng hợp Đoạn Văn M3' : `Ca ${sVal} Đoạn Văn M3`)
+                    ? (sVal === 'prac_only' ? '⭐ Đề Thật Đoạn Văn M3' : (sVal === 'pred_only' ? '🔮 Dự Đoán Đoạn Văn M3' : (sVal === 'all' ? 'Tổng hợp 222 Đoạn Văn M3' : `Ca ${sVal} Đoạn Văn M3`)))
                     : (activeBank === 'm3_191'
                         ? (sVal === 'core' ? '⭐ Trọng Tâm Mondai 3' : (sVal === 'full' ? '🛡️ Phủ Kín Mondai 3' : (sVal === 'all' ? 'Tổng hợp 191 Mondai 3' : `Bài ${sVal} Mondai 3`)))
                         : (activeBank === 'm5_107'
@@ -2157,7 +2213,7 @@ function launchCustom(mode) {
                                     : (activeBank === 'syn80'
                                         ? (sVal === 'orig95' ? '📘 95 Câu Gốc Đồng Nghĩa' : (sVal === 'prac_new' ? '⭐ 34 Đề Thật M4 Taisaku' : (sVal === 'pred' ? '🔮 141 Dự Đoán M4 Taisaku' : (sVal === 'all' ? 'Tổng hợp 270 Đồng Nghĩa' : `Bài ${sVal} Đồng Nghĩa`))))
                                         : (sVal === 'extra' ? '112 Kanji Mới (B5–B6)' : (sVal === 'all' ? 'Tổng hợp 352 Kanji' : `Buổi ${sVal}`))))))))));
-    const specialVals = ['all', 'extra', 'core', 'full', 'orig95', 'prac_new', 'pred'];
+    const specialVals = ['all', 'extra', 'core', 'full', 'orig95', 'prac_new', 'pred', 'prac_only', 'pred_only'];
     startQuizEngine({
         bankId: activeBank,
         title: `${prefix} • ${pool.length} câu`,
